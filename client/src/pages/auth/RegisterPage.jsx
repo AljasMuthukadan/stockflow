@@ -1,4 +1,6 @@
+import {useNavigate} from "react-router-dom"
 const RegisterPage = () => {
+  const navigate = useNavigate();
   return (
     <main className="min-h-screen bg-slate-100 flex items-center justify-center p-6">
       <div className="w-full max-w-7xl bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-2">
@@ -180,7 +182,7 @@ const RegisterPage = () => {
 
             <p className="mt-6 text-center text-gray-500">
               Already have an account?{" "}
-              <span className="text-emerald-600 font-semibold cursor-pointer">
+              <span onClick={()=> navigate("/login")} className="text-emerald-600 font-semibold cursor-pointer">
                 Sign In
               </span>
             </p>
