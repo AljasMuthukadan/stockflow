@@ -49,23 +49,7 @@ import {
             "
           />
 
-          <span
-            className="
-            absolute
-            right-3
-            top-1/2
-            -translate-y-1/2
-            text-xs
-            bg-white
-            border
-            rounded-md
-            px-2
-            py-1
-            text-slate-500
-            "
-          >
-            Ctrl + K
-          </span>
+          
         </div>
 
         {/* Notification */}
