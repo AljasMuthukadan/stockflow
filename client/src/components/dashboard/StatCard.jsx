@@ -14,7 +14,7 @@
       rounded-2xl
       border
       border-slate-200
-      p-5
+      p-4
       shadow-sm
       hover:shadow-md
       transition

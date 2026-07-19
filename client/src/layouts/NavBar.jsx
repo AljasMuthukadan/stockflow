@@ -9,7 +9,7 @@ import {
 
  function Navbar() {
   return (
-    <header className="h-16  w-full bg-white border-b border-slate-200 flex items-center justify-between px-6">
+    <header className="h-13  w-full bg-white border-b border-slate-200 flex items-center justify-between px-6">
 
       {/* Left */}
       <div className="flex items-center gap-5">
@@ -49,7 +49,23 @@ import {
             "
           />
 
-          
+          <span
+            className="
+            absolute
+            right-3
+            top-1/2
+            -translate-y-1/2
+            text-xs
+            bg-white
+            border
+            rounded-md
+            px-2
+            py-1
+            text-slate-500
+            "
+          >
+            Ctrl + K
+          </span>
         </div>
 
         {/* Notification */}
