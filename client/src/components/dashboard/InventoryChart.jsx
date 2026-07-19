@@ -21,7 +21,7 @@ const data = [
 
  function InventoryChart() {
   return (
-    <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="flex h-[300px] flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
       <div className="mb-4 flex items-center justify-between">
         <div>
@@ -41,7 +41,7 @@ const data = [
         </select>
       </div>
 
-      <div className="flex-1 min-h-[320px]">
+      <div className=" min-h-[180px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
             <CartesianGrid strokeDasharray="3 3" />

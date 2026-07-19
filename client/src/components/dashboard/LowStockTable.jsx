@@ -40,13 +40,13 @@ export default function LowStockTable() {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-      <div className="border-b border-slate-100 px-6 py-4">
+      <div className="border-b border-slate-100 px-6 py-2">
         <h3 className="text-lg font-semibold">
           Low Stock Alerts
         </h3>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="max-h-[280px] scrollbar-none overflow-y-auto px-6 py-4">
 
         <table className="w-full text-sm">
 

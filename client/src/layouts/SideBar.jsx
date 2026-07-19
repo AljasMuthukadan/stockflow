@@ -56,7 +56,7 @@ const menu = [
 
  function Sidebar() {
   return (
-    <aside className="w-64 bg-slate-950 text-white flex flex-col">
+    <aside className="w-64 min-h-screen bg-slate-950 text-white flex flex-col">
 
       {/* Logo */}
 

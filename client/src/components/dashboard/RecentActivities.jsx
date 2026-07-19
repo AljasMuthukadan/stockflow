@@ -53,7 +53,7 @@ import ActivityItem from "./ActivityItem";
   ];
 
   return (
-  <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="flex h-full min-h-[650px] flex-col rounded-2xl border border-slate-200 bg-white shadow-sm">
       {/* Header */}
 
       <div className="flex items-center justify-between p-5 border-b border-slate-100">

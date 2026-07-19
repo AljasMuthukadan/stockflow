@@ -2,7 +2,7 @@ import { CalendarDays } from "lucide-react";
 
  function DashboardHeader() {
   return (
-    <div className="mb-8 flex  flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div className="mb-5 flex  flex-col gap-4 md:flex-row md:items-center md:justify-between">
       {/* Left */}
       <div>
         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
