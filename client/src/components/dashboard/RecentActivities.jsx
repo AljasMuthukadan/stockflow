@@ -53,8 +53,7 @@ import ActivityItem from "./ActivityItem";
   ];
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm h-full flex-col">
-
+  <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white shadow-sm">
       {/* Header */}
 
       <div className="flex items-center justify-between p-5 border-b border-slate-100">
@@ -71,7 +70,7 @@ import ActivityItem from "./ActivityItem";
 
       {/* Activity List */}
 
-      <div className="px-5 max-h-[420px] overflow-y-auto">
+     <div className="flex-1 overflow-y-auto px-5">
 
         {activities.map((activity, index) => (
           <ActivityItem

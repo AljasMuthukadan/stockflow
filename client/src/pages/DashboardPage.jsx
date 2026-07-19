@@ -4,7 +4,7 @@ import StatsGrid from "../components/dashboard/StatsGrid";
 
 const DashboardPage = () => {
   return (
-    <div className="bg-gray-50 px-5 border border-slate-200 shadow h-full ">
+    <div className="min-h-full bg-gray-50 px-6 py-6">
       <DashboardHeader />
       <StatsGrid />
     

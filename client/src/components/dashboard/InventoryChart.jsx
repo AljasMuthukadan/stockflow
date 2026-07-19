@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Legend,
 } from "recharts";
 
 const data = [
@@ -20,12 +21,9 @@ const data = [
 
  function InventoryChart() {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
 
-      {/* Header */}
-
-      <div className="mb-6 flex items-center justify-between">
-
+      <div className="mb-4 flex items-center justify-between">
         <div>
           <h3 className="text-lg font-semibold">
             Inventory Overview
@@ -36,20 +34,16 @@ const data = [
           </p>
         </div>
 
-        <select className="rounded-lg border border-slate-200 px-3 py-2 text-sm outline-none">
+        <select className="rounded-lg border border-slate-200 px-3 py-2 text-sm">
           <option>This Week</option>
           <option>This Month</option>
           <option>This Year</option>
         </select>
-
       </div>
 
-      <div className="h-64">
-
+      <div className="flex-1 min-h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
-
           <LineChart data={data}>
-
             <CartesianGrid strokeDasharray="3 3" />
 
             <XAxis dataKey="day" />
@@ -58,8 +52,9 @@ const data = [
 
             <Tooltip />
 
+            <Legend />
+
             <Line
-              type="monotone"
               dataKey="stockIn"
               stroke="#10B981"
               strokeWidth={3}
@@ -67,19 +62,14 @@ const data = [
             />
 
             <Line
-              type="monotone"
               dataKey="stockOut"
               stroke="#3B82F6"
               strokeWidth={3}
               dot={{ r: 4 }}
             />
-
           </LineChart>
-
         </ResponsiveContainer>
-
       </div>
-
     </div>
   );
 }
