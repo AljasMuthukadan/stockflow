@@ -7,6 +7,8 @@ import RegisterPage from './pages/auth/RegisterPage.jsx';
 import { LoginPage } from './pages/auth/LoginPage.jsx';
 import DashboardPage from './pages/DashboardPage.jsx';
 import DashboardLayout from './layouts/DashboardLayout.jsx';
+import InventoryPage from './pages/InventoryPage.jsx';
+import { ProductionPage } from './pages/ProductionPage.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -18,6 +20,8 @@ createRoot(document.getElementById('root')).render(
       {/** Dashboard Routes */}
       <Route  path="/dashboard" element={<DashboardLayout/>} >
        <Route index element={<DashboardPage />} />
+       <Route path="inventory" element={<InventoryPage />} />
+        <Route path="production" element={<ProductionPage />} />
       </Route>
       
     </Routes>
