@@ -1,6 +1,6 @@
 
 export const ProductionPage = () => {
   return (
-    <div>ProductionPage</div>
+    <div className="production-page">ProductionPage</div>
   )
 }
