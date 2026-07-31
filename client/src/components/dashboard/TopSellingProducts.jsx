@@ -41,7 +41,7 @@ const products = [
 
 export default function TopSellingProducts() {
   return (
-    <div className="flex h-[330px] min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="flex  h-[330px] min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
       
       {/* Header - Fixed */}
       <div className="flex shrink-0 items-center justify-between border-b border-slate-100 bg-white px-5 py-4">

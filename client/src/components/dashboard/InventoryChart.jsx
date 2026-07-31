@@ -21,7 +21,7 @@ const data = [
 
 export default function InventoryChart() {
   return (
-    <div className="flex h-[330px] min-h-0 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+    <div className="flex h-[300px] min-h-0 w-full flex-col rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
 
       {/* Header */}
       <div className="mb-3 flex shrink-0 items-start justify-between gap-4">
