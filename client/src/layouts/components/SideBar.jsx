@@ -26,31 +26,39 @@ const menu = [
   {
     title: "Warehouses",
     icon: Warehouse,
+    link: "/warehouses",
   },
   {
     title: "Suppliers",
     icon: Users,
+    link: "/suppliers",
   },
   {
     title: "Production",
     icon: Factory,
+    link: "/production",
   },
   {
     title: "Sales & Orders",
     icon: ShoppingCart,
-    dropdown: true,
+    dropdown: true, 
+    link: "/sales-orders",
   },
   {
     title: "Purchases",
     icon: Truck,
+    dropdown: true,
+    link: "/purchases",
   },
   {
     title: "Reports",
     icon: FileBarChart2,
+    link: "/reports", 
   },
   {
     title: "Settings",
     icon: Settings,
+    link: "/settings",
   },
 ];
 
