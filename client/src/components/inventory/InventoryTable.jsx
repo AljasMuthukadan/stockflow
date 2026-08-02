@@ -1,212 +1,425 @@
-import { MoreVertical } from "lucide-react";
-
-const inventory = [
-  {
-    id: 1,
-    name: "Raw Sugar",
-    sku: "RS-1001",
-    category: "Raw Materials",
-    stock: "120 kg",
-    unit: "kg",
-    reorder: "250 kg",
-    status: "Low Stock",
-  },
-  {
-    id: 2,
-    name: "Milk Powder",
-    sku: "MP-1002",
-    category: "Raw Materials",
-    stock: "80 kg",
-    unit: "kg",
-    reorder: "200 kg",
-    status: "Low Stock",
-  },
-  {
-    id: 3,
-    name: "Chocolate Syrup",
-    sku: "CS-1003",
-    category: "Raw Materials",
-    stock: "25 L",
-    unit: "L",
-    reorder: "100 L",
-    status: "Critical",
-  },
-  {
-    id: 4,
-    name: "Packaging Box",
-    sku: "PB-1004",
-    category: "Packaging",
-    stock: "150 pcs",
-    unit: "pcs",
-    reorder: "300 pcs",
-    status: "Low Stock",
-  },
-  {
-    id: 5,
-    name: "Vanilla Essence",
-    sku: "VE-1005",
-    category: "Raw Materials",
-    stock: "10 L",
-    unit: "L",
-    reorder: "50 L",
-    status: "Critical",
-  },
-  {
-    id: 6,
-    name: "Ice Cream Cup",
-    sku: "IC-1006",
-    category: "Packaging",
-    stock: "2500 pcs",
-    unit: "pcs",
-    reorder: "1000 pcs",
-    status: "In Stock",
-  },
-  {
-    id: 7,
-    name: "Sprinkles",
-    sku: "SP-1007",
-    category: "Raw Materials",
-    stock: "5 kg",
-    unit: "kg",
-    reorder: "25 kg",
-    status: "Low Stock",
-  },
-];
+import {
+  MoreVertical,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import inventory from "./inventoryData"
 
 const badgeStyle = (status) => {
   switch (status) {
     case "In Stock":
-      return "bg-green-100 text-green-700";
+      return "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-100";
 
     case "Low Stock":
-      return "bg-orange-100 text-orange-700";
+      return "bg-orange-50 text-orange-700 ring-1 ring-inset ring-orange-100";
 
     case "Critical":
-      return "bg-red-100 text-red-700";
+      return "bg-red-50 text-red-700 ring-1 ring-inset ring-red-100";
 
     default:
-      return "bg-slate-100";
+      return "bg-slate-50 text-slate-600 ring-1 ring-inset ring-slate-200";
   }
 };
 
-const InventoryTable = () => {
+export default function InventoryTable() {
   return (
-    <div className="px-8 mt-5 mb-5">
-        <div className="bg-white  rounded-2xl border border-slate-200 overflow-hidden">
+    <div className="mt-5 mb-5 px-8">
 
-      <table className="w-full">
+      {/* Table Card */}
 
-        <thead className="bg-slate-50">
+      <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-          <tr className="text-left text-sm text-slate-500">
+        {/* Table */}
 
-            <th className="p-4">Item</th>
-            <th>SKU</th>
-            <th>Category</th>
-            <th>Stock</th>
-            <th>Unit</th>
-            <th>Reorder Level</th>
-            <th>Status</th>
-            <th className="text-center">Actions</th>
+        <div className="overflow-x-auto">
 
-          </tr>
+          <table className="w-full min-w-[900px]">
 
-        </thead>
+            {/* Header */}
 
-        <tbody>
+            <thead className="bg-slate-50/80">
 
-          {inventory.map((item) => (
-            <tr
-              key={item.id}
-              className="border-t hover:bg-slate-50 transition"
-            >
-              <td className="p-4 font-medium">
-                {item.name}
-              </td>
+              <tr className="border-b border-slate-100 text-left">
 
-              <td>{item.sku}</td>
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Item
+                </th>
 
-              <td>{item.category}</td>
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  SKU
+                </th>
 
-              <td>{item.stock}</td>
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Category
+                </th>
 
-              <td>{item.unit}</td>
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Stock
+                </th>
 
-              <td>{item.reorder}</td>
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Unit
+                </th>
 
-              <td>
-                <span
-                  className={`
-                  px-3
-                  py-1
-                  rounded-full
-                  text-xs
-                  font-medium
-                  ${badgeStyle(item.status)}
-                  `}
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Reorder Level
+                </th>
+
+                <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Status
+                </th>
+
+                <th className="px-5 py-4 text-center text-xs font-semibold uppercase tracking-wide text-slate-500">
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+            {/* Body */}
+
+            <tbody >
+
+              {inventory.map((item) => (
+
+                <tr
+                  key={item.id}
+                  className="
+                    border-b
+                    border-slate-100
+                    last:border-b-0
+                    transition-colors
+                    hover:bg-slate-50/70
+                  "
                 >
-                  {item.status}
-                </span>
-              </td>
 
-              <td>
+                  {/* Item */}
 
-                <div className="flex justify-center">
+                  <td className="px-5 py-3 ">
 
-                  <button className="hover:bg-slate-100 p-2 rounded-lg">
+                    <div className="flex items-center gap-3">
 
-                    <MoreVertical size={18} />
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-sm font-semibold text-emerald-600">
+                        {item.name.charAt(0)}
+                      </div>
 
-                  </button>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-800">
+                          {item.name}
+                        </p>
 
-                </div>
+                        <p className="mt-0.5 text-xs text-slate-400">
+                          Item #{item.id}
+                        </p>
+                      </div>
 
-              </td>
+                    </div>
 
-            </tr>
-          ))}
+                  </td>
 
-        </tbody>
+                  {/* SKU */}
 
-      </table>
+                  <td className="px-5 py-4">
 
-      {/* Footer */}
+                    <span className="text-sm font-medium text-slate-600">
+                      {item.sku}
+                    </span>
 
-      <div className="flex items-center justify-between p-5 border-t">
+                  </td>
 
-        <p className="text-sm text-slate-500">
-          Showing 1–7 of 1,250 items
-        </p>
+                  {/* Category */}
 
-        <div className="flex gap-2">
+                  <td className="px-5 py-4">
 
-          <button className="w-9 h-9 rounded-lg border">
-            &lt;
-          </button>
+                    <span className="text-sm text-slate-600">
+                      {item.category}
+                    </span>
 
-          <button className="w-9 h-9 rounded-lg bg-green-600 text-white">
-            1
-          </button>
+                  </td>
 
-          <button className="w-9 h-9 rounded-lg border">
-            2
-          </button>
+                  {/* Stock */}
 
-          <button className="w-9 h-9 rounded-lg border">
-            3
-          </button>
+                  <td className="px-5 py-4">
 
-          <button className="w-9 h-9 rounded-lg border">
-            &gt;
-          </button>
+                    <span className="text-sm font-semibold text-slate-800">
+                      {item.stock}
+                    </span>
+
+                  </td>
+
+                  {/* Unit */}
+
+                  <td className="px-5 py-4">
+
+                    <span className="text-sm text-slate-500">
+                      {item.unit}
+                    </span>
+
+                  </td>
+
+                  {/* Reorder */}
+
+                  <td className="px-5 py-4">
+
+                    <span className="text-sm text-slate-600">
+                      {item.reorder}
+                    </span>
+
+                  </td>
+
+                  {/* Status */}
+
+                  <td className="px-5 py-4">
+
+                    <span
+                      className={`
+                        inline-flex
+                        items-center
+                        rounded-full
+                        px-3
+                        py-1.5
+                        text-xs
+                        font-semibold
+                        ${badgeStyle(item.status)}
+                      `}
+                    >
+                      {item.status}
+                    </span>
+
+                  </td>
+
+                  {/* Actions */}
+
+                  <td className="px-5 py-4">
+
+                    <div className="flex justify-center">
+
+                      <button
+                        type="button"
+                        className="
+                          flex
+                          h-9
+                          w-9
+                          items-center
+                          justify-center
+                          rounded-lg
+                          text-slate-400
+                          transition
+                          hover:bg-slate-100
+                          hover:text-slate-700
+                        "
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+              ))}
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+        {/* Footer */}
+
+        <div className="flex flex-col gap-4 border-t border-slate-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+
+          {/* Results */}
+
+          <p className="text-sm text-slate-500">
+
+            Showing{" "}
+
+            <span className="font-semibold text-slate-700">
+              1–7
+            </span>{" "}
+
+            of{" "}
+
+            <span className="font-semibold text-slate-700">
+              1,250
+            </span>{" "}
+
+            items
+
+          </p>
+
+          {/* Pagination */}
+
+          <div className="flex items-center gap-1.5">
+
+            {/* Previous */}
+
+            <button
+              type="button"
+              aria-label="Previous page"
+              className="
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-200
+                bg-white
+                text-slate-500
+                transition
+                hover:border-slate-300
+                hover:bg-slate-50
+                hover:text-slate-700
+                disabled:cursor-not-allowed
+              "
+            >
+              <ChevronLeft size={16} />
+            </button>
+
+            {/* Page 1 */}
+
+            <button
+              type="button"
+              className="
+                flex
+                h-9
+                min-w-9
+                items-center
+                justify-center
+                rounded-lg
+                bg-emerald-600
+                px-2.5
+                text-sm
+                font-semibold
+                text-white
+                shadow-sm
+                transition
+                hover:bg-emerald-700
+              "
+            >
+              1
+            </button>
+
+            {/* Page 2 */}
+
+            <button
+              type="button"
+              className="
+                flex
+                h-9
+                min-w-9
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-200
+                bg-white
+                px-2.5
+                text-sm
+                font-medium
+                text-slate-600
+                transition
+                hover:border-slate-300
+                hover:bg-slate-50
+              "
+            >
+              2
+            </button>
+
+            {/* Page 3 */}
+
+            <button
+              type="button"
+              className="
+                flex
+                h-9
+                min-w-9
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-200
+                bg-white
+                px-2.5
+                text-sm
+                font-medium
+                text-slate-600
+                transition
+                hover:border-slate-300
+                hover:bg-slate-50
+              "
+            >
+              3
+            </button>
+
+            {/* Dots */}
+
+            <span className="flex h-9 w-9 items-center justify-center text-sm text-slate-400">
+              ...
+            </span>
+
+            {/* Last Page */}
+
+            <button
+              type="button"
+              className="
+                flex
+                h-9
+                min-w-9
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-200
+                bg-white
+                px-2.5
+                text-sm
+                font-medium
+                text-slate-600
+                transition
+                hover:border-slate-300
+                hover:bg-slate-50
+              "
+            >
+              179
+            </button>
+
+            {/* Next */}
+
+            <button
+              type="button"
+              aria-label="Next page"
+              className="
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                rounded-lg
+                border
+                border-slate-200
+                bg-white
+                text-slate-500
+                transition
+                hover:border-slate-300
+                hover:bg-slate-50
+                hover:text-slate-700
+              "
+            >
+              <ChevronRight size={16} />
+            </button>
+
+          </div>
 
         </div>
 
       </div>
 
     </div>
-    </div>
   );
-};
-
-export default InventoryTable;
+}
