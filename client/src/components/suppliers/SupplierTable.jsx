@@ -1,6 +1,13 @@
-import { MoreVertical } from "lucide-react";
+import { useState } from "react";
+import {
+  MoreVertical,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
 import { suppliers } from "./supplierData";
 import SupplierFilters from "./SupplierFilters";
+
 
 const partyBadge = (type) => {
   switch (type) {
@@ -15,6 +22,7 @@ const partyBadge = (type) => {
   }
 };
 
+
 const outstandingBadge = (type) => {
   switch (type) {
     case "Payable":
@@ -28,233 +36,509 @@ const outstandingBadge = (type) => {
   }
 };
 
+
+const ITEMS_PER_PAGE = 10;
+
+
 const SupplierTable = () => {
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+
+  // Total pages
+
+  const totalPages = Math.ceil(
+    suppliers.length / ITEMS_PER_PAGE
+  );
+
+
+  // Starting index
+
+  const startIndex =
+    (currentPage - 1) * ITEMS_PER_PAGE;
+
+
+  // Suppliers for current page
+
+  const currentSuppliers = suppliers.slice(
+    startIndex,
+    startIndex + ITEMS_PER_PAGE
+  );
+
+
+  // Previous page
+
+  const handlePrevious = () => {
+    setCurrentPage((prev) =>
+      Math.max(prev - 1, 1)
+    );
+  };
+
+
+  // Next page
+
+  const handleNext = () => {
+    setCurrentPage((prev) =>
+      Math.min(prev + 1, totalPages)
+    );
+  };
+
+
+  // Direct page navigation
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+
   return (
     <div
       className="
-      overflow-hidden
-      rounded-2xl
-      border
-      border-slate-200
-      bg-white
-      shadow-sm
+        overflow-hidden
+        rounded-2xl
+        border
+        border-slate-200
+        bg-white
+        shadow-sm
       "
     >
-      {/* Filters */}
+
+      {/* ================= FILTERS ================= */}
 
       <SupplierFilters />
 
-      {/* Table */}
+
+      {/* ================= TABLE ================= */}
 
       <div className="overflow-x-auto">
+
         <table className="min-w-[1150px] w-full">
-          <thead
-            className="
-            sticky
-            top-0
-            z-10
-            bg-slate-50
-            "
-          >
+
+          {/* Header */}
+
+          <thead className="bg-slate-50">
+
             <tr className="text-left text-sm text-slate-500">
-              <th className="px-30  py-4 font-semibold">Supplier</th>
 
-              <th className="px-4 py-4 font-semibold">Party Type</th>
+              <th className="px-30 py-3 font-semibold">
+                Supplier
+              </th>
 
-              <th className="px-3 py-4 font-semibold">Supplies</th>
+              <th className="px-4 py-3 font-semibold">
+                Party Type
+              </th>
 
-              <th className="px-4 py-4 font-semibold">Contact</th>
+              <th className="px-3 py-3 font-semibold">
+                Supplies
+              </th>
 
-              <th className="px-4 py-4 font-semibold">Outstanding</th>
+              <th className="px-4 py-3 font-semibold">
+                Contact
+              </th>
 
-              <th className="px-4 py-4 font-semibold">Orders</th>
+              <th className="px-4 py-3 font-semibold">
+                Outstanding
+              </th>
 
-              <th className="px-4 py-4 font-semibold text-center">Actions</th>
+              <th className="px-4 py-3 font-semibold">
+                Orders
+              </th>
+
+              <th className="px-4 py-3 font-semibold text-center">
+                Actions
+              </th>
+
             </tr>
+
           </thead>
 
+
+          {/* Body */}
+
           <tbody>
-            {suppliers.map((supplier) => (
+
+            {currentSuppliers.map((supplier) => (
+
               <tr
                 key={supplier.id}
                 className="
-                border-t
-                border-slate-200
-                transition
-                hover:bg-slate-50
+                  border-t
+                  border-slate-200
+                  transition
+                  hover:bg-slate-50
                 "
               >
-                {/* Company */}
 
-                <td className="px-6 py-5">
-                  <div className="flex items-center gap-4">
+                {/* ================= SUPPLIER ================= */}
+
+                <td className="px-6 py-3">
+
+                  <div className="flex items-center gap-3">
+
                     <div
                       className="
-                      flex
-                      h-12
-                      w-12
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-green-100
-                      font-bold
-                      text-green-700
+                        flex
+                        h-10
+                        w-10
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        bg-green-100
+                        text-sm
+                        font-bold
+                        text-green-700
                       "
                     >
                       {supplier.avatar}
                     </div>
 
-                    <div>
-                      <h3 className="font-semibold text-slate-800">
+
+                    <div className="min-w-0">
+
+                      <h3 className="truncate font-semibold text-slate-800">
                         {supplier.company}
                       </h3>
 
-                      <p className="mt-1 text-xs text-slate-500">
+                      <p className="mt-0.5 text-[11px] text-slate-500">
                         GSTIN : {supplier.gstin}
                       </p>
 
-                      <p className="text-xs text-slate-400">{supplier.city}</p>
+                      <p className="text-[11px] text-slate-400">
+                        {supplier.city}
+                      </p>
+
                     </div>
+
                   </div>
+
                 </td>
 
-                {/* Party Type */}
 
-                <td className="px-4">
+                {/* ================= PARTY TYPE ================= */}
+
+                <td className="px-4 py-3">
+
                   <span
                     className={`
-                    rounded-full
-                    border
-                    px-3
-                    py-1
-                    text-xs
-                    font-medium
-                    ${partyBadge(supplier.partyType)}
+                      inline-flex
+                      rounded-full
+                      border
+                      px-3
+                      py-1
+                      text-xs
+                      font-medium
+                      ${partyBadge(supplier.partyType)}
                     `}
                   >
                     {supplier.partyType}
                   </span>
+
                 </td>
 
-                {/* Supplies */}
 
-                {/* Supplies */}
+                {/* ================= SUPPLIES ================= */}
 
-                <td className="px-3   py-5 w-56">
-                  <div className="flex flex-wrap gap-2">
-                    {supplier.supplyCategory.slice(0, 2).map((item) => (
-                      <span
-                        key={item}
-                        className="
-            rounded-md
-            bg-slate-100
-            px-2.5
-            py-1
-            text-xs
-            font-medium
-            text-slate-700
-            whitespace-nowrap
-          "
-                      >
-                        {item}
-                      </span>
-                    ))}
+                <td className="w-56 px-3 py-3">
+
+                  <div className="flex flex-wrap gap-1.5">
+
+                    {supplier.supplyCategory
+                      .slice(0, 2)
+                      .map((item) => (
+
+                        <span
+                          key={item}
+                          className="
+                            whitespace-nowrap
+                            rounded-md
+                            bg-slate-100
+                            px-2.5
+                            py-1
+                            text-[11px]
+                            font-medium
+                            text-slate-700
+                          "
+                        >
+                          {item}
+                        </span>
+
+                      ))}
+
 
                     {supplier.supplyCategory.length > 2 && (
+
                       <span
                         className="
-          rounded-md
-          bg-emerald-50
-          px-2.5
-          py-1
-          text-xs
-          font-semibold
-          text-emerald-700
-          whitespace-nowrap
-        "
+                          whitespace-nowrap
+                          rounded-md
+                          bg-emerald-50
+                          px-2.5
+                          py-1
+                          text-[11px]
+                          font-semibold
+                          text-emerald-700
+                        "
                       >
                         +{supplier.supplyCategory.length - 2}
                       </span>
+
                     )}
+
                   </div>
+
                 </td>
 
-                {/* Contact */}
 
-                <td className="px-4">
+                {/* ================= CONTACT ================= */}
+
+                <td className="px-4 py-3">
+
                   <div>
+
                     <p className="font-medium text-slate-800">
                       {supplier.contact}
                     </p>
 
-                    <p className="text-xs text-slate-500">{supplier.phone}</p>
+                    <p className="text-[11px] text-slate-500">
+                      {supplier.phone}
+                    </p>
 
-                    <p className="text-xs text-slate-400">{supplier.email}</p>
+                    <p className="text-[11px] text-slate-400">
+                      {supplier.email}
+                    </p>
+
                   </div>
+
                 </td>
 
-                {/* Outstanding */}
-                <td className="px-4 py-5 text-center">
+
+                {/* ================= OUTSTANDING ================= */}
+
+                <td className="px-4 py-3 text-center">
+
                   <div className="flex flex-col items-center">
+
                     <h4 className="font-semibold text-slate-800">
                       ₹{supplier.outstanding.toLocaleString()}
                     </h4>
 
                     <span
                       className={`
-        mt-2
-        inline-flex
-        rounded-full
-        px-3
-        py-1
-        text-xs
-        font-medium
-        ${outstandingBadge(supplier.outstandingType)}
-      `}
+                        mt-1.5
+                        inline-flex
+                        rounded-full
+                        px-3
+                        py-1
+                        text-xs
+                        font-medium
+                        ${outstandingBadge(
+                          supplier.outstandingType
+                        )}
+                      `}
                     >
                       {supplier.outstandingType}
                     </span>
+
                   </div>
+
                 </td>
 
-                {/* Orders */}
 
-                <td className="px-4">
+                {/* ================= ORDERS ================= */}
+
+                <td className="px-4 py-3">
+
                   <span
                     className="
-                    rounded-lg
-                    bg-slate-100
-                    px-3
-                    py-2
-                    text-sm
-                    font-semibold
+                      rounded-lg
+                      bg-slate-100
+                      px-3
+                      py-1.5
+                      text-sm
+                      font-semibold
                     "
                   >
                     {supplier.orders}
                   </span>
+
                 </td>
 
-                {/* Actions */}
 
-                <td className="px-4">
+                {/* ================= ACTION ================= */}
+
+                <td className="px-4 py-3">
+
                   <div className="flex justify-center">
+
                     <button
+                      type="button"
                       className="
-                      rounded-lg
-                      p-2
-                      transition
-                      hover:bg-slate-200
+                        rounded-lg
+                        p-2
+                        text-slate-500
+                        transition
+                        hover:bg-slate-100
+                        hover:text-slate-800
                       "
                     >
                       <MoreVertical size={18} />
                     </button>
+
                   </div>
+
                 </td>
+
               </tr>
+
             ))}
+
           </tbody>
+
         </table>
+
       </div>
+
+
+      {/* ================= PAGINATION ================= */}
+
+      <div
+        className="
+          flex
+          items-center
+          justify-between
+          border-t
+          border-slate-200
+          px-6
+          py-3
+        "
+      >
+
+        {/* Result information */}
+
+        <p className="text-xs text-slate-500">
+
+          Showing{" "}
+
+          <span className="font-semibold text-slate-700">
+            {startIndex + 1}
+          </span>
+
+          {" - "}
+
+          <span className="font-semibold text-slate-700">
+            {Math.min(
+              startIndex + ITEMS_PER_PAGE,
+              suppliers.length
+            )}
+          </span>
+
+          {" of "}
+
+          <span className="font-semibold text-slate-700">
+            {suppliers.length}
+          </span>
+
+          {" suppliers"}
+
+        </p>
+
+
+        {/* Pagination controls */}
+
+        <div className="flex items-center gap-1.5">
+
+          {/* Previous */}
+
+          <button
+            type="button"
+            onClick={handlePrevious}
+            disabled={currentPage === 1}
+            className="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              text-slate-500
+              transition
+              hover:bg-slate-50
+              disabled:cursor-not-allowed
+              disabled:opacity-40
+            "
+          >
+            <ChevronLeft size={16} />
+          </button>
+
+
+          {/* Page numbers */}
+
+          {Array.from(
+            { length: totalPages },
+            (_, index) => index + 1
+          ).map((page) => (
+
+            <button
+              key={page}
+              type="button"
+              onClick={() => handlePageChange(page)}
+              className={`
+                flex
+                h-8
+                min-w-8
+                items-center
+                justify-center
+                rounded-lg
+                px-2
+                text-xs
+                font-semibold
+                transition
+
+                ${
+                  currentPage === page
+                    ? "bg-emerald-600 text-white shadow-sm"
+                    : "border border-slate-200 text-slate-600 hover:bg-slate-50"
+                }
+              `}
+            >
+              {page}
+            </button>
+
+          ))}
+
+
+          {/* Next */}
+
+          <button
+            type="button"
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+            className="
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              text-slate-500
+              transition
+              hover:bg-slate-50
+              disabled:cursor-not-allowed
+              disabled:opacity-40
+            "
+          >
+            <ChevronRight size={16} />
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
   );
 };

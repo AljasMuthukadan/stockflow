@@ -1,7 +1,11 @@
 import { Plus } from "lucide-react";
+import { useState } from "react";
+import SupplierModal from "./add-supplier/SupplierModal";
 
 const SupplierHeader = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
+    <>
     <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
 
       <div>
@@ -31,14 +35,16 @@ const SupplierHeader = () => {
         shadow-sm
         transition
         "
+        onClick={() => setShowModal(true)}
       >
         <Plus size={18} />
 
         Add Supplier
 
       </button>
-
     </div>
+      {showModal && (<SupplierModal onClose={() => setShowModal(false)} />)}
+    </>
   );
 };
 
