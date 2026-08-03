@@ -100,6 +100,7 @@ const SupplierTable = () => {
         border-slate-200
         bg-white
         shadow-sm
+        mb-3
       "
     >
 
