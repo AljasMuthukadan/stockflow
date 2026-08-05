@@ -1,6 +1,9 @@
+import { useState } from "react";
 import {
   MoreVertical,
   Factory,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 const productionOrders = [
@@ -69,75 +72,118 @@ const productionOrders = [
 const badgeStyle = (status) => {
   switch (status) {
     case "Completed":
-      return "bg-green-100 text-green-700 border border-green-200";
+      return "border border-green-200 bg-green-50 text-green-700";
 
     case "In Progress":
-      return "bg-blue-100 text-blue-700 border border-blue-200";
+      return "border border-blue-200 bg-blue-50 text-blue-700";
 
     case "Pending":
-      return "bg-yellow-100 text-yellow-700 border border-yellow-200";
+      return "border border-yellow-200 bg-yellow-50 text-yellow-700";
 
     default:
-      return "bg-slate-100 text-slate-600";
+      return "border border-slate-200 bg-slate-50 text-slate-600";
   }
 };
 
 const progressColor = (progress) => {
-  if (progress === 100) return "bg-green-500";
-  if (progress > 60) return "bg-blue-500";
-  if (progress > 30) return "bg-orange-500";
+  if (progress === 100) {
+    return "bg-green-500";
+  }
+
+  if (progress > 60) {
+    return "bg-blue-500";
+  }
+
+  if (progress > 30) {
+    return "bg-orange-500";
+  }
+
   return "bg-red-500";
 };
 
 const ProductionTable = () => {
+  const [selectedOrders, setSelectedOrders] = useState([]);
+
+  const allSelected =
+    selectedOrders.length === productionOrders.length;
+
+  const toggleAll = () => {
+    if (allSelected) {
+      setSelectedOrders([]);
+    } else {
+      setSelectedOrders(productionOrders.map((order) => order.id));
+    }
+  };
+
+  const toggleOrder = (id) => {
+    setSelectedOrders((current) =>
+      current.includes(id)
+        ? current.filter((orderId) => orderId !== id)
+        : [...current, id]
+    );
+  };
+
   return (
-    <div className="overflow-hidden mx-8 rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="mx-6 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+
+      {/* ========================= */}
+      {/* TABLE */}
+      {/* ========================= */}
 
       <div className="overflow-x-auto">
 
         <table className="min-w-[1250px] w-full">
 
-          <thead className="border-b bg-slate-50">
+          {/* ========================= */}
+          {/* HEADER */}
+          {/* ========================= */}
 
-            <tr className="text-xs uppercase tracking-wider text-slate-500">
+          <thead className="border-b border-slate-200 bg-slate-50">
 
-              <th className="px-6 py-4">
-                <input type="checkbox" />
+            <tr className="text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
+
+              <th className="w-12 px-5 py-4 text-center">
+                <input
+                  type="checkbox"
+                  checked={allSelected}
+                  onChange={toggleAll}
+                  className="h-4 w-4 rounded border-slate-300 accent-green-600"
+                />
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Production Order
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Batch
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Quantity
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Progress
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Machine
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Supervisor
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Due Date
               </th>
 
-              <th className="px-6 py-4 text-left">
+              <th className="px-5 py-4">
                 Status
               </th>
 
-              <th className="px-6 py-4 text-center">
+              <th className="px-5 py-4 text-center">
                 Action
               </th>
 
@@ -145,198 +191,270 @@ const ProductionTable = () => {
 
           </thead>
 
+          {/* ========================= */}
+          {/* BODY */}
+          {/* ========================= */}
+
           <tbody>
 
-            {productionOrders.map((order) => (
+            {productionOrders.map((order) => {
 
-              <tr
-                key={order.id}
-                className="border-b transition hover:bg-slate-50"
-              >
+              const isSelected = selectedOrders.includes(order.id);
 
-                <td className="px-6 py-5">
-                  <input type="checkbox" />
-                </td>
+              return (
+                <tr
+                  key={order.id}
+                  className={`
+                    border-b
+                    border-slate-100
+                    transition
+                    hover:bg-slate-50
+                    ${
+                      isSelected
+                        ? "bg-green-50/40"
+                        : "bg-white"
+                    }
+                  `}
+                >
 
-                <td className="px-6 py-5">
+                  {/* Checkbox */}
 
-                  <div className="flex items-center gap-4">
+                  <td className="px-5 py-4 text-center">
 
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-100">
+                    <input
+                      type="checkbox"
+                      checked={isSelected}
+                      onChange={() => toggleOrder(order.id)}
+                      className="h-4 w-4 rounded border-slate-300 accent-green-600"
+                    />
 
-                      <Factory
-                        size={22}
-                        className="text-green-600"
-                      />
+                  </td>
+
+                  {/* Production Order */}
+
+                  <td className="px-5 py-4">
+
+                    <div className="flex items-center gap-3">
+
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-50">
+
+                        <Factory
+                          size={19}
+                          className="text-green-600"
+                        />
+
+                      </div>
+
+                      <div className="min-w-0">
+
+                        <p className="truncate font-semibold text-slate-800">
+                          {order.product}
+                        </p>
+
+                        <p className="mt-0.5 text-xs text-slate-400">
+                          {order.id}
+                        </p>
+
+                      </div>
 
                     </div>
+
+                  </td>
+
+                  {/* Batch */}
+
+                  <td className="px-5 py-4">
+
+                    <span className="font-medium text-slate-700">
+                      {order.batch}
+                    </span>
+
+                  </td>
+
+                  {/* Quantity */}
+
+                  <td className="px-5 py-4">
 
                     <div>
-
-                      <h3 className="font-semibold text-slate-800">
-                        {order.product}
-                      </h3>
-
-                      <p className="text-xs text-slate-400">
-                        {order.id}
+                      <p className="font-medium text-slate-700">
+                        {order.quantity.toLocaleString()}
                       </p>
 
+                      <p className="mt-0.5 text-xs text-slate-400">
+                        Units
+                      </p>
                     </div>
 
-                  </div>
+                  </td>
 
-                </td>
+                  {/* Progress */}
 
-                <td className="px-6 py-5 font-medium text-slate-700">
-                  {order.batch}
-                </td>
+                  <td className="px-5 py-4">
 
-                <td className="px-6 py-5">
-                  {order.quantity} Units
-                </td>
+                    <div className="w-44">
 
-                <td className="px-6 py-5">
+                      <div className="mb-1.5 flex items-center justify-between">
 
-                  <div className="w-44">
+                        <span className="text-xs font-semibold text-slate-700">
+                          {order.progress}%
+                        </span>
 
-                    <div className="mb-2 flex justify-between text-xs">
+                        <span className="text-[11px] text-slate-400">
+                          Completed
+                        </span>
 
-                      <span>{order.progress}%</span>
+                      </div>
 
-                      <span className="text-slate-400">
-                        Completed
-                      </span>
+                      <div className="h-1.5 overflow-hidden rounded-full bg-slate-100">
 
-                    </div>
+                        <div
+                          className={`h-full rounded-full transition-all ${progressColor(
+                            order.progress
+                          )}`}
+                          style={{
+                            width: `${order.progress}%`,
+                          }}
+                        />
 
-                    <div className="h-2 rounded-full bg-slate-100">
-
-                      <div
-                        className={`h-2 rounded-full ${progressColor(order.progress)}`}
-                        style={{
-                          width: `${order.progress}%`,
-                        }}
-                      />
+                      </div>
 
                     </div>
 
-                  </div>
+                  </td>
 
-                </td>
-                                <td className="px-6 py-5">
-                  <div>
-                    <p className="font-medium text-slate-800">
-                      {order.machine}
-                    </p>
+                  {/* Machine */}
 
-                    <p className="mt-1 text-xs text-slate-400">
-                      Production Line
-                    </p>
-                  </div>
-                </td>
-
-                <td className="px-6 py-5">
-
-                  <div className="flex items-center gap-3">
-
-                    <div
-                      className="
-                      flex
-                      h-10
-                      w-10
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-blue-100
-                      font-semibold
-                      text-blue-700
-                      "
-                    >
-                      {order.supervisor.charAt(0)}
-                    </div>
+                  <td className="px-5 py-4">
 
                     <div>
 
                       <p className="font-medium text-slate-800">
-                        {order.supervisor}
+                        {order.machine}
                       </p>
 
-                      <p className="text-xs text-slate-400">
-                        Supervisor
+                      <p className="mt-0.5 text-xs text-slate-400">
+                        Production Line
                       </p>
 
                     </div>
 
-                  </div>
+                  </td>
 
-                </td>
+                  {/* Supervisor */}
 
-                <td className="px-6 py-5">
+                  <td className="px-5 py-4">
 
-                  <div>
+                    <div className="flex items-center gap-2.5">
 
-                    <p className="font-medium text-slate-700">
-                      {order.dueDate}
-                    </p>
+                      <div
+                        className="
+                          flex
+                          h-9
+                          w-9
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-full
+                          bg-blue-50
+                          text-xs
+                          font-semibold
+                          text-blue-700
+                        "
+                      >
+                        {order.supervisor.charAt(0)}
+                      </div>
 
-                    <p className="mt-1 text-xs text-slate-400">
-                      Expected Completion
-                    </p>
+                      <div className="min-w-0">
 
-                  </div>
+                        <p className="truncate font-medium text-slate-800">
+                          {order.supervisor}
+                        </p>
 
-                </td>
+                        <p className="mt-0.5 text-xs text-slate-400">
+                          Supervisor
+                        </p>
 
-                <td className="px-6 py-5">
+                      </div>
 
-                  <span
-                    className={`
-                    inline-flex
-                    items-center
-                    gap-2
-                    rounded-full
-                    px-3
-                    py-1.5
-                    text-xs
-                    font-semibold
-                    ${badgeStyle(order.status)}
-                    `}
-                  >
-                    <span className="h-2 w-2 rounded-full bg-current"></span>
+                    </div>
 
-                    {order.status}
-                  </span>
+                  </td>
 
-                </td>
+                  {/* Due Date */}
 
-                <td className="px-6 py-5">
+                  <td className="px-5 py-4">
 
-                  <div className="flex justify-center">
+                    <div>
 
-                    <button
-                      className="
-                      flex
-                      h-10
-                      w-10
-                      items-center
-                      justify-center
-                      rounded-xl
-                      text-slate-500
-                      transition
-                      hover:bg-slate-100
-                      hover:text-slate-700
-                      "
+                      <p className="font-medium text-slate-700">
+                        {order.dueDate}
+                      </p>
+
+                      <p className="mt-0.5 text-xs text-slate-400">
+                        Expected Completion
+                      </p>
+
+                    </div>
+
+                  </td>
+
+                  {/* Status */}
+
+                  <td className="px-5 py-4">
+
+                    <span
+                      className={`
+                        inline-flex
+                        items-center
+                        gap-2
+                        whitespace-nowrap
+                        rounded-full
+                        px-2.5
+                        py-1
+                        text-xs
+                        font-semibold
+                        ${badgeStyle(order.status)}
+                      `}
                     >
-                      <MoreVertical size={18} />
-                    </button>
 
-                  </div>
+                      <span className="h-1.5 w-1.5 rounded-full bg-current" />
 
-                </td>
+                      {order.status}
 
-              </tr>
+                    </span>
 
-            ))}
+                  </td>
+
+                  {/* Action */}
+
+                  <td className="px-5 py-4">
+
+                    <div className="flex justify-center">
+
+                      <button
+                        className="
+                          flex
+                          h-9
+                          w-9
+                          items-center
+                          justify-center
+                          rounded-lg
+                          text-slate-500
+                          transition
+                          hover:bg-slate-100
+                          hover:text-slate-700
+                        "
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+              );
+            })}
 
           </tbody>
 
@@ -344,82 +462,167 @@ const ProductionTable = () => {
 
       </div>
 
-      {/* Footer */}
+      {/* ========================= */}
+      {/* FOOTER / PAGINATION */}
+      {/* ========================= */}
 
-      <div
-        className="
-        flex
-        flex-col
-        gap-4
-        border-t
-        border-slate-200
-        px-6
-        py-5
-        md:flex-row
-        md:items-center
-        md:justify-between
-        "
-      >
+      <div className="flex flex-col gap-4 border-t border-slate-200 px-5 py-4 md:flex-row md:items-center md:justify-between">
+
+        {/* Information */}
 
         <div>
 
           <p className="text-sm font-medium text-slate-700">
-            Showing <span className="font-semibold">1–5</span> of{" "}
-            <span className="font-semibold">148</span> production orders
+            Showing{" "}
+            <span className="font-semibold">
+              1–5
+            </span>{" "}
+            of{" "}
+            <span className="font-semibold">
+              148
+            </span>{" "}
+            production orders
           </p>
 
-          <p className="mt-1 text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-slate-400">
             Updated 2 minutes ago
           </p>
 
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Pagination */}
+
+        <div className="flex items-center gap-1.5">
+
+          {/* Previous */}
 
           <button
             className="
-            rounded-xl
-            border
-            border-slate-200
-            px-4
-            py-2
-            text-sm
-            transition
-            hover:bg-slate-50
+              flex
+              h-9
+              items-center
+              gap-1
+              rounded-lg
+              border
+              border-slate-200
+              px-3
+              text-sm
+              font-medium
+              text-slate-600
+              transition
+              hover:bg-slate-50
             "
           >
+            <ChevronLeft size={16} />
             Previous
           </button>
 
-          <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-green-600 text-white">
-            1
-          </button>
-
-          <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50">
-            2
-          </button>
-
-          <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50">
-            3
-          </button>
-
-          <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 hover:bg-slate-50">
-            4
-          </button>
+          {/* Page 1 */}
 
           <button
             className="
-            rounded-xl
-            border
-            border-slate-200
-            px-4
-            py-2
-            text-sm
-            transition
-            hover:bg-slate-50
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-lg
+              bg-green-600
+              text-sm
+              font-semibold
+              text-white
+            "
+          >
+            1
+          </button>
+
+          {/* Page 2 */}
+
+          <button
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              text-sm
+              font-medium
+              text-slate-600
+              transition
+              hover:bg-slate-50
+            "
+          >
+            2
+          </button>
+
+          {/* Page 3 */}
+
+          <button
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              text-sm
+              font-medium
+              text-slate-600
+              transition
+              hover:bg-slate-50
+            "
+          >
+            3
+          </button>
+
+          {/* Page 4 */}
+
+          <button
+            className="
+              flex
+              h-9
+              w-9
+              items-center
+              justify-center
+              rounded-lg
+              border
+              border-slate-200
+              text-sm
+              font-medium
+              text-slate-600
+              transition
+              hover:bg-slate-50
+            "
+          >
+            4
+          </button>
+
+          {/* Next */}
+
+          <button
+            className="
+              flex
+              h-9
+              items-center
+              gap-1
+              rounded-lg
+              border
+              border-slate-200
+              px-3
+              text-sm
+              font-medium
+              text-slate-600
+              transition
+              hover:bg-slate-50
             "
           >
             Next
+            <ChevronRight size={16} />
           </button>
 
         </div>

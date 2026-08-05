@@ -1,40 +1,105 @@
 import {
   Boxes,
   ChevronDown,
+  X,
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
 
 import { menu } from "./sideBarMenu";
 
-function Sidebar() {
+function Sidebar({ isMobile = false, onClose }) {
   return (
-    <aside className="flex min-h-screen w-64 flex-col border-r border-slate-200 bg-white text-slate-800">
+    <aside
+      className={`
+        flex
+        w-64
+        flex-col
+        border-r
+        border-slate-200
+        bg-white
+        text-slate-800
+        ${isMobile ? "h-full" : "min-h-screen"}
+      `}
+    >
 
-      {/* Logo */}
+      {/* ================================= */}
+      {/* LOGO */}
+      {/* ================================= */}
 
-      <div className="flex h-20 shrink-0 items-center border-b border-slate-200 px-6">
+      <div
+        className="
+          flex
+          h-20
+          shrink-0
+          items-center
+          justify-between
+          border-b
+          border-slate-200
+          px-6
+        "
+      >
 
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
-          <Boxes
-            className="text-emerald-600"
-            size={24}
-          />
+        <div className="flex items-center">
+
+          <div
+            className="
+              flex
+              h-10
+              w-10
+              items-center
+              justify-center
+              rounded-xl
+              bg-emerald-50
+            "
+          >
+            <Boxes
+              className="text-emerald-600"
+              size={24}
+            />
+          </div>
+
+
+          <h1 className="ml-3 text-2xl font-bold text-slate-900">
+
+            Stock
+            <span className="text-emerald-600">
+              Flow
+            </span>
+
+          </h1>
+
         </div>
 
-        <h1 className="ml-3 text-2xl font-bold text-slate-900">
-          Stock
-          <span className="text-emerald-600">
-            Flow
-          </span>
-        </h1>
+
+        {/* Mobile Close Button */}
+
+        {isMobile && (
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close sidebar"
+            className="
+              rounded-lg
+              p-2
+              text-slate-500
+              transition
+              hover:bg-slate-100
+              hover:text-slate-700
+            "
+          >
+            <X size={20} />
+          </button>
+        )}
 
       </div>
 
 
-      {/* Navigation */}
+      {/* ================================= */}
+      {/* NAVIGATION */}
+      {/* ================================= */}
 
-      <nav className="mt-5 flex-1 space-y-1.5 px-3">
+      <nav className="mt-5 flex-1 space-y-1.5 overflow-y-auto px-3">
 
         {menu.map((item) => {
 
@@ -44,6 +109,7 @@ function Sidebar() {
             <NavLink
               key={item.title}
               to={item.path}
+              onClick={isMobile ? onClose : undefined}
               className={({ isActive }) => `
                 group
                 relative
@@ -67,11 +133,26 @@ function Sidebar() {
 
               {({ isActive }) => (
                 <>
+
                   {/* Active Indicator */}
 
                   {isActive && (
-                    <span className="absolute left-0 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full bg-emerald-600" />
+                    <span
+                      className="
+                        absolute
+                        left-0
+                        top-1/2
+                        h-7
+                        w-1
+                        -translate-y-1/2
+                        rounded-r-full
+                        bg-emerald-600
+                      "
+                    />
                   )}
+
+
+                  {/* Menu Item */}
 
                   <div className="flex items-center gap-3">
 
@@ -90,6 +171,8 @@ function Sidebar() {
 
                   </div>
 
+
+                  {/* Dropdown */}
 
                   {item.dropdown && (
                     <ChevronDown
@@ -113,9 +196,11 @@ function Sidebar() {
       </nav>
 
 
-      {/* User */}
+      {/* ================================= */}
+      {/* USER */}
+      {/* ================================= */}
 
-      <div className="border-t border-slate-200 p-4">
+      <div className="shrink-0 border-t border-slate-200 p-4">
 
         <button
           type="button"
@@ -149,6 +234,7 @@ function Sidebar() {
               AD
             </div>
 
+
             <div className="text-left">
 
               <h4 className="text-sm font-semibold text-slate-800">
@@ -162,6 +248,7 @@ function Sidebar() {
             </div>
 
           </div>
+
 
           <ChevronDown
             size={18}

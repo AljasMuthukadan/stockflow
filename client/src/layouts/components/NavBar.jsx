@@ -7,143 +7,229 @@ import {
   Building2,
 } from "lucide-react";
 
- function Navbar() {
+function Navbar({ onMenuClick }) {
   return (
-    <header className="h-15  w-full bg-white border-b border-slate-200 flex items-center justify-between px-6">
+    <header
+      className="
+        flex
+        h-15
+        w-full
+        shrink-0
+        items-center
+        justify-between
+        border-b
+        border-slate-200
+        bg-white
+        px-4
+        sm:px-5
+        lg:px-6
+      "
+    >
 
-      {/* Left */}
-      <div className="flex items-center gap-5">
-        <button className="text-slate-500 hover:text-slate-700">
+      {/* ================================= */}
+      {/* LEFT */}
+      {/* ================================= */}
+
+      <div className="flex items-center">
+
+        {/* Mobile Menu */}
+
+        <button
+          type="button"
+          onClick={onMenuClick}
+          aria-label="Open sidebar"
+          className="
+            rounded-lg
+            p-2
+            text-slate-500
+            transition
+            hover:bg-slate-100
+            hover:text-slate-700
+            lg:hidden
+          "
+        >
           <Menu size={22} />
         </button>
+
       </div>
 
-      {/* Right */}
-      <div className="flex items-center gap-5">
+
+      {/* ================================= */}
+      {/* RIGHT */}
+      {/* ================================= */}
+
+      <div className="flex items-center gap-2 sm:gap-3 lg:gap-5">
 
         {/* Search */}
 
-        <div className="relative w-[340px]">
+        <div className="relative hidden w-[340px] lg:block">
 
           <Search
             size={17}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+            className="
+              absolute
+              left-4
+              top-1/2
+              -translate-y-1/2
+              text-slate-400
+            "
           />
 
           <input
+            type="text"
             placeholder="Search anything..."
             className="
-            w-full
-            h-11
-            rounded-xl
-            border
-            border-slate-200
-            bg-slate-50
-            pl-11
-            pr-20
-            text-sm
-            outline-none
-            focus:bg-white
-            focus:border-green-500
-            transition
+              h-11
+              w-full
+              rounded-xl
+              border
+              border-slate-200
+              bg-slate-50
+              pl-11
+              pr-20
+              text-sm
+              outline-none
+              transition
+              focus:border-green-500
+              focus:bg-white
             "
           />
 
           <span
             className="
-            absolute
-            right-3
-            top-1/2
-            -translate-y-1/2
-            text-xs
-            bg-white
-            border
-            rounded-md
-            px-2
-            py-1
-            text-slate-500
+              absolute
+              right-3
+              top-1/2
+              -translate-y-1/2
+              rounded-md
+              border
+              border-slate-200
+              bg-white
+              px-2
+              py-1
+              text-xs
+              text-slate-500
             "
           >
             Ctrl + K
           </span>
+
         </div>
+
 
         {/* Notification */}
 
-        <button className="relative">
-          <Bell
-            size={21}
-            className="text-slate-600 hover:text-green-600"
-          />
+        <button
+          type="button"
+          aria-label="Notifications"
+          className="
+            relative
+            rounded-lg
+            p-2
+            text-slate-600
+            transition
+            hover:bg-slate-100
+            hover:text-green-600
+          "
+        >
+          <Bell size={21} />
 
           <span
             className="
-            absolute
-            -top-1
-            -right-1
-            w-4
-            h-4
-            rounded-full
-            bg-red-500
-            text-white
-            text-[10px]
-            flex
-            items-center
-            justify-center
+              absolute
+              right-1
+              top-1
+              flex
+              h-4
+              w-4
+              items-center
+              justify-center
+              rounded-full
+              bg-red-500
+              text-[10px]
+              text-white
             "
           >
             3
           </span>
+
         </button>
+
 
         {/* Theme */}
 
-        <button className="hover:text-green-600">
+        <button
+          type="button"
+          aria-label="Toggle theme"
+          className="
+            rounded-lg
+            p-2
+            text-slate-600
+            transition
+            hover:bg-slate-100
+            hover:text-green-600
+          "
+        >
           <Moon size={20} />
         </button>
+
 
         {/* Profile */}
 
         <button
+          type="button"
           className="
-          flex
-          items-center
-          gap-3
-          px-3
-          py-2
-          rounded-xl
-          hover:bg-slate-100
-          transition
-          "
-        >
-          <div
-            className="
-            w-10
-            h-10
-            rounded-full
-            bg-slate-900
-            text-white
             flex
             items-center
-            justify-center
+            gap-2
+            rounded-xl
+            px-2
+            py-1.5
+            transition
+            hover:bg-slate-100
+            sm:gap-3
+            sm:px-3
+            sm:py-2
+          "
+        >
+
+          <div
+            className="
+              flex
+              h-9
+              w-9
+              shrink-0
+              items-center
+              justify-center
+              rounded-full
+              bg-slate-900
+              text-white
+              sm:h-10
+              sm:w-10
             "
           >
             <Building2 size={18} />
           </div>
 
-          <div className="text-left">
-            <h4 className="text-sm font-semibold">
+
+          <div className="hidden text-left sm:block">
+
+            <h4 className="text-sm font-semibold text-slate-800">
               ABC Industries
             </h4>
+
           </div>
+
 
           <ChevronDown
             size={18}
-            className="text-slate-500"
+            className="hidden text-slate-500 sm:block"
           />
+
         </button>
 
       </div>
+
     </header>
   );
 }

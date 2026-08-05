@@ -9,96 +9,115 @@ import {
 
 const ProductionFilters = () => {
   return (
-    <div className="rounded-2xl mx-8 border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="mx-8 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
 
-      {/* Top Section */}
-      <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      {/* ================= TOP SECTION ================= */}
+
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+
+        {/* Title */}
 
         <div>
-          <h2 className="text-lg font-semibold text-slate-800">
+          <h2 className="text-base font-semibold text-slate-800">
             Production Orders
           </h2>
 
-          <p className="text-sm text-slate-500">
-            Showing <span className="font-semibold">42</span> production orders
+          <p className="mt-0.5 text-xs text-slate-500">
+            Showing{" "}
+            <span className="font-semibold text-slate-700">
+              42
+            </span>{" "}
+            production orders
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        {/* Top Actions */}
+
+        <div className="flex flex-wrap gap-2">
 
           <button
             className="
               flex
+              h-9
               items-center
-              gap-2
-              rounded-xl
+              gap-1.5
+              rounded-lg
               border
               border-slate-200
-              px-4
-              py-2.5
-              text-sm
+              px-3
+              text-xs
               font-medium
+              text-slate-700
               transition
               hover:bg-slate-50
             "
           >
-            <Download size={17} />
+            <Download size={15} />
             Export
           </button>
 
           <button
             className="
               flex
+              h-9
               items-center
-              gap-2
-              rounded-xl
+              gap-1.5
+              rounded-lg
               bg-green-600
-              px-4
-              py-2.5
-              text-sm
+              px-3.5
+              text-xs
               font-semibold
               text-white
               transition
               hover:bg-green-700
             "
           >
-            <Plus size={17} />
+            <Plus size={15} />
             New Order
           </button>
 
         </div>
-
       </div>
 
-      {/* Filters */}
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-6">
+      {/* ================= FILTERS ================= */}
+
+      <div className="grid grid-cols-1 gap-2.5 xl:grid-cols-6">
 
         {/* Search */}
+
         <div className="relative xl:col-span-2">
 
           <Search
-            size={18}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+            size={16}
+            className="
+              absolute
+              left-3
+              top-1/2
+              -translate-y-1/2
+              text-slate-400
+            "
           />
 
           <input
             type="text"
             placeholder="Search production order..."
             className="
-              h-12
+              h-10
               w-full
-              rounded-xl
+              rounded-lg
               border
               border-slate-200
               bg-slate-50
-              pl-11
-              pr-4
-              text-sm
+              pl-9
+              pr-3
+              text-xs
+              text-slate-700
               outline-none
               transition
+              placeholder:text-slate-400
               focus:border-green-500
               focus:bg-white
-              focus:ring-4
+              focus:ring-2
               focus:ring-green-100
             "
           />
@@ -106,19 +125,21 @@ const ProductionFilters = () => {
         </div>
 
         {/* Status */}
+
         <select
           className="
-            h-12
-            rounded-xl
+            h-10
+            rounded-lg
             border
             border-slate-200
             bg-white
-            px-4
-            text-sm
+            px-3
+            text-xs
+            text-slate-700
             outline-none
             transition
             focus:border-green-500
-            focus:ring-4
+            focus:ring-2
             focus:ring-green-100
           "
         >
@@ -130,19 +151,21 @@ const ProductionFilters = () => {
         </select>
 
         {/* Product */}
+
         <select
           className="
-            h-12
-            rounded-xl
+            h-10
+            rounded-lg
             border
             border-slate-200
             bg-white
-            px-4
-            text-sm
+            px-3
+            text-xs
+            text-slate-700
             outline-none
             transition
             focus:border-green-500
-            focus:ring-4
+            focus:ring-2
             focus:ring-green-100
           "
         >
@@ -154,78 +177,102 @@ const ProductionFilters = () => {
         </select>
 
         {/* Date */}
+
         <button
           className="
             flex
-            h-12
+            h-10
             items-center
-            gap-2
-            rounded-xl
+            gap-1.5
+            rounded-lg
             border
             border-slate-200
             bg-white
-            px-4
-            text-sm
+            px-3
+            text-xs
+            text-slate-700
             transition
             hover:bg-slate-50
           "
         >
-          <Calendar size={17} />
+          <Calendar size={15} />
           This Month
         </button>
 
         {/* Apply */}
+
         <button
           className="
             flex
-            h-12
+            h-10
             items-center
             justify-center
-            gap-2
-            rounded-xl
+            gap-1.5
+            rounded-lg
             bg-green-600
-            px-5
-            text-sm
+            px-4
+            text-xs
             font-semibold
             text-white
             transition
             hover:bg-green-700
           "
         >
-          <Filter size={17} />
+          <Filter size={15} />
           Apply
         </button>
 
       </div>
 
-      {/* Bottom Actions */}
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-4">
+      {/* ================= BOTTOM SECTION ================= */}
 
-        <p className="text-sm text-slate-500">
-          Last updated: <span className="font-medium text-slate-700">2 minutes ago</span>
+      <div
+        className="
+          mt-3
+          flex
+          flex-wrap
+          items-center
+          justify-between
+          gap-2
+          border-t
+          border-slate-200
+          pt-3
+        "
+      >
+
+        {/* Last Updated */}
+
+        <p className="text-xs text-slate-500">
+          Last updated:{" "}
+          <span className="font-medium text-slate-700">
+            2 minutes ago
+          </span>
         </p>
+
+        {/* Refresh */}
 
         <button
           className="
             flex
+            h-8
             items-center
-            gap-2
-            rounded-xl
+            gap-1.5
+            rounded-lg
             border
             border-slate-200
-            px-4
-            py-2
-            text-sm
+            px-3
+            text-xs
+            font-medium
+            text-slate-600
             transition
             hover:bg-slate-50
           "
         >
-          <RotateCcw size={16} />
+          <RotateCcw size={14} />
           Refresh
         </button>
 
       </div>
-
     </div>
   );
 };
