@@ -1,4 +1,4 @@
- function StatCard({
+function StatCard({
   title,
   value,
   change,
@@ -10,50 +10,109 @@
   return (
     <div
       className="
-      bg-white
-      rounded-2xl
-      border
-      border-slate-200
-      p-4
-      shadow-sm
-      hover:shadow-md
-      transition
+        rounded-xl
+        border
+        border-slate-200
+        bg-white
+        p-3
+        shadow-sm
+        transition
+        hover:shadow-md
+
+        sm:rounded-2xl
+        sm:p-4
       "
     >
-      <div className="flex justify-between">
+      <div className="flex items-start justify-between gap-2">
 
-        <div>
+        {/* Content */}
 
-          <p className="text-sm text-slate-500">
+        <div className="min-w-0">
+
+          <p
+            className="
+              truncate
+              text-[11px]
+              font-medium
+              text-slate-500
+
+              sm:text-sm
+            "
+          >
             {title}
           </p>
 
-          <h2 className="text-3xl font-bold mt-2">
+          <h2
+            className="
+              mt-1
+              text-xl
+              font-bold
+              leading-tight
+              text-slate-800
+
+              sm:mt-2
+              sm:text-2xl
+
+              xl:text-3xl
+            "
+          >
             {value}
           </h2>
 
-          <p className="text-sm mt-3">
+          <p
+            className="
+              mt-2
+              truncate
+              text-[10px]
+              leading-tight
+
+              sm:mt-3
+              sm:text-sm
+            "
+          >
             <span
               className={
                 positive
-                  ? "text-green-600 font-semibold"
-                  : "text-red-500 font-semibold"
+                  ? "font-semibold text-green-600"
+                  : "font-semibold text-red-500"
               }
             >
               {change}
             </span>
 
-            <span className="text-slate-500 ml-1">
+            <span className="ml-1 text-slate-500">
               {subtitle}
             </span>
           </p>
 
         </div>
 
+        {/* Icon */}
+
         <div
-          className={`w-14 h-14 rounded-2xl flex items-center justify-center ${color}`}
+          className={`
+            flex
+            h-9
+            w-9
+            shrink-0
+            items-center
+            justify-center
+            rounded-lg
+            ${color}
+
+            sm:h-11
+            sm:w-11
+            sm:rounded-xl
+
+            xl:h-12
+            xl:w-12
+            xl:rounded-2xl
+          `}
         >
-          <Icon size={24} />
+          <Icon
+            size={18}
+            className="sm:h-5 sm:w-5 xl:h-6 xl:w-6"
+          />
         </div>
 
       </div>

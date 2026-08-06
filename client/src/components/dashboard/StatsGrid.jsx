@@ -68,8 +68,17 @@ export default function StatsGrid() {
   ];
 
   return (
-    <div className="grid  grid-cols-1 gap-5 sm:grid-cols-3 xl:grid-cols-6">
-        {/** Dashboard Stats */}
+    <div
+      className="
+        grid
+        grid-cols-2
+        gap-3
+        sm:gap-4
+        md:grid-cols-3
+        md:gap-5
+        xl:grid-cols-6
+      "
+    >
       {stats.map((card) => (
         <StatCard
           key={card.title}
