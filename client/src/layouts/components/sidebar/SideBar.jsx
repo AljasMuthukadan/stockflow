@@ -5,7 +5,6 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
-
 import { menu } from "./sideBarMenu";
 
 function Sidebar({ isMobile = false, onClose }) {
@@ -19,10 +18,9 @@ function Sidebar({ isMobile = false, onClose }) {
         border-slate-200
         bg-white
         text-slate-800
-        ${isMobile ? "h-full" : "min-h-screen"}
+        ${isMobile ? "h-full" : "h-screen"}
       `}
     >
-
       {/* ================================= */}
       {/* LOGO */}
       {/* ================================= */}
@@ -39,9 +37,7 @@ function Sidebar({ isMobile = false, onClose }) {
           px-6
         "
       >
-
         <div className="flex items-center">
-
           <div
             className="
               flex
@@ -59,18 +55,13 @@ function Sidebar({ isMobile = false, onClose }) {
             />
           </div>
 
-
           <h1 className="ml-3 text-2xl font-bold text-slate-900">
-
             Stock
             <span className="text-emerald-600">
               Flow
             </span>
-
           </h1>
-
         </div>
-
 
         {/* Mobile Close Button */}
 
@@ -91,18 +82,14 @@ function Sidebar({ isMobile = false, onClose }) {
             <X size={20} />
           </button>
         )}
-
       </div>
-
 
       {/* ================================= */}
       {/* NAVIGATION */}
       {/* ================================= */}
 
-      <nav className="mt-5 flex-1 space-y-1.5 overflow-y-auto px-3">
-
+      <nav className="mt-5 flex-1 space-y-1.5 px-3">
         {menu.map((item) => {
-
           const Icon = item.icon;
 
           return (
@@ -130,10 +117,8 @@ function Sidebar({ isMobile = false, onClose }) {
                 }
               `}
             >
-
               {({ isActive }) => (
                 <>
-
                   {/* Active Indicator */}
 
                   {isActive && (
@@ -151,11 +136,9 @@ function Sidebar({ isMobile = false, onClose }) {
                     />
                   )}
 
-
                   {/* Menu Item */}
 
                   <div className="flex items-center gap-3">
-
                     <Icon
                       size={18}
                       className={
@@ -168,9 +151,7 @@ function Sidebar({ isMobile = false, onClose }) {
                     <span className="text-sm font-medium">
                       {item.title}
                     </span>
-
                   </div>
-
 
                   {/* Dropdown */}
 
@@ -184,24 +165,18 @@ function Sidebar({ isMobile = false, onClose }) {
                       }
                     />
                   )}
-
                 </>
               )}
-
             </NavLink>
           );
-
         })}
-
       </nav>
-
 
       {/* ================================= */}
       {/* USER */}
       {/* ================================= */}
 
       <div className="shrink-0 border-t border-slate-200 p-4">
-
         <button
           type="button"
           className="
@@ -215,14 +190,13 @@ function Sidebar({ isMobile = false, onClose }) {
             hover:bg-slate-50
           "
         >
-
           <div className="flex items-center gap-3">
-
             <div
               className="
                 flex
                 h-10
                 w-10
+                shrink-0
                 items-center
                 justify-center
                 rounded-full
@@ -234,31 +208,23 @@ function Sidebar({ isMobile = false, onClose }) {
               AD
             </div>
 
-
-            <div className="text-left">
-
-              <h4 className="text-sm font-semibold text-slate-800">
+            <div className="min-w-0 text-left">
+              <h4 className="truncate text-sm font-semibold text-slate-800">
                 Admin User
               </h4>
 
-              <p className="text-xs text-slate-500">
+              <p className="truncate text-xs text-slate-500">
                 admin@stockflow.com
               </p>
-
             </div>
-
           </div>
-
 
           <ChevronDown
             size={18}
-            className="text-slate-400"
+            className="shrink-0 text-slate-400"
           />
-
         </button>
-
       </div>
-
     </aside>
   );
 }

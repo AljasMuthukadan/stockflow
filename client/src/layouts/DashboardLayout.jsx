@@ -18,10 +18,9 @@ const DashboardLayout = () => {
       {/* DESKTOP SIDEBAR */}
       {/* ================================= */}
 
-      <aside className="hidden lg:flex">
+      <aside className="hidden h-screen shrink-0 lg:flex">
         <Sidebar />
       </aside>
-
 
       {/* ================================= */}
       {/* MAIN AREA */}
@@ -29,16 +28,19 @@ const DashboardLayout = () => {
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
 
+        {/* Navbar */}
+
         <Navbar
           onMenuClick={() => setMobileSidebarOpen(true)}
         />
+
+        {/* Main Content */}
 
         <main className="min-h-0 flex-1 overflow-y-auto scrollbar-none bg-gray-100">
           <Outlet />
         </main>
 
       </div>
-
 
       {/* ================================= */}
       {/* MOBILE SIDEBAR */}
@@ -52,14 +54,18 @@ const DashboardLayout = () => {
           <button
             type="button"
             aria-label="Close sidebar"
-            className="absolute inset-0 cursor-default bg-black/40"
+            className="
+              absolute
+              inset-0
+              cursor-default
+              bg-black/40
+            "
             onClick={closeMobileSidebar}
           />
 
-
           {/* Drawer */}
 
-          <div className="absolute left-0 top-0 h-full w-64 bg-white shadow-2xl">
+          <div className="absolute left-0 top-0 h-screen w-64 bg-white shadow-2xl">
 
             <Sidebar
               isMobile
@@ -67,7 +73,6 @@ const DashboardLayout = () => {
             />
 
           </div>
-
         </div>
       )}
 
