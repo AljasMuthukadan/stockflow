@@ -40,7 +40,8 @@ function DashboardHeader() {
             text-[11px]
             leading-4
             text-slate-500
-
+            hidden
+            lg:block
             sm:mt-1
             sm:text-sm
             sm:leading-5

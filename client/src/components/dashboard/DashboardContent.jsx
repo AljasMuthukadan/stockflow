@@ -1,7 +1,7 @@
 import InventoryChart from "./InventoryChart";
 import StockCategoryChart from "./StockCategoryChart";
 import RecentActivities from "./RecentActivities";
-import LowStockTable from "./LowStockTable";
+import LowStockTable from "./low-stock/LowStockTable";
 import TopSellingProducts from "./TopSellingProducts";
 
 export default function DashboardContent() {
