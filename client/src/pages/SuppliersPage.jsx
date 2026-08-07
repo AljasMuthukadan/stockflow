@@ -5,22 +5,53 @@ import SupplierProfile from "../components/suppliers/SupplierProfile";
 
 const SuppliersPage = () => {
   return (
-    <div className="space-y-3  px-8 pt-2">
+    <div className="min-h-full bg-gray-50 px-3 py-3 sm:px-4 md:px-5 lg:px-6">
+
+      {/* ========================= */}
+      {/* PAGE HEADER */}
+      {/* ========================= */}
 
       <SupplierHeader />
-     {/* Left Section */}
-     <div className="flex flex-col gap-3 lg:flex-row">
-     <div className="flex w-[75%] flex-1 flex-col  gap-3 ">
-        <div className="flex flex-row">
-      <SupplierStats />
+
+      {/* ========================= */}
+      {/* MAIN CONTENT */}
+      {/* ========================= */}
+
+      <div className="mt-3 grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)]">
+
+        {/* ========================= */}
+        {/* LEFT SECTION */}
+        {/* ========================= */}
+
+        <div className="flex min-w-0 flex-col gap-3">
+
+          {/* Supplier Statistics */}
+
+          <div className="min-w-0">
+            <SupplierStats />
+          </div>
+
+          {/* Supplier Table */}
+
+          <div className="min-w-0">
+            <SupplierTable />
+          </div>
+
+        </div>
+
+
+        {/* ========================= */}
+        {/* RIGHT SECTION */}
+        {/* ========================= */}
+
+        <div className="min-w-0">
+
+          <SupplierProfile />
+
+        </div>
+
       </div>
-      <SupplierTable />
-     </div>
-    {/* Right Section */}
-    <div className="flex w-[25%] flex-1 flex-col  gap-3 lg:flex-row">
-    <SupplierProfile />
-    </div>
-    </div>
+
     </div>
   );
 };

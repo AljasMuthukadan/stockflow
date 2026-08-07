@@ -4,46 +4,116 @@ import SupplierModal from "./add-supplier/SupplierModal";
 
 const SupplierHeader = () => {
   const [showModal, setShowModal] = useState(false);
+
   return (
     <>
-    <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+      <div
+        className="
+          mb-4
+          flex
+          flex-row
+          items-center
+          justify-between
+          gap-3
 
-      <div>
+          sm:mb-5
+          sm:gap-4
+        "
+      >
+        {/* ========================= */}
+        {/* LEFT */}
+        {/* ========================= */}
 
-        <h1 className="text-2xl font-bold text-slate-800">
-          Suppliers
-        </h1>
+        <div className="min-w-0 flex-1">
 
-        <p className="mt-2 text-slate-500">
-          Manage suppliers, sundry creditors and debtors.
-        </p>
+          <h1
+            className="
+              truncate
+              text-lg
+              font-bold
+              text-slate-800
+
+              sm:text-xl
+
+              lg:text-2xl
+            "
+          >
+            Suppliers
+          </h1>
+
+          <p
+            className="
+              mt-1
+              hidden
+              text-sm
+              text-slate-500
+
+              lg:block
+            "
+          >
+            Manage suppliers, sundry creditors and debtors.
+          </p>
+
+        </div>
+
+
+        {/* ========================= */}
+        {/* RIGHT */}
+        {/* ========================= */}
+
+        <button
+          type="button"
+          onClick={() => setShowModal(true)}
+          className="
+            inline-flex
+            shrink-0
+            items-center
+            justify-center
+            gap-1.5
+            rounded-lg
+            bg-green-600
+            px-3
+            py-2
+            text-xs
+            font-semibold
+            text-white
+            shadow-sm
+            transition
+            hover:bg-green-700
+            active:scale-95
+
+            sm:gap-2
+            sm:rounded-xl
+            sm:px-4
+            sm:py-2.5
+            sm:text-sm
+
+            lg:px-5
+            lg:py-3
+          "
+        >
+          <Plus
+            size={16}
+            className="sm:h-[18px] sm:w-[18px]"
+          />
+
+          <span className="whitespace-nowrap">
+            Add Supplier
+          </span>
+        </button>
 
       </div>
 
-      <button
-        className="
-        flex
-        items-center
-        gap-2
-        rounded-xl
-        bg-green-600
-        hover:bg-green-700
-        px-5
-        py-3
-        text-white
-        font-semibold
-        shadow-sm
-        transition
-        "
-        onClick={() => setShowModal(true)}
-      >
-        <Plus size={18} />
 
-        Add Supplier
+      {/* ========================= */}
+      {/* MODAL */}
+      {/* ========================= */}
 
-      </button>
-    </div>
-      {showModal && (<SupplierModal onClose={() => setShowModal(false)} />)}
+      {showModal && (
+        <SupplierModal
+          onClose={() => setShowModal(false)}
+        />
+      )}
     </>
   );
 };

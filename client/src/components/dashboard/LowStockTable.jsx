@@ -52,12 +52,16 @@ const products = [
 
 export default function LowStockTable() {
   return (
-    <div className="flex h-[330px] min-h-0 flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden rounded-xl border border-slate-200 bg-white">
 
-      {/* Header - Fixed */}
-      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 bg-white px-5 py-3">
-        <div>
-          <h3 className="text-base font-semibold text-slate-900 sm:text-lg">
+      {/* ================================================= */}
+      {/* HEADER */}
+      {/* ================================================= */}
+
+      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 px-4 py-3 sm:px-5">
+
+        <div className="min-w-0">
+          <h3 className="text-sm font-semibold text-slate-900 sm:text-base">
             Low Stock Alerts
           </h3>
 
@@ -66,145 +70,273 @@ export default function LowStockTable() {
           </p>
         </div>
 
-        <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-600">
+        <span className="shrink-0 rounded-full bg-red-50 px-2.5 py-1 text-[11px] font-medium text-red-600 sm:px-3 sm:text-xs">
           {products.length} Alerts
         </span>
+
       </div>
 
-      {/* Table Area */}
-      <div className="min-h-0 flex-1 overflow-hidden">
 
-        {/* Horizontal scroll for smaller screens */}
-        <div className="h-full scrollbar-none overflow-x-auto">
+      {/* ================================================= */}
+      {/* MOBILE VIEW */}
+      {/* ================================================= */}
 
-          <table className="min-w-[760px] w-full text-sm">
+      <div className="min-h-0 flex-1 overflow-y-auto md:hidden">
 
-            {/* Table Header - Fixed */}
-            <thead className="sticky top-0 z-10 bg-slate-50">
+        <div className="divide-y divide-slate-100">
 
-              <tr className="border-b border-slate-100">
+          {products.map((item) => (
 
-                <th className="whitespace-nowrap px-5 py-3 text-left text-xs font-semibold text-slate-500">
-                  Product
-                </th>
+            <div
+              key={item.product}
+              className="px-4 py-3 transition hover:bg-slate-50"
+            >
 
-                <th className="whitespace-nowrap px-5 py-3 text-left text-xs font-semibold text-slate-500">
-                  Category
-                </th>
+              {/* Top Row */}
 
-                <th className="whitespace-nowrap px-5 py-3 text-left text-xs font-semibold text-slate-500">
-                  Current Stock
-                </th>
+              <div className="flex items-start justify-between gap-3">
 
-                <th className="whitespace-nowrap px-5 py-3 text-left text-xs font-semibold text-slate-500">
-                  Minimum Stock
-                </th>
+                <div className="min-w-0">
 
-                <th className="whitespace-nowrap px-5 py-3 text-left text-xs font-semibold text-slate-500">
-                  Status
-                </th>
+                  <h4 className="truncate text-sm font-semibold text-slate-800">
+                    {item.product}
+                  </h4>
 
-                <th className="whitespace-nowrap px-5 py-3 text-right text-xs font-semibold text-slate-500">
-                  Action
-                </th>
+                  <p className="mt-0.5 truncate text-xs text-slate-400">
+                    {item.category}
+                  </p>
+
+                </div>
+
+                {/* Status */}
+
+                <span
+                  className={`shrink-0 rounded-full px-2 py-1 text-[10px] font-medium ${
+                    item.status === "Critical"
+                      ? "bg-red-100 text-red-600"
+                      : "bg-orange-100 text-orange-600"
+                  }`}
+                >
+                  {item.status}
+                </span>
+
+              </div>
+
+
+              {/* Stock Information */}
+
+              <div className="mt-3 flex items-center justify-between">
+
+                <div>
+                  <p className="text-[11px] text-slate-400">
+                    Current
+                  </p>
+
+                  <p
+                    className={`mt-0.5 text-sm font-semibold ${
+                      item.status === "Critical"
+                        ? "text-red-600"
+                        : "text-orange-600"
+                    }`}
+                  >
+                    {item.stock}
+                  </p>
+                </div>
+
+
+                <div className="text-right">
+
+                  <p className="text-[11px] text-slate-400">
+                    Minimum
+                  </p>
+
+                  <p className="mt-0.5 text-sm font-medium text-slate-600">
+                    {item.minimum}
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              {/* Action */}
+
+              <button
+                type="button"
+                className="
+                  mt-3
+                  w-full
+                  rounded-lg
+                  border
+                  border-slate-200
+                  px-3
+                  py-2
+                  text-xs
+                  font-medium
+                  text-slate-700
+                  transition
+                  hover:bg-slate-100
+                "
+              >
+                Restock
+              </button>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+
+      {/* ================================================= */}
+      {/* TABLE VIEW - TABLET + DESKTOP */}
+      {/* ================================================= */}
+
+      <div className="hidden min-h-0 flex-1 overflow-auto md:block">
+
+        <table className="w-full min-w-[680px] text-sm">
+
+          {/* Table Header */}
+
+          <thead className="sticky top-0 z-10 bg-slate-50">
+
+            <tr className="border-b border-slate-100">
+
+              <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold text-slate-500 lg:px-5">
+                Product
+              </th>
+
+              <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold text-slate-500 lg:px-5">
+                Category
+              </th>
+
+              <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold text-slate-500 lg:px-5">
+                Current Stock
+              </th>
+
+              <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold text-slate-500 lg:px-5">
+                Minimum Stock
+              </th>
+
+              <th className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold text-slate-500 lg:px-5">
+                Status
+              </th>
+
+              <th className="whitespace-nowrap px-4 py-3 text-right text-xs font-semibold text-slate-500 lg:px-5">
+                Action
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          {/* Table Body */}
+
+          <tbody>
+
+            {products.map((item) => (
+
+              <tr
+                key={item.product}
+                className="border-b border-slate-100 transition hover:bg-slate-50"
+              >
+
+                {/* Product */}
+
+                <td className="whitespace-nowrap px-4 py-3 lg:px-5 lg:py-3.5">
+
+                  <span className="font-medium text-slate-800">
+                    {item.product}
+                  </span>
+
+                </td>
+
+
+                {/* Category */}
+
+                <td className="whitespace-nowrap px-4 py-3 text-slate-500 lg:px-5 lg:py-3.5">
+                  {item.category}
+                </td>
+
+
+                {/* Current Stock */}
+
+                <td className="whitespace-nowrap px-4 py-3 lg:px-5 lg:py-3.5">
+
+                  <span
+                    className={
+                      item.status === "Critical"
+                        ? "font-semibold text-red-600"
+                        : "font-semibold text-orange-600"
+                    }
+                  >
+                    {item.stock}
+                  </span>
+
+                </td>
+
+
+                {/* Minimum Stock */}
+
+                <td className="whitespace-nowrap px-4 py-3 text-slate-500 lg:px-5 lg:py-3.5">
+                  {item.minimum}
+                </td>
+
+
+                {/* Status */}
+
+                <td className="whitespace-nowrap px-4 py-3 lg:px-5 lg:py-3.5">
+
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-xs font-medium ${
+                      item.status === "Critical"
+                        ? "bg-red-100 text-red-600"
+                        : "bg-orange-100 text-orange-600"
+                    }`}
+                  >
+                    {item.status}
+                  </span>
+
+                </td>
+
+
+                {/* Action */}
+
+                <td className="whitespace-nowrap px-4 py-3 text-right lg:px-5 lg:py-3.5">
+
+                  <button
+                    type="button"
+                    className="
+                      rounded-lg
+                      border
+                      border-slate-200
+                      px-3
+                      py-1.5
+                      text-xs
+                      font-medium
+                      text-slate-700
+                      transition
+                      hover:bg-slate-100
+                      lg:px-4
+                      lg:py-2
+                      lg:text-sm
+                    "
+                  >
+                    Restock
+                  </button>
+
+                </td>
 
               </tr>
 
-            </thead>
+            ))}
 
-            {/* ONLY BODY SCROLLS */}
-            <tbody>
+          </tbody>
 
-              {products.map((item) => (
-
-                <tr
-                  key={item.product}
-                  className="border-b border-slate-100 transition hover:bg-slate-50"
-                >
-
-                  {/* Product */}
-
-                  <td className="whitespace-nowrap px-5 py-3.5">
-                    <span className="font-medium text-slate-800">
-                      {item.product}
-                    </span>
-                  </td>
-
-                  {/* Category */}
-
-                  <td className="whitespace-nowrap px-5 py-3.5 text-slate-500">
-                    {item.category}
-                  </td>
-
-                  {/* Current Stock */}
-
-                  <td className="whitespace-nowrap px-5 py-3.5">
-                    <span
-                      className={
-                        item.status === "Critical"
-                          ? "font-semibold text-red-600"
-                          : "font-semibold text-orange-600"
-                      }
-                    >
-                      {item.stock}
-                    </span>
-                  </td>
-
-                  {/* Minimum Stock */}
-
-                  <td className="whitespace-nowrap px-5 py-3.5 text-slate-500">
-                    {item.minimum}
-                  </td>
-
-                  {/* Status */}
-
-                  <td className="whitespace-nowrap px-5 py-3.5">
-
-                    <span
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${
-                        item.status === "Critical"
-                          ? "bg-red-100 text-red-600"
-                          : "bg-orange-100 text-orange-600"
-                      }`}
-                    >
-                      {item.status}
-                    </span>
-
-                  </td>
-
-                  {/* Action */}
-
-                  <td className="whitespace-nowrap px-5 py-3.5 text-right">
-
-                    <button
-                      type="button"
-                      className="
-                        rounded-lg
-                        border
-                        border-slate-200
-                        px-4
-                        py-2
-                        text-sm
-                        font-medium
-                        text-slate-700
-                        transition
-                        hover:bg-slate-100
-                      "
-                    >
-                      Restock
-                    </button>
-
-                  </td>
-
-                </tr>
-
-              ))}
-
-            </tbody>
-
-          </table>
-
-        </div>
+        </table>
 
       </div>
 

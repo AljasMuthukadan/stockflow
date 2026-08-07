@@ -23,7 +23,7 @@ const badgeStyle = (status) => {
 
 export default function InventoryTable() {
   return (
-    <div className="mt-5 mb-5 px-8">
+    <div className="mt-5 mb-5 px-3 sm:px-4 md:px-6 lg:px-8">
 
       {/* Table Card */}
 

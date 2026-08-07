@@ -61,31 +61,33 @@ const colors = {
 
 const SupplierStats = () => {
   return (
-    <div className="grid gap-3 w-full sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
 
       {stats.map((item) => {
-
         const Icon = item.icon;
 
         return (
-
           <div
             key={item.title}
             className="
-            group
-            relative
-            overflow-hidden
-            rounded-lg
-            border
-            border-slate-200
-            bg-white
-            py-3
-            px-5
-            shadow-sm
-            transition-all
-            duration-300
-            hover:-translate-y-1
-            hover:shadow-xl
+              group
+              relative
+              overflow-hidden
+              rounded-lg
+              border
+              border-slate-200
+              bg-white
+              px-3
+              py-3
+              shadow-sm
+              transition-all
+              duration-300
+              hover:-translate-y-1
+              hover:shadow-md
+              sm:px-4
+              sm:py-4
+              lg:px-5
+              lg:py-3
             "
           >
 
@@ -93,59 +95,90 @@ const SupplierStats = () => {
 
             <div
               className="
-              absolute
-              -right-10
-              -top-10
-              h-32
-              w-32
-              rounded-full
-              bg-slate-100/40
-              transition
-              group-hover:scale-110
+                absolute
+                -right-8
+                -top-8
+                h-24
+                w-24
+                rounded-full
+                bg-slate-100/40
+                transition
+                group-hover:scale-110
+                sm:-right-10
+                sm:-top-10
+                sm:h-28
+                sm:w-28
+                lg:h-32
+                lg:w-32
               "
             />
 
-            <div className="relative flex items-start justify-between">
+            {/* Content */}
 
-              <div>
+            <div className="relative flex items-start justify-between gap-2">
 
-                <p className="text-sm font-medium text-slate-500">
+              {/* Text */}
+
+              <div className="min-w-0">
+
+                <p className="truncate text-xs font-medium text-slate-500 sm:text-sm">
                   {item.title}
                 </p>
 
-                <h2 className="mt-3 text-4xl font-bold text-slate-800">
+                <h2 className="mt-2 text-2xl font-bold text-slate-800 sm:mt-3 sm:text-3xl lg:text-4xl">
                   {item.value}
                 </h2>
 
-                <p className={`mt-4 text-sm ${colors[item.color].text}`}>
+                <p
+                  className={`
+                    mt-2
+                    truncate
+                    text-[11px]
+                    sm:mt-3
+                    sm:text-xs
+                    lg:mt-4
+                    lg:text-sm
+                    ${colors[item.color].text}
+                  `}
+                >
                   {item.sub}
                 </p>
 
               </div>
 
+              {/* Icon */}
+
               <div
                 className={`
-                flex
-                h-14
-                w-14
-                items-center
-                justify-center
-                rounded-2xl
-                ${colors[item.color].bg}
+                  flex
+                  h-9
+                  w-9
+                  shrink-0
+                  items-center
+                  justify-center
+                  rounded-xl
+                  sm:h-11
+                  sm:w-11
+                  lg:h-14
+                  lg:w-14
+                  lg:rounded-2xl
+                  ${colors[item.color].bg}
                 `}
               >
                 <Icon
-                  size={26}
-                  className={colors[item.color].icon}
+                  size={18}
+                  className={`
+                    ${colors[item.color].icon}
+                    sm:size-[20px]
+                    lg:size-[26px]
+                  `}
                 />
               </div>
 
             </div>
 
           </div>
-
         );
-
       })}
 
     </div>

@@ -8,7 +8,7 @@ import {
 
 const InventoryFilters = () => {
   return (
-    <div className="px-8">
+    <div className="px-3 sm:px-4 md:px-6 lg:px-8">
 
       <div className="w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
 
