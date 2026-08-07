@@ -70,7 +70,7 @@ const colors = {
 
 const InventoryStats = () => {
   return (
-    <div className="grid grid-cols-1 gap-4 px-8 sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 px-3 sm:px-5 md:px-6 lg:px-8 sm:grid-cols-2 xl:grid-cols-4">
 
       {stats.map((item) => {
         const Icon = item.icon;
