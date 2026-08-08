@@ -1,0 +1,51 @@
+export const products = [
+  {
+    product: "Raw Sugar",
+    category: "Raw Materials",
+    stock: "120 kg",
+    minimum: "250 kg",
+    status: "Low",
+  },
+  {
+    product: "Milk Powder",
+    category: "Raw Materials",
+    stock: "80 kg",
+    minimum: "200 kg",
+    status: "Low",
+  },
+  {
+    product: "Chocolate Syrup",
+    category: "Raw Materials",
+    stock: "25 L",
+    minimum: "100 L",
+    status: "Critical",
+  },
+  {
+    product: "Packaging Box",
+    category: "Packaging",
+    stock: "150 pcs",
+    minimum: "300 pcs",
+    status: "Low",
+  },
+  {
+    product: "Vanilla Essence",
+    category: "Raw Materials",
+    stock: "10 L",
+    minimum: "50 L",
+    status: "Critical",
+  },
+  {
+    product: "Cocoa Powder",
+    category: "Raw Materials",
+    stock: "45 kg",
+    minimum: "100 kg",
+    status: "Low",
+  },
+  {
+    product: "Plastic Cups",
+    category: "Packaging",
+    stock: "180 pcs",
+    minimum: "500 pcs",
+    status: "Critical",
+  },
+];

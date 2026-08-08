@@ -1,59 +1,11 @@
 import LowstockHeader from "./LowstockHeader";
 import { LowStockMobileTable } from "./LowStockMobileTable";
 import RestockButton from "./RestockButton";
+import { products } from "./data";
 
-const products = [
-  {
-    product: "Raw Sugar",
-    category: "Raw Materials",
-    stock: "120 kg",
-    minimum: "250 kg",
-    status: "Low",
-  },
-  {
-    product: "Milk Powder",
-    category: "Raw Materials",
-    stock: "80 kg",
-    minimum: "200 kg",
-    status: "Low",
-  },
-  {
-    product: "Chocolate Syrup",
-    category: "Raw Materials",
-    stock: "25 L",
-    minimum: "100 L",
-    status: "Critical",
-  },
-  {
-    product: "Packaging Box",
-    category: "Packaging",
-    stock: "150 pcs",
-    minimum: "300 pcs",
-    status: "Low",
-  },
-  {
-    product: "Vanilla Essence",
-    category: "Raw Materials",
-    stock: "10 L",
-    minimum: "50 L",
-    status: "Critical",
-  },
-  {
-    product: "Cocoa Powder",
-    category: "Raw Materials",
-    stock: "45 kg",
-    minimum: "100 kg",
-    status: "Low",
-  },
-  {
-    product: "Plastic Cups",
-    category: "Packaging",
-    stock: "180 pcs",
-    minimum: "500 pcs",
-    status: "Critical",
-  },
-];
 
+
+ 
 export default function LowStockTable() {
   return (
     <div
@@ -96,6 +48,7 @@ export default function LowStockTable() {
           overflow-auto
           md:block
           scrollbar-none
+          
         "
       >
         <table className="w-full min-w-[680px] text-sm">
@@ -151,7 +104,7 @@ export default function LowStockTable() {
               <th
                 className="
                   whitespace-nowrap
-                  px-4
+                  px-2
                   py-3
                   text-left
                   text-xs
@@ -172,7 +125,9 @@ export default function LowStockTable() {
                   text-xs
                   font-semibold
                   text-slate-500
-                  lg:px-5
+                  xl:px-5
+                  lg:hidden
+                  xl:block
                 "
               >
                 Status
@@ -224,7 +179,7 @@ export default function LowStockTable() {
 
                 {/* Current Stock */}
 
-                <td className="whitespace-nowrap px-4 py-3 lg:px-5 lg:py-3.5">
+                <td className="whitespace-nowrap px-3 py-3 xl:px-5 xl:py-3.5 lg:px-3 lg:py-3.5">
                   <span
                     className={
                       item.status === "Critical"
@@ -244,7 +199,7 @@ export default function LowStockTable() {
 
                 {/* Status */}
 
-                <td className="whitespace-nowrap px-4 py-3 lg:px-5 lg:py-3.5">
+                <td className="whitespace-nowrap px-4 py-3 lg:px-5 lg:hidden xl:block xl:py-3.5">
                   <span
                     className={`
                       rounded-full
