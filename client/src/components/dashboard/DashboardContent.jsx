@@ -1,8 +1,8 @@
-import InventoryChart from "./InventoryChart";
 import StockCategoryChart from "./StockCategoryChart";
 import RecentActivities from "./RecentActivities";
 import LowStockTable from "./low-stock/LowStockTable";
 import TopSellingProducts from "./TopSellingProducts";
+import OverviewSection from "./stock-overview/OverviewSection";
 
 export default function DashboardContent() {
   return (
@@ -15,7 +15,7 @@ export default function DashboardContent() {
 
               {/* Inventory Chart */}
               <div className="col-span-12 lg:col-span-8">
-                <InventoryChart />
+                <OverviewSection />
               </div>
 
               {/* Pie Chart */}
