@@ -1,9 +1,10 @@
 import {
   MoreVertical,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
-import inventory from "./inventoryData"
+
+import inventory from "../inventoryData";
+import { InventoryMobileView } from "./InventoryMobileView";
+import FooterSection from "./FooterSection";
 
 const badgeStyle = (status) => {
   switch (status) {
@@ -23,15 +24,29 @@ const badgeStyle = (status) => {
 
 export default function InventoryTable() {
   return (
-    <div className="mt-5 mb-5 px-3 sm:px-4 md:px-6 lg:px-8">
+    <div className="mt-5 mb-5 px-3 sm:px-4 md:px-6  lg:px-8">
 
-      {/* Table Card */}
+      {/* ================================================= */}
+      {/* MAIN CARD */}
+      {/* ================================================= */}
 
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-        {/* Table */}
+        {/* ================================================= */}
+        {/* MOBILE VIEW */}
+        {/* ================================================= */}
 
-        <div className="overflow-x-auto">
+        <InventoryMobileView
+          inventory={inventory}
+          badgeStyle={badgeStyle}
+        />
+
+
+        {/* ================================================= */}
+        {/* TABLE VIEW - TABLET + DESKTOP */}
+        {/* ================================================= */}
+
+        <div className="hidden overflow-x-auto md:block">
 
           <table className="w-full min-w-[900px]">
 
@@ -77,9 +92,10 @@ export default function InventoryTable() {
 
             </thead>
 
+
             {/* Body */}
 
-            <tbody >
+            <tbody>
 
               {inventory.map((item) => (
 
@@ -96,15 +112,30 @@ export default function InventoryTable() {
 
                   {/* Item */}
 
-                  <td className="px-5 py-3 ">
+                  <td className="px-5 py-3">
 
                     <div className="flex items-center gap-3">
 
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-sm font-semibold text-emerald-600">
+                      <div
+                        className="
+                          flex
+                          h-9
+                          w-9
+                          shrink-0
+                          items-center
+                          justify-center
+                          rounded-lg
+                          bg-emerald-50
+                          text-sm
+                          font-semibold
+                          text-emerald-600
+                        "
+                      >
                         {item.name.charAt(0)}
                       </div>
 
                       <div>
+
                         <p className="text-sm font-semibold text-slate-800">
                           {item.name}
                         </p>
@@ -112,11 +143,13 @@ export default function InventoryTable() {
                         <p className="mt-0.5 text-xs text-slate-400">
                           Item #{item.id}
                         </p>
+
                       </div>
 
                     </div>
 
                   </td>
+
 
                   {/* SKU */}
 
@@ -128,6 +161,7 @@ export default function InventoryTable() {
 
                   </td>
 
+
                   {/* Category */}
 
                   <td className="px-5 py-4">
@@ -137,6 +171,7 @@ export default function InventoryTable() {
                     </span>
 
                   </td>
+
 
                   {/* Stock */}
 
@@ -148,6 +183,7 @@ export default function InventoryTable() {
 
                   </td>
 
+
                   {/* Unit */}
 
                   <td className="px-5 py-4">
@@ -158,6 +194,7 @@ export default function InventoryTable() {
 
                   </td>
 
+
                   {/* Reorder */}
 
                   <td className="px-5 py-4">
@@ -167,6 +204,7 @@ export default function InventoryTable() {
                     </span>
 
                   </td>
+
 
                   {/* Status */}
 
@@ -189,6 +227,7 @@ export default function InventoryTable() {
 
                   </td>
 
+
                   {/* Actions */}
 
                   <td className="px-5 py-4">
@@ -197,6 +236,7 @@ export default function InventoryTable() {
 
                       <button
                         type="button"
+                        aria-label={`Actions for ${item.name}`}
                         className="
                           flex
                           h-9
@@ -227,196 +267,13 @@ export default function InventoryTable() {
 
         </div>
 
-        {/* Footer */}
 
-        <div className="flex flex-col gap-4 border-t border-slate-100 px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+        {/* ================================================= */}
+        {/* FOOTER / PAGINATION */}
+        {/* ================================================= */}
 
-          {/* Results */}
-
-          <p className="text-sm text-slate-500">
-
-            Showing{" "}
-
-            <span className="font-semibold text-slate-700">
-              1–7
-            </span>{" "}
-
-            of{" "}
-
-            <span className="font-semibold text-slate-700">
-              1,250
-            </span>{" "}
-
-            items
-
-          </p>
-
-          {/* Pagination */}
-
-          <div className="flex items-center gap-1.5">
-
-            {/* Previous */}
-
-            <button
-              type="button"
-              aria-label="Previous page"
-              className="
-                flex
-                h-9
-                w-9
-                items-center
-                justify-center
-                rounded-lg
-                border
-                border-slate-200
-                bg-white
-                text-slate-500
-                transition
-                hover:border-slate-300
-                hover:bg-slate-50
-                hover:text-slate-700
-                disabled:cursor-not-allowed
-              "
-            >
-              <ChevronLeft size={16} />
-            </button>
-
-            {/* Page 1 */}
-
-            <button
-              type="button"
-              className="
-                flex
-                h-9
-                min-w-9
-                items-center
-                justify-center
-                rounded-lg
-                bg-emerald-600
-                px-2.5
-                text-sm
-                font-semibold
-                text-white
-                shadow-sm
-                transition
-                hover:bg-emerald-700
-              "
-            >
-              1
-            </button>
-
-            {/* Page 2 */}
-
-            <button
-              type="button"
-              className="
-                flex
-                h-9
-                min-w-9
-                items-center
-                justify-center
-                rounded-lg
-                border
-                border-slate-200
-                bg-white
-                px-2.5
-                text-sm
-                font-medium
-                text-slate-600
-                transition
-                hover:border-slate-300
-                hover:bg-slate-50
-              "
-            >
-              2
-            </button>
-
-            {/* Page 3 */}
-
-            <button
-              type="button"
-              className="
-                flex
-                h-9
-                min-w-9
-                items-center
-                justify-center
-                rounded-lg
-                border
-                border-slate-200
-                bg-white
-                px-2.5
-                text-sm
-                font-medium
-                text-slate-600
-                transition
-                hover:border-slate-300
-                hover:bg-slate-50
-              "
-            >
-              3
-            </button>
-
-            {/* Dots */}
-
-            <span className="flex h-9 w-9 items-center justify-center text-sm text-slate-400">
-              ...
-            </span>
-
-            {/* Last Page */}
-
-            <button
-              type="button"
-              className="
-                flex
-                h-9
-                min-w-9
-                items-center
-                justify-center
-                rounded-lg
-                border
-                border-slate-200
-                bg-white
-                px-2.5
-                text-sm
-                font-medium
-                text-slate-600
-                transition
-                hover:border-slate-300
-                hover:bg-slate-50
-              "
-            >
-              179
-            </button>
-
-            {/* Next */}
-
-            <button
-              type="button"
-              aria-label="Next page"
-              className="
-                flex
-                h-9
-                w-9
-                items-center
-                justify-center
-                rounded-lg
-                border
-                border-slate-200
-                bg-white
-                text-slate-500
-                transition
-                hover:border-slate-300
-                hover:bg-slate-50
-                hover:text-slate-700
-              "
-            >
-              <ChevronRight size={16} />
-            </button>
-
-          </div>
-
-        </div>
+        <FooterSection />
+        
 
       </div>
 

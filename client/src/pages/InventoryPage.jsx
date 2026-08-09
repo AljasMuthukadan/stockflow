@@ -1,6 +1,6 @@
-import InventoryStats from "../components/inventory/InventoryStats";
-import InventoryFilters from "../components/inventory/InventoryFilters";
-import InventoryTable from "../components/inventory/InventoryTable";
+import InventoryStats from "../components/inventory/stat-card/InventoryStats";
+import InventoryFilters from "../components/inventory/search-filter/InventoryFilters";
+import InventoryTable from "../components/inventory/inventory-table/InventoryTable";
 import InventoryHeader from "../components/inventory/InventoryHeader";
 
 const InventoryPage = () => {
