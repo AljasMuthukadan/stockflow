@@ -1,6 +1,6 @@
 import DashboardContent from "../components/dashboard/DashboardContent";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
-import StatsGrid from "../components/dashboard/StatsGrid";
+import StatsGrid from "../components/dashboard/stat-card/StatsGrid";
 
 const DashboardPage = () => {
   return (

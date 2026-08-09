@@ -1,7 +1,7 @@
-import StockCategoryChart from "./StockCategoryChart";
-import RecentActivities from "./RecentActivities";
+import StockCategoryChart from "./stock-category/StockCategoryChart";
+import RecentActivities from "./recent-activity/RecentActivities";
 import LowStockTable from "./low-stock/LowStockTable";
-import TopSellingProducts from "./TopSellingProducts";
+import TopSellingProducts from "./top-selling/TopSellingProducts";
 import OverviewSection from "./stock-overview/OverviewSection";
 
 export default function DashboardContent() {
