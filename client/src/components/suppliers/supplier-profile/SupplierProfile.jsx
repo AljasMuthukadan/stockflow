@@ -2,9 +2,9 @@ import { useState } from "react";
 import {
   X
 } from "lucide-react";
-import ProfileSection from "./supplier-profile/ProfileSection";
-import TabHeader from "./supplier-profile/TabHeader";
-import TabContent from "./supplier-profile/TabContent";
+import ProfileSection from "./ProfileSection";
+import TabHeader from "./TabHeader";
+import TabContent from "./TabContent";
 
 const supplier = {
   company: "ABC Foods Pvt Ltd",
