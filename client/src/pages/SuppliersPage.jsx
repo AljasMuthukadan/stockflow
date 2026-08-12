@@ -1,6 +1,6 @@
 import SupplierHeader from "../components/suppliers/SupplierHeader";
 import SupplierStats from "../components/suppliers/stat-card/SupplierStats";
-import SupplierTable from "../components/suppliers/SupplierTable";
+import SupplierTable from "../components/suppliers/supplier-table/SupplierTable";
 import SupplierProfile from "../components/suppliers/supplier-profile/SupplierProfile";
 
 const SuppliersPage = () => {
