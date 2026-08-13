@@ -5,71 +5,134 @@ import {
 
 const SalesHeader = () => {
   return (
-    <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+    <div
+      className="
+        flex
+        w-full
+        min-w-0
+        flex-col
+        gap-4
+        sm:flex-row
+        sm:items-center
+        sm:justify-between
+      "
+    >
+      {/* ================================================= */}
+      {/* TITLE */}
+      {/* ================================================= */}
 
-      <div>
-
-        <h1 className="text-3xl font-bold text-slate-800">
+      <div className="min-w-0">
+        <h1
+          className="
+            text-2xl
+            font-bold
+            text-slate-800
+            sm:text-3xl
+          "
+        >
           Sales & Orders
         </h1>
 
-        <p className="mt-1 text-sm text-slate-500">
+        <p
+          className="
+            mt-1
+            hidden
+            text-sm
+            text-slate-500
+            lg:block
+          "
+        >
           Monitor sales performance and manage customer orders
         </p>
-
       </div>
 
-      <div className="flex flex-wrap gap-3">
+
+      {/* ================================================= */}
+      {/* ACTIONS */}
+      {/* ================================================= */}
+
+      <div
+        className="
+          flex
+          w-full
+          min-w-0
+          flex-col
+          gap-2
+          sm:w-auto
+          sm:flex-row
+          sm:shrink-0
+          sm:gap-3
+        "
+      >
+
+        {/* Import Orders */}
 
         <button
+          type="button"
           className="
-          flex
-          items-center
-          gap-2
-          rounded-xl
-          border
-          border-slate-200
-          bg-white
-          px-5
-          py-3
-          text-sm
-          font-medium
-          shadow-sm
-          transition
-          hover:bg-slate-50
+            flex
+            h-10
+            w-full
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            border
+            border-slate-200
+            bg-white
+            px-4
+            text-sm
+            font-medium
+            text-slate-700
+            shadow-sm
+            transition
+            hover:bg-slate-50
+            sm:h-11
+            sm:w-auto
+            sm:px-5
           "
         >
           <Upload size={18} />
 
-          Import Orders
-
+          <span>
+            Import Orders
+          </span>
         </button>
 
+
+        {/* New Sales Order */}
+
         <button
+          type="button"
           className="
-          flex
-          items-center
-          gap-2
-          rounded-xl
-          bg-green-600
-          px-5
-          py-3
-          text-sm
-          font-semibold
-          text-white
-          shadow
-          transition
-          hover:bg-green-700
+            flex
+            h-10
+            w-full
+            items-center
+            justify-center
+            gap-2
+            rounded-xl
+            bg-green-600
+            px-4
+            text-sm
+            font-semibold
+            text-white
+            shadow
+            transition
+            hover:bg-green-700
+            sm:h-11
+            sm:w-auto
+            sm:px-5
           "
         >
           <Plus size={18} />
 
-          New Sales Order
-
+          <span>
+            New Sales Order
+          </span>
         </button>
 
       </div>
-
     </div>
   );
 };

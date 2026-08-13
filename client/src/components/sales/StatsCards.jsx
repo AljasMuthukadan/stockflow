@@ -28,7 +28,7 @@ const StatsCards = () => {
     <div
       className="
       grid
-      grid-cols-[repeat(auto-fit,minmax(220px,1fr))]
+      grid-cols-2
       gap-4
       "
     >

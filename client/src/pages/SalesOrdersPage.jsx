@@ -4,7 +4,7 @@ import StatsCards from "../components/sales/StatsCards";
 
 const SalesOrdersPage = () => {
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-6 px-3 lg:px-8 mt-2">
 
       <SalesHeader />
 
