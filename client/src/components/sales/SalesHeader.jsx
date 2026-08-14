@@ -11,6 +11,7 @@ const SalesHeader = () => {
         w-full
         min-w-0
         flex-col
+        lg:flex-row
         gap-4
         sm:flex-row
         sm:items-center
