@@ -1,4 +1,4 @@
-import OrdersSection from "../components/sales/OrdersSection";
+import OrdersSection from "../components/sales/order-table/OrdersSection";
 import SalesHeader from "../components/sales/SalesHeader";
 import StatsCards from "../components/sales/StatsCards";
 
