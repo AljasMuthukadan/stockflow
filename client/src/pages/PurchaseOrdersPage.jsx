@@ -5,7 +5,7 @@ import PurchaseTable from "../components/purchases/PurchaseTable";
 
 export default function PurchaseOrdersPage() {
   return (
-    <div className="space-y-3 px-8">
+    <div className="space-y-3 px-3 lg:px-8  md:px-6 ">
       <PurchaseHeader />
 
       <PurchaseStats />

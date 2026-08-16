@@ -2,14 +2,14 @@ import { Plus } from "lucide-react";
 
 export default function PurchaseHeader() {
   return (
-    <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+    <div className="flex flex-row gap-5 lg:flex-row items-center justify-between">
       {/* Left */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">
+        <h1 className=" text-lg lg:text-3xl font-bold text-slate-900">
           Purchase Orders
         </h1>
 
-        <p className="mt-1 text-sm text-slate-500">
+        <p className="mt-1 hidden lg:block text-sm text-slate-500">
           Manage and track all your purchase orders.
         </p>
       </div>
