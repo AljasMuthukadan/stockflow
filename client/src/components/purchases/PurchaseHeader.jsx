@@ -2,7 +2,7 @@ import { Plus } from "lucide-react";
 
 export default function PurchaseHeader() {
   return (
-    <div className="flex flex-row gap-5 lg:flex-row items-center justify-between">
+    <div className="flex flex-row mt-2 gap-5 lg:flex-row items-center justify-between">
       {/* Left */}
       <div>
         <h1 className=" text-lg lg:text-3xl font-bold text-slate-900">

@@ -56,7 +56,7 @@ const stats = [
 
 export default function PurchaseStats() {
   return (
-    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-5">
+    <div className="grid gap-5 grid-cols-2 sm:grid-cols-2 xl:grid-cols-5">
       {stats.map((stat) => {
         const Icon = stat.icon;
 
@@ -82,7 +82,7 @@ export default function PurchaseStats() {
                   {stat.title}
                 </p>
 
-                <h2 className="mt-2 text-4xl font-bold text-slate-900">
+                <h2 className="mt-2 text-lg lg:text-4xl font-bold text-slate-900">
                   {stat.value}
                 </h2>
 

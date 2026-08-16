@@ -1,5 +1,5 @@
-import PurchaseRow from "./PurchaseRow.jsx";
-import { purchaseOrders } from "./purchaseData.js";
+import PurchaseRow from "../PurchaseRow.jsx";
+import { purchaseOrders } from "../purchaseData.js";
 
 export default function PurchaseTable() {
   return (
