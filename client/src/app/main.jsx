@@ -1,24 +1,24 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
+import "../index.css";
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./App.jsx";
 
-import LoginPage from "./pages/auth/LoginPage.jsx";
-import RegisterPage from "./pages/auth/RegisterPage.jsx";
+import LoginPage from "../pages/auth/LoginPage.jsx";
+import RegisterPage from "../pages/auth/RegisterPage.jsx";
 
-import DashboardLayout from "./layouts/DashboardLayout.jsx";
+import DashboardLayout from "../layouts/DashboardLayout.jsx";
 
-import DashboardPage from "./pages/DashboardPage.jsx";
-import InventoryPage from "./pages/InventoryPage.jsx";
-import ProductionPage from "./pages/ProductionPage.jsx";
-import SuppliersPage from "./pages/SuppliersPage.jsx";
-import PurchaseOrdersPage from "./pages/PurchaseOrdersPage.jsx";
-import ReportsPage from "./pages/ReportsPage.jsx";
-import SettingsPage from "./pages/SettingsPage.jsx";
-import SalesOrdersPage from "./pages/SalesOrdersPage.jsx";
+import DashboardPage from "../pages/DashboardPage.jsx";
+import InventoryPage from "../pages/InventoryPage.jsx";
+import ProductionPage from "../pages/ProductionPage.jsx";
+import SuppliersPage from "../pages/SuppliersPage.jsx";
+import PurchaseOrdersPage from "../pages/PurchaseOrdersPage.jsx";
+import ReportsPage from "../pages/ReportsPage.jsx";
+import SettingsPage from "../pages/SettingsPage.jsx";
+import SalesOrdersPage from "../pages/SalesOrdersPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
