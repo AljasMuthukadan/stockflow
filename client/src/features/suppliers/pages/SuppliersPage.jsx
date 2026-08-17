@@ -1,7 +1,7 @@
-import SupplierHeader from "../components/suppliers/SupplierHeader";
-import SupplierStats from "../components/suppliers/stat-card/SupplierStats";
-import SupplierTable from "../components/suppliers/supplier-table/SupplierTable";
-import SupplierProfile from "../components/suppliers/supplier-profile/SupplierProfile";
+import SupplierHeader from "../SupplierHeader";
+import SupplierStats from "../stat-card/SupplierStats";
+import SupplierTable from "../supplier-table/SupplierTable";
+import SupplierProfile from "../supplier-profile/SupplierProfile";
 
 const SuppliersPage = () => {
   return (

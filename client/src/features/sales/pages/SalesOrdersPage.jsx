@@ -1,6 +1,6 @@
-import OrdersSection from "../components/sales/order-table/OrdersSection";
-import SalesHeader from "../components/sales/SalesHeader";
-import StatsCards from "../components/sales/StatsCards";
+import OrdersSection from "../order-table/OrdersSection";
+import SalesHeader from "../SalesHeader";
+import StatsCards from "../StatsCards";
 
 const SalesOrdersPage = () => {
   return (

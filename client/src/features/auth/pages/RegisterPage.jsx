@@ -9,7 +9,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 
-import AuthLayout from "../../layouts/AuthLayout";
+import AuthLayout from "../../../layouts/AuthLayout";
 
 export default function RegisterPage() {
   const navigate = useNavigate();

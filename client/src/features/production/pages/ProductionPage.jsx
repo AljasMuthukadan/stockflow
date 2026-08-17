@@ -1,10 +1,10 @@
-import ProductionStats from "../components/production/ProductionStats";
-import ProductionFilters from "../components/production/ProductionFilters";
-import ProductionTable from "../components/production/production-table/ProductionTable";
-import ProductionOverview from "../components/production/ProductionOverview";
-import RecentActivities from "../components/production/RecentActivities";
-import TopProducts from "../components/production/TopProducts";
-import ProductionHeader from "../components/production/ProductionHeader";
+import ProductionStats from "../ProductionStats";
+import ProductionFilters from "../ProductionFilters";
+import ProductionTable from "../production-table/ProductionTable";
+import ProductionOverview from "../ProductionOverview";
+import RecentActivities from "../RecentActivities";
+import TopProducts from "../TopProducts";
+import ProductionHeader from "../ProductionHeader";
 
 const ProductionPage = () => {
   return (

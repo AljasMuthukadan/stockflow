@@ -6,19 +6,19 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./App.jsx";
 
-import LoginPage from "../pages/auth/LoginPage.jsx";
-import RegisterPage from "../pages/auth/RegisterPage.jsx";
+import LoginPage from "../features/auth/pages/LoginPage.jsx";
+import RegisterPage from "../features/auth/pages/RegisterPage.jsx";
 
 import DashboardLayout from "../layouts/DashboardLayout.jsx";
 
-import DashboardPage from "../pages/DashboardPage.jsx";
-import InventoryPage from "../pages/InventoryPage.jsx";
-import ProductionPage from "../pages/ProductionPage.jsx";
-import SuppliersPage from "../pages/SuppliersPage.jsx";
-import PurchaseOrdersPage from "../pages/PurchaseOrdersPage.jsx";
-import ReportsPage from "../pages/ReportsPage.jsx";
-import SettingsPage from "../pages/SettingsPage.jsx";
-import SalesOrdersPage from "../pages/SalesOrdersPage.jsx";
+import DashboardPage from "../features/dashboard/pages/DashboardPage.jsx";
+import InventoryPage from "../features/inventory/pages/InventoryPage.jsx";
+import ProductionPage from "../features/production/pages/ProductionPage.jsx";
+import SuppliersPage from "../features/suppliers/pages/SuppliersPage.jsx";
+import PurchaseOrdersPage from "../features/purchases/pages/PurchaseOrdersPage.jsx";
+import ReportsPage from "../features/reports/pages/ReportsPage.jsx";
+import SettingsPage from "../features/settings/pages/SettingsPage.jsx";
+import SalesOrdersPage from "../features/sales/pages/SalesOrdersPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
