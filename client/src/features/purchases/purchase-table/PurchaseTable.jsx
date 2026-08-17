@@ -1,5 +1,6 @@
 import PurchaseRow from "./PurchaseRow.jsx";
 import { purchaseOrders } from "../purchaseData.js";
+import Pagination from "../../../components/common/Pagination.jsx";
 
 export default function PurchaseTable() {
   return (
@@ -442,88 +443,7 @@ export default function PurchaseTable() {
 
         {/* Pagination */}
 
-        <div
-          className="
-            flex
-            w-full
-            items-center
-            gap-2
-            sm:w-auto
-          "
-        >
-          {/* Previous */}
-
-          <button
-            type="button"
-            className="
-              flex
-              h-9
-              flex-1
-              items-center
-              justify-center
-              rounded-lg
-              border
-              border-slate-200
-              px-3
-              text-sm
-              font-medium
-              text-slate-600
-              transition
-              hover:bg-slate-100
-              sm:flex-none
-            "
-          >
-            Previous
-          </button>
-
-          {/* Page */}
-
-          <button
-            type="button"
-            className="
-              flex
-              h-9
-              w-9
-              shrink-0
-              items-center
-              justify-center
-              rounded-lg
-              bg-emerald-600
-              text-sm
-              font-semibold
-              text-white
-              transition
-              hover:bg-emerald-700
-            "
-          >
-            1
-          </button>
-
-          {/* Next */}
-
-          <button
-            type="button"
-            className="
-              flex
-              h-9
-              flex-1
-              items-center
-              justify-center
-              rounded-lg
-              border
-              border-slate-200
-              px-3
-              text-sm
-              font-medium
-              text-slate-600
-              transition
-              hover:bg-slate-100
-              sm:flex-none
-            "
-          >
-            Next
-          </button>
-        </div>
+        <Pagination/>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import {
 
 import inventory from "../inventoryData";
 import { InventoryMobileView } from "./InventoryMobileView";
-import FooterSection from "./FooterSection";
+import Pagination from "../../../components/common/Pagination";
 
 const badgeStyle = (status) => {
   switch (status) {
@@ -272,7 +272,7 @@ export default function InventoryTable() {
         {/* FOOTER / PAGINATION */}
         {/* ================================================= */}
 
-        <FooterSection />
+        <Pagination />
         
 
       </div>

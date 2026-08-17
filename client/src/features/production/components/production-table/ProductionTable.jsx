@@ -6,7 +6,7 @@ import ProductionOrderInfo from "./ProductionOrderInfo";
 import ActionButton from "./ActionButton";
 import ProductionTableMobile from "./mobile/ProductionTableMobile";
 import ProductionTableHeader from "./ProductionTableHeader";
-import FooterSection from "./FooterSection";
+import Pagination from "../../../../components/common/Pagination";
 
 const ProductionTable = () => {
   return (
@@ -147,7 +147,7 @@ const ProductionTable = () => {
       {/* FOOTER / PAGINATION */}
       {/* ================================================= */}
 
-      <FooterSection />
+      <Pagination />
     </div>
   );
 };

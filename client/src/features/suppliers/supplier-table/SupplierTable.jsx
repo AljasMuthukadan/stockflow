@@ -1,5 +1,4 @@
-import {  ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+
 import { suppliers } from "../supplierData";
 import { SupplyCategories, 
   PartyType, 
@@ -9,14 +8,9 @@ import { SupplyCategories,
   OrdersInfo , 
   ActionButton } from "./Components";
 import SupplierFilters from "../SupplierFilters";
+import Pagination from "../../../components/common/Pagination";
 
 
-
-/* ================================================= */
-/* PAGINATION */
-/* ================================================= */
-
-const ITEMS_PER_PAGE = 10;
 
 
 /* ================================================= */
@@ -112,188 +106,16 @@ const SupplierMobileCard = ({ supplier }) => {
   );
 };
 
-/* ================================================= */
-/* PAGINATION */
-/* ================================================= */
 
-const Pagination = ({
-  currentPage,
-  totalPages,
-  startIndex,
-  totalItems,
-  handlePrevious,
-  handleNext,
-  handlePageChange,
-}) => {
-  return (
-    <div
-      className="
-        flex
-        flex-col
-        gap-3
-        border-t
-        border-slate-200
-        px-4
-        py-3
-        sm:flex-row
-        sm:items-center
-        sm:justify-between
-        sm:px-6
-      "
-    >
-      {/* Result information */}
-
-      <p className="text-xs text-slate-500">
-        Showing{" "}
-        <span className="font-semibold text-slate-700">
-          {totalItems === 0 ? 0 : startIndex + 1}
-        </span>{" "}
-        -{" "}
-        <span className="font-semibold text-slate-700">
-          {Math.min(
-            startIndex + ITEMS_PER_PAGE,
-            totalItems
-          )}
-        </span>{" "}
-        of{" "}
-        <span className="font-semibold text-slate-700">
-          {totalItems}
-        </span>{" "}
-        suppliers
-      </p>
-
-      {/* Pagination controls */}
-
-      <div className="flex items-center gap-1.5">
-        {/* Previous */}
-
-        <button
-          type="button"
-          onClick={handlePrevious}
-          disabled={currentPage === 1}
-          className="
-            flex
-            h-8
-            w-8
-            items-center
-            justify-center
-            rounded-lg
-            border
-            border-slate-200
-            text-slate-500
-            transition
-            hover:bg-slate-50
-            disabled:cursor-not-allowed
-            disabled:opacity-40
-          "
-        >
-          <ChevronLeft size={16} />
-        </button>
-
-        {/* Page numbers */}
-
-        {Array.from(
-          { length: totalPages },
-          (_, index) => index + 1
-        ).map((page) => (
-          <button
-            key={page}
-            type="button"
-            onClick={() => handlePageChange(page)}
-            className={`
-              flex
-              h-8
-              min-w-8
-              items-center
-              justify-center
-              rounded-lg
-              px-2
-              text-xs
-              font-semibold
-              transition
-
-              ${
-                currentPage === page
-                  ? "bg-emerald-600 text-white shadow-sm"
-                  : "border border-slate-200 text-slate-600 hover:bg-slate-50"
-              }
-            `}
-          >
-            {page}
-          </button>
-        ))}
-
-        {/* Next */}
-
-        <button
-          type="button"
-          onClick={handleNext}
-          disabled={currentPage === totalPages}
-          className="
-            flex
-            h-8
-            w-8
-            items-center
-            justify-center
-            rounded-lg
-            border
-            border-slate-200
-            text-slate-500
-            transition
-            hover:bg-slate-50
-            disabled:cursor-not-allowed
-            disabled:opacity-40
-          "
-        >
-          <ChevronRight size={16} />
-        </button>
-      </div>
-    </div>
-  );
-};
 
 /* ================================================= */
 /* MAIN COMPONENT */
 /* ================================================= */
 
 const SupplierTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+ 
 
-  /* ================================================= */
-  /* PAGINATION CALCULATIONS */
-  /* ================================================= */
 
-  const totalPages = Math.ceil(
-    suppliers.length / ITEMS_PER_PAGE
-  );
-
-  const startIndex =
-    (currentPage - 1) * ITEMS_PER_PAGE;
-
-  const currentSuppliers = suppliers.slice(
-    startIndex,
-    startIndex + ITEMS_PER_PAGE
-  );
-
-  /* ================================================= */
-  /* PAGE HANDLERS */
-  /* ================================================= */
-
-  const handlePrevious = () => {
-    setCurrentPage((prev) =>
-      Math.max(prev - 1, 1)
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentPage((prev) =>
-      Math.min(prev + 1, totalPages)
-    );
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
 
   return (
     <div
@@ -327,7 +149,7 @@ const SupplierTable = () => {
             scrollbar-none
           "
         >
-          {currentSuppliers.map((supplier) => (
+          {suppliers.map((supplier) => (
             <SupplierMobileCard
               key={supplier.id}
               supplier={supplier}
@@ -390,7 +212,7 @@ const SupplierTable = () => {
           {/* ================================================= */}
 
           <tbody>
-            {currentSuppliers.map((supplier) => (
+            {suppliers.map((supplier) => (
               <tr
                 key={supplier.id}
                 className="
@@ -463,15 +285,7 @@ const SupplierTable = () => {
       {/* PAGINATION */}
       {/* ================================================= */}
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        startIndex={startIndex}
-        totalItems={suppliers.length}
-        handlePrevious={handlePrevious}
-        handleNext={handleNext}
-        handlePageChange={handlePageChange}
-      />
+      <Pagination />
     </div>
   );
 };
