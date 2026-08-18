@@ -2,10 +2,10 @@ import {
   FileText,
   Download,
   FileSpreadsheet,
-  MoreVertical,
 } from "lucide-react";
 
 import CategoryBadge from "./CategoryBadge";
+import ActionButton from "../../components/common/ActionButton";
 
 export default function ReportRow({ report }) {
   return (
@@ -113,19 +113,7 @@ export default function ReportRow({ report }) {
 
       <td className="px-5 py-3">
         <div className="flex justify-end">
-          <button
-            className="
-              rounded-lg
-              p-2
-              transition
-              hover:bg-slate-100
-            "
-          >
-            <MoreVertical
-              size={18}
-              className="text-slate-500"
-            />
-          </button>
+         <ActionButton />
         </div>
       </td>
     </tr>

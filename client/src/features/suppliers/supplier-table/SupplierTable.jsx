@@ -5,8 +5,8 @@ import { SupplyCategories,
   SupplierInfo, 
   ContactInfo, 
   OutstandingInfo, 
-  OrdersInfo , 
-  ActionButton } from "./Components";
+  OrdersInfo ,  } from "./Components";
+import ActionButton from "../../../components/common/ActionButton"
 import SupplierFilters from "../SupplierFilters";
 import Pagination from "../../../components/common/Pagination";
 

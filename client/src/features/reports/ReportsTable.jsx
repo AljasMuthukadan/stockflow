@@ -1,5 +1,6 @@
 import { reports } from "./reportsData";
 import ReportRow from "./ReportRow";
+import Pagination from "../../components/common/Pagination";
 
 export default function ReportsTable() {
   return (
@@ -45,33 +46,7 @@ export default function ReportsTable() {
         </table>
       </div>
 
-      <div className="flex flex-col gap-3 border-t border-slate-200 px-5 py-3 md:flex-row md:items-center md:justify-between">
-        <p className="text-sm text-slate-500">
-          Showing{" "}
-          <span className="font-semibold text-slate-800">
-            1–5
-          </span>{" "}
-          of{" "}
-          <span className="font-semibold text-slate-800">
-            {reports.length}
-          </span>{" "}
-          reports
-        </p>
-
-        <div className="flex items-center gap-2">
-          <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100">
-            Previous
-          </button>
-
-          <button className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white">
-            1
-          </button>
-
-          <button className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100">
-            Next
-          </button>
-        </div>
-      </div>
+      <Pagination />
     </div>
   );
 }

@@ -3,10 +3,10 @@ import ProductionProgress from "./ProductionProgress";
 import ProductionStatus from "./ProductionStatus";
 import SupervisorInfo from "./Supervisorinfo";
 import ProductionOrderInfo from "./ProductionOrderInfo";
-import ActionButton from "./ActionButton";
 import ProductionTableMobile from "./mobile/ProductionTableMobile";
 import ProductionTableHeader from "./ProductionTableHeader";
 import Pagination from "../../../../components/common/Pagination";
+import ActionButton from "../../../../components/common/ActionButton";
 
 const ProductionTable = () => {
   return (

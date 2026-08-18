@@ -1,12 +1,10 @@
 import { useState } from "react";
-import {
-  MoreVertical,
-} from "lucide-react";
 import {orders} from './data'
 import TableHeader from "./TableHeader";
 import TableFilters from "./TableFilters";
 import {paymentBadge, statusBadge} from './utils'
 import TableMobileview from "./TableMobileview";
+import ActionButton from "../../../components/common/ActionButton";
 
 
 const OrdersSection = () => {
@@ -195,19 +193,7 @@ const OrdersSection = () => {
                     text-right
                   "
                 >
-                  <button
-                    type="button"
-                    className="
-                      rounded-lg
-                      p-1.5
-                      text-slate-500
-                      transition
-                      hover:bg-slate-100
-                      hover:text-slate-700
-                    "
-                  >
-                    <MoreVertical size={17} />
-                  </button>
+              <ActionButton />
                 </td>
               </tr>
             ))}

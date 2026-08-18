@@ -1,10 +1,7 @@
-import {
-  MoreVertical,
-} from "lucide-react";
-
 import inventory from "../inventoryData";
 import { InventoryMobileView } from "./InventoryMobileView";
 import Pagination from "../../../components/common/Pagination";
+import ActionButton from "../../../components/common/ActionButton";
 
 const badgeStyle = (status) => {
   switch (status) {
@@ -234,24 +231,7 @@ export default function InventoryTable() {
 
                     <div className="flex justify-center">
 
-                      <button
-                        type="button"
-                        aria-label={`Actions for ${item.name}`}
-                        className="
-                          flex
-                          h-9
-                          w-9
-                          items-center
-                          justify-center
-                          rounded-lg
-                          text-slate-400
-                          transition
-                          hover:bg-slate-100
-                          hover:text-slate-700
-                        "
-                      >
-                        <MoreVertical size={18} />
-                      </button>
+                     <ActionButton/>
 
                     </div>
 

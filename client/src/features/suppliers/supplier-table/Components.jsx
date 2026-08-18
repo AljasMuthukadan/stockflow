@@ -1,4 +1,4 @@
-import { MoreVertical } from "lucide-react";
+
 import { partyBadge, outstandingBadge } from "./utils";
 export const PartyType = ({ type }) => {
   return (
@@ -165,29 +165,3 @@ export const OrdersInfo = ({ orders }) => {
   );
 };
 
-/* ================================================= */
-/* ACTION */
-/* ================================================= */
-
-export const ActionButton = () => {
-  return (
-    <button
-      type="button"
-      className="
-        flex
-        h-9
-        w-9
-        shrink-0
-        items-center
-        justify-center
-        rounded-lg
-        text-slate-500
-        transition
-        hover:bg-slate-100
-        hover:text-slate-800
-      "
-    >
-      <MoreVertical size={18} />
-    </button>
-  );
-};

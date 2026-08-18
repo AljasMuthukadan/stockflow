@@ -1,5 +1,5 @@
-import { MoreVertical } from 'lucide-react';
 import {statusBadge, paymentBadge } from './utils'
+import ActionButton from '../../../components/common/ActionButton';
 
 const TableMobileview = ({filteredOrders}) => {
   return (
@@ -50,23 +50,7 @@ const TableMobileview = ({filteredOrders}) => {
                   </h3>
                 </div>
 
-                <button
-                  type="button"
-                  className="
-                    flex
-                    h-8
-                    w-8
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-lg
-                    text-slate-500
-                    transition
-                    hover:bg-slate-100
-                  "
-                >
-                  <MoreVertical size={17} />
-                </button>
+                <ActionButton />
               </div>
 
               {/* Customer */}
