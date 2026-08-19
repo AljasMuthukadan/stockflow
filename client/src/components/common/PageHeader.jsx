@@ -16,9 +16,6 @@ function PageHeader({
         gap-3
         sm:mb-3
         sm:gap-4
-        sm:mx-3
-        md:mx-4
-        lg:mx-8
       "
     >
       {/* Left */}

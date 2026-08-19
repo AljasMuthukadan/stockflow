@@ -98,8 +98,6 @@ const ProductionStats = () => {
       lg:grid-cols-3
       2xl:grid-cols-5
       gap-5
-      px-3
-      lg:px-8
       "
     >
       {stats.map((item) => {

@@ -9,7 +9,7 @@ import {
 
 const ProductionFilters = () => {
   return (
-    <div className=" mx-3 lg:mx-8 rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="  rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
 
       {/* ================= TOP SECTION ================= */}
 

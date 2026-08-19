@@ -12,15 +12,12 @@ const ProductionTable = () => {
   return (
     <div
       className="
-        mx-3
         overflow-hidden
         rounded-2xl
         border
         border-slate-200
         bg-white
         shadow-sm
-        sm:mx-4
-        md:mx-6
       "
     >
       {/* ================================================= */}
