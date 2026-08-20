@@ -1,7 +1,7 @@
 import inventory from "../inventoryData";
 import { InventoryMobileView } from "./InventoryMobileView";
-import Pagination from "../../../components/common/Pagination";
-import ActionButton from "../../../components/common/ActionButton";
+import Pagination from "../../../../components/common/Pagination";
+import ActionButton from "../../../../components/common/ActionButton";
 
 const badgeStyle = (status) => {
   switch (status) {

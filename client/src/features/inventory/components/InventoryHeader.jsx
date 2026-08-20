@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 
 import AddItemModal from "./item/AddItemModal";
-import PageHeader from "../../components/common/PageHeader";
+import PageHeader from "../../../components/common/PageHeader";
 
 const InventoryHeader = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
