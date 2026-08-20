@@ -1,6 +1,6 @@
 import PurchaseRow from "./PurchaseRow.jsx";
 import { purchaseOrders } from "../purchaseData.js";
-import Pagination from "../../../components/common/Pagination.jsx";
+import Pagination from "../../../../components/common/Pagination.jsx";
 
 export default function PurchaseTable() {
   return (

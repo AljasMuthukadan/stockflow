@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 
 import CategoryBadge from "./CategoryBadge";
-import ActionButton from "../../components/common/ActionButton";
+import ActionButton from "../../../components/common/ActionButton";
 
 export default function ReportRow({ report }) {
   return (

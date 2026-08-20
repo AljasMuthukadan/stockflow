@@ -1,6 +1,6 @@
 import { reports } from "./reportsData";
 import ReportRow from "./ReportRow";
-import Pagination from "../../components/common/Pagination";
+import Pagination from "../../../components/common/Pagination";
 
 export default function ReportsTable() {
   return (

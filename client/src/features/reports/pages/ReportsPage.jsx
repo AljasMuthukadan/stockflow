@@ -1,8 +1,8 @@
-import ReportsHeader from "../ReportsHeader";
-import ReportsStats from "../ReportsStats";
-import ReportsFilters from "../ReportsFilters";
-import ReportsTable from "../ReportsTable";
-import ReportsSidebar from "../ReportsSidebar";
+import ReportsHeader from "../components/ReportsHeader";
+import ReportsStats from "../components/ReportsStats";
+import ReportsFilters from "../components/ReportsFilters";
+import ReportsTable from "../components/ReportsTable";
+import ReportsSidebar from "../components/ReportsSidebar";
 
 export default function ReportsPage() {
   return (

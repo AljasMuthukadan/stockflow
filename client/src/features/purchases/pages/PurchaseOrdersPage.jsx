@@ -1,7 +1,7 @@
-import PurchaseHeader from "../PurchaseHeader";
-import PurchaseStats from "../PurchaseStats";
-import PurchaseFilters from "../PurchaseFilters";
-import PurchaseTable from "../purchase-table/PurchaseTable";
+import PurchaseHeader from "../components/PurchaseHeader";
+import PurchaseStats from "../components/PurchaseStats";
+import PurchaseFilters from "../components/PurchaseFilters";
+import PurchaseTable from "../components/purchase-table/PurchaseTable";
 
 export default function PurchaseOrdersPage() {
   return (

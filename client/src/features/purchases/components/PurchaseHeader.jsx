@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import PageHeader from "../../components/common/PageHeader";
+import PageHeader from "../../../components/common/PageHeader";
 
 export default function PurchaseHeader() {
   return (
