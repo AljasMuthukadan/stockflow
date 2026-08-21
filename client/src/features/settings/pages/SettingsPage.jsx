@@ -1,11 +1,11 @@
-import SettingsHeader from "../SettingsHeader";
-import SettingsSidebar from "../SettingsSidebar";
-import CompanyProfile from "../CompanyProfile";
-import PreferencesCard from "../PreferencesCard";
-import SecurityCard from "../SecurityCard";
-import SystemInformation from "../SystemInformation";
-import QuickActions from "../QuickActions";
-import BottomActions from "../BottomActions";
+import SettingsHeader from "../components/SettingsHeader";
+import SettingsSidebar from "../components/SettingsSidebar";
+import CompanyProfile from "../components/CompanyProfile";
+import PreferencesCard from "../components/PreferencesCard";
+import SecurityCard from "../components/SecurityCard";
+import SystemInformation from "../components/SystemInformation";
+import QuickActions from "../components/QuickActions";
+import BottomActions from "../components/BottomActions";
 
 const SettingsPage = () => {
   return (

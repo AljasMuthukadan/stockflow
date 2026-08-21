@@ -1,10 +1,10 @@
 import { useState } from "react";
-import {orders} from './data'
+import {orders} from '../data'
 import TableHeader from "./TableHeader";
 import TableFilters from "./TableFilters";
 import {paymentBadge, statusBadge} from './utils'
 import TableMobileview from "./TableMobileview";
-import ActionButton from "../../../components/common/ActionButton";
+import ActionButton from "../../../../components/common/ActionButton";
 
 
 const OrdersSection = () => {

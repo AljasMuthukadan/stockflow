@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import SupplierModal from "./add-supplier/SupplierModal";
-import PageHeader from "../../components/common/PageHeader";
+import SupplierModal from "../components/add-supplier/SupplierModal";
+import PageHeader from "../../../components/common/PageHeader";
 
 const SupplierHeader = () => {
   const [showModal, setShowModal] = useState(false);

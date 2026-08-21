@@ -6,9 +6,9 @@ import { SupplyCategories,
   ContactInfo, 
   OutstandingInfo, 
   OrdersInfo ,  } from "./Components";
-import ActionButton from "../../../components/common/ActionButton"
+import ActionButton from "../../../../components/common/ActionButton"
 import SupplierFilters from "../SupplierFilters";
-import Pagination from "../../../components/common/Pagination";
+import Pagination from "../../../../components/common/Pagination";
 
 
 
