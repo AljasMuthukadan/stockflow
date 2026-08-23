@@ -1,4 +1,3 @@
-import clsx from "clsx";
 
 const variants = {
   primary:
@@ -23,24 +22,33 @@ const sizes = {
   lg: "h-11 px-5 text-sm",
 };
 
+
 const Button = ({
   children,
   variant = "primary",
   size = "md",
-  className,
+  className = "",
   ...props
 }) => {
   return (
     <button
       type="button"
-      className={clsx(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition",
-        "focus:outline-none focus:ring-2 focus:ring-emerald-500/20",
-        "disabled:cursor-not-allowed disabled:opacity-50",
-        variants[variant],
-        sizes[size],
-        className
-      )}
+      className={`
+        inline-flex
+        shrink-0
+        items-center
+        justify-center
+        gap-1.5
+        rounded-lg
+        font-semibold
+        shadow-sm
+        transition
+        active:scale-95
+        ${variants[variant]}
+        ${sizes[size]}
+
+        ${className}
+      `}
       {...props}
     >
       {children}
