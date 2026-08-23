@@ -2,6 +2,7 @@ import {
   Upload,
   Plus,
 } from "lucide-react";
+import Button from "../../../components/ui/Button";
 
 const SalesHeader = () => {
   return (
@@ -68,70 +69,22 @@ const SalesHeader = () => {
 
         {/* Import Orders */}
 
-        <button
-          type="button"
-          className="
-            flex
-            h-10
-            w-full
-            items-center
-            justify-center
-            gap-2
-            rounded-xl
-            border
-            border-slate-200
-            bg-white
-            px-4
-            text-sm
-            font-medium
-            text-slate-700
-            shadow-sm
-            transition
-            hover:bg-slate-50
-            sm:h-11
-            sm:w-auto
-            sm:px-5
-          "
-        >
+        <Button variant="secondary" onClick={()=> console.log("Import orders Buttons Clicked")} >
           <Upload size={18} />
-
           <span>
             Import Orders
           </span>
-        </button>
+        </Button>
 
 
         {/* New Sales Order */}
 
-        <button
-          type="button"
-          className="
-            flex
-            h-10
-            w-full
-            items-center
-            justify-center
-            gap-2
-            rounded-xl
-            bg-green-600
-            px-4
-            text-sm
-            font-semibold
-            text-white
-            shadow
-            transition
-            hover:bg-green-700
-            sm:h-11
-            sm:w-auto
-            sm:px-5
-          "
-        >
+        <Button variant="primary" onClick={()=>console.log("Sales Order Button Clicked")} >
           <Plus size={18} />
-
           <span>
             New Sales Order
           </span>
-        </button>
+        </Button>
 
       </div>
     </div>
