@@ -1,3 +1,5 @@
+import Button from "../ui/Button";
+
 function PageHeader({
   title,
   description,
@@ -33,37 +35,7 @@ function PageHeader({
 
       {/* Right */}
       {actionLabel && (
-        <button
-          type="button"
-          onClick={onAction}
-          className="
-            inline-flex
-            shrink-0
-            items-center
-            justify-center
-            gap-1.5
-            rounded-lg
-            bg-green-600
-            px-3
-            py-2
-            text-xs
-            font-semibold
-            text-white
-            shadow-sm
-            transition
-            hover:bg-green-700
-            active:scale-95
-
-            sm:gap-2
-            sm:rounded-xl
-            sm:px-4
-            sm:py-2.5
-            sm:text-sm
-
-            lg:px-5
-            lg:py-3
-          "
-        >
+        <Button onClick={onAction} variant="primary" >
           {ActionIcon && (
             <ActionIcon
               size={16}
@@ -74,7 +46,7 @@ function PageHeader({
           <span className="whitespace-nowrap">
             {actionLabel}
           </span>
-        </button>
+        </Button>
       )}
     </div>
   );
