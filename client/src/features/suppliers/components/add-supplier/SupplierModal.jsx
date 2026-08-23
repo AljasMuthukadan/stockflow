@@ -7,6 +7,9 @@ import {
   Package,
   ChevronDown,
 } from "lucide-react";
+import Modal from "../../../../components/common/Modal";
+import Input from "../../../../components/ui/Input";
+import SelectField from "../../../../components/ui/SelectField";
 
 const SupplierModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -77,36 +80,7 @@ const SupplierModal = ({ onClose }) => {
   };
 
   return (
-    <div
-      className="
-        fixed
-        inset-0
-        z-50
-        flex
-        items-center
-        justify-center
-        bg-slate-950/40
-        p-3
-        backdrop-blur-[2px]
-        sm:p-5
-      "
-    >
-      {/* Modal */}
-
-      <div
-        className="
-          flex
-          max-h-[94vh]
-          w-full
-          max-w-3xl
-          flex-col
-          overflow-hidden
-          rounded-2xl
-          border
-          border-slate-200
-          bg-white
-          shadow-2xl
-        "
+    <Modal
       >
 
         {/* ================================================= */}
@@ -281,7 +255,7 @@ const SupplierModal = ({ onClose }) => {
 
                     {/* Company Name */}
 
-                    <InputField
+                    <Input
                       label="Company Name"
                       name="companyName"
                       value={formData.companyName}
@@ -292,7 +266,7 @@ const SupplierModal = ({ onClose }) => {
 
                     {/* Alias */}
 
-                    <InputField
+                    <Input
                       label="Alias / Short Name"
                       name="alias"
                       value={formData.alias}
@@ -350,7 +324,7 @@ const SupplierModal = ({ onClose }) => {
 
                     {/* GSTIN */}
 
-                    <InputField
+                    <Input
                       label="GSTIN"
                       name="gstin"
                       value={formData.gstin}
@@ -360,7 +334,7 @@ const SupplierModal = ({ onClose }) => {
 
                     {/* Supplier Code */}
 
-                    <InputField
+                    <Input
                       label="Supplier Code"
                       name="supplierCode"
                       value={formData.supplierCode}
@@ -457,7 +431,7 @@ const SupplierModal = ({ onClose }) => {
 
                   <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
 
-                    <InputField
+                    <Input
                       label="Contact Person"
                       name="contactName"
                       value={formData.contactName}
@@ -466,7 +440,7 @@ const SupplierModal = ({ onClose }) => {
                       required
                     />
 
-                    <InputField
+                    <Input
                       label="Phone Number"
                       name="phone"
                       value={formData.phone}
@@ -475,7 +449,7 @@ const SupplierModal = ({ onClose }) => {
                       required
                     />
 
-                    <InputField
+                    <Input
                       label="Email"
                       name="email"
                       value={formData.email}
@@ -484,7 +458,7 @@ const SupplierModal = ({ onClose }) => {
                       type="email"
                     />
 
-                    <InputField
+                    <Input
                       label="Alternate Phone"
                       name="alternatePhone"
                       value={formData.alternatePhone}
@@ -581,7 +555,7 @@ const SupplierModal = ({ onClose }) => {
 
                   <div className="space-y-4">
 
-                    <InputField
+                    <Input
                       label="Address Line 1"
                       name="addressLine1"
                       value={formData.addressLine1}
@@ -589,7 +563,7 @@ const SupplierModal = ({ onClose }) => {
                       placeholder="Building / Street"
                     />
 
-                    <InputField
+                    <Input
                       label="Address Line 2"
                       name="addressLine2"
                       value={formData.addressLine2}
@@ -599,7 +573,7 @@ const SupplierModal = ({ onClose }) => {
 
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
 
-                      <InputField
+                      <Input
                         label="City"
                         name="city"
                         value={formData.city}
@@ -633,7 +607,7 @@ const SupplierModal = ({ onClose }) => {
                         </option>
                       </SelectField>
 
-                      <InputField
+                      <Input
                         label="PIN Code"
                         name="pinCode"
                         value={formData.pinCode}
@@ -846,135 +820,12 @@ const SupplierModal = ({ onClose }) => {
 
         </form>
 
-      </div>
-    </div>
+      </Modal>
   );
 };
 
 
-/* ========================================================= */
-/* INPUT COMPONENT                                           */
-/* ========================================================= */
-
-const InputField = ({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  type = "text",
-  required = false,
-}) => {
-  return (
-    <div>
-      <label className="mb-1.5 block text-xs font-medium text-slate-600">
-        {label}
-
-        {required && (
-          <span className="ml-1 text-red-500">
-            *
-          </span>
-        )}
-      </label>
-
-      <input
-        type={type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        required={required}
-        className="
-          h-10
-          w-full
-          rounded-lg
-          border
-          border-slate-200
-          bg-white
-          px-3
-          text-sm
-          text-slate-800
-          outline-none
-          placeholder:text-slate-400
-          transition
-          focus:border-emerald-500
-          focus:ring-4
-          focus:ring-emerald-50
-        "
-      />
-    </div>
-  );
-};
 
 
-/* ========================================================= */
-/* SELECT COMPONENT                                          */
-/* ========================================================= */
-
-const SelectField = ({
-  label,
-  name,
-  value,
-  onChange,
-  children,
-  required = false,
-}) => {
-  return (
-    <div>
-      <label className="mb-1.5 block text-xs font-medium text-slate-600">
-        {label}
-
-        {required && (
-          <span className="ml-1 text-red-500">
-            *
-          </span>
-        )}
-      </label>
-
-      <div className="relative">
-
-        <select
-          name={name}
-          value={value}
-          onChange={onChange}
-          required={required}
-          className="
-            h-10
-            w-full
-            appearance-none
-            rounded-lg
-            border
-            border-slate-200
-            bg-white
-            px-3
-            pr-9
-            text-sm
-            text-slate-700
-            outline-none
-            transition
-            focus:border-emerald-500
-            focus:ring-4
-            focus:ring-emerald-50
-          "
-        >
-          {children}
-        </select>
-
-        <ChevronDown
-          size={15}
-          className="
-            pointer-events-none
-            absolute
-            right-3
-            top-1/2
-            -translate-y-1/2
-            text-slate-400
-          "
-        />
-
-      </div>
-    </div>
-  );
-};
 
 export default SupplierModal;

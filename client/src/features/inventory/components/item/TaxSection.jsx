@@ -1,4 +1,6 @@
 import { ChevronDown, IndianRupee } from "lucide-react";
+import Input from "../../../../components/ui/Input";
+import SelectField from "../../../../components/ui/SelectField";
 
 const TaxSection = ({ formData, handleChange, toggleSection, openSection , setFormData }) => {
   return (
@@ -62,14 +64,14 @@ const TaxSection = ({ formData, handleChange, toggleSection, openSection , setFo
                           className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                         />
 
-                        <input
+                        <Input
                           name="purchasePrice"
                           value={formData.purchasePrice}
                           onChange={handleChange}
                           type="number"
                           min="0"
                           placeholder="0.00"
-                          className="h-10 w-full rounded-lg border border-slate-300 pl-8 pr-3 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                         
                         />
 
                       </div>
@@ -89,31 +91,28 @@ const TaxSection = ({ formData, handleChange, toggleSection, openSection , setFo
                           className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
                         />
 
-                        <input
+                        <Input
                           name="sellingPrice"
                           value={formData.sellingPrice}
                           onChange={handleChange}
                           type="number"
                           min="0"
                           placeholder="0.00"
-                          className="h-10 w-full rounded-lg border border-slate-300 pl-8 pr-3 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                     
                         />
 
                       </div>
 
                     </div>
 
-                    <div>
+                  
 
-                      <label className="mb-1.5 block text-xs font-medium text-slate-700">
-                        Tax Rate
-                      </label>
-
-                      <select
+                      <SelectField
+                       label="Tax Rate"
                         name="taxRate"
                         value={formData.taxRate}
                         onChange={handleChange}
-                        className="h-10 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
+                   
                       >
 
                         <option value="0">
@@ -136,15 +135,15 @@ const TaxSection = ({ formData, handleChange, toggleSection, openSection , setFo
                           28%
                         </option>
 
-                      </select>
+                      </SelectField>
 
-                    </div>
+                    
 
                   </div>
 
                   <label className="mt-4 flex items-center gap-2 text-sm text-slate-600">
 
-                    <input
+                    <Input
                       type="checkbox"
                       checked={formData.taxable === "yes"}
                       onChange={(e) =>

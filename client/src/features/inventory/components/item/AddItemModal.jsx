@@ -5,7 +5,8 @@ import AdditionalSection from "./AdditionalSection";
 import TaxSection from "./TaxSection";
 import StockAndUnitSection from "./StockAndUnitSection";
 import BasicInfoSection from "./BasicInfoSection";
-import HeaderSection from "./HeaderSection";
+import HeaderSection from "./FormHeader";
+import Modal from "../../../../components/common/Modal";
 
 export default function AddItemModal({ onClose }) {
   const [openSection, setOpenSection] = useState("basic");
@@ -56,11 +57,7 @@ export default function AddItemModal({ onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/45 p-4 backdrop-blur-[2px]">
-
-      {/* Modal */}
-
-      <div className="flex max-h-[92vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl">
+    <Modal>
 
         {/* Header */}
 
@@ -70,7 +67,7 @@ export default function AddItemModal({ onClose }) {
 
         <form
           onSubmit={handleSubmit}
-          className="min-h-0 flex-1 overflow-y-auto"
+          className="min-h-0 flex-1 overflow-y-auto "
         >
 
           <div className="space-y-2 p-4">
@@ -131,8 +128,7 @@ export default function AddItemModal({ onClose }) {
 
         </form>
 
-      </div>
 
-    </div>
+    </Modal>
   );
 }
