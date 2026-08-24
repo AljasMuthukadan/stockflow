@@ -1,4 +1,5 @@
 import { ChevronDown, FileText, ImagePlus } from "lucide-react";
+import SelectField from "../../../../components/ui/SelectField";
 
 const AdditionalSection = ({ toggleSection, openSection, formData, handleChange }) => {
   return (
@@ -51,11 +52,8 @@ const AdditionalSection = ({ toggleSection, openSection, formData, handleChange 
 
                     <div>
 
-                      <label className="mb-1.5 block text-xs font-medium text-slate-700">
-                        Warehouse
-                      </label>
-
-                      <select
+                      <SelectField
+                      label="Warehouse"
                         name="warehouse"
                         value={formData.warehouse}
                         onChange={handleChange}
@@ -74,7 +72,7 @@ const AdditionalSection = ({ toggleSection, openSection, formData, handleChange 
                           Production Warehouse
                         </option>
 
-                      </select>
+                      </SelectField>
 
                     </div>
 
