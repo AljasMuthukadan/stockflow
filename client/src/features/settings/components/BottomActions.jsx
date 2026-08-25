@@ -2,42 +2,49 @@ const BottomActions = () => {
   return (
     <div
       className="
-        mt-5
-        rounded-2xl
+        sticky
+        bottom-3
+        z-20
+        mt-4
+        rounded-xl
         border
         border-slate-200
-        bg-white
-        px-5
-        py-4
-        shadow-sm
+        bg-white/95
+        px-4
+        py-3
+        shadow-lg
+        backdrop-blur
       "
     >
-      <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+      <div className="flex items-center justify-end gap-2">
 
         <button
+          type="button"
           className="
             rounded-lg
             border
             border-slate-300
-            px-5
+            bg-white
+            px-4
             py-2
-            text-sm
+            text-xs
             font-medium
             text-slate-700
             transition
-            hover:bg-slate-100
+            hover:bg-slate-50
           "
         >
           Cancel
         </button>
 
         <button
+          type="button"
           className="
             rounded-lg
             bg-green-600
-            px-5
+            px-4
             py-2
-            text-sm
+            text-xs
             font-semibold
             text-white
             shadow-sm

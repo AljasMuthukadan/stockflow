@@ -6,62 +6,51 @@ const SettingsSidebar = () => {
     <aside
       className="
         sticky
-        top-24
-        w-full
-        h-[calc(100vh-7.5rem)]
-        rounded-2xl
+        top-4
+        hidden
+        overflow-hidden
+        rounded-xl
         border
         border-slate-200
         bg-white
         shadow-sm
-        overflow-hidden
+        lg:block
       "
     >
       {/* Header */}
+      <div className="border-b border-slate-100 px-4 py-3.5">
 
-      <div className="border-b border-slate-100 px-5 py-4">
-
-        <h2 className="text-base font-semibold text-slate-800">
+        <h2 className="text-sm font-semibold text-slate-800">
           Settings
         </h2>
 
-        <p className="mt-0.5 text-xs text-slate-500">
+        <p className="mt-0.5 text-[11px] text-slate-500">
           System Configuration
         </p>
 
       </div>
 
       {/* Menu */}
-
-      <nav
-        className="
-          h-[calc(100%-68px)]
-          overflow-y-auto
-          px-2
-          py-2
-        "
-      >
+      <nav className="p-2">
 
         {settingsMenu.map((item) => {
-
           const Icon = item.icon;
 
           return (
-
             <button
               key={item.title}
+              type="button"
               className={`
                 group
-                mb-1
+                mb-0.5
                 flex
                 w-full
                 items-center
                 justify-between
-                rounded-xl
-                px-3
+                rounded-lg
+                px-2.5
                 py-2
-                transition-all
-                duration-200
+                transition-colors
 
                 ${
                   item.active
@@ -70,18 +59,17 @@ const SettingsSidebar = () => {
                 }
               `}
             >
-
-              <div className="flex items-center gap-3">
+              <div className="flex min-w-0 items-center gap-2.5">
 
                 <div
                   className={`
                     flex
-                    h-8
-                    w-8
+                    h-7
+                    w-7
+                    shrink-0
                     items-center
                     justify-center
-                    rounded-lg
-                    transition
+                    rounded-md
 
                     ${
                       item.active
@@ -90,12 +78,10 @@ const SettingsSidebar = () => {
                     }
                   `}
                 >
-
-                  <Icon size={16} />
-
+                  <Icon size={15} />
                 </div>
 
-                <span className="text-[13px] font-medium">
+                <span className="truncate text-xs font-medium">
                   {item.title}
                 </span>
 
@@ -104,24 +90,22 @@ const SettingsSidebar = () => {
               <ChevronRight
                 size={14}
                 className={`
-                  transition-all
+                  shrink-0
+                  transition-transform
 
                   ${
                     item.active
                       ? "text-green-600"
-                      : "text-slate-400 group-hover:translate-x-1"
+                      : "text-slate-400 group-hover:translate-x-0.5"
                   }
                 `}
               />
 
             </button>
-
           );
-
         })}
 
       </nav>
-
     </aside>
   );
 };

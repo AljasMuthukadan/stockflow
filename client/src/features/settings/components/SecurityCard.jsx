@@ -20,7 +20,7 @@ const badgeStyle = (badge) => {
 
 const SecurityCard = () => {
   return (
-    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm h-full">
+  <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
 
       {/* Header */}
 

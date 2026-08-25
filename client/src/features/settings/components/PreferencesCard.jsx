@@ -39,12 +39,11 @@ const PreferencesCard = () => {
   };
 
   return (
-    <div className="h-full overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+   <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
 
       {/* Header */}
 
-      <div className="border-b border-slate-100 px-4 py-3">
-
+      <div className="border-b border-slate-100 px-4 py-3.5">
         <h2 className="text-base font-semibold text-slate-800">
           Preferences
         </h2>

@@ -3,15 +3,17 @@ const ToggleSwitch = ({ enabled = false, onChange }) => {
     <button
       type="button"
       onClick={onChange}
+      aria-pressed={enabled}
       className={`
         relative
         inline-flex
-        h-7
-        w-12
+        h-6
+        w-10
+        shrink-0
         items-center
         rounded-full
-        transition-all
-        duration-300
+        transition-colors
+        duration-200
         ${
           enabled
             ? "bg-green-600"
@@ -22,17 +24,16 @@ const ToggleSwitch = ({ enabled = false, onChange }) => {
       <span
         className={`
           inline-block
-          h-5
-          w-5
-          transform
+          h-4
+          w-4
           rounded-full
           bg-white
-          shadow-md
-          transition-all
-          duration-300
+          shadow-sm
+          transition-transform
+          duration-200
           ${
             enabled
-              ? "translate-x-6"
+              ? "translate-x-5"
               : "translate-x-1"
           }
         `}

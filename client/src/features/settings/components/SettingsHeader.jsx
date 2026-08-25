@@ -2,43 +2,27 @@ import { ChevronRight, Home } from "lucide-react";
 
 const SettingsHeader = () => {
   return (
-    <div
-      className="
-        flex
-        flex-col
-        gap-5
-        lg:flex-row
-        lg:items-center
-        lg:justify-between
-      "
-    >
-      {/* Left */}
+    <header className="flex items-center justify-between gap-4">
 
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+      {/* Left */}
+      <div className="min-w-0">
+
+        <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
           Settings
         </h1>
 
-        <p className="mt-2 text-slate-500">
+        <p className="mt-1 text-sm text-slate-500">
           Manage your preferences and configure your StockFlow system.
         </p>
+
       </div>
 
       {/* Breadcrumb */}
+      <div className="hidden shrink-0 items-center gap-1.5 text-xs sm:flex">
 
-      <div
-        className="
-          flex
-          items-center
-          gap-2
-          px-4
-          py-2
-          text-sm
-        "
-      >
         <Home
-          size={16}
-          className="text-slate-500"
+          size={14}
+          className="text-slate-400"
         />
 
         <span className="text-slate-500">
@@ -46,15 +30,17 @@ const SettingsHeader = () => {
         </span>
 
         <ChevronRight
-          size={15}
+          size={13}
           className="text-slate-400"
         />
 
         <span className="font-medium text-green-600">
           Settings
         </span>
+
       </div>
-    </div>
+
+    </header>
   );
 };
 

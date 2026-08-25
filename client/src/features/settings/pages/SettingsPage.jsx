@@ -9,41 +9,37 @@ import BottomActions from "../components/BottomActions";
 
 const SettingsPage = () => {
   return (
-    <div className="min-h-screen px-8 bg-slate-100">
+    <div className="min-h-full bg-slate-100 px-4 py-4 sm:px-6 lg:px-8">
 
+      {/* Header */}
       <SettingsHeader />
 
-      <div className=" py-2">
+      {/* Settings Content */}
+      <div className="mt-4">
 
-        <div className="flex gap-6 items-start">
+        <div className="grid items-start gap-4 lg:grid-cols-[260px_minmax(0,1fr)]">
 
           {/* Sidebar */}
+          <SettingsSidebar />
 
-          <div className="w-72  flex-shrink-0">
-            <SettingsSidebar />
-          </div>
+          {/* Main Content */}
+          <main className="min-w-0">
 
-          {/* Main */}
+            {/* Top Section */}
+            <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">
 
-          <div className="flex-1 space-y-3">
-
-            {/* Row 1 */}
-
-            <div className="grid grid-cols-12 gap-6">
-
-              <div className="col-span-8">
+              <section className="min-w-0 xl:col-span-8">
                 <CompanyProfile />
-              </div>
+              </section>
 
-              <div className="col-span-4">
+              <section className="min-w-0 xl:col-span-4">
                 <PreferencesCard />
-              </div>
+              </section>
 
             </div>
 
-            {/* Row 2 */}
-
-            <div className="grid grid-cols-3 gap-6">
+            {/* Bottom Cards */}
+            <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
 
               <SecurityCard />
 
@@ -53,11 +49,10 @@ const SettingsPage = () => {
 
             </div>
 
-            {/* Bottom */}
-
+            {/* Actions */}
             <BottomActions />
 
-          </div>
+          </main>
 
         </div>
 
