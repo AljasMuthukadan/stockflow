@@ -1,15 +1,10 @@
 import { useState } from "react";
-import {
-  User,
-  MapPin,
-  Package,
-  ChevronDown,
-} from "lucide-react";
 import Modal from "../../../../components/common/Modal";
-import Input from "../../../../components/ui/Input";
-import SelectField from "../../../../components/ui/SelectField";
 import ModalHeader from "./ModalHeader";
 import BasicInfo from "./BasicInfo";
+import ContactInfo from "./ContactInfo";
+import AddressInfo from "./AddressInfo";
+import SupplyInfo from "./SupplyInfo";
 
 const SupplierModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -54,9 +49,7 @@ const SupplierModal = ({ onClose }) => {
   };
 
   const toggleSection = (section) => {
-    setOpenSection((prev) =>
-      prev === section ? "" : section
-    );
+    setOpenSection((prev) => (prev === section ? "" : section));
   };
 
   const toggleSupply = (supply) => {
@@ -80,449 +73,78 @@ const SupplierModal = ({ onClose }) => {
   };
 
   return (
-    <Modal
-      >
+    <Modal>
+      {/* ================================================= */}
+      {/* HEADER */}
+      {/* ================================================= */}
 
-        {/* ================================================= */}
-        {/* HEADER */}
-        {/* ================================================= */}
+      <ModalHeader onClose={onClose} />
 
-        <ModalHeader onClose={onClose} />
+      {/* ================================================= */}
+      {/* FORM */}
+      {/* ================================================= */}
 
-
-        {/* ================================================= */}
-        {/* FORM */}
-        {/* ================================================= */}
-
-        <form
-          onSubmit={handleSubmit}
-          className="
+      <form
+        onSubmit={handleSubmit}
+        className="
             min-h-0
             flex-1
             overflow-y-auto
           "
-        >
-
-          <div className="space-y-2 p-3 sm:p-4">
-
-
-            {/* ================================================= */}
-            {/* BASIC INFORMATION */}
-            {/* ================================================= */}
-
-            <BasicInfo formData={formData} handleChange={handleChange}
-             openSection={openSection} toggleSection={toggleSection} 
-            />    
-        
-
-            {/* ================================================= */}
-            {/* CONTACT */}
-            {/* ================================================= */}
-
-            <section
-              className="
-                overflow-hidden
-                rounded-xl
-                border
-                border-slate-200
-              "
-            >
-
-              <button
-                type="button"
-                onClick={() => toggleSection("contact")}
-                className="
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                  px-4
-                  py-3
-                  text-left
-                  transition
-                  hover:bg-slate-50
-                "
-              >
-
-                <div className="flex items-center gap-3">
-
-                  <div
-                    className="
-                      flex
-                      h-8
-                      w-8
-                      items-center
-                      justify-center
-                      rounded-lg
-                      bg-blue-50
-                    "
-                  >
-                    <User
-                      size={16}
-                      className="text-blue-600"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-800">
-                      Contact Information
-                    </h3>
-
-                    <p className="text-xs text-slate-400">
-                      Primary supplier contact
-                    </p>
-                  </div>
-
-                </div>
-
-                <ChevronDown
-                  size={17}
-                  className={`
-                    text-slate-400
-                    transition-transform
-                    ${
-                      openSection === "contact"
-                        ? "rotate-180"
-                        : ""
-                    }
-                  `}
-                />
-
-              </button>
-
-
-              {openSection === "contact" && (
-                <div className="border-t border-slate-100 p-4">
-
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-
-                    <Input
-                      label="Contact Person"
-                      name="contactName"
-                      value={formData.contactName}
-                      onChange={handleChange}
-                      placeholder="John Mathew"
-                      required
-                    />
-
-                    <Input
-                      label="Phone Number"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                      required
-                    />
-
-                    <Input
-                      label="Email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="supplier@email.com"
-                      type="email"
-                    />
-
-                    <Input
-                      label="Alternate Phone"
-                      name="alternatePhone"
-                      value={formData.alternatePhone}
-                      onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                    />
-
-                  </div>
-
-                </div>
-              )}
-
-            </section>
-
-
-            {/* ================================================= */}
-            {/* ADDRESS */}
-            {/* ================================================= */}
-
-            <section
-              className="
-                overflow-hidden
-                rounded-xl
-                border
-                border-slate-200
-              "
-            >
-
-              <button
-                type="button"
-                onClick={() => toggleSection("address")}
-                className="
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                  px-4
-                  py-3
-                  text-left
-                  transition
-                  hover:bg-slate-50
-                "
-              >
-
-                <div className="flex items-center gap-3">
-
-                  <div
-                    className="
-                      flex
-                      h-8
-                      w-8
-                      items-center
-                      justify-center
-                      rounded-lg
-                      bg-orange-50
-                    "
-                  >
-                    <MapPin
-                      size={16}
-                      className="text-orange-600"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-800">
-                      Address
-                    </h3>
-
-                    <p className="text-xs text-slate-400">
-                      Supplier business address
-                    </p>
-                  </div>
-
-                </div>
-
-                <ChevronDown
-                  size={17}
-                  className={`
-                    text-slate-400
-                    transition-transform
-                    ${
-                      openSection === "address"
-                        ? "rotate-180"
-                        : ""
-                    }
-                  `}
-                />
-
-              </button>
-
-
-              {openSection === "address" && (
-                <div className="border-t border-slate-100 p-4">
-
-                  <div className="space-y-4">
-
-                    <Input
-                      label="Address Line 1"
-                      name="addressLine1"
-                      value={formData.addressLine1}
-                      onChange={handleChange}
-                      placeholder="Building / Street"
-                    />
-
-                    <Input
-                      label="Address Line 2"
-                      name="addressLine2"
-                      value={formData.addressLine2}
-                      onChange={handleChange}
-                      placeholder="Area / Landmark"
-                    />
-
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-
-                      <Input
-                        label="City"
-                        name="city"
-                        value={formData.city}
-                        onChange={handleChange}
-                        placeholder="Kochi"
-                      />
-
-                      <SelectField
-                        label="State"
-                        name="state"
-                        value={formData.state}
-                        onChange={handleChange}
-                      >
-                        <option value="">
-                          Select state
-                        </option>
-                        <option value="Kerala">
-                          Kerala
-                        </option>
-                        <option value="Tamil Nadu">
-                          Tamil Nadu
-                        </option>
-                        <option value="Karnataka">
-                          Karnataka
-                        </option>
-                        <option value="Maharashtra">
-                          Maharashtra
-                        </option>
-                        <option value="Delhi">
-                          Delhi
-                        </option>
-                      </SelectField>
-
-                      <Input
-                        label="PIN Code"
-                        name="pinCode"
-                        value={formData.pinCode}
-                        onChange={handleChange}
-                        placeholder="682001"
-                      />
-
-                    </div>
-
-                  </div>
-
-                </div>
-              )}
-
-            </section>
-
-
-            {/* ================================================= */}
-            {/* SUPPLY INFORMATION */}
-            {/* ================================================= */}
-
-            <section
-              className="
-                overflow-hidden
-                rounded-xl
-                border
-                border-slate-200
-              "
-            >
-
-              <button
-                type="button"
-                onClick={() => toggleSection("supply")}
-                className="
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                  px-4
-                  py-3
-                  text-left
-                  transition
-                  hover:bg-slate-50
-                "
-              >
-
-                <div className="flex items-center gap-3">
-
-                  <div
-                    className="
-                      flex
-                      h-8
-                      w-8
-                      items-center
-                      justify-center
-                      rounded-lg
-                      bg-purple-50
-                    "
-                  >
-                    <Package
-                      size={16}
-                      className="text-purple-600"
-                    />
-                  </div>
-
-                  <div>
-                    <h3 className="text-sm font-semibold text-slate-800">
-                      Supply Information
-                    </h3>
-
-                    <p className="text-xs text-slate-400">
-                      Products and categories supplied
-                    </p>
-                  </div>
-
-                </div>
-
-                <ChevronDown
-                  size={17}
-                  className={`
-                    text-slate-400
-                    transition-transform
-                    ${
-                      openSection === "supply"
-                        ? "rotate-180"
-                        : ""
-                    }
-                  `}
-                />
-
-              </button>
-
-
-              {openSection === "supply" && (
-                <div className="border-t border-slate-100 p-4">
-
-                  <p className="mb-3 text-xs font-medium text-slate-500">
-                    Select supply categories
-                  </p>
-
-                  <div className="flex flex-wrap gap-2">
-
-                    {supplyOptions.map((supply) => {
-
-                      const selected =
-                        formData.supplies.includes(supply);
-
-                      return (
-                        <button
-                          key={supply}
-                          type="button"
-                          onClick={() =>
-                            toggleSupply(supply)
-                          }
-                          className={`
-                            rounded-lg
-                            border
-                            px-3
-                            py-2
-                            text-xs
-                            font-medium
-                            transition
-                            ${
-                              selected
-                                ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                : "border-slate-200 bg-white text-slate-600 hover:bg-slate-50"
-                            }
-                          `}
-                        >
-                          {supply}
-                        </button>
-                      );
-                    })}
-
-                  </div>
-
-                </div>
-              )}
-
-            </section>
-
-          </div>
-
-
+      >
+        <div className="space-y-2 p-3 sm:p-4">
           {/* ================================================= */}
-          {/* FOOTER */}
+          {/* BASIC INFORMATION */}
           {/* ================================================= */}
 
-          <div
-            className="
+          <BasicInfo
+            formData={formData}
+            handleChange={handleChange}
+            openSection={openSection}
+            toggleSection={toggleSection}
+          />
+
+          {/* ================================================= */}
+          {/* CONTACT */}
+          {/* ================================================= */}
+
+          <ContactInfo 
+          formData={formData}
+          handleChange={handleChange}
+          openSection={openSection}
+          toggleSection={toggleSection}
+          />
+
+          {/* ================================================= */}
+          {/* ADDRESS */}
+          {/* ================================================= */}
+
+          <AddressInfo
+          formData={formData}
+          handleChange={handleChange}
+          openSection={openSection}
+          toggleSection={toggleSection}
+          />
+
+          {/* ================================================= */}
+          {/* SUPPLY INFORMATION */}
+          {/* ================================================= */}
+          <SupplyInfo
+          formData={formData}
+          openSection={openSection}
+          supplyOptions={supplyOptions}
+          toggleSection={toggleSection}
+          toggleSupply={toggleSupply}
+          />
+          
+        </div>
+
+        {/* ================================================= */}
+        {/* FOOTER */}
+        {/* ================================================= */}
+
+        <div
+          className="
               flex
               shrink-0
               flex-col-reverse
@@ -537,12 +159,11 @@ const SupplierModal = ({ onClose }) => {
               sm:justify-end
               sm:px-5
             "
-          >
-
-            <button
-              type="button"
-              onClick={onClose}
-              className="
+        >
+          <button
+            type="button"
+            onClick={onClose}
+            className="
                 w-full
                 rounded-xl
                 border
@@ -556,13 +177,13 @@ const SupplierModal = ({ onClose }) => {
                 hover:bg-slate-50
                 sm:w-auto
               "
-            >
-              Cancel
-            </button>
+          >
+            Cancel
+          </button>
 
-            <button
-              type="submit"
-              className="
+          <button
+            type="submit"
+            className="
                 w-full
                 rounded-xl
                 bg-emerald-600
@@ -577,20 +198,13 @@ const SupplierModal = ({ onClose }) => {
                 active:scale-[0.98]
                 sm:w-auto
               "
-            >
-              Add Supplier
-            </button>
-
-          </div>
-
-        </form>
-
-      </Modal>
+          >
+            Add Supplier
+          </button>
+        </div>
+      </form>
+    </Modal>
   );
 };
-
-
-
-
 
 export default SupplierModal;
