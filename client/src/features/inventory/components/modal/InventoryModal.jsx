@@ -8,7 +8,7 @@ import BasicInfoSection from "./BasicInfoSection";
 import HeaderSection from "./FormHeader";
 import Modal from "../../../../components/common/Modal";
 
-export default function AddItemModal({ onClose }) {
+export default function InventoryModal({ onClose }) {
   const [openSection, setOpenSection] = useState("basic");
 
   const [formData, setFormData] = useState({

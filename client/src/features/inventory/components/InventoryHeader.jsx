@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 
-import AddItemModal from "./item/AddItemModal";
+import InventoryModal from "./modal/InventoryModal";
 import PageHeader from "../../../components/common/PageHeader";
 
 const InventoryHeader = () => {
@@ -18,7 +18,7 @@ const InventoryHeader = () => {
       />
 
       {isModalOpen && (
-        <AddItemModal
+        <InventoryModal
           onClose={() => setIsModalOpen(false)}
         />
       )}
