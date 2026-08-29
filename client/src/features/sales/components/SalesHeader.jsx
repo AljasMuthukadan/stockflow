@@ -3,9 +3,13 @@ import {
   Plus,
 } from "lucide-react";
 import Button from "../../../components/ui/Button";
+import { useState } from "react";
+import SalesModal from "./modal/SalesModal";
 
 const SalesHeader = () => {
+  const [isOpen, setIsOpen] = useState(false)
   return (
+    <>
     <div
       className="
         flex
@@ -79,7 +83,7 @@ const SalesHeader = () => {
 
         {/* New Sales Order */}
 
-        <Button variant="primary" onClick={()=>console.log("Sales Order Button Clicked")} >
+        <Button variant="primary" onClick={()=>setIsOpen(true)} >
           <Plus size={18} />
           <span>
             New Sales Order
@@ -88,6 +92,10 @@ const SalesHeader = () => {
 
       </div>
     </div>
+    {
+      isOpen && (<SalesModal onClose={()=> setIsOpen(false)} />)
+    }
+    </>
   );
 };
 
