@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import FormFooter from "./FormFooter";
 import SupplierSection from "./SupplierSection";
 import AdditionalSection from "./AdditionalSection";
@@ -6,9 +7,13 @@ import TaxSection from "./TaxSection";
 import StockAndUnitSection from "./StockAndUnitSection";
 import BasicInfoSection from "./BasicInfoSection";
 import HeaderSection from "./FormHeader";
+
 import Modal from "../../../../components/common/Modal";
 
-export default function InventoryModal({ onClose }) {
+export default function InventoryModal({
+  onClose,
+  onAddItem,
+}) {
   const [openSection, setOpenSection] = useState("basic");
 
   const [formData, setFormData] = useState({
@@ -47,32 +52,79 @@ export default function InventoryModal({ onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Inventory Item:", formData);
+    const quantity = Number(formData.quantity) || 0;
 
-    // Later:
-    // POST /api/inventory
-    // send formData to backend
+    const reorderLevel =
+      Number(formData.reorderLevel) || 0;
 
+    let status = "In Stock";
+
+    if (quantity === 0) {
+      status = "Critical";
+    } else if (quantity <= reorderLevel) {
+      status = "Low Stock";
+    }
+
+    const newItem = {
+      id: Date.now(),
+
+      name: formData.itemName,
+
+      sku: formData.sku,
+
+      category: formData.category,
+
+      stock: quantity,
+
+      unit: formData.unit,
+
+      reorder: reorderLevel,
+
+      status,
+
+      itemType: formData.itemType,
+
+      purchasePrice:
+        Number(formData.purchasePrice) || 0,
+
+      sellingPrice:
+        Number(formData.sellingPrice) || 0,
+
+      supplier: formData.supplier,
+
+      supplierSku: formData.supplierSku,
+
+      warehouse: formData.warehouse,
+
+      description: formData.description,
+
+      taxable: formData.taxable,
+
+      taxRate: formData.taxRate,
+    };
+
+    // Send new item to parent
+    onAddItem(newItem);
+
+    // Close modal
     onClose();
   };
 
   return (
     <Modal>
 
-        {/* Header */}
+      <HeaderSection onClose={onClose} />
 
-        <HeaderSection onClose={onClose} />
+      <form
+        onSubmit={handleSubmit}
+        className="flex min-h-0 flex-1 flex-col overflow-hidden"
+      >
 
-        {/* Form Content */}
+        {/* Scrollable Form Content */}
 
-        <form
-          onSubmit={handleSubmit}
-          className="min-h-0 flex-1 overflow-y-auto "
-        >
+        <div className="flex-1 overflow-y-auto">
 
           <div className="space-y-2 p-4">
-
-            {/* BASIC INFORMATION */}
 
             <BasicInfoSection
               openSection={openSection}
@@ -81,9 +133,6 @@ export default function InventoryModal({ onClose }) {
               handleChange={handleChange}
             />
 
-
-            {/* STOCK & UNIT */}
-
             <StockAndUnitSection
               openSection={openSection}
               toggleSection={toggleSection}
@@ -91,17 +140,13 @@ export default function InventoryModal({ onClose }) {
               handleChange={handleChange}
             />
 
-
-            {/* PRICING & TAX */}
-
-           <TaxSection formData={formData}
-            handleChange={handleChange} 
-            toggleSection={toggleSection} 
-            openSection={openSection} 
-            setFormData={setFormData} />
-
-
-            {/* SUPPLIER */}
+            <TaxSection
+              formData={formData}
+              handleChange={handleChange}
+              toggleSection={toggleSection}
+              openSection={openSection}
+              setFormData={setFormData}
+            />
 
             <SupplierSection
               toggleSection={toggleSection}
@@ -109,9 +154,6 @@ export default function InventoryModal({ onClose }) {
               formData={formData}
               handleChange={handleChange}
             />
-
-
-            {/* ADDITIONAL */}
 
             <AdditionalSection
               toggleSection={toggleSection}
@@ -122,12 +164,11 @@ export default function InventoryModal({ onClose }) {
 
           </div>
 
-          {/* Footer */}
+        </div>
 
-          <FormFooter onClose={onClose} />
+        <FormFooter onClose={onClose} />
 
-        </form>
-
+      </form>
 
     </Modal>
   );

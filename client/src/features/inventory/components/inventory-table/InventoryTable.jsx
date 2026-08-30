@@ -1,4 +1,3 @@
-import inventory from "../inventoryData";
 import { InventoryMobileView } from "./InventoryMobileView";
 import Pagination from "../../../../components/common/Pagination";
 import ActionButton from "../../../../components/common/ActionButton";
@@ -19,35 +18,24 @@ const badgeStyle = (status) => {
   }
 };
 
-export default function InventoryTable() {
+export default function InventoryTable({ inventory }) {
   return (
-    <div className="mt-5 mb-5 ">
-
-      {/* ================================================= */}
-      {/* MAIN CARD */}
-      {/* ================================================= */}
+    <div className="mb-5 mt-5">
 
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-        {/* ================================================= */}
-        {/* MOBILE VIEW */}
-        {/* ================================================= */}
+        {/* Mobile View */}
 
         <InventoryMobileView
           inventory={inventory}
           badgeStyle={badgeStyle}
         />
 
-
-        {/* ================================================= */}
-        {/* TABLE VIEW - TABLET + DESKTOP */}
-        {/* ================================================= */}
+        {/* Desktop Table */}
 
         <div className="hidden overflow-x-auto md:block">
 
           <table className="w-full min-w-[900px]">
-
-            {/* Header */}
 
             <thead className="bg-slate-50/80">
 
@@ -89,9 +77,6 @@ export default function InventoryTable() {
 
             </thead>
 
-
-            {/* Body */}
-
             <tbody>
 
               {inventory.map((item) => (
@@ -113,22 +98,20 @@ export default function InventoryTable() {
 
                     <div className="flex items-center gap-3">
 
-                      <div
-                        className="
-                          flex
-                          h-9
-                          w-9
-                          shrink-0
-                          items-center
-                          justify-center
-                          rounded-lg
-                          bg-emerald-50
-                          text-sm
-                          font-semibold
-                          text-emerald-600
-                        "
-                      >
-                        {item.name.charAt(0)}
+                      <div className="
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-lg
+                        bg-emerald-50
+                        text-sm
+                        font-semibold
+                        text-emerald-600
+                      ">
+                        {item.name.charAt(0).toUpperCase()}
                       </div>
 
                       <div>
@@ -147,7 +130,6 @@ export default function InventoryTable() {
 
                   </td>
 
-
                   {/* SKU */}
 
                   <td className="px-5 py-4">
@@ -157,7 +139,6 @@ export default function InventoryTable() {
                     </span>
 
                   </td>
-
 
                   {/* Category */}
 
@@ -169,7 +150,6 @@ export default function InventoryTable() {
 
                   </td>
 
-
                   {/* Stock */}
 
                   <td className="px-5 py-4">
@@ -179,7 +159,6 @@ export default function InventoryTable() {
                     </span>
 
                   </td>
-
 
                   {/* Unit */}
 
@@ -191,7 +170,6 @@ export default function InventoryTable() {
 
                   </td>
 
-
                   {/* Reorder */}
 
                   <td className="px-5 py-4">
@@ -201,7 +179,6 @@ export default function InventoryTable() {
                     </span>
 
                   </td>
-
 
                   {/* Status */}
 
@@ -224,15 +201,12 @@ export default function InventoryTable() {
 
                   </td>
 
-
                   {/* Actions */}
 
                   <td className="px-5 py-4">
 
                     <div className="flex justify-center">
-
-                     <ActionButton/>
-
+                      <ActionButton />
                     </div>
 
                   </td>
@@ -247,13 +221,7 @@ export default function InventoryTable() {
 
         </div>
 
-
-        {/* ================================================= */}
-        {/* FOOTER / PAGINATION */}
-        {/* ================================================= */}
-
         <Pagination />
-        
 
       </div>
 
