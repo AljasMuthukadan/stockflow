@@ -1,4 +1,4 @@
-import { X, BookA } from 'lucide-react';
+import { X,  ReceiptText } from 'lucide-react';
 
 const HeaderSection = ({ onClose }) => {
   return (
@@ -7,7 +7,7 @@ const HeaderSection = ({ onClose }) => {
           <div className="flex items-center gap-3">
 
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50">
-              <BookA
+              <ReceiptText
                 size={20}
                 className="text-emerald-600"
               />
@@ -15,11 +15,11 @@ const HeaderSection = ({ onClose }) => {
 
             <div>
               <h2 className="text-base font-semibold text-slate-900">
-                New Production
+                New Purchase Order
               </h2>
 
               <p className="mt-0.5 text-xs text-slate-500">
-                New production for your inventory.
+                Create a new purchase order for your inventory.
               </p>
             </div>
 
