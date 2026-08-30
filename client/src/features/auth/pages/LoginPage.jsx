@@ -20,7 +20,7 @@ export default  function LoginPage() {
       title="Welcome Back"
       subtitle="Sign in to access your StockFlow dashboard."
     >
-      <form className="space-y-6">
+      <form className="space-y-5">
 
         {/* Email */}
 
@@ -164,7 +164,7 @@ export default  function LoginPage() {
 
       {/* Divider */}
 
-      <div className="my-8 flex items-center gap-4">
+      <div className="my-6 flex items-center gap-4">
 
         <div className="h-px flex-1 bg-slate-200" />
 
