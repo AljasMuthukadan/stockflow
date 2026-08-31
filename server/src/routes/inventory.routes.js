@@ -1,14 +1,14 @@
 import express from "express";
-import { createIventoryItem } from "../controllers/inventory.item.controller.js";
+
+import {
+  createInventoryItem,
+  getInventoryItems,
+} from "../controllers/inventory.item.controller.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.status(200).json({
-    message: "Inventory data fetched",
-    success: true,
-  });
-});
-router.post('/create', createIventoryItem )
+router.get("/", getInventoryItems);
+
+router.post("/", createInventoryItem);
 
 export default router;
