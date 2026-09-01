@@ -11,7 +11,12 @@ const inventoryItemSchema = new mongoose.Schema(
 
     sku: {
       type: String,
-      required: true,
+      required: false,
+      default : function() {
+        // Generate a SKU based on the name and a random number
+        const randomNum = Math.floor(Math.random() * 10000);
+        return `${this.name.replace(/\s+/g, '-').toUpperCase()}-${randomNum}`;
+      },
       trim: true,
       uppercase: true,
       unique: true,
@@ -25,7 +30,7 @@ const inventoryItemSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
 
@@ -58,7 +63,10 @@ const inventoryItemSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
-
+    hsnCode: {
+      type: String,
+      default: "",
+    },
     taxable: {
       type: Boolean,
       default: true,

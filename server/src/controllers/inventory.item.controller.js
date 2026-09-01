@@ -2,8 +2,8 @@ import InventoryItem from "../models/Inventory.Item.js";
 
 export const createInventoryItem = async (req, res) => {
   // POST /api/inventory
-  const { name, description, quantity, price } = req.body;
-  if (!name || !description || !quantity || !price) {
+  const { name, description, quantity, price, itemType, unit } = req.body;
+  if (!name || !description || !itemType || !unit || quantity === undefined ) {
     return res.status(400).json({
       success: false,
       message: "Please provide all required fields",
@@ -11,12 +11,7 @@ export const createInventoryItem = async (req, res) => {
   }
 
   try {
-    const newItem = await InventoryItem.create({
-      name,
-      description,
-      quantity,
-      price,
-    });
+    const newItem = await InventoryItem.create(req.body);
 
     return res.status(201).json({
       success: true,
