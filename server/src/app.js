@@ -1,9 +1,10 @@
 import express from "express"
 import inventoryRoutes from "./routes/inventory.routes.js"
-const app = express()
+import cors from "cors"
+const app = express();
+app.use(cors());
 // Global Middlewares
 app.use(express.json());
-
 app.get('/api/health', (req, res) => {
     res.status(200).json({
     success: true,
