@@ -9,6 +9,7 @@ import InventoryModal from "../components/modal/InventoryModal";
 import inventoryData from "../components/inventoryData";
 
 const InventoryPage = () => {
+  // State for managing the inventory items and modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [inventory, setInventory] = useState(() => inventoryData);
