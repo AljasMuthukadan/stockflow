@@ -13,7 +13,7 @@ const InventoryPage = () => {
   // State for managing the inventory items and modal visibility
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { addInventoryItem } = useInventory(); // Destructure any values returned by the custom hook
+  const { addInventoryItem, } = useInventory(); // Destructure any values returned by the custom hook
 
   const [inventory, setInventory] = useState(() => inventoryData);
 

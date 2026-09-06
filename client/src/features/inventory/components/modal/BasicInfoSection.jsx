@@ -51,8 +51,8 @@ const BasicInfoSection = ({
               </label>
 
               <Input
-                name="itemName"
-                value={formData.itemName}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
                 type="text"
                 placeholder="e.g. Raw Sugar"
@@ -80,9 +80,9 @@ const BasicInfoSection = ({
             {/* Item Type */}
 
             <SelectField
-              label="Supplier Type"
-              name="supplierType"
-              value={formData.supplierType}
+              label="Item Type"
+              name="itemType"
+              value={formData.itemType}
               onChange={handleChange}
               required
             >

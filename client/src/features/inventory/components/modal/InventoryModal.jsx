@@ -17,114 +17,83 @@ export default function InventoryModal({
   const [openSection, setOpenSection] = useState("basic");
 
   const [formData, setFormData] = useState({
-    itemName: "",
+    name: "",
     sku: "",
     itemType: "",
-    category: 0,
+    category: "",
     quantity: "",
     unit: "",
     reorderLevel: "",
     purchasePrice: "",
     sellingPrice: "",
-    taxable: "yes",
-    taxRate: "18",
+    taxable: true,
+    taxRate: 18,
     supplier: "",
     supplierSku: "",
     warehouse: "",
     description: "",
   });
 
+  // Handle input changes
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
 
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
+  // Toggle form sections
   const toggleSection = (section) => {
     setOpenSection((prev) =>
       prev === section ? "" : section
     );
   };
 
+  // Submit form
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const quantity = Number(formData.quantity) || 0;
+    // Prepare data before sending to API
+    const itemData = {
+      ...formData,
 
-    const reorderLevel =
-      Number(formData.reorderLevel) || 0;
-
-    let status = "In Stock";
-
-    if (quantity === 0) {
-      status = "Critical";
-    } else if (quantity <= reorderLevel) {
-      status = "Low Stock";
-    }
-
-    const newItem = {
-      id: Date.now(),
-
-      itemName: formData.itemName,
-
-      sku: formData.sku,
-
-      category: formData.category,
-
-      stock: quantity,
-
-      unit: formData.unit,
-
-      reorder: reorderLevel,
-
-      status,
-
-      itemType: formData.itemType,
-
-      purchasePrice:
-        Number(formData.purchasePrice) || 0,
-
-      sellingPrice:
-        Number(formData.sellingPrice) || 0,
-
-      supplier: formData.supplier,
-
-      supplierSku: formData.supplierSku,
-
-      warehouse: formData.warehouse,
-
-      description: formData.description,
-
-      taxable: formData.taxable,
-
-      taxRate: formData.taxRate,
+      quantity: Number(formData.quantity),
+      reorderLevel: Number(formData.reorderLevel) || 0,
+      purchasePrice: Number(formData.purchasePrice) || 0,
+      sellingPrice: Number(formData.sellingPrice) || 0,
+      taxRate: Number(formData.taxRate) || 0,
     };
 
+    console.log("Sending inventory item:", itemData);
 
-    // Send new item to parent
-    await onAddItem(newItem);
+    try {
+      // Call API function from parent
+      await onAddItem(itemData);
 
-    // Close modal
-    onClose();
+      // Close modal only after successful API request
+      onClose();
+
+    } catch (error) {
+      console.error(
+        "Failed to create inventory item:",
+        error.response?.data?.message ||
+        error.message
+      );
+    }
   };
 
   return (
     <Modal>
-
       <HeaderSection onClose={onClose} />
 
       <form
         onSubmit={handleSubmit}
         className="flex min-h-0 flex-1 flex-col overflow-hidden"
       >
-
         {/* Scrollable Form Content */}
-
         <div className="flex-1 overflow-y-auto">
-
           <div className="space-y-2 p-4">
 
             <BasicInfoSection
@@ -164,13 +133,10 @@ export default function InventoryModal({
             />
 
           </div>
-
         </div>
 
         <FormFooter onClose={onClose} />
-
       </form>
-
     </Modal>
   );
 }

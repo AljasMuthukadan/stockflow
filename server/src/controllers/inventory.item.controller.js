@@ -2,14 +2,9 @@ import InventoryItem from "../models/Inventory.Item.js";
 
 export const createInventoryItem = async (req, res) => {
   // POST /api/inventory
-   console.log("METHOD:", req.method);
-  console.log("URL:", req.originalUrl);
-  console.log("CONTENT TYPE:", req.headers["content-type"]);
-  console.log("REQUEST BODY:", req.body);
   console.log("Request body:", req.body); // Log the request body for debugging
-  const { itemName, stock, category, itemType, unit } = req.body;
-  console.log("Received data:", { itemName, stock, category, itemType, unit }); // Log the received data for debugging
-  if (!itemName  || !itemType ||!category ||!unit || stock === undefined ) {
+  const { name, quantity, category, itemType, unit } = req.body;
+  if (!name  || !itemType ||!category ||!unit || quantity === undefined ) {
     return res.status(400).json({
       success: false,
       message: "Please provide all required fields",
@@ -18,7 +13,7 @@ export const createInventoryItem = async (req, res) => {
 
   try {
     // Check if an inventory item with the same name already exists
-    const existingItem = await InventoryItem.findOne({ itemName });
+    const existingItem = await InventoryItem.findOne({ name });
     if (existingItem) {
       return res.status(400).json({
         success: false,
@@ -27,7 +22,7 @@ export const createInventoryItem = async (req, res) => {
     }
     // Create a new inventory item
     const newItem = await InventoryItem.create(req.body);
-
+    console.log("New inventory item created:", newItem); // Log the newly created item for debugging
     return res.status(201).json({
       success: true,
       message: "Inventory item created successfully",

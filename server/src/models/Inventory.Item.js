@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const inventoryItemSchema = new mongoose.Schema(
   {
-    itemName: {
+    name: {
       type: String,
       required: true,
       trim: true,
@@ -11,30 +11,25 @@ const inventoryItemSchema = new mongoose.Schema(
 
     sku: {
       type: String,
-      required: false,
-      default : function() {
-        // Generate a SKU based on the name and a random number
-        const randomNum = Math.floor(Math.random() * 10000);
-        return `${this.name.replace(/\s+/g, '-').toUpperCase()}-${randomNum}`;
-      },
       trim: true,
       uppercase: true,
       unique: true,
+      sparse: true,
     },
 
     itemType: {
       type: String,
       required: true,
-      enum: ["Raw Material", "Finished Goods"],
+      enum: ["Raw Material", "Finished Goods","raw-material", "finished-good", "packaging"],
     },
 
     category: {
       type: String,
-      required: false,
       trim: true,
+      default: "",
     },
 
-    stock: {
+    quantity: {
       type: Number,
       required: true,
       default: 0,
@@ -44,6 +39,7 @@ const inventoryItemSchema = new mongoose.Schema(
     unit: {
       type: String,
       required: true,
+      trim: true,
     },
 
     reorderLevel: {
@@ -63,10 +59,13 @@ const inventoryItemSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
+
     hsnCode: {
       type: String,
       default: "",
+      trim: true,
     },
+
     taxable: {
       type: Boolean,
       default: true,
@@ -75,6 +74,7 @@ const inventoryItemSchema = new mongoose.Schema(
     taxRate: {
       type: Number,
       default: 18,
+      min: 0,
     },
 
     supplier: {
@@ -97,6 +97,7 @@ const inventoryItemSchema = new mongoose.Schema(
       default: "",
       trim: true,
     },
+
     imageUrl: {
       type: String,
       default: "",
