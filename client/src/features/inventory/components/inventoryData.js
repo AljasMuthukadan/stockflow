@@ -54,6 +54,7 @@ const inventoryData = [
     reorder: 1000,
     status: "In Stock",
   },
+  
 ];
 
 export default inventoryData;
