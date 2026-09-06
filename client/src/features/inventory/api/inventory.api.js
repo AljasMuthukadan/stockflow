@@ -2,7 +2,7 @@ import api from  "../../../api/axios.js";
 
 export const createInventoryItem = async (itemData) => {
   try {
-    const response = await api.post("/api/inventory", itemData);
+    const response = await api.post("/api/inventory/", itemData);
     return response.data;
   } catch (error) {
     console.error("Error creating inventory item:", error);

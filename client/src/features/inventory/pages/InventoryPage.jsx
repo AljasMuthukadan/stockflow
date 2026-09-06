@@ -7,18 +7,18 @@ import InventoryHeader from "../components/InventoryHeader";
 import InventoryModal from "../components/modal/InventoryModal";
 
 import inventoryData from "../components/inventoryData";
+import useInventory from "../hooks/useInventory";
 
 const InventoryPage = () => {
   // State for managing the inventory items and modal visibility
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addInventoryItem } = useInventory(); // Destructure any values returned by the custom hook
 
   const [inventory, setInventory] = useState(() => inventoryData);
 
   const handleAddItem = (newItem) => {
-    setInventory((previousInventory) => [
-      ...previousInventory,
-      newItem,
-    ]);
+    setInventory((prevInventory) => [...prevInventory, newItem]);
   };
 
   const handleOpenModal = () => {
@@ -49,7 +49,7 @@ const InventoryPage = () => {
       {isModalOpen && (
         <InventoryModal
           onClose={handleCloseModal}
-          onAddItem={handleAddItem}
+          onAddItem={addInventoryItem}
         />
       )}
 

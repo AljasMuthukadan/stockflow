@@ -20,7 +20,7 @@ export default function InventoryModal({
     itemName: "",
     sku: "",
     itemType: "",
-    category: "",
+    category: 0,
     quantity: "",
     unit: "",
     reorderLevel: "",
@@ -49,7 +49,7 @@ export default function InventoryModal({
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const quantity = Number(formData.quantity) || 0;
@@ -68,7 +68,7 @@ export default function InventoryModal({
     const newItem = {
       id: Date.now(),
 
-      name: formData.itemName,
+      itemName: formData.itemName,
 
       sku: formData.sku,
 
@@ -103,8 +103,9 @@ export default function InventoryModal({
       taxRate: formData.taxRate,
     };
 
+
     // Send new item to parent
-    onAddItem(newItem);
+    await onAddItem(newItem);
 
     // Close modal
     onClose();
