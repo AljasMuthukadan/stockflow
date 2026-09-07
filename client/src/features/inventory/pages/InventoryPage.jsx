@@ -6,20 +6,18 @@ import InventoryTable from "../components/inventory-table/InventoryTable";
 import InventoryHeader from "../components/InventoryHeader";
 import InventoryModal from "../components/modal/InventoryModal";
 
-import inventoryData from "../components/inventoryData";
 import useInventory from "../hooks/useInventory";
 
 const InventoryPage = () => {
-  // State for managing the inventory items and modal visibility
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { addInventoryItem, } = useInventory(); // Destructure any values returned by the custom hook
 
-  const [inventory, setInventory] = useState(() => inventoryData);
-
-  const handleAddItem = (newItem) => {
-    setInventory((prevInventory) => [...prevInventory, newItem]);
-  };
+  // ONE inventory state for this page
+  const {
+    inventory,
+    loading,
+    error,
+    addInventoryItem,
+  } = useInventory();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -36,15 +34,32 @@ const InventoryPage = () => {
         onAddItem={handleOpenModal}
       />
 
+      {/* Error */}
+
+      {error && (
+        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
+          {error}
+        </div>
+      )}
+
+      {/* Stats */}
+
       <InventoryStats
         inventory={inventory}
       />
 
+      {/* Filters */}
+
       <InventoryFilters />
+
+      {/* Table */}
 
       <InventoryTable
         inventory={inventory}
+        loading={loading}
       />
+
+      {/* Modal */}
 
       {isModalOpen && (
         <InventoryModal

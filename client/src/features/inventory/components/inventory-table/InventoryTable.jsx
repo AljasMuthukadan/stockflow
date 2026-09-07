@@ -30,7 +30,10 @@ const getStockStatus = (quantity, reorderLevel) => {
   return "In Stock";
 };
 
-export default function InventoryTable({ inventory = [] }) {
+export default function InventoryTable({
+  inventory = [],
+  loading = false,
+}) {
   return (
     <div className="mb-5 mt-5">
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -45,15 +48,6 @@ export default function InventoryTable({ inventory = [] }) {
         {/* Desktop Table */}
 
         <div className="hidden md:block">
-
-          {/* 
-            Fixed visible area
-            Approximately header + 5 rows
-
-            min-h -> maintains height even with few/no items
-            max-h -> prevents table from growing infinitely
-          */}
-
           <div className="min-h-[420px] max-h-[420px] overflow-y-auto overflow-x-auto">
 
             <table className="w-full min-w-[900px]">
@@ -61,7 +55,6 @@ export default function InventoryTable({ inventory = [] }) {
               {/* Sticky Header */}
 
               <thead className="sticky top-0 z-10 bg-slate-50/95 backdrop-blur">
-
                 <tr className="border-b border-slate-100 text-left">
 
                   <th className="px-5 py-4 text-xs font-semibold uppercase tracking-wide text-slate-500">
@@ -97,21 +90,39 @@ export default function InventoryTable({ inventory = [] }) {
                   </th>
 
                 </tr>
-
               </thead>
 
               <tbody>
 
-                {/* Empty State */}
+                {/* Loading State */}
 
-                {inventory.length === 0 && (
+                {loading ? (
                   <tr>
-
                     <td
                       colSpan={8}
                       className="h-[330px] px-5 text-center"
                     >
+                      <div className="flex flex-col items-center justify-center">
 
+                        <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-emerald-500" />
+
+                        <p className="mt-4 text-sm font-medium text-slate-500">
+                          Loading inventory...
+                        </p>
+
+                      </div>
+                    </td>
+                  </tr>
+
+                ) : inventory.length === 0 ? (
+
+                  /* Empty State */
+
+                  <tr>
+                    <td
+                      colSpan={8}
+                      className="h-[330px] px-5 text-center"
+                    >
                       <div className="flex flex-col items-center justify-center">
 
                         <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-xl">
@@ -127,170 +138,146 @@ export default function InventoryTable({ inventory = [] }) {
                         </p>
 
                       </div>
-
                     </td>
-
                   </tr>
-                )}
 
-                {/* Inventory Items */}
+                ) : (
 
-                {inventory.map((item) => {
+                  /* Inventory Items */
 
-                  const status = getStockStatus(
-                    item.quantity,
-                    item.reorderLevel
-                  );
+                  inventory.map((item) => {
+                    const status = getStockStatus(
+                      item.quantity,
+                      item.reorderLevel
+                    );
 
-                  return (
-                    <tr
-                      key={item._id}
-                      className="
-                        h-[66px]
-                        border-b
-                        border-slate-100
-                        last:border-b-0
-                        transition-colors
-                        hover:bg-slate-50/70
-                      "
-                    >
+                    return (
+                      <tr
+                        key={item._id}
+                        className="
+                          h-[66px]
+                          border-b
+                          border-slate-100
+                          last:border-b-0
+                          transition-colors
+                          hover:bg-slate-50/70
+                        "
+                      >
 
-                      {/* Item */}
+                        {/* Item */}
 
-                      <td className="px-5 py-3">
+                        <td className="px-5 py-3">
+                          <div className="flex items-center gap-3">
 
-                        <div className="flex items-center gap-3">
+                            <div
+                              className="
+                                flex
+                                h-9
+                                w-9
+                                shrink-0
+                                items-center
+                                justify-center
+                                rounded-lg
+                                bg-emerald-50
+                                text-sm
+                                font-semibold
+                                text-emerald-600
+                              "
+                            >
+                              {item.name?.charAt(0).toUpperCase() || "?"}
+                            </div>
 
-                          <div
-                            className="
-                              flex
-                              h-9
-                              w-9
-                              shrink-0
+                            <div>
+                              <p className="text-sm font-semibold text-slate-800">
+                                {item.name}
+                              </p>
+
+                              <p className="mt-0.5 text-xs text-slate-400">
+                                ID #{item._id?.slice(-6)}
+                              </p>
+                            </div>
+
+                          </div>
+                        </td>
+
+                        {/* SKU */}
+
+                        <td className="px-5 py-4">
+                          <span className="text-sm font-medium text-slate-600">
+                            {item.sku || "-"}
+                          </span>
+                        </td>
+
+                        {/* Category */}
+
+                        <td className="px-5 py-4">
+                          <span className="text-sm text-slate-600">
+                            {item.category || "-"}
+                          </span>
+                        </td>
+
+                        {/* Quantity */}
+
+                        <td className="px-5 py-4">
+                          <span className="text-sm font-semibold text-slate-800">
+                            {item.quantity}
+                          </span>
+                        </td>
+
+                        {/* Unit */}
+
+                        <td className="px-5 py-4">
+                          <span className="text-sm text-slate-500">
+                            {item.unit}
+                          </span>
+                        </td>
+
+                        {/* Reorder Level */}
+
+                        <td className="px-5 py-4">
+                          <span className="text-sm text-slate-600">
+                            {item.reorderLevel}
+                          </span>
+                        </td>
+
+                        {/* Status */}
+
+                        <td className="px-5 py-4">
+                          <span
+                            className={`
+                              inline-flex
                               items-center
-                              justify-center
-                              rounded-lg
-                              bg-emerald-50
-                              text-sm
+                              rounded-full
+                              px-3
+                              py-1.5
+                              text-xs
                               font-semibold
-                              text-emerald-600
-                            "
+                              ${badgeStyle(status)}
+                            `}
                           >
-                            {item.name?.charAt(0).toUpperCase()}
+                            {status}
+                          </span>
+                        </td>
+
+                        {/* Actions */}
+
+                        <td className="px-5 py-4">
+                          <div className="flex justify-center">
+                            <ActionButton />
                           </div>
+                        </td>
 
-                          <div>
-
-                            <p className="text-sm font-semibold text-slate-800">
-                              {item.name}
-                            </p>
-
-                            <p className="mt-0.5 text-xs text-slate-400">
-                              ID #{item._id?.slice(-6)}
-                            </p>
-
-                          </div>
-
-                        </div>
-
-                      </td>
-
-                      {/* SKU */}
-
-                      <td className="px-5 py-4">
-
-                        <span className="text-sm font-medium text-slate-600">
-                          {item.sku || "-"}
-                        </span>
-
-                      </td>
-
-                      {/* Category */}
-
-                      <td className="px-5 py-4">
-
-                        <span className="text-sm text-slate-600">
-                          {item.category || "-"}
-                        </span>
-
-                      </td>
-
-                      {/* Quantity */}
-
-                      <td className="px-5 py-4">
-
-                        <span className="text-sm font-semibold text-slate-800">
-                          {item.quantity}
-                        </span>
-
-                      </td>
-
-                      {/* Unit */}
-
-                      <td className="px-5 py-4">
-
-                        <span className="text-sm text-slate-500">
-                          {item.unit}
-                        </span>
-
-                      </td>
-
-                      {/* Reorder Level */}
-
-                      <td className="px-5 py-4">
-
-                        <span className="text-sm text-slate-600">
-                          {item.reorderLevel}
-                        </span>
-
-                      </td>
-
-                      {/* Status */}
-
-                      <td className="px-5 py-4">
-
-                        <span
-                          className={`
-                            inline-flex
-                            items-center
-                            rounded-full
-                            px-3
-                            py-1.5
-                            text-xs
-                            font-semibold
-                            ${badgeStyle(status)}
-                          `}
-                        >
-                          {status}
-                        </span>
-
-                      </td>
-
-                      {/* Actions */}
-
-                      <td className="px-5 py-4">
-
-                        <div className="flex justify-center">
-
-                          <ActionButton />
-
-                        </div>
-
-                      </td>
-
-                    </tr>
-                  );
-                })}
+                      </tr>
+                    );
+                  })
+                )}
 
               </tbody>
 
             </table>
 
           </div>
-
         </div>
-
-        {/* Pagination outside scroll container */}
 
         <Pagination />
 
