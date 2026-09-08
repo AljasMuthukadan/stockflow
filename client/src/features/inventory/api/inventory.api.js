@@ -1,5 +1,6 @@
 import api from  "../../../api/axios.js";
 
+// creates inventory item
 export const createInventoryItem = async (itemData) => {
   try {
     const response = await api.post("/api/inventory/", itemData);
@@ -9,6 +10,7 @@ export const createInventoryItem = async (itemData) => {
     throw error;
   }
 };
+// gets all inventory items
 
 export const getInventoryItems = async () => {
     try {
@@ -19,6 +21,7 @@ export const getInventoryItems = async () => {
         throw error;
     }
 };
+// gets inventory items by category
 
 export const getInventoryItemByCategory = async (category) => {
   try {
