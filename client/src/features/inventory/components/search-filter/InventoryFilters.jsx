@@ -4,8 +4,14 @@ import {
 } from "lucide-react";
 import FilterHeader from "./FilterHeader";
 import InventorySearch from "./InventorySearch";
+import { useState } from "react";
 
-const InventoryFilters = () => {
+const InventoryFilters = ({inventory}) => {
+  const [category, setCategory] = useState("All Categories");
+  const filteredInventory = inventory.map(item =>{
+     console.log(item.category)
+  })
+   
   return (
     <div className="w-full hidden md:block ">
       <div
@@ -54,6 +60,12 @@ const InventoryFilters = () => {
           {/* ================================================= */}
 
           <select
+            value={category}
+            onChange={(e)=> {
+              setCategory(e.target.value)
+              console.log(e.target.value)
+              filteredInventory.filter(item => item.category === e.target.value)
+            }}
             className="
               h-10
               w-full

@@ -5,16 +5,16 @@ import ActionButton from "../../../../components/common/ActionButton";
 const badgeStyle = (status) => {
   switch (status) {
     case "In Stock":
-      return "bg-emerald-50 text-emerald-700 ring-1 ring-inset ring-emerald-100";
+      return "bg-emerald-50 border border-emerald-200 text-emerald-700 ring-1 ring-inset ring-emerald-100";
 
     case "Low Stock":
-      return "bg-orange-50 text-orange-700 ring-1 ring-inset ring-orange-100";
+      return "bg-orange-50 border border-orange-200 text-orange-700 ring-1 ring-inset ring-orange-100";
 
     case "Critical":
-      return "bg-red-50 text-red-700 ring-1 ring-inset ring-red-100";
+      return "bg-red-50 border border-red-200 text-red-700 ring-1 ring-inset ring-red-100";
 
     default:
-      return "bg-slate-50 text-slate-600 ring-1 ring-inset ring-slate-200";
+      return "bg-slate-50 border border-slate-200 text-slate-600 ring-1 ring-inset ring-slate-100";
   }
 };
 

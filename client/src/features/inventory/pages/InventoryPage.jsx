@@ -21,6 +21,7 @@ const InventoryPage = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
+    
   };
 
   const handleCloseModal = () => {
@@ -50,7 +51,7 @@ const InventoryPage = () => {
 
       {/* Filters */}
 
-      <InventoryFilters />
+      <InventoryFilters inventory={inventory} />
 
       {/* Table */}
 
