@@ -6,39 +6,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-
-const stats = [
-  {
-    title: "Total Items",
-    value: "1,250",
-    change: "+12.5%",
-    icon: Boxes,
-    color: "green",
-  },
-  {
-    title: "Total Stock",
-    value: "25,430",
-    subtitle: "Units Available",
-    change: "+8.2%",
-    icon: Package,
-    color: "blue",
-  },
-  {
-    title: "Low Stock",
-    value: "32",
-    change: "+5",
-    icon: AlertTriangle,
-    color: "orange",
-  },
-  {
-    title: "Out of Stock",
-    value: "12",
-    change: "+2",
-    icon: XCircle,
-    color: "red",
-  },
-];
-
 const colors = {
   green: {
     iconBg: "bg-emerald-50",
@@ -69,11 +36,75 @@ const colors = {
   },
 };
 
-const InventoryStats = () => {
+const InventoryStats = ({ inventory = [] }) => {
+
+  // =========================
+  // Calculate Inventory Stats
+  // =========================
+
+  const totalItems = inventory.length;
+
+  const totalStock = inventory.reduce(
+    (total, item) => total + Number(item.quantity || 0),
+    0
+  );
+
+  const lowStock = inventory.filter((item) => {
+    const quantity = Number(item.quantity || 0);
+    const reorderLevel = Number(item.reorderLevel || 0);
+
+    return quantity > 0 && quantity <= reorderLevel;
+  }).length;
+
+  const outOfStock = inventory.filter((item) => {
+    return Number(item.quantity || 0) === 0;
+  }).length;
+
+
+  // =========================
+  // Stats Configuration
+  // =========================
+
+  const stats = [
+    {
+      title: "Total Items",
+      value: totalItems,
+      subtitle: "Items in inventory",
+      icon: Boxes,
+      color: "green",
+    },
+
+    {
+      title: "Total Stock",
+      value: totalStock,
+      subtitle: "Units Available",
+      icon: Package,
+      color: "blue",
+    },
+
+    {
+      title: "Low Stock",
+      value: lowStock,
+      subtitle: "Need attention",
+      icon: AlertTriangle,
+      color: "orange",
+    },
+
+    {
+      title: "Out of Stock",
+      value: outOfStock,
+      subtitle: "Currently unavailable",
+      icon: XCircle,
+      color: "red",
+    },
+  ];
+
+
   return (
-    <div className="grid  grid-cols-2 gap-4  sm:grid-cols-2 xl:grid-cols-4">
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 xl:grid-cols-4">
 
       {stats.map((item) => {
+
         const Icon = item.icon;
         const color = colors[item.color];
 
@@ -98,6 +129,7 @@ const InventoryStats = () => {
           >
 
             {/* Top Accent */}
+
             <div
               className={`
                 absolute
@@ -105,13 +137,17 @@ const InventoryStats = () => {
                 top-0
                 h-0.5
                 w-full
+                ${color.accent}
               `}
             />
 
+
             {/* Main Content */}
+
             <div className="flex items-center justify-between gap-4">
 
               {/* Text */}
+
               <div className="min-w-0">
 
                 <p className="text-sm font-medium text-slate-500">
@@ -126,19 +162,15 @@ const InventoryStats = () => {
 
                 </div>
 
-                {item.subtitle ? (
-                  <p className="mt-0.5 text-xs text-slate-400">
-                    {item.subtitle}
-                  </p>
-                ) : (
-                  <p className="mt-0.5 text-xs text-slate-400">
-                    Current inventory
-                  </p>
-                )}
+                <p className="mt-0.5 text-xs text-slate-400">
+                  {item.subtitle}
+                </p>
 
               </div>
 
+
               {/* Icon */}
+
               <div
                 className={`
                   flex
@@ -151,15 +183,19 @@ const InventoryStats = () => {
                   ${color.iconBg}
                 `}
               >
+
                 <Icon
                   size={21}
                   className={color.iconText}
                 />
+
               </div>
 
             </div>
 
+
             {/* Bottom Information */}
+
             <div className="mt-3 flex items-center justify-between">
 
               <div
@@ -170,20 +206,24 @@ const InventoryStats = () => {
                   ${color.change}
                 `}
               >
+
                 <TrendingUp size={14} />
 
                 <span className="text-xs font-semibold">
-                  {item.change}
+                  Live
                 </span>
+
               </div>
 
               <span className="text-[11px] text-slate-400">
-                vs last month
+                Current data
               </span>
 
             </div>
 
+
             {/* Progress */}
+
             <div className="mt-3 h-1 overflow-hidden rounded-full bg-slate-100">
 
               <div
