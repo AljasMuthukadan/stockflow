@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import {
   getInventoryItems,
   createInventoryItem,
-} from "../api/inventory.api.js";
+} from "../../../api/inventory.api.js";
 
 
 const useInventory = () => {

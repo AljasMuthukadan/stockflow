@@ -1,4 +1,4 @@
-import api from  "../../../api/axios.js";
+import api from  "./axios.js";
 
 // creates inventory item
 export const createInventoryItem = async (itemData) => {
