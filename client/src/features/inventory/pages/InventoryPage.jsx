@@ -19,11 +19,12 @@ const InventoryPage = () => {
     addInventoryItem,
   } = useInventory();
 
+  // Modal Handlers
   const handleOpenModal = () => {
     setIsModalOpen(true);
     
   };
-
+ // Modal Handlers
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
