@@ -54,7 +54,7 @@ const useInventory = () => {
   }, [fetchInventory]);
 
 
-  // Add Inventory Item
+  // Add & Update Inventory Item
 
   const addInventoryItem = async (itemData) => {
 
