@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import InventoryStats from "../components/stat-card/InventoryStats";
 import InventoryFilters from "../components/search-filter/InventoryFilters";
@@ -11,7 +11,10 @@ import useInventory from "../hooks/useInventory";
 const InventoryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // ONE inventory state for this page
+  // =========================================================
+  // INVENTORY DATA
+  // =========================================================
+
   const {
     inventory,
     loading,
@@ -19,12 +22,34 @@ const InventoryPage = () => {
     addInventoryItem,
   } = useInventory();
 
-  // Modal Handlers
+  // =========================================================
+  // FILTER STATE
+  // =========================================================
+
+  const [category, setCategory] = useState("All Categories");
+
+  // =========================================================
+  // FILTER INVENTORY
+  // =========================================================
+
+  const filteredInventory = useMemo(() => {
+    if (category === "All Categories") {
+      return inventory;
+    }
+
+    return inventory.filter(
+      (item) => item.itemType === category
+    );
+  }, [inventory, category]);
+
+  // =========================================================
+  // MODAL
+  // =========================================================
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
-    
   };
- // Modal Handlers
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -52,12 +77,15 @@ const InventoryPage = () => {
 
       {/* Filters */}
 
-      <InventoryFilters inventory={inventory} />
+      <InventoryFilters
+        category={category}
+        setCategory={setCategory}
+      />
 
       {/* Table */}
 
       <InventoryTable
-        inventory={inventory}
+        inventory={filteredInventory}
         loading={loading}
       />
 
