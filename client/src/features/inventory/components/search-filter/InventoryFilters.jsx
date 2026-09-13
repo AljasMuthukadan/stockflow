@@ -5,7 +5,7 @@ import {
 import FilterHeader from "./FilterHeader";
 import InventorySearch from "./InventorySearch";
 
-const InventoryFilters = ({category, setCategory}) => {
+const InventoryFilters = ({category, setCategory, stockWise, setStockWise}) => {
 
   return (
     <div className="w-full hidden md:block ">
@@ -94,6 +94,12 @@ const InventoryFilters = ({category, setCategory}) => {
           {/* ================================================= */}
 
           <select
+            value={stockWise}
+            onChange={(e)=> {
+              setStockWise(e.target.value)
+              console.log(e.target.value)
+            
+            }}
             className="
               h-10
               w-full

@@ -27,21 +27,45 @@ const InventoryPage = () => {
   // =========================================================
 
   const [category, setCategory] = useState("All Categories");
+  const [stockWise, setStockWise] = useState("All Status");
 
   // =========================================================
   // FILTER INVENTORY
   // =========================================================
 
-  const filteredInventory = useMemo(() => {
-    if (category === "All Categories") {
-      return inventory;
-    }
+  const getStockStatus = (quantity, reorderLevel) => {
+  const stock = Number(quantity || 0);
+  const reorder = Number(reorderLevel || 0);
 
-    return inventory.filter(
-      (item) => item.itemType === category
+  if (stock === 0) {
+    return "Out of Stock";
+  }
+
+  if (stock <= reorder) {
+    return "Low Stock";
+  }
+
+  return "In Stock";
+};
+
+const filteredInventory = useMemo(() => {
+  return inventory.filter((item) => {
+    const matchesCategory =
+      category === "All Categories" ||
+      item.itemType === category;
+
+    const status = getStockStatus(
+      item.quantity,
+      item.reorderLevel
     );
-  }, [inventory, category]);
 
+    const matchesStock =
+      stockWise === "All Status" ||
+      status === stockWise;
+
+    return matchesCategory && matchesStock;
+  });
+}, [inventory, category, stockWise]);
   // =========================================================
   // MODAL
   // =========================================================
@@ -80,6 +104,8 @@ const InventoryPage = () => {
       <InventoryFilters
         category={category}
         setCategory={setCategory}
+        stockWise={stockWise}
+        setStockWise={setStockWise}
       />
 
       {/* Table */}

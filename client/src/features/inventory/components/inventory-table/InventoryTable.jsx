@@ -10,7 +10,7 @@ const badgeStyle = (status) => {
     case "Low Stock":
       return "bg-orange-50 border border-orange-200 text-orange-700 ring-1 ring-inset ring-orange-100";
 
-    case "Critical":
+    case "Out of Stock":
       return "bg-red-50 border border-red-200 text-red-700 ring-1 ring-inset ring-red-100";
 
     default:
@@ -20,7 +20,7 @@ const badgeStyle = (status) => {
 
 const getStockStatus = (quantity, reorderLevel) => {
   if (quantity === 0) {
-    return "Critical";
+    return "Out of Stock";
   }
 
   if (quantity <= reorderLevel) {
