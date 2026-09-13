@@ -1,5 +1,6 @@
 import InventoryItem from "../models/Inventory.Item.js";
 
+// Create a new inventory item Fn
 export const createInventoryItem = async (req, res) => {
   // POST /api/inventory
   console.log("Request body:", req.body); // Log the request body for debugging
@@ -36,7 +37,7 @@ export const createInventoryItem = async (req, res) => {
     });
   }
 };
-
+// Get all inventory items Fn
 export const getInventoryItems = async (req, res) => {
   // GET /api/inventory
   //  fetches all inventory items and returns them in the response.
@@ -63,7 +64,7 @@ export const getInventoryItems = async (req, res) => {
   }
 }
 
-
+// Get inventory items by category Fn
 export const getInventoryItemByCategory = async (req, res) => {
   // GET /api/inventory/category/:category
   try {
@@ -91,6 +92,7 @@ export const getInventoryItemByCategory = async (req, res) => {
   }
 };
 
+// Get inventory item by ID Fn
 export const getInventoryItemById = async (req, res) => {
   // GET /api/inventory/:id
   
@@ -120,11 +122,52 @@ export const getInventoryItemById = async (req, res) => {
     });
   }
 };
+// Update inventory item by ID Fn
 
 export const updateInventoryItem = async (req, res) => {
   // PATCH /api/inventory/:id
+  const { id } = req.params;
+  try{
+    const item = await InventoryItem.findByIdAndUpdate(id, req.body, { new: true });
+    if(!item) return res.status(404).json({
+       succes: false,
+       message : "Inventory Item Not Found"
+    })
+    return res.status(200).json({
+      success: true,
+      message: "Inventory item updated successfully",
+      data: item,
+    });
+
+  }catch(err){
+    console.error("Error updating inventory item:", err);
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while updating the inventory item",
+    });
+  }
 };
 
 export const deleteInventoryItem = async (req, res) => {
   // DELETE /api/inventory/:id
+  const { id } = req.params;
+  try{
+    const item = await InventoryItem.findByIdAndDelete(id);
+    if(!item) return res.status(404).json({
+      succes: false,
+      message : "Inventory Item Not Found"
+   })
+   return res.status(200).json({
+     success: true,
+     message: "Inventory item deleted successfully",
+     data: item,
+   });
+
+  }catch(err){
+    console.log("Error deleting inventory item:", err);
+    return res.status(500).json({
+      succes:false,
+      message:"An error occurred while deleting the inventory item"
+    });
+  }
 };
