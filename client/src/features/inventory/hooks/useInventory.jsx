@@ -1,108 +1,89 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 import {
   getInventoryItems,
   createInventoryItem,
 } from "../../../api/inventory.api.js";
 
+// Query key for inventory data
+const INVENTORY_QUERY_KEY = ["inventory"];
 
 const useInventory = () => {
+  const queryClient = useQueryClient();
 
-  const [inventory, setInventory] = useState([]);
+  // =========================================================
+  // GET INVENTORY
+  // =========================================================
 
-  const [loading, setLoading] = useState(true);
+  const {
+    data: inventory = [],
+    isLoading: loading,
+    error: queryError,
+    refetch: fetchInventory,
+  } = useQuery({
+    queryKey: INVENTORY_QUERY_KEY,
 
-  const [error, setError] = useState(null);
-
-
-  // Fetch Inventory
-
-  const fetchInventory = useCallback(async () => {
-
-    try {
-
-      setLoading(true);
-      setError(null);
-
+    queryFn: async () => {
       const response = await getInventoryItems();
 
-      setInventory(response.data);
+      return response.data;
+    },
+  });
 
-    } catch (error) {
+  // =========================================================
+  // CREATE INVENTORY ITEM
+  // =========================================================
 
-      const message =
-        error.response?.data?.message ||
-        "Failed to fetch inventory items";
+  const createMutation = useMutation({
+    mutationFn: createInventoryItem,
 
-      setError(message);
+    onSuccess: () => {
+      // Tell React Query that the cached inventory
+      // is no longer up to date.
+      queryClient.invalidateQueries({
+        queryKey: INVENTORY_QUERY_KEY,
+      });
+    },
+  });
 
-    } finally {
-
-      setLoading(false);
-
-    }
-
-  }, []);
-
-
-  // Fetch on mount
-
-  useEffect(() => {
-
-    fetchInventory();
-
-  }, [fetchInventory]);
-
-
-  // Add & Update Inventory Item
+  // =========================================================
+  // ADD INVENTORY ITEM
+  // =========================================================
 
   const addInventoryItem = async (itemData) => {
-
-    try {
-
-      setError(null);
-
-      const response = await createInventoryItem(itemData);
-
-
-      setInventory((previousInventory) => [
-        ...previousInventory,
-        response.data,
-      ]);
-
+    
+      const response = await createMutation.mutateAsync(itemData);
 
       return response.data;
-
-    } catch (error) {
-
-      const message =
-        error.response?.data?.message ||
-        "Failed to add inventory item";
-
-      setError(message);
-
-      throw error;
-
-    }
-
+   
+   
   };
 
+  // =========================================================
+  // ERROR
+  // =========================================================
+
+  const error =
+    queryError?.response?.data?.message ||
+    createMutation.error?.response?.data?.message ||
+    null;
 
   return {
-
     inventory,
-
     loading,
-
     error,
 
     fetchInventory,
 
     addInventoryItem,
 
+    // Useful later
+    isAdding: createMutation.isPending,
   };
-
 };
-
 
 export default useInventory;
