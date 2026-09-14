@@ -8,7 +8,7 @@ export const InventoryMobileView = ({ inventory, badgeStyle }) => {
 
             {inventory.map((item) => (
               <div
-                key={item.id}
+                key={item._id}
                 className="
                   p-4
                   transition-colors

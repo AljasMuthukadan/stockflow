@@ -7,6 +7,7 @@ import {
 import {
   getInventoryItems,
   createInventoryItem,
+  updateInventoryItem,
 } from "../../../api/inventory.api.js";
 
 // Query key for inventory data
@@ -62,6 +63,33 @@ const useInventory = () => {
    
    
   };
+  // =========================================================
+  // UPDATE
+  // =========================================================
+   const updateMutation = useMutation({
+    mutationFn: async ({ itemId, updatedData }) => {
+      const response = await updateInventoryItem (itemId, updatedData);
+      return response.data;
+    },
+    onSuccess: () => {
+      // Invalidate the inventory query to refetch the updated data
+      queryClient.invalidateQueries({
+        queryKey: INVENTORY_QUERY_KEY,
+      });
+    },  
+   });
+
+   const updateInventoryItemById = async (itemId, updatedData) => {
+    try{
+      const response = await updateMutation.mutateAsync({ itemId, updatedData });
+      return response.data;
+    }catch(error){
+      console.error("Error updating inventory item:", error);
+      throw error;
+    }
+   }
+
+  
 
   // =========================================================
   // ERROR
@@ -80,7 +108,7 @@ const useInventory = () => {
     fetchInventory,
 
     addInventoryItem,
-
+    updateInventoryItemById,
     // Useful later
     isAdding: createMutation.isPending,
   };

@@ -32,3 +32,14 @@ export const getInventoryItemByCategory = async (category) => {
     throw error;
   }
 };
+
+// update inventory item 
+export const updateInventoryItem = async (itemId, updatedData) => {
+  try{
+    const response = await api.put(`/api/inventory/${itemId}`,updatedData);
+    return response.data;
+  }catch(error){
+    console.error("Error updating inventory item:", error);
+    throw error;
+  }
+}
