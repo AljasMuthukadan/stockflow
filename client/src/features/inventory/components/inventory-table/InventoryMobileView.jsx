@@ -1,5 +1,4 @@
-import { MoreVertical } from "lucide-react";
-
+import ActionButton from "../../../../components/common/ActionButton";
 export const InventoryMobileView = ({ inventory, badgeStyle }) => {
   return (
      <div className="md:hidden">
@@ -59,25 +58,11 @@ export const InventoryMobileView = ({ inventory, badgeStyle }) => {
 
                   {/* Action */}
 
-                  <button
-                    type="button"
-                    aria-label={`Actions for ${item.name}`}
-                    className="
-                      flex
-                      h-9
-                      w-9
-                      shrink-0
-                      items-center
-                      justify-center
-                      rounded-lg
-                      text-slate-400
-                      transition
-                      hover:bg-slate-100
-                      hover:text-slate-700
-                    "
-                  >
-                    <MoreVertical size={18} />
-                  </button>
+                  <ActionButton
+                    item={item}
+                    onEdit={() => console.log("Edit", item)}
+                    onDelete={() => console.log("Delete", item)}
+                  />
 
                 </div>
 

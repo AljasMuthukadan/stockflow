@@ -263,7 +263,11 @@ export default function InventoryTable({
 
                         <td className="px-5 py-4">
                           <div className="flex justify-center">
-                            <ActionButton />
+                            <ActionButton 
+                              item={item}
+                              onEdit={() => console.log("Edit", item)}
+                              onDelete={() => console.log("Delete", item)}
+                            />
                           </div>
                         </td>
 
