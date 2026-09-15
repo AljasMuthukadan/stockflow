@@ -5,10 +5,9 @@ import {
   getInventoryItems,
   getInventoryItemByCategory,
   getInventoryItemById,
-  updateInventoryItem,
-  deleteInventoryItem,
-  updateItem,
   updateInventoryItemById,
+  deleteInventoryItemById,
+  updateInventoryItem,
 } from "../controllers/inventory.item.controller.js";
 
 const router = express.Router();
@@ -16,13 +15,13 @@ const router = express.Router();
 router.get("/", getInventoryItems);
 
 router.post("/", createInventoryItem);
-router.put("/", updateItem)
+router.put("/", updateInventoryItem)
 router.get("/category/:category", getInventoryItemByCategory);
 
 router.get("/:id", getInventoryItemById);
 
 router.put("/:id", updateInventoryItemById);
 
-router.delete("/:id", deleteInventoryItem);
+router.delete("/:id", deleteInventoryItemById);
 
 export default router;
