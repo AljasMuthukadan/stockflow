@@ -124,7 +124,7 @@ export const getInventoryItemById = async (req, res) => {
 };
 // Update inventory item by ID Fn
 
-export const updateInventoryItem = async (req, res) => {
+export const updateInventoryItemById = async (req, res) => {
   // PATCH /api/inventory/:id
   const { id } = req.params;
   try{
@@ -148,7 +148,7 @@ export const updateInventoryItem = async (req, res) => {
   }
 };
 
-export const deleteInventoryItem = async (req, res) => {
+export const deleteInventoryItemById = async (req, res) => {
   // DELETE /api/inventory/:id
   const { id } = req.params;
   try{
@@ -171,3 +171,10 @@ export const deleteInventoryItem = async (req, res) => {
     });
   }
 };
+
+// Update inventory item Fn
+export const updateInventoryItem = async (req, res) => {
+ const { id } = req.body;
+ console.log("Request body:", req.body); // Log the request body for debugging
+ console.log("ITEM ID:", id); 
+}

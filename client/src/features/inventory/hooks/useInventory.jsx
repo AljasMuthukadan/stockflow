@@ -10,7 +10,6 @@ import {
   updateInventoryItem,
 } from "../../../api/inventory.api.js";
 
-// Query key for inventory data
 const INVENTORY_QUERY_KEY = ["inventory"];
 
 const useInventory = () => {
@@ -43,53 +42,48 @@ const useInventory = () => {
     mutationFn: createInventoryItem,
 
     onSuccess: () => {
-      // Tell React Query that the cached inventory
-      // is no longer up to date.
       queryClient.invalidateQueries({
         queryKey: INVENTORY_QUERY_KEY,
       });
     },
   });
 
-  // =========================================================
-  // ADD INVENTORY ITEM
-  // =========================================================
-
   const addInventoryItem = async (itemData) => {
-    
-      const response = await createMutation.mutateAsync(itemData);
+    const response = await createMutation.mutateAsync(itemData);
 
-      return response.data;
-   
-   
+    return response.data;
   };
+
   // =========================================================
-  // UPDATE
+  // UPDATE INVENTORY ITEM
   // =========================================================
-   const updateMutation = useMutation({
+
+  const updateMutation = useMutation({
     mutationFn: async ({ itemId, updatedData }) => {
-      const response = await updateInventoryItem (itemId, updatedData);
+      const response = await updateInventoryItem(
+        itemId,
+        updatedData
+      );
+
       return response.data;
     },
+
     onSuccess: () => {
-      // Invalidate the inventory query to refetch the updated data
       queryClient.invalidateQueries({
         queryKey: INVENTORY_QUERY_KEY,
       });
-    },  
-   });
+    },
+  });
 
-   const updateInventoryItemById = async (itemId, updatedData) => {
-    try{
-      const response = await updateMutation.mutateAsync({ itemId, updatedData });
-      return response.data;
-    }catch(error){
-      console.error("Error updating inventory item:", error);
-      throw error;
-    }
-   }
-
-  
+  const updateInventoryItemById = (
+    itemId,
+    updatedData
+  ) => {
+    return updateMutation.mutateAsync({
+      itemId,
+      updatedData,
+    });
+  };
 
   // =========================================================
   // ERROR
@@ -98,7 +92,12 @@ const useInventory = () => {
   const error =
     queryError?.response?.data?.message ||
     createMutation.error?.response?.data?.message ||
+    updateMutation.error?.response?.data?.message ||
     null;
+
+  // =========================================================
+  // RETURN
+  // =========================================================
 
   return {
     inventory,
@@ -109,8 +108,9 @@ const useInventory = () => {
 
     addInventoryItem,
     updateInventoryItemById,
-    // Useful later
+
     isAdding: createMutation.isPending,
+    isUpdating: updateMutation.isPending,
   };
 };
 
