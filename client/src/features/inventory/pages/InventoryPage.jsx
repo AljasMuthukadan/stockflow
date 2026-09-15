@@ -20,6 +20,7 @@ const InventoryPage = () => {
     loading,
     error,
     addInventoryItem,
+    updateInventoryItemById,
   } = useInventory();
 
   // =========================================================
@@ -113,6 +114,7 @@ const filteredInventory = useMemo(() => {
       <InventoryTable
         inventory={filteredInventory}
         loading={loading}
+        onUpdateItem={updateInventoryItemById}
       />
 
       {/* Modal */}

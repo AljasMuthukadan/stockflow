@@ -33,6 +33,7 @@ const getStockStatus = (quantity, reorderLevel) => {
 export default function InventoryTable({
   inventory = [],
   loading = false,
+  onUpdateItem
 }) {
   return (
     <div className="mb-5 mt-5">
@@ -265,7 +266,9 @@ export default function InventoryTable({
                           <div className="flex justify-center">
                             <ActionButton
                               item={item}
-                              onEdit={() => console.log("Edit", item)}
+                              onEdit={() => { onUpdateItem(item._id, item); 
+                                 console.log("Edit", item)
+                              }}
                               onDelete={() => console.log("Delete", item)}
                             />
                           </div>
