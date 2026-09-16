@@ -20,7 +20,7 @@
 
   router.get("/:id", getInventoryItemById);
 
-  router.put("/:id", updateInventoryItemById);
+  router.patch("/:id", updateInventoryItemById);
 
   router.delete("/:id", deleteInventoryItemById);
 
