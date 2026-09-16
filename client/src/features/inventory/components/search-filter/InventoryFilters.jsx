@@ -1,14 +1,24 @@
-import {
-  Filter,
-  RotateCcw,
-} from "lucide-react";
+import { RotateCcw } from "lucide-react";
+
 import FilterHeader from "./FilterHeader";
 import InventorySearch from "./InventorySearch";
 
-const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searchQuery, setSearchQuery}) => {
+const InventoryFilters = ({
+  category,
+  setCategory,
+  stockWise,
+  setStockWise,
+  searchQuery,
+  setSearchQuery,
+}) => {
+  const handleReset = () => {
+    setSearchQuery("");
+    setCategory("All Categories");
+    setStockWise("All Status");
+  };
 
   return (
-    <div className="w-full hidden md:block ">
+    <div className="hidden w-full md:block">
       <div
         className="
           w-full
@@ -21,17 +31,11 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searc
           sm:p-4
         "
       >
-
-        {/* ================================================= */}
         {/* HEADER */}
-        {/* ================================================= */}
 
         <FilterHeader />
 
-
-        {/* ================================================= */}
         {/* FILTERS */}
-        {/* ================================================= */}
 
         <div
           className="
@@ -42,28 +46,18 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searc
             xl:flex-row
           "
         >
-
-          {/* ================================================= */}
           {/* SEARCH */}
-          {/* ================================================= */}
 
-          <InventorySearch 
-            searchQuery={searchQuery} 
+          <InventorySearch
+            searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
 
-
-          {/* ================================================= */}
           {/* CATEGORY */}
-          {/* ================================================= */}
 
           <select
             value={category}
-            onChange={(e)=> {
-              setCategory(e.target.value)
-              console.log(e.target.value)
-            
-            }}
+            onChange={(e) => setCategory(e.target.value)}
             className="
               h-10
               w-full
@@ -81,28 +75,20 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searc
               focus:border-emerald-500
               focus:ring-4
               focus:ring-emerald-50
-              sm:w-full
               xl:w-48
             "
           >
-            <option>All Categories</option>
-            <option>raw-material</option>
-            <option>packaging</option>
-            <option>finished-good</option>
+            <option value="All Categories">All Categories</option>
+            <option value="raw-material">Raw Material</option>
+            <option value="packaging">Packaging</option>
+            <option value="finished-good">Finished Good</option>
           </select>
 
-
-          {/* ================================================= */}
           {/* STATUS */}
-          {/* ================================================= */}
 
           <select
             value={stockWise}
-            onChange={(e)=> {
-              setStockWise(e.target.value)
-              console.log(e.target.value)
-            
-            }}
+            onChange={(e) => setStockWise(e.target.value)}
             className="
               h-10
               w-full
@@ -120,61 +106,20 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searc
               focus:border-emerald-500
               focus:ring-4
               focus:ring-emerald-50
-              sm:w-full
               xl:w-40
             "
           >
-            <option>All Status</option>
-            <option>In Stock</option>
-            <option>Low Stock</option>
-            <option>Critical</option>
-            <option>Out of Stock</option>
+            <option value="All Status">All Status</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Low Stock">Low Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
           </select>
 
-
-          {/* ================================================= */}
-          {/* APPLY */}
-          {/* ================================================= */}
-
-          <button
-            type="button"
-            className="
-              inline-flex
-              h-10
-              w-full
-              shrink-0
-              items-center
-              justify-center
-              gap-2
-              rounded-lg
-              bg-emerald-600
-              px-5
-              text-sm
-              font-semibold
-              text-white
-              shadow-sm
-              transition
-              hover:bg-emerald-700
-              active:scale-[0.98]
-              sm:w-full
-              xl:w-auto
-            "
-          >
-            <Filter size={15} />
-            Apply
-          </button>
-
-
-          {/* ================================================= */}
           {/* RESET */}
-          {/* ================================================= */}
 
           <button
             type="button"
-            onClick={() => {
-              setCategory("All Categories")
-              setStockWise("All Status")
-            }}
+            onClick={handleReset}
             className="
               inline-flex
               h-10
@@ -195,16 +140,13 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searc
               hover:bg-slate-50
               hover:text-slate-800
               active:scale-[0.98]
-              sm:w-full
               xl:w-auto
             "
           >
             <RotateCcw size={15} />
             Reset
           </button>
-
         </div>
-
       </div>
     </div>
   );

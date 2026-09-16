@@ -60,10 +60,11 @@ const InventoryPage = () => {
 
   const filteredInventory = useMemo(() => {
     return inventory.filter((item) => {
+      {/** will get matched category | matched category */}
       const matchesCategory =
         category === "All Categories" ||
         item.itemType === category;
-
+        
       const status = getStockStatus(
         item.quantity,
         item.reorderLevel
@@ -72,7 +73,7 @@ const InventoryPage = () => {
       const matchesStock =
         stockWise === "All Status" ||
         status === stockWise;
-
+      {/** search can filter  items by name. sku, item type  */}
       const matchesSearch =
         searchQuery === "" ||
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
