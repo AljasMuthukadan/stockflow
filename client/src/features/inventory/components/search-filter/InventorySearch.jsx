@@ -1,30 +1,31 @@
-import { Search } from 'lucide-react';
+import { Search } from "lucide-react";
 
-const InventorySearch = () => {
+const InventorySearch = ({ searchQuery, setSearchQuery }) => {
   return (
     <div
-            className="
+      className="
               relative
               min-w-0
               flex-1
             "
-          >
-
-            <Search
-              size={16}
-              className="
+    >
+      <Search
+        size={16}
+        className="
                 absolute
                 left-3.5
                 top-1/2
                 -translate-y-1/2
                 text-slate-400
               "
-            />
+      />
 
-            <input
-              type="text"
-              placeholder="Search by item name, SKU, category..."
-              className="
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search by item name, SKU, category..."
+        className="
                 h-10
                 w-full
                 min-w-0
@@ -44,11 +45,9 @@ const InventorySearch = () => {
                 focus:ring-4
                 focus:ring-emerald-50
               "
-            />
+      />
+    </div>
+  );
+};
 
-          </div>
-  )
-    
-}
-
-export default InventorySearch
+export default InventorySearch;

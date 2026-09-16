@@ -33,6 +33,7 @@ const InventoryPage = () => {
 
   const [category, setCategory] = useState("All Categories");
   const [stockWise, setStockWise] = useState("All Status");
+  const [searchQuery, setSearchQuery] = useState("");
 
   // =========================================================
   // STOCK STATUS
@@ -72,9 +73,15 @@ const InventoryPage = () => {
         stockWise === "All Status" ||
         status === stockWise;
 
-      return matchesCategory && matchesStock;
+      const matchesSearch =
+        searchQuery === "" ||
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.sku.includes(searchQuery) ||
+        item.itemType.includes(searchQuery);
+
+      return matchesCategory && matchesStock && matchesSearch;
     });
-  }, [inventory, category, stockWise]);
+  }, [inventory, category, stockWise, searchQuery]);
 
   // =========================================================
   // ADD ITEM
@@ -134,6 +141,8 @@ const InventoryPage = () => {
         setCategory={setCategory}
         stockWise={stockWise}
         setStockWise={setStockWise}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
 
       {/* Table */}

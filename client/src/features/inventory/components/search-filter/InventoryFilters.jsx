@@ -5,7 +5,7 @@ import {
 import FilterHeader from "./FilterHeader";
 import InventorySearch from "./InventorySearch";
 
-const InventoryFilters = ({category, setCategory, stockWise, setStockWise}) => {
+const InventoryFilters = ({category, setCategory, stockWise, setStockWise, searchQuery, setSearchQuery}) => {
 
   return (
     <div className="w-full hidden md:block ">
@@ -47,7 +47,10 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise}) => {
           {/* SEARCH */}
           {/* ================================================= */}
 
-          <InventorySearch />
+          <InventorySearch 
+            searchQuery={searchQuery} 
+            setSearchQuery={setSearchQuery}
+          />
 
 
           {/* ================================================= */}
@@ -168,6 +171,10 @@ const InventoryFilters = ({category, setCategory, stockWise, setStockWise}) => {
 
           <button
             type="button"
+            onClick={() => {
+              setCategory("All Categories")
+              setStockWise("All Status")
+            }}
             className="
               inline-flex
               h-10
