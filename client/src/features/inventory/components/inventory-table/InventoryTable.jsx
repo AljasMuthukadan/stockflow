@@ -33,7 +33,7 @@ const getStockStatus = (quantity, reorderLevel) => {
 export default function InventoryTable({
   inventory = [],
   loading = false,
-  onUpdateItem
+  onEditItem,
 }) {
   return (
     <div className="mb-5 mt-5">
@@ -44,6 +44,7 @@ export default function InventoryTable({
         <InventoryMobileView
           inventory={inventory}
           badgeStyle={badgeStyle}
+          onEditItem={onEditItem}
         />
 
         {/* Desktop Table */}
@@ -266,9 +267,7 @@ export default function InventoryTable({
                           <div className="flex justify-center">
                             <ActionButton
                               item={item}
-                              onEdit={() => { onUpdateItem(item._id, item); 
-                                 console.log("Edit", item)
-                              }}
+                              onEdit={onEditItem}
                               onDelete={() => console.log("Delete", item)}
                             />
                           </div>

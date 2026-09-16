@@ -1,5 +1,5 @@
 import ActionButton from "../../../../components/common/ActionButton";
-export const InventoryMobileView = ({ inventory, badgeStyle }) => {
+export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem }) => {
   return (
      <div className="md:hidden">
 
@@ -60,7 +60,7 @@ export const InventoryMobileView = ({ inventory, badgeStyle }) => {
 
                   <ActionButton
                     item={item}
-                    onEdit={() => console.log("Edit", item)}
+                    onEdit={onEditItem}
                     onDelete={() => console.log("Delete", item)}
                   />
 

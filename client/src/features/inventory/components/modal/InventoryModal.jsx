@@ -10,89 +10,150 @@ import HeaderSection from "./FormHeader";
 
 import Modal from "../../../../components/common/Modal";
 
+const createInitialFormData = (item) => ({
+  name: item?.name ?? "",
+  sku: item?.sku ?? "",
+  itemType: item?.itemType ?? "",
+  category: item?.category ?? "",
+  quantity: item?.quantity ?? "",
+  unit: item?.unit ?? "",
+  reorderLevel: item?.reorderLevel ?? "",
+  purchasePrice: item?.purchasePrice ?? "",
+  sellingPrice: item?.sellingPrice ?? "",
+  taxable: item?.taxable ?? true,
+  taxRate: item?.taxRate ?? 18,
+  supplier: item?.supplier ?? "",
+  supplierSku: item?.supplierSku ?? "",
+  warehouse: item?.warehouse ?? "",
+  description: item?.description ?? "",
+});
+
 export default function InventoryModal({
+  item,
   onClose,
   onAddItem,
+  onUpdateItem,
 }) {
   const [openSection, setOpenSection] = useState("basic");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    sku: "",
-    itemType: "",
-    category: "",
-    quantity: "",
-    unit: "",
-    reorderLevel: "",
-    purchasePrice: "",
-    sellingPrice: "",
-    taxable: true,
-    taxRate: 18,
-    supplier: "",
-    supplierSku: "",
-    warehouse: "",
-    description: "",
-  });
+  // =========================================================
+  // MODE
+  // =========================================================
 
-  // Handle input changes
+  const isEditMode = Boolean(item);
+
+  // =========================================================
+  // FORM DATA
+  // =========================================================
+
+  const [formData, setFormData] = useState(() =>
+    createInitialFormData(item)
+  );
+
+  // =========================================================
+  // HANDLE INPUT CHANGE
+  // =========================================================
+
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const {
+      name,
+      value,
+      type,
+      checked,
+    } = e.target;
 
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]:
+        type === "checkbox"
+          ? checked
+          : value,
     }));
   };
 
-  // Toggle form sections
+  // =========================================================
+  // TOGGLE SECTION
+  // =========================================================
+
   const toggleSection = (section) => {
     setOpenSection((prev) =>
       prev === section ? "" : section
     );
   };
 
-  // Submit form
+  // =========================================================
+  // SUBMIT
+  // =========================================================
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare data before sending to API
     const itemData = {
-      ...formData,
-
-      quantity: Number(formData.quantity),
+      name: formData.name.trim(),
+      sku: formData.sku.trim() || undefined,
+      itemType: formData.itemType,
+      category: formData.category.trim(),
+      quantity: Number(formData.quantity) || 0,
+      unit: formData.unit,
       reorderLevel: Number(formData.reorderLevel) || 0,
-      purchasePrice: Number(formData.purchasePrice) || 0,
-      sellingPrice: Number(formData.sellingPrice) || 0,
+      purchasePrice:
+        Number(formData.purchasePrice) || 0,
+      sellingPrice:
+        Number(formData.sellingPrice) || 0,
+      taxable: Boolean(formData.taxable),
       taxRate: Number(formData.taxRate) || 0,
+      supplier: formData.supplier.trim(),
+      supplierSku: formData.supplierSku.trim(),
+      warehouse: formData.warehouse.trim(),
+      description: formData.description.trim(),
     };
 
-    console.log("Sending inventory item:", itemData);
+    console.log(
+      isEditMode
+        ? "Updating inventory item:"
+        : "Creating inventory item:",
+      itemData
+    );
 
     try {
-      // Call API function from parent
-      await onAddItem(itemData);
+      if (isEditMode) {
+        // UPDATE
+        await onUpdateItem(
+          item._id,
+          itemData
+        );
+      } else {
+        // CREATE
+        await onAddItem(itemData);
+      }
 
-      // Close modal only after successful API request
+      // Only close after successful request
       onClose();
 
     } catch (error) {
       console.error(
-        "Failed to create inventory item:",
+        isEditMode
+          ? "Failed to update inventory item:"
+          : "Failed to create inventory item:",
         error.response?.data?.message ||
-        error.message
+          error.message
       );
     }
   };
 
   return (
     <Modal>
-      <HeaderSection onClose={onClose} />
+      <HeaderSection
+        onClose={onClose}
+        isEditMode={isEditMode}
+      />
 
       <form
         onSubmit={handleSubmit}
         className="flex min-h-0 flex-1 flex-col overflow-hidden"
       >
         {/* Scrollable Form Content */}
+
         <div className="flex-1 overflow-y-auto">
           <div className="space-y-2 p-4">
 
@@ -135,7 +196,10 @@ export default function InventoryModal({
           </div>
         </div>
 
-        <FormFooter onClose={onClose} />
+        <FormFooter
+          onClose={onClose}
+          isEditMode={isEditMode}
+        />
       </form>
     </Modal>
   );

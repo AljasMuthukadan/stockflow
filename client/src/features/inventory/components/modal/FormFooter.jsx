@@ -1,4 +1,4 @@
-const FormFooter = ({ onClose }) => {
+const FormFooter = ({ onClose, isEditMode }) => {
   return (
     <div className="sticky bottom-0 flex shrink-0 items-center justify-between border-t border-slate-200 bg-white px-5 py-3">
       
@@ -20,7 +20,7 @@ const FormFooter = ({ onClose }) => {
           type="submit"
           className="rounded-lg bg-emerald-600 px-5 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 active:scale-[0.98]"
         >
-          Add Item
+          {isEditMode ? "Update Item" : "Add Item"}
         </button>
 
       </div>

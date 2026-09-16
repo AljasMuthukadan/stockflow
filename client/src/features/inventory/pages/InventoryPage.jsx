@@ -11,6 +11,10 @@ import useInventory from "../hooks/useInventory";
 const InventoryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // null = Add mode
+  // item object = Edit mode
+  const [selectedItem, setSelectedItem] = useState(null);
+
   // =========================================================
   // INVENTORY DATA
   // =========================================================
@@ -31,59 +35,82 @@ const InventoryPage = () => {
   const [stockWise, setStockWise] = useState("All Status");
 
   // =========================================================
-  // FILTER INVENTORY
+  // STOCK STATUS
   // =========================================================
 
   const getStockStatus = (quantity, reorderLevel) => {
-  const stock = Number(quantity || 0);
-  const reorder = Number(reorderLevel || 0);
+    const stock = Number(quantity || 0);
+    const reorder = Number(reorderLevel || 0);
 
-  if (stock === 0) {
-    return "Out of Stock";
-  }
+    if (stock === 0) {
+      return "Out of Stock";
+    }
 
-  if (stock <= reorder) {
-    return "Low Stock";
-  }
+    if (stock <= reorder) {
+      return "Low Stock";
+    }
 
-  return "In Stock";
-};
+    return "In Stock";
+  };
 
-const filteredInventory = useMemo(() => {
-  return inventory.filter((item) => {
-    const matchesCategory =
-      category === "All Categories" ||
-      item.itemType === category;
-
-    const status = getStockStatus(
-      item.quantity,
-      item.reorderLevel
-    );
-
-    const matchesStock =
-      stockWise === "All Status" ||
-      status === stockWise;
-
-    return matchesCategory && matchesStock;
-  });
-}, [inventory, category, stockWise]);
   // =========================================================
-  // MODAL
+  // FILTER INVENTORY
   // =========================================================
 
-  const handleOpenModal = () => {
+  const filteredInventory = useMemo(() => {
+    return inventory.filter((item) => {
+      const matchesCategory =
+        category === "All Categories" ||
+        item.itemType === category;
+
+      const status = getStockStatus(
+        item.quantity,
+        item.reorderLevel
+      );
+
+      const matchesStock =
+        stockWise === "All Status" ||
+        status === stockWise;
+
+      return matchesCategory && matchesStock;
+    });
+  }, [inventory, category, stockWise]);
+
+  // =========================================================
+  // ADD ITEM
+  // =========================================================
+
+  const handleOpenAddModal = () => {
+    // No selected item = Add mode
+    setSelectedItem(null);
     setIsModalOpen(true);
   };
 
+  // =========================================================
+  // EDIT ITEM
+  // =========================================================
+
+  const handleEditItem = (item) => {
+    setSelectedItem(item);
+    setIsModalOpen(true);
+  };
+
+  // =========================================================
+  // CLOSE MODAL
+  // =========================================================
+
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setSelectedItem(null);
   };
 
   return (
     <div className="space-y-6 px-3 md:px-4 lg:px-8">
 
+      {/* Header */}
+
       <InventoryHeader
-        onAddItem={handleOpenModal}
+        onAddItem={handleOpenAddModal}
       />
 
       {/* Error */}
@@ -114,15 +141,18 @@ const filteredInventory = useMemo(() => {
       <InventoryTable
         inventory={filteredInventory}
         loading={loading}
-        onUpdateItem={updateInventoryItemById}
+        onEditItem={handleEditItem}
       />
 
-      {/* Modal */}
+      {/* Add / Edit Modal */}
 
       {isModalOpen && (
         <InventoryModal
+          key={selectedItem?._id ?? "new"}
+          item={selectedItem}
           onClose={handleCloseModal}
           onAddItem={addInventoryItem}
+          onUpdateItem={updateInventoryItemById}
         />
       )}
 

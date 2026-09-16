@@ -1,6 +1,6 @@
 import { Package, X } from 'lucide-react';
 
-const HeaderSection = ({ onClose }) => {
+const HeaderSection = ({ onClose, isEditMode }) => {
   return (
      <div className="flex shrink-0 items-center  justify-between border-b border-slate-200 px-5 py-4">
 
@@ -15,11 +15,13 @@ const HeaderSection = ({ onClose }) => {
 
             <div>
               <h2 className="text-base font-semibold text-slate-900">
-                Add Inventory Item
+                {isEditMode ? "Edit Inventory Item" : "Add Inventory Item"}
               </h2>
 
               <p className="mt-0.5 text-xs text-slate-500">
-                Add a new product or material to your inventory.
+                {isEditMode
+                  ? "Update the details of an existing inventory item."
+                  : "Add a new product or material to your inventory."}
               </p>
             </div>
 
