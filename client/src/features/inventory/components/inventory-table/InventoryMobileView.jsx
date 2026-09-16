@@ -1,11 +1,14 @@
 import ActionButton from "../../../../components/common/ActionButton";
-export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem }) => {
+export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem, getStockStatus }) => {
   return (
      <div className="md:hidden">
 
           <div className="divide-y divide-slate-100">
 
-            {inventory.map((item) => (
+            {inventory.map((item) => {
+              const status = getStockStatus(item.quantity, item.reorderLevel)
+              return(
+              
               <div
                 key={item._id}
                 className="
@@ -105,7 +108,7 @@ export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem }) => {
                     </p>
 
                     <p className="mt-0.5 text-sm font-semibold text-slate-800">
-                      {item.stock}
+                      {item.quantity}
                     </p>
                   </div>
 
@@ -131,7 +134,7 @@ export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem }) => {
                     </p>
 
                     <p className="mt-0.5 text-sm text-slate-600">
-                      {item.reorder}
+                      {item.reorderLevel}
                     </p>
                   </div>
 
@@ -152,10 +155,10 @@ export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem }) => {
                         py-1
                         text-xs
                         font-semibold
-                        ${badgeStyle(item.status)}
+                        ${badgeStyle(status)}
                       `}
                     >
-                      {item.status}
+                      {status}
                     </span>
 
                   </div>
@@ -163,7 +166,7 @@ export const InventoryMobileView = ({ inventory, badgeStyle, onEditItem }) => {
                 </div>
 
               </div>
-            ))}
+            )})}
 
           </div>
 

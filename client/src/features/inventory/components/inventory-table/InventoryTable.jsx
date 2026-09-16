@@ -45,6 +45,7 @@ export default function InventoryTable({
           inventory={inventory}
           badgeStyle={badgeStyle}
           onEditItem={onEditItem}
+          getStockStatus={getStockStatus}
         />
 
         {/* Desktop Table */}
