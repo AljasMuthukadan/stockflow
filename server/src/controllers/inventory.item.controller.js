@@ -128,7 +128,7 @@ export const updateInventoryItemById = async (req, res) => {
   // PATCH /api/inventory/:id
   const { id } = req.params;
   try{
-    const item = await InventoryItem.findByIdAndUpdate(id, req.body, { new: true });
+    const item = await InventoryItem.findByIdAndUpdate(id, req.body, { returnDocument: 'after', runValidators: true });
     if(!item) return res.status(404).json({
        succes: false,
        message : "Inventory Item Not Found"
