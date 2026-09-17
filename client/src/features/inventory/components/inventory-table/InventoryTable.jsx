@@ -1,5 +1,4 @@
 import { InventoryMobileView } from "./InventoryMobileView";
-import Pagination from "../../../../components/common/Pagination";
 import ActionButton from "../../../../components/common/ActionButton";
 
 const badgeStyle = (status) => {
@@ -51,7 +50,7 @@ export default function InventoryTable({
         {/* Desktop Table */}
 
         <div className="hidden md:block">
-          <div className="min-h-[420px] max-h-[420px] overflow-y-auto overflow-x-auto">
+          <div className="min-h-[420px] max-h-[480px] overflow-y-auto overflow-x-auto">
 
             <table className="w-full min-w-[900px]">
 
@@ -285,8 +284,6 @@ export default function InventoryTable({
 
           </div>
         </div>
-
-        <Pagination />
 
       </div>
     </div>
