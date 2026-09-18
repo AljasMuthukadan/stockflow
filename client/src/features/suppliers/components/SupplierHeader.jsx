@@ -11,7 +11,7 @@ const SupplierHeader = () => {
      <PageHeader
      title={"Suppliers"}
      actionIcon={Plus}
-     actionLabel={"Add Suppliers"}
+     actionLabel={"Add Ledger"}
      description={"Manage suppliers, sundry creditors and debtors."}
      onAction={()=>setShowModal(true)}
      />

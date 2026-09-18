@@ -3,7 +3,7 @@ import SupplierStats from "../components/stat-card/SupplierStats";
 import SupplierTable from "../components/supplier-table/SupplierTable";
 import SupplierProfile from "../components/supplier-profile/SupplierProfile";
 
-const SuppliersPage = () => {
+const LedgerPage = () => {
   return (
     <div className="min-h-full bg-gray-50 px-3 py-3 sm:px-4 md:px-5 lg:px-6">
 
@@ -56,4 +56,4 @@ const SuppliersPage = () => {
   );
 };
 
-export default SuppliersPage;
+export default LedgerPage;

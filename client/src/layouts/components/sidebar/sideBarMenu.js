@@ -22,9 +22,9 @@ export const menu = [
     path: "/dashboard/inventory",
   },
   {
-    title: "Suppliers",
+    title: "Ledgers",
     icon: Users,
-    path    : "/dashboard/suppliers",
+    path    : "/dashboard/ledgers",
   },
 
   {

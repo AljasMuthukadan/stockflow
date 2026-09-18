@@ -20,7 +20,9 @@ app.get("/api/health", (req, res) => {
 });
 
 // Routes
+// inventory routes
 app.use("/api/inventory", inventoryRoutes);
+// ledger routes
 app.use("/ledger", ledgerRoutes);
 
 export default app;

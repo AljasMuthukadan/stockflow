@@ -199,7 +199,7 @@ const SupplierModal = ({ onClose }) => {
                 sm:w-auto
               "
           >
-            Add Supplier
+            Add Ledger
           </button>
         </div>
       </form>
