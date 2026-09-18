@@ -15,7 +15,7 @@ import DashboardLayout from "../layouts/DashboardLayout.jsx";
 import DashboardPage from "../features/dashboard/pages/DashboardPage.jsx";
 import InventoryPage from "../features/inventory/pages/InventoryPage.jsx";
 import ProductionPage from "../features/production/pages/ProductionPage.jsx";
-import LedgerPage from "../features/suppliers/pages/LedgerPage.jsx";
+import LedgerPage from "../features/ledgers/pages/LedgerPage.jsx";
 import PurchaseOrdersPage from "../features/purchases/pages/PurchaseOrdersPage.jsx";
 import ReportsPage from "../features/reports/pages/ReportsPage.jsx";
 import SettingsPage from "../features/settings/pages/SettingsPage.jsx";
