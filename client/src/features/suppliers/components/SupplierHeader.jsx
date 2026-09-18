@@ -9,10 +9,10 @@ const SupplierHeader = () => {
   return (
     <>
      <PageHeader
-     title={"Suppliers"}
+     title={"Ledgers"}
      actionIcon={Plus}
      actionLabel={"Add Ledger"}
-     description={"Manage suppliers, sundry creditors and debtors."}
+     description={"Manage Ledgers, sundry creditors and debtors."}
      onAction={()=>setShowModal(true)}
      />
 
