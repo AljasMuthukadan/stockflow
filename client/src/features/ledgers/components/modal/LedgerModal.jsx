@@ -6,7 +6,7 @@ import ContactInfo from "./ContactInfo";
 import AddressInfo from "./AddressInfo";
 import SupplyInfo from "./SupplyInfo";
 
-const SupplierModal = ({ onClose }) => {
+const LedgerModal = ({ onClose }) => {
   const [formData, setFormData] = useState({
     companyName: "",
     alias: "",
@@ -207,4 +207,4 @@ const SupplierModal = ({ onClose }) => {
   );
 };
 
-export default SupplierModal;
+export default LedgerModal;

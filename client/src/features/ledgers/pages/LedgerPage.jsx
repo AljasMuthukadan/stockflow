@@ -1,9 +1,20 @@
-import SupplierHeader from "../components/SupplierHeader";
+import LedgerHeader from "../components/LedgerHeader";
 import SupplierStats from "../components/stat-card/SupplierStats";
 import SupplierTable from "../components/supplier-table/SupplierTable";
 import SupplierProfile from "../components/supplier-profile/SupplierProfile";
+import { useState } from "react";
+import LedgerModal from "../components/modal/LedgerModal";
 
 const LedgerPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+ const handleModal = ()=> {
+  setIsModalOpen(!isModalOpen);
+ }
+ const handleModalClose = () => {
+   setIsModalOpen(false);
+ }
+
   return (
     <div className="min-h-full bg-gray-50 px-3 py-3 sm:px-4 md:px-5 lg:px-6">
 
@@ -11,7 +22,7 @@ const LedgerPage = () => {
       {/* PAGE HEADER */}
       {/* ========================= */}
 
-      <SupplierHeader />
+      <LedgerHeader onAddItem={handleModal} />
 
       {/* ========================= */}
       {/* MAIN CONTENT */}
@@ -51,6 +62,9 @@ const LedgerPage = () => {
         </div>
 
       </div>
+      {isModalOpen && <LedgerModal
+       onClose={handleModalClose}
+      /> }
 
     </div>
   );
