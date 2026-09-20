@@ -4,10 +4,12 @@ import SupplierTable from "../components/supplier-table/SupplierTable";
 import SupplierProfile from "../components/supplier-profile/SupplierProfile";
 import { useState } from "react";
 import LedgerModal from "../components/modal/LedgerModal";
+import { suppliers } from "../components/supplierData";
 
 const LedgerPage = () => {
+  const [ledger, setLedger] = useState(suppliers)
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+  console.log(ledger)
  const handleModal = ()=> {
   setIsModalOpen(!isModalOpen);
  }
@@ -45,7 +47,8 @@ const LedgerPage = () => {
           {/* Supplier Table */}
 
           <div className="min-w-0">
-            <SupplierTable />
+            <SupplierTable ledger={ledger} 
+            />
           </div>
 
         </div>
@@ -64,6 +67,7 @@ const LedgerPage = () => {
       </div>
       {isModalOpen && <LedgerModal
        onClose={handleModalClose}
+       setLedger={setLedger}
       /> }
 
     </div>

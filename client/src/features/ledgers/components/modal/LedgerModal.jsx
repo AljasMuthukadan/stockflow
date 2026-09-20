@@ -7,6 +7,7 @@ import AddressInfo from "./AddressInfo";
 import SupplyInfo from "./SupplyInfo";
 
 const LedgerModal = ({ onClose }) => {
+  {/** formdata */}
   const [formData, setFormData] = useState({
     companyName: "",
     alias: "",
@@ -65,7 +66,6 @@ const LedgerModal = ({ onClose }) => {
     e.preventDefault();
 
     console.log("Supplier:", formData);
-
     // Later:
     // POST /api/suppliers
 

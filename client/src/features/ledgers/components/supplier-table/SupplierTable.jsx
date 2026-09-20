@@ -1,5 +1,3 @@
-
-import { suppliers } from "../supplierData";
 import { SupplyCategories, 
   PartyType, 
   SupplierInfo, 
@@ -112,7 +110,7 @@ const SupplierMobileCard = ({ supplier }) => {
 /* MAIN COMPONENT */
 /* ================================================= */
 
-const SupplierTable = () => {
+const SupplierTable = ({ledger}) => {
  
 
 
@@ -149,7 +147,7 @@ const SupplierTable = () => {
             scrollbar-none
           "
         >
-          {suppliers.map((supplier) => (
+          {ledger.map((supplier) => (
             <SupplierMobileCard
               key={supplier.id}
               supplier={supplier}
@@ -212,7 +210,7 @@ const SupplierTable = () => {
           {/* ================================================= */}
 
           <tbody>
-            {suppliers.map((supplier) => (
+            {ledger.map((supplier) => (
               <tr
                 key={supplier.id}
                 className="
