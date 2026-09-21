@@ -71,8 +71,8 @@ const BasicInfo = ({ toggleSection, handleChange, formData, openSection }) => {
 
             <Input
               label="Company Name"
-              name="companyName"
-              value={formData.companyName}
+              name="company"
+              value={formData.company}
               onChange={handleChange}
               placeholder="ABC Foods Pvt Ltd"
               required

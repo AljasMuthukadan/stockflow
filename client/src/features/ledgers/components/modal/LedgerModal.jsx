@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Modal from "../../../../components/common/Modal";
 import ModalHeader from "./ModalHeader";
 import BasicInfo from "./BasicInfo";
@@ -6,30 +7,30 @@ import ContactInfo from "./ContactInfo";
 import AddressInfo from "./AddressInfo";
 import SupplyInfo from "./SupplyInfo";
 
-const LedgerModal = ({ onClose }) => {
-  {/** formdata */}
-  const [formData, setFormData] = useState({
-    companyName: "",
-    alias: "",
-    supplierType: "",
-    category: "",
-    gstin: "",
-    supplierCode: "",
+const initialFormData = {
+  company: "",
+  alias: "",
+  supplierType: "",
+  category: "",
+  gstin: "",
+  supplierCode: "",
 
-    contactName: "",
-    phone: "",
-    alternatePhone: "",
-    email: "",
+  contactName: "",
+  phone: "",
+  alternatePhone: "",
+  email: "",
 
-    addressLine1: "",
-    addressLine2: "",
-    city: "",
-    state: "",
-    pinCode: "",
+  addressLine1: "",
+  addressLine2: "",
+  city: "",
+  state: "",
+  pinCode: "",
 
-    supplies: [],
-  });
+  supplies: [],
+};
 
+const LedgerModal = ({ onClose, onSubmit }) => {
+  const [formData, setFormData] = useState(initialFormData);
   const [openSection, setOpenSection] = useState("basic");
 
   const supplyOptions = [
@@ -65,118 +66,103 @@ const LedgerModal = ({ onClose }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Supplier:", formData);
-    // Later:
-    // POST /api/suppliers
+    const newLedger = {
+      ...formData,
 
+      id: crypto.randomUUID(),
+
+      // Fields expected by the table
+      company: formData.company || "Unnamed Company",
+      partyType: formData.supplierType || "Sundry Creditor",
+      supplyCategory: Array.isArray(formData.supplies)
+        ? formData.supplies
+        : [],
+
+      contact: formData.contactName || "",
+      phone: formData.phone || "",
+      email: formData.email || "",
+
+      avatar: formData.company
+        ? formData.company
+            .split(" ")
+            .map((word) => word[0])
+            .join("")
+            .slice(0, 2)
+            .toUpperCase()
+        : "NA",
+
+      avatarColor: "bg-emerald-500",
+
+      orders: 0,
+      outstanding: 0,
+      outstandingType: "Settled",
+    };
+
+    console.log("New Ledger:", newLedger);
+
+    onSubmit(newLedger);
+
+    setFormData(initialFormData);
+    setOpenSection("basic");
     onClose();
   };
 
   return (
     <Modal>
-      {/* ================================================= */}
-      {/* HEADER */}
-      {/* ================================================= */}
-
       <ModalHeader onClose={onClose} />
-
-      {/* ================================================= */}
-      {/* FORM */}
-      {/* ================================================= */}
 
       <form
         onSubmit={handleSubmit}
-        className="
-            min-h-0
-            flex-1
-            overflow-y-auto
-          "
+        className="flex min-h-0 flex-1 flex-col overflow-hidden"
       >
-        <div className="space-y-2 p-3 sm:p-4">
-          {/* ================================================= */}
-          {/* BASIC INFORMATION */}
-          {/* ================================================= */}
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <div className="space-y-2 p-3 sm:p-4">
+            <BasicInfo
+              formData={formData}
+              handleChange={handleChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
 
-          <BasicInfo
-            formData={formData}
-            handleChange={handleChange}
-            openSection={openSection}
-            toggleSection={toggleSection}
-          />
+            <ContactInfo
+              formData={formData}
+              handleChange={handleChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
 
-          {/* ================================================= */}
-          {/* CONTACT */}
-          {/* ================================================= */}
+            <AddressInfo
+              formData={formData}
+              handleChange={handleChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
 
-          <ContactInfo 
-          formData={formData}
-          handleChange={handleChange}
-          openSection={openSection}
-          toggleSection={toggleSection}
-          />
-
-          {/* ================================================= */}
-          {/* ADDRESS */}
-          {/* ================================================= */}
-
-          <AddressInfo
-          formData={formData}
-          handleChange={handleChange}
-          openSection={openSection}
-          toggleSection={toggleSection}
-          />
-
-          {/* ================================================= */}
-          {/* SUPPLY INFORMATION */}
-          {/* ================================================= */}
-          <SupplyInfo
-          formData={formData}
-          openSection={openSection}
-          supplyOptions={supplyOptions}
-          toggleSection={toggleSection}
-          toggleSupply={toggleSupply}
-          />
-          
+            <SupplyInfo
+              formData={formData}
+              openSection={openSection}
+              supplyOptions={supplyOptions}
+              toggleSection={toggleSection}
+              toggleSupply={toggleSupply}
+            />
+          </div>
         </div>
-
-        {/* ================================================= */}
-        {/* FOOTER */}
-        {/* ================================================= */}
 
         <div
           className="
-              flex
-              shrink-0
-              flex-col-reverse
-              gap-2
-              border-t
-              border-slate-100
-              bg-white
-              px-4
-              py-3
-              sm:flex-row
-              sm:items-center
-              sm:justify-end
-              sm:px-5
-            "
+            flex shrink-0 flex-col-reverse gap-2 border-t
+            border-slate-100 bg-white px-4 py-3
+            sm:flex-row sm:items-center sm:justify-end sm:px-5
+          "
         >
           <button
             type="button"
             onClick={onClose}
             className="
-                w-full
-                rounded-xl
-                border
-                border-slate-200
-                px-5
-                py-2.5
-                text-sm
-                font-medium
-                text-slate-600
-                transition
-                hover:bg-slate-50
-                sm:w-auto
-              "
+              w-full rounded-xl border border-slate-200
+              px-5 py-2.5 text-sm font-medium text-slate-600
+              transition hover:bg-slate-50 sm:w-auto
+            "
           >
             Cancel
           </button>
@@ -184,20 +170,11 @@ const LedgerModal = ({ onClose }) => {
           <button
             type="submit"
             className="
-                w-full
-                rounded-xl
-                bg-emerald-600
-                px-5
-                py-2.5
-                text-sm
-                font-semibold
-                text-white
-                shadow-sm
-                transition
-                hover:bg-emerald-700
-                active:scale-[0.98]
-                sm:w-auto
-              "
+              w-full rounded-xl bg-emerald-600 px-5 py-2.5
+              text-sm font-semibold text-white shadow-sm
+              transition hover:bg-emerald-700
+              active:scale-[0.98] sm:w-auto
+            "
           >
             Add Ledger
           </button>
