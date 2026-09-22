@@ -92,7 +92,10 @@ const SupplierMobileCard = ({ supplier }) => {
 /* DESKTOP TABLE */
 /* ================================================= */
 
-const SupplierDesktopTable = ({ ledger }) => {
+const SupplierDesktopTable = ({ ledger, setProfile }) => {
+  const handleProfile = (supplier)=> {
+    setProfile(supplier)
+  }
   return (
     <div className="h-full overflow-auto scrollbar-none">
       <table className="w-full min-w-[1050px]">
@@ -132,6 +135,7 @@ const SupplierDesktopTable = ({ ledger }) => {
           {ledger.map((supplier) => (
             <tr
               key={supplier.id}
+              onClick={()=>handleProfile(supplier)}
               className="
                 border-t
                 border-slate-200
@@ -184,7 +188,7 @@ const SupplierDesktopTable = ({ ledger }) => {
 /* MAIN COMPONENT */
 /* ================================================= */
 
-const LedgerTable = ({ ledger = [] }) => {
+const LedgerTable = ({ ledger = [] , setProfile }) => {
   return (
     <div
       className="
@@ -237,7 +241,7 @@ const LedgerTable = ({ ledger = [] }) => {
 
       <div className="hidden min-h-0 flex-1 md:block">
         {ledger.length > 0 ? (
-          <SupplierDesktopTable ledger={ledger} />
+          <SupplierDesktopTable ledger={ledger} setProfile={setProfile} />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-slate-400">
             No suppliers found

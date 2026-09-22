@@ -11,7 +11,7 @@ import { suppliers } from "../components/supplierData";
 const LedgerPage = () => {
   const [ledger, setLedger] = useState(suppliers);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectProfile, setSelectProfile] = useState(ledger[1]);
+  const [selectProfile, setSelectProfile] = useState(ledger[0]);
 
   const handleModal = () => {
     setIsModalOpen(true);
@@ -81,7 +81,7 @@ const LedgerPage = () => {
           {/* TABLE */}
 
           <div className="min-h-0 min-w-0 flex-1">
-            <LedgerTable ledger={ledger} />
+            <LedgerTable ledger={ledger} setProfile={setSelectProfile} />
           </div>
         </div>
 

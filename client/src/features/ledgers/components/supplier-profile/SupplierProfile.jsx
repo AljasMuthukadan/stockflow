@@ -5,7 +5,6 @@ import {
 import ProfileSection from "./ProfileSection";
 import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
-import { suppliers } from "../supplierData.js";
 
 
 export default function SupplierProfile({ledger}) {
