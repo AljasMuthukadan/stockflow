@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import LedgerHeader from "../components/LedgerHeader";
 import SupplierStats from "../components/stat-card/SupplierStats";
-import SupplierTable from "../components/supplier-table/SupplierTable";
+import LedgerTable from "../components/supplier-table/LedgerTable";
 import SupplierProfile from "../components/supplier-profile/SupplierProfile";
 import LedgerModal from "../components/modal/LedgerModal";
 
@@ -11,6 +11,7 @@ import { suppliers } from "../components/supplierData";
 const LedgerPage = () => {
   const [ledger, setLedger] = useState(suppliers);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectProfile, setSelectProfile] = useState(ledger[1]);
 
   const handleModal = () => {
     setIsModalOpen(true);
@@ -80,14 +81,14 @@ const LedgerPage = () => {
           {/* TABLE */}
 
           <div className="min-h-0 min-w-0 flex-1">
-            <SupplierTable ledger={ledger} />
+            <LedgerTable ledger={ledger} />
           </div>
         </div>
 
         {/* RIGHT SECTION */}
 
         <div className="hidden min-h-0 min-w-0 xl:block">
-          <SupplierProfile />
+          <SupplierProfile ledger={selectProfile} />
         </div>
       </div>
 

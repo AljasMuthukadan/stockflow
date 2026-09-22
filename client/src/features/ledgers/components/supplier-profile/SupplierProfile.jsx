@@ -5,64 +5,12 @@ import {
 import ProfileSection from "./ProfileSection";
 import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
+import { suppliers } from "../supplierData.js";
 
-const supplier = {
-  company: "ABC Foods Pvt Ltd",
-  avatar: "AF",
 
-  partyType: "Sundry Creditor",
-
-  gst: "27ABCDE1234F1Z5",
-
-  categories: [
-    "Sugar",
-    "Milk Powder",
-    "Cocoa Powder",
-  ],
-
-  outstanding: "₹85,400",
-
-  outstandingType: "Payable",
-
-  totalOrders: 42,
-
-  totalPurchase: "₹5,85,200",
-
-  contact: {
-    name: "John Mathew",
-    designation: "Manager – Sales",
-    phone: "+91 98765 43210",
-    email: "contact@abcfoods.com",
-  },
-
-  address: {
-    company: "ABC Foods Pvt Ltd",
-    address:
-      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 682017, India",
-  },
-
-  documents: [
-    {
-      name: "GST Certificate.pdf",
-      size: "2.4 MB",
-    },
-    {
-      name: "PAN Card.pdf",
-      size: "980 KB",
-    },
-    {
-      name: "Supplier Agreement.pdf",
-      size: "1.8 MB",
-    },
-  ],
-
-  notes:
-    "Reliable supplier with consistent delivery performance. Payment terms are Net 30 days. Preferred vendor for sugar and milk powder procurement.",
-};
-
-export default function SupplierProfile() {
+export default function SupplierProfile({ledger}) {
   const [activeTab, setActiveTab] = useState("overview");
-
+  console.log(ledger)
   const tabs = [
     {
       id: "overview",
@@ -93,7 +41,7 @@ export default function SupplierProfile() {
       </div>
 
       {/* Supplier Information */}
-      <ProfileSection supplier={supplier} />
+      <ProfileSection supplier={ledger} />
 
       {/* Tabs Header */}
       <TabHeader 
@@ -102,7 +50,7 @@ export default function SupplierProfile() {
         tabs={tabs}
       />
       {/* Tab Content */}
-      <TabContent supplier={supplier} setActiveTab={setActiveTab} activeTab={activeTab} />
+      <TabContent supplier={ledger} setActiveTab={setActiveTab} activeTab={activeTab} />
       
     </div>
   );

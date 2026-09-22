@@ -17,7 +17,7 @@ const ProfileSection = ({supplier}) => {
             </span>
 
             <p className="mt-1.5 text-xs text-slate-500">
-              GSTIN: {supplier.gst}
+              GSTIN: {supplier.gstin}
             </p>
           </div>
 

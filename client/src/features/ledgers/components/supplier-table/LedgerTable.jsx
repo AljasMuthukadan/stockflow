@@ -184,7 +184,7 @@ const SupplierDesktopTable = ({ ledger }) => {
 /* MAIN COMPONENT */
 /* ================================================= */
 
-const SupplierTable = ({ ledger = [] }) => {
+const LedgerTable = ({ ledger = [] }) => {
   return (
     <div
       className="
@@ -248,4 +248,4 @@ const SupplierTable = ({ ledger = [] }) => {
   );
 };
 
-export default SupplierTable;
+export default LedgerTable;

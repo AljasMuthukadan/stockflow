@@ -11,6 +11,11 @@ export const suppliers = [
       "Milk Powder",
       "Cocoa Powder",
     ],
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 682017, India",
+    },
     contact: "John Mathew",
     phone: "+91 98765 43210",
     email: "john@abcfoods.com",
@@ -24,6 +29,11 @@ export const suppliers = [
     avatar: "PP",
     avatarColor: "bg-violet-500",
     company: "PackPro Solutions",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
     gstin: "32XYZAB5678C1Z2",
     partyType: "Sundry Creditor",
     supplyCategory: [
