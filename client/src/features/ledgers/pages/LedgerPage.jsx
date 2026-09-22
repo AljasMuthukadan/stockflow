@@ -10,20 +10,16 @@ import { suppliers } from "../components/supplierData";
 
 const LedgerPage = () => {
   const [ledger, setLedger] = useState(suppliers);
-
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Open modal
   const handleModal = () => {
     setIsModalOpen(true);
   };
 
-  // Close modal
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
-  // Add new ledger
   const handleSubmit = (newLedger) => {
     setLedger((prev) => [newLedger, ...prev]);
   };
@@ -31,7 +27,11 @@ const LedgerPage = () => {
   return (
     <div
       className="
-        min-h-full
+        flex
+        h-[calc(100vh-64px)]
+        min-h-0
+        flex-col
+        overflow-hidden
         bg-gray-50
         px-3
         py-3
@@ -42,7 +42,9 @@ const LedgerPage = () => {
     >
       {/* PAGE HEADER */}
 
-      <LedgerHeader onAddItem={handleModal} />
+      <div className="shrink-0">
+        <LedgerHeader onAddItem={handleModal} />
+      </div>
 
       {/* MAIN CONTENT */}
 
@@ -50,35 +52,46 @@ const LedgerPage = () => {
         className="
           mt-3
           grid
+          min-h-0
+          flex-1
           grid-cols-1
           gap-3
+          overflow-hidden
           xl:grid-cols-[minmax(0,3fr)_minmax(280px,1fr)]
         "
       >
         {/* LEFT SECTION */}
 
-        <div className="flex min-w-0 flex-col gap-3">
-          {/* SUPPLIER STATISTICS */}
+        <div
+          className="
+            flex
+            min-h-0
+            min-w-0
+            flex-col
+            gap-3
+          "
+        >
+          {/* STATISTICS */}
 
-          <div className="min-w-0">
+          <div className="shrink-0">
             <SupplierStats />
           </div>
 
-          {/* SUPPLIER TABLE */}
+          {/* TABLE */}
 
-          <div className="min-w-0">
+          <div className="min-h-0 min-w-0 flex-1">
             <SupplierTable ledger={ledger} />
           </div>
         </div>
 
         {/* RIGHT SECTION */}
 
-        <div className="min-w-0">
+        <div className="hidden min-h-0 min-w-0 xl:block">
           <SupplierProfile />
         </div>
       </div>
 
-      {/* LEDGER MODAL */}
+      {/* MODAL */}
 
       {isModalOpen && (
         <LedgerModal

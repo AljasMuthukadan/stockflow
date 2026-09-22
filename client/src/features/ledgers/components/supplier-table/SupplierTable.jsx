@@ -1,15 +1,14 @@
-import { SupplyCategories, 
-  PartyType, 
-  SupplierInfo, 
-  ContactInfo, 
-  OutstandingInfo, 
-  OrdersInfo ,  } from "./Components";
-import ActionButton from "../../../../components/common/ActionButton"
+import {
+  SupplyCategories,
+  PartyType,
+  SupplierInfo,
+  ContactInfo,
+  OutstandingInfo,
+  OrdersInfo,
+} from "./Components";
+
+import ActionButton from "../../../../components/common/ActionButton";
 import SupplierFilters from "../SupplierFilters";
-import Pagination from "../../../../components/common/Pagination";
-
-
-
 
 /* ================================================= */
 /* MOBILE CARD */
@@ -25,23 +24,12 @@ const SupplierMobileCard = ({ supplier }) => {
         bg-white
         p-4
         shadow-sm
-        transition
-        hover:shadow-md
       "
     >
-      {/* ================================================= */}
-      {/* HEADER */}
-      {/* ================================================= */}
-
       <div className="flex min-w-0 items-start justify-between gap-3">
         <SupplierInfo supplier={supplier} />
-
         <ActionButton />
       </div>
-
-      {/* ================================================= */}
-      {/* PARTY TYPE */}
-      {/* ================================================= */}
 
       <div className="mt-4 border-t border-slate-100 pt-4">
         <p className="mb-1.5 text-xs text-slate-400">
@@ -51,25 +39,27 @@ const SupplierMobileCard = ({ supplier }) => {
         <PartyType type={supplier.partyType} />
       </div>
 
-      {/* ================================================= */}
-      {/* SUPPLIES */}
-      {/* ================================================= */}
-
       <div className="mt-4 border-t border-slate-100 pt-4">
         <p className="mb-1.5 text-xs text-slate-400">
           Supplies
         </p>
 
-        <SupplyCategories categories={supplier.supplyCategory} />
+        <SupplyCategories
+          categories={supplier.supplyCategory}
+        />
       </div>
 
-      {/* ================================================= */}
-      {/* CONTACT + ORDERS */}
-      {/* ================================================= */}
-
-      <div className="mt-4 grid grid-cols-2 gap-4 border-t border-slate-100 pt-4">
-        {/* Contact */}
-
+      <div
+        className="
+          mt-4
+          grid
+          grid-cols-2
+          gap-4
+          border-t
+          border-slate-100
+          pt-4
+        "
+      >
         <div className="min-w-0">
           <p className="mb-1.5 text-xs text-slate-400">
             Contact
@@ -77,8 +67,6 @@ const SupplierMobileCard = ({ supplier }) => {
 
           <ContactInfo supplier={supplier} />
         </div>
-
-        {/* Orders */}
 
         <div>
           <p className="mb-1.5 text-xs text-slate-400">
@@ -88,10 +76,6 @@ const SupplierMobileCard = ({ supplier }) => {
           <OrdersInfo orders={supplier.orders} />
         </div>
       </div>
-
-      {/* ================================================= */}
-      {/* OUTSTANDING */}
-      {/* ================================================= */}
 
       <div className="mt-4 border-t border-slate-100 pt-4">
         <p className="mb-1.5 text-xs text-slate-400">
@@ -104,21 +88,110 @@ const SupplierMobileCard = ({ supplier }) => {
   );
 };
 
+/* ================================================= */
+/* DESKTOP TABLE */
+/* ================================================= */
 
+const SupplierDesktopTable = ({ ledger }) => {
+  return (
+    <div className="h-full overflow-auto scrollbar-none">
+      <table className="w-full min-w-[1050px]">
+        <thead className="sticky top-0 z-10 bg-slate-50">
+          <tr className="text-left text-sm text-slate-500">
+            <th className="whitespace-nowrap px-4 py-2.5 font-semibold">
+              Supplier
+            </th>
+
+            <th className="whitespace-nowrap px-3 py-2.5 font-semibold">
+              Party Type
+            </th>
+
+            <th className="whitespace-nowrap px-3 py-2.5 font-semibold">
+              Supplies
+            </th>
+
+            <th className="whitespace-nowrap px-3 py-2.5 font-semibold">
+              Contact
+            </th>
+
+            <th className="whitespace-nowrap px-3 py-2.5 font-semibold">
+              Outstanding
+            </th>
+
+            <th className="whitespace-nowrap px-3 py-2.5 font-semibold">
+              Orders
+            </th>
+
+            <th className="whitespace-nowrap px-3 py-2.5 text-center font-semibold">
+              Actions
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {ledger.map((supplier) => (
+            <tr
+              key={supplier.id}
+              className="
+                border-t
+                border-slate-200
+                transition
+                hover:bg-slate-50
+              "
+            >
+              <td className="px-4 py-2.5">
+                <SupplierInfo supplier={supplier} />
+              </td>
+
+              <td className="px-3 py-2.5">
+                <PartyType type={supplier.partyType} />
+              </td>
+
+              <td className="w-52 px-3 py-2.5">
+                <SupplyCategories
+                  categories={supplier.supplyCategory}
+                />
+              </td>
+
+              <td className="px-3 py-2.5">
+                <ContactInfo supplier={supplier} />
+              </td>
+
+              <td className="px-3 py-2.5 text-center">
+                <div className="flex justify-center">
+                  <OutstandingInfo supplier={supplier} />
+                </div>
+              </td>
+
+              <td className="px-3 py-2.5">
+                <OrdersInfo orders={supplier.orders} />
+              </td>
+
+              <td className="px-3 py-2.5">
+                <div className="flex justify-center">
+                  <ActionButton />
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 /* ================================================= */
 /* MAIN COMPONENT */
 /* ================================================= */
 
-const SupplierTable = ({ledger}) => {
- 
-
-
-
+const SupplierTable = ({ ledger = [] }) => {
   return (
     <div
       className="
-        mb-3
+        flex
+        h-full
+        min-h-0
+        flex-col
         overflow-hidden
         rounded-2xl
         border
@@ -127,163 +200,50 @@ const SupplierTable = ({ledger}) => {
         shadow-sm
       "
     >
-      {/* ================================================= */}
       {/* FILTERS */}
-      {/* ================================================= */}
 
-      <SupplierFilters />
+      <div className="shrink-0">
+        <SupplierFilters />
+      </div>
 
-      {/* ================================================= */}
       {/* MOBILE VIEW */}
-      {/* ================================================= */}
 
-      <div className="block md:hidden">
+      <div className="min-h-0 flex-1 md:hidden">
         <div
           className="
-            max-h-[calc(100vh-330px)]
+            h-full
             space-y-3
             overflow-y-auto
             p-3
             scrollbar-none
           "
         >
-          {ledger.map((supplier) => (
-            <SupplierMobileCard
-              key={supplier.id}
-              supplier={supplier}
-            />
-          ))}
+          {ledger.length > 0 ? (
+            ledger.map((supplier) => (
+              <SupplierMobileCard
+                key={supplier.id}
+                supplier={supplier}
+              />
+            ))
+          ) : (
+            <div className="flex h-24 items-center justify-center text-sm text-slate-400">
+              No suppliers found
+            </div>
+          )}
         </div>
       </div>
 
-      {/* ================================================= */}
-      {/* TABLET + DESKTOP */}
-      {/* ================================================= */}
+      {/* DESKTOP VIEW */}
 
-      <div
-        className="
-          hidden
-          overflow-x-auto
-          scrollbar-none
-          md:block
-        "
-      >
-        <table className="w-full min-w-[1150px]">
-          {/* ================================================= */}
-          {/* HEADER */}
-          {/* ================================================= */}
-
-          <thead className="bg-slate-50">
-            <tr className="text-left text-sm text-slate-500">
-              <th className="px-6 py-3 font-semibold">
-                Supplier
-              </th>
-
-              <th className="px-4 py-3 font-semibold">
-                Party Type
-              </th>
-
-              <th className="px-3 py-3 font-semibold">
-                Supplies
-              </th>
-
-              <th className="px-4 py-3 font-semibold">
-                Contact
-              </th>
-
-              <th className="px-4 py-3 font-semibold">
-                Outstanding
-              </th>
-
-              <th className="px-4 py-3 font-semibold">
-                Orders
-              </th>
-
-              <th className="px-4 py-3 text-center font-semibold">
-                Actions
-              </th>
-            </tr>
-          </thead>
-
-          {/* ================================================= */}
-          {/* BODY */}
-          {/* ================================================= */}
-
-          <tbody>
-            {ledger.map((supplier) => (
-              <tr
-                key={supplier.id}
-                className="
-                  border-t
-                  border-slate-200
-                  transition
-                  hover:bg-slate-50
-                "
-              >
-                {/* Supplier */}
-
-                <td className="px-6 py-3">
-                  <SupplierInfo supplier={supplier} />
-                </td>
-
-                {/* Party Type */}
-
-                <td className="px-4 py-3">
-                  <PartyType
-                    type={supplier.partyType}
-                  />
-                </td>
-
-                {/* Supplies */}
-
-                <td className="w-56 px-3 py-3">
-                  <SupplyCategories
-                    categories={supplier.supplyCategory}
-                  />
-                </td>
-
-                {/* Contact */}
-
-                <td className="px-4 py-3">
-                  <ContactInfo supplier={supplier} />
-                </td>
-
-                {/* Outstanding */}
-
-                <td className="px-4 py-3 text-center">
-                  <div className="flex justify-center">
-                    <OutstandingInfo
-                      supplier={supplier}
-                    />
-                  </div>
-                </td>
-
-                {/* Orders */}
-
-                <td className="px-4 py-3">
-                  <OrdersInfo
-                    orders={supplier.orders}
-                  />
-                </td>
-
-                {/* Action */}
-
-                <td className="px-4 py-3">
-                  <div className="flex justify-center">
-                    <ActionButton />
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="hidden min-h-0 flex-1 md:block">
+        {ledger.length > 0 ? (
+          <SupplierDesktopTable ledger={ledger} />
+        ) : (
+          <div className="flex h-full items-center justify-center text-sm text-slate-400">
+            No suppliers found
+          </div>
+        )}
       </div>
-
-      {/* ================================================= */}
-      {/* PAGINATION */}
-      {/* ================================================= */}
-
-      <Pagination />
     </div>
   );
 };
