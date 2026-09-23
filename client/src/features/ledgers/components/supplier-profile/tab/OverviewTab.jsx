@@ -18,7 +18,7 @@ const OverviewTab = ({ supplier }) => {
                   </span>
 
                   <span className="text-sm font-semibold text-red-500">
-                    {supplier.outstanding} {supplier.outstandingType}
+                    {supplier.outstanding || 0} {supplier.outstandingType || ""}
                   </span>
                 </div>
 
@@ -28,7 +28,7 @@ const OverviewTab = ({ supplier }) => {
                   </span>
 
                   <span className="text-sm font-semibold text-slate-700">
-                    {supplier.totalOrders}
+                    {supplier.totalOrders || 0}
                   </span>
                 </div>
 
@@ -38,7 +38,7 @@ const OverviewTab = ({ supplier }) => {
                   </span>
 
                   <span className="text-base font-bold text-slate-800">
-                    {supplier.totalPurchase}
+                    {supplier.totalPurchase || 0}
                   </span>
                 </div>
 
@@ -61,11 +61,11 @@ const OverviewTab = ({ supplier }) => {
 
                   <div>
                     <h5 className="text-sm font-semibold text-slate-800">
-                      {supplier.contact}
+                      {supplier.contact || ""}
                     </h5>
 
                     <p className="text-xs text-slate-500">
-                      {supplier.phone}
+                      {supplier.phone || ""}
                     </p>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ const OverviewTab = ({ supplier }) => {
                   />
 
                   <span className="text-sm font-medium text-slate-700">
-                    {supplier.phone}
+                    {supplier.phone || ""}
                   </span>
                 </div>
 
@@ -88,7 +88,7 @@ const OverviewTab = ({ supplier }) => {
                   />
 
                   <span className="break-all text-sm font-medium text-slate-700">
-                    {supplier.email}
+                    {supplier.email || "not defined"}
                   </span>
                 </div>
 
@@ -111,11 +111,11 @@ const OverviewTab = ({ supplier }) => {
                 <div className="min-w-0">
 
                   <h5 className="text-sm font-semibold text-slate-800">
-                    {supplier.address.company}
+                    {supplier?.address?.company || "Not defined"}
                   </h5>
 
                   <p className="mt-1 whitespace-pre-line text-sm leading-5 text-slate-600">
-                    {supplier.address.address}
+                    {supplier?.address?.address || "Not defined"}
                   </p>
 
                 </div>

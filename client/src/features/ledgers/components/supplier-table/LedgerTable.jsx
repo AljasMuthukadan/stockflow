@@ -36,7 +36,7 @@ const SupplierMobileCard = ({ supplier }) => {
           Party Type
         </p>
 
-        <PartyType type={supplier.partyType} />
+        <PartyType type={supplier.partyType || ""} />
       </div>
 
       <div className="mt-4 border-t border-slate-100 pt-4">
@@ -45,7 +45,7 @@ const SupplierMobileCard = ({ supplier }) => {
         </p>
 
         <SupplyCategories
-          categories={supplier.supplyCategory}
+          categories={supplier.supplyCategory || ""}
         />
       </div>
 
@@ -73,7 +73,7 @@ const SupplierMobileCard = ({ supplier }) => {
             Orders
           </p>
 
-          <OrdersInfo orders={supplier.orders} />
+          <OrdersInfo orders={supplier.orders || ""} />
         </div>
       </div>
 
@@ -148,12 +148,12 @@ const SupplierDesktopTable = ({ ledger, setProfile }) => {
               </td>
 
               <td className="px-3 py-2.5">
-                <PartyType type={supplier.partyType} />
+                <PartyType type={supplier.partyType || ""} />
               </td>
 
               <td className="w-52 px-3 py-2.5">
                 <SupplyCategories
-                  categories={supplier.supplyCategory}
+                  categories={supplier.supplyCategory || ""}
                 />
               </td>
 
@@ -168,7 +168,7 @@ const SupplierDesktopTable = ({ ledger, setProfile }) => {
               </td>
 
               <td className="px-3 py-2.5">
-                <OrdersInfo orders={supplier.orders} />
+                <OrdersInfo orders={supplier.orders || ""} />
               </td>
 
               <td className="px-3 py-2.5">

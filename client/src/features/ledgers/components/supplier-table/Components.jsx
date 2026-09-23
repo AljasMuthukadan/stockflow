@@ -83,15 +83,15 @@ export const SupplierInfo = ({ supplier }) => {
 
       <div className="min-w-0">
         <h3 className="truncate font-semibold text-slate-800">
-          {supplier.company}
+          {supplier.company || ""}
         </h3>
 
         <p className="mt-0.5 truncate text-[11px] text-slate-500">
-          GSTIN : {supplier.gstin}
+          GSTIN : {supplier.gstin || ""}
         </p>
 
         <p className="truncate text-[11px] text-slate-400">
-          {supplier.city}
+          {supplier.city || ""}
         </p>
       </div>
     </div>
@@ -133,10 +133,10 @@ export const OutstandingInfo = ({ supplier }) => {
           py-1
           text-xs
           font-medium
-          ${outstandingBadge(supplier.outstandingType)}
+          ${outstandingBadge(supplier.outstandingType || 0 )}
         `}
       >
-        {supplier.outstandingType}
+        {supplier.outstandingType }
       </span>
     </div>
   );
