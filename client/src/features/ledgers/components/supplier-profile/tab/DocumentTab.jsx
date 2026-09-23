@@ -5,17 +5,17 @@ const DocumentTab = ({ supplier }) => {
 
             {supplier.documents.map((doc) => (
               <div
-                key={doc.name}
+                key={doc?.name || ""}
                 className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 px-3.5 py-2.5"
               >
 
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-slate-800">
-                    {doc.name}
+                    {doc?.name || ""}
                   </p>
 
                   <p className="mt-0.5 text-xs text-slate-500">
-                    {doc.size}
+                    {doc?.size || "0kb"}
                   </p>
                 </div>
 

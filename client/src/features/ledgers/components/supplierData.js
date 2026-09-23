@@ -54,6 +54,11 @@ export const suppliers = [
     avatarColor: "bg-blue-500",
     company: "Kerala Milk Suppliers",
     gstin: "32KLMNO1234D1Z3",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
     partyType: "Sundry Creditor",
     supplyCategory: [
       "Milk Powder",
@@ -74,6 +79,11 @@ export const suppliers = [
     avatarColor: "bg-orange-500",
     company: "Sweet Plus Ingredients",
     gstin: "29SWEET1234E1Z4",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
     partyType: "Sundry Creditor",
     supplyCategory: [
       "Flavors",
@@ -93,6 +103,11 @@ export const suppliers = [
     avatar: "XL",
     avatarColor: "bg-cyan-500",
     company: "XL Packaging",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
     gstin: "32XLPAK9876F1Z5",
     partyType: "Sundry Creditor",
     supplyCategory: [
@@ -112,6 +127,11 @@ export const suppliers = [
     id: 6,
     avatar: "RT",
     avatarColor: "bg-emerald-600",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
     company: "Retail Mart",
     gstin: "29RETAIL4455G1Z6",
     partyType: "Sundry Debtor",
@@ -127,3 +147,61 @@ export const suppliers = [
     orders: 28,
   },
 ];
+
+export const sampleData = [{
+    id: 1,
+    avatar: "RT",
+    avatarColor: "bg-emerald-600",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
+    company: "Retail Mart",
+    gstin: "29RETAIL4455G1Z6",
+    partyType: "Sundry Debtor",
+    supplyCategory: [
+      "Finished Products",
+      "Ice Cream",
+    ],
+    contactInfo: {
+      personName : "Neeraj Menon",
+      phoneNo : "+91 98899 44556",
+      designation : "Manager"
+    },
+    contact: "Neeraj Menon",
+    phone: "+91 98899 44556",
+    email: "neeraj@retailmart.com",
+    outstanding: 248600,
+    outstandingType: "Receivable",
+    orders: 28,
+  },
+  {
+    id: 2,
+    avatar: "RT",
+    avatarColor: "bg-emerald-600",
+    address: {
+    company: "ABC Foods Pvt Ltd",
+    address:
+      "No. 12, Industrial Estate, Kaloor,\nErnakulam, Kerala - 689325, India",
+    },
+    company: "Retail Mart",
+    gstin: "29RETAIL4455G1Z6",
+    partyType: "Sundry Debtor",
+    supplyCategory: [
+      "Finished Products",
+      "Ice Cream",
+    ],
+    contactInfo: {
+      personName : "Neeraj Menon",
+      phoneNo : "+91 98899 44556",
+      designation : "Manager"
+    },
+    contact: "Neeraj Menon",
+    phone: "+91 98899 44556",
+    email: "neeraj@retailmart.com",
+    outstanding: 248600,
+    outstandingType: "Receivable",
+    orders: 28,
+  }
+]

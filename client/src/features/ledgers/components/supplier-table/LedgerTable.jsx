@@ -168,7 +168,7 @@ const SupplierDesktopTable = ({ ledger, setProfile }) => {
               </td>
 
               <td className="px-3 py-2.5">
-                <OrdersInfo orders={supplier.orders || ""} />
+                <OrdersInfo orders={supplier.orders} />
               </td>
 
               <td className="px-3 py-2.5">

@@ -26,14 +26,25 @@ const ledgerSchema = new mongoose.Schema(
       uppercase: true,
     },
 
+    supplyCategory: {
+      type: [String],
+      default: [],
+    },
+
     // =========================================
     // FINANCIAL INFORMATION
     // =========================================
 
-    outstandingPayable: {
+    outstanding: {
       type: Number,
       default: 0,
       min: 0,
+    },
+
+    outstandingType: {
+      type: String,
+      enum: ["Payable", "Receivable", "Settled"],
+      default: "Settled",
     },
 
     totalOrders: {
@@ -52,57 +63,79 @@ const ledgerSchema = new mongoose.Schema(
     // CONTACT INFORMATION
     // =========================================
 
-    contactPerson: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+    contact: {
+      personName: {
+        type: String,
+        default: "",
+        trim: true,
+      },
 
-    phone: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+      phoneNo: {
+        type: String,
+        default: "",
+        trim: true,
+      },
 
-    email: {
-      type: String,
-      default: "",
-      trim: true,
-      lowercase: true,
+      designation: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+
+      email: {
+        type: String,
+        default: "",
+        trim: true,
+        lowercase: true,
+      },
     },
 
     // =========================================
     // ADDRESS
     // =========================================
 
-    buildingStreet: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+    address: {
+      company: {
+        type: String,
+        default: "",
+        trim: true,
+      },
 
-    landmark: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+      buildingStreet: {
+        type: String,
+        default: "",
+        trim: true,
+      },
 
-    place: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+      landmark: {
+        type: String,
+        default: "",
+        trim: true,
+      },
 
-    pincode: {
-      type: String,
-      default: "",
-      trim: true,
-    },
+      place: {
+        type: String,
+        default: "",
+        trim: true,
+      },
 
-    state: {
-      type: String,
-      required: true,
-      trim: true,
+      pincode: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+
+      state: {
+        type: String,
+        default: "",
+        trim: true,
+      },
+
+      country: {
+        type: String,
+        default: "India",
+        trim: true,
+      },
     },
   },
   {
