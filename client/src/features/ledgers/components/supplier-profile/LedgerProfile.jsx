@@ -7,7 +7,7 @@ import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
 
 
-export default function SupplierProfile({ledger}) {
+export default function LedgerProfile({ledger}) {
   const [activeTab, setActiveTab] = useState("overview");
   console.log(ledger)
   const tabs = [

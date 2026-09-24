@@ -26,7 +26,7 @@ const colors = {
   },
 };
 
-const SupplierStats = () => {
+const LedgerStats = () => {
   return (
 
     <div className="grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
@@ -153,4 +153,4 @@ const SupplierStats = () => {
   );
 };
 
-export default SupplierStats;
+export default LedgerStats;

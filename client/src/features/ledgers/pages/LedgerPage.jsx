@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import LedgerHeader from "../components/LedgerHeader";
-import SupplierStats from "../components/stat-card/SupplierStats";
-import LedgerTable from "../components/supplier-table/LedgerTable";
-import SupplierProfile from "../components/supplier-profile/SupplierProfile";
+import LedgerStats from "../components/card/LedgerStats";
+import LedgerTable from "../components/table/LedgerTable";
+import LedgerProfile from "../components/supplier-profile/LedgerProfile";
 import LedgerModal from "../components/modal/LedgerModal";
 
-import {  sampleData } from "../components/supplierData";
+import { sampleData } from "../components/supplierData";
 
 const LedgerPage = () => {
   const [ledger, setLedger] = useState(sampleData);
@@ -75,7 +75,7 @@ const LedgerPage = () => {
           {/* STATISTICS */}
 
           <div className="shrink-0">
-            <SupplierStats />
+            <LedgerStats />
           </div>
 
           {/* TABLE */}
@@ -88,7 +88,7 @@ const LedgerPage = () => {
         {/* RIGHT SECTION */}
 
         <div className="hidden min-h-0 min-w-0 xl:block">
-          <SupplierProfile ledger={selectProfile} />
+          <LedgerProfile ledger={selectProfile} />
         </div>
       </div>
 
