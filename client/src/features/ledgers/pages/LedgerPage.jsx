@@ -6,10 +6,10 @@ import LedgerTable from "../components/supplier-table/LedgerTable";
 import SupplierProfile from "../components/supplier-profile/SupplierProfile";
 import LedgerModal from "../components/modal/LedgerModal";
 
-import { suppliers, sampleData } from "../components/supplierData";
+import {  sampleData } from "../components/supplierData";
 
 const LedgerPage = () => {
-  const [ledger, setLedger] = useState(suppliers);
+  const [ledger, setLedger] = useState(sampleData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectProfile, setSelectProfile] = useState(ledger[0]);
 

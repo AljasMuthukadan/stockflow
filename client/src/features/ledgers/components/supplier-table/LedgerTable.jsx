@@ -102,7 +102,7 @@ const SupplierDesktopTable = ({ ledger, setProfile }) => {
         <thead className="sticky top-0 z-10 bg-slate-50">
           <tr className="text-left text-sm text-slate-500">
             <th className="whitespace-nowrap px-4 py-2.5 font-semibold">
-              Supplier
+              Ledger
             </th>
 
             <th className="whitespace-nowrap px-3 py-2.5 font-semibold">
@@ -148,12 +148,12 @@ const SupplierDesktopTable = ({ ledger, setProfile }) => {
               </td>
 
               <td className="px-3 py-2.5">
-                <PartyType type={supplier.partyType || ""} />
+                <PartyType type={supplier?.partyType || ""} />
               </td>
 
               <td className="w-52 px-3 py-2.5">
                 <SupplyCategories
-                  categories={supplier.supplyCategory || ""}
+                  categories={supplier?.supplyCategory || ""}
                 />
               </td>
 

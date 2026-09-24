@@ -61,11 +61,11 @@ const OverviewTab = ({ supplier }) => {
 
                   <div>
                     <h5 className="text-sm font-semibold text-slate-800">
-                      {supplier.contact || "Not defined"}
+                      {supplier.contactInfo.personName || "None"}
                     </h5>
 
                     <p className="text-xs text-slate-500">
-                      {supplier.phone || ""}
+                      {supplier.contactInfo.designation || ""}
                     </p>
                   </div>
                 </div>
@@ -77,7 +77,7 @@ const OverviewTab = ({ supplier }) => {
                   />
 
                   <span className="text-sm font-medium text-slate-700">
-                    {supplier.phone || ""}
+                    {supplier.contactInfo.phoneNo || ""}
                   </span>
                 </div>
 
