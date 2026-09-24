@@ -7,7 +7,7 @@ import TabHeader from "./TabHeader";
 import TabContent from "./TabContent";
 
 
-export default function LedgerProfile({ledger}) {
+export default function Ledger({ledger}) {
   const [activeTab, setActiveTab] = useState("overview");
   console.log(ledger)
   const tabs = [
@@ -26,7 +26,7 @@ export default function LedgerProfile({ledger}) {
   ];
 
   return (
-    <div className="w-full overflow-hidden mb-3 rounded-xl border border-slate-200 bg-white shadow-sm">
+    <div className="w-full  min-h-full max-h-full overflow-hidden mb-3 rounded-xl border border-slate-200 bg-white shadow-sm">
 
       {/* Header */}
       <div className="flex items-center justify-between border-b border-slate-200 px-5 py-2.5">
