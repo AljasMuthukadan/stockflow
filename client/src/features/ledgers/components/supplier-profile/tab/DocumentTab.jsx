@@ -3,7 +3,7 @@ const DocumentTab = ({ supplier }) => {
   return (
    < div className="space-y-2.5">
 
-            {supplier.documents.map((doc) => (
+            {supplier?.documents?.map((doc) => (
               <div
                 key={doc?.name || ""}
                 className="flex items-center justify-between gap-3 rounded-lg border border-slate-200 px-3.5 py-2.5"
