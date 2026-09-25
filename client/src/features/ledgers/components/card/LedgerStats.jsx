@@ -1,7 +1,9 @@
-
-import { stats} from "./data"
-
-
+import {
+  BadgeIndianRupee,
+  Building2,
+  Truck,
+  Users,
+} from "lucide-react";
 
 const colors = {
   green: {
@@ -12,35 +14,87 @@ const colors = {
   purple: {
     bg: "bg-purple-100",
     icon: "text-purple-600",
-    text: "text-red-500",
+    text: "text-purple-600",
   },
   blue: {
     bg: "bg-blue-100",
     icon: "text-blue-600",
-    text: "text-green-600",
+    text: "text-blue-600",
   },
   orange: {
     bg: "bg-orange-100",
     icon: "text-orange-600",
-    text: "text-slate-500",
+    text: "text-orange-600",
   },
 };
 
-const LedgerStats = ({ledger = []}) => {
+const LedgerStats = ({ ledger = [] }) => {
   const totalLedgers = ledger.length;
-  const sundryDebtors = ledger.filter(party => party.partyType == "Sundry Debtor");
-  const sundryCreditors = ledger.filter(party => party.partyType == "Sundry Creditor");
-  const others = ledger.filter(party => party.partyType !=="Sundry Debtor" && !"Sundry Creditor");
-  console.log("Total ledgers : ", totalLedgers);
-  console.log("Sundry Creditors :",sundryCreditors);
-  console.log("Sundry Debtors :",sundryDebtors);
-  console.log("others : ", others);
-  
-  
-  return (
 
+  const sundryDebtors = ledger.filter(
+    (party) => party.partyType === "Sundry Debtor"
+  );
+
+  const sundryCreditors = ledger.filter(
+    (party) => party.partyType === "Sundry Creditor"
+  );
+
+  const others = ledger.filter(
+    (party) =>
+      !["Sundry Debtor", "Sundry Creditor"].includes(party.partyType)
+  );
+
+  const totalPayable = sundryCreditors.reduce(
+    (total, party) => total + Number(party.outstanding || 0),
+    0
+  );
+
+  const totalReceivable = sundryDebtors.reduce(
+    (total, party) => total + Number(party.outstanding || 0),
+    0
+  );
+
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const stats = [
+    {
+      title: "Total Ledgers",
+      value: totalLedgers,
+      sub: "+8 this month",
+      icon: Users,
+      color: "green",
+    },
+    {
+      title: "Sundry Creditors",
+      value: sundryCreditors.length,
+      sub: `Payable ${formatCurrency(totalPayable)}`,
+      icon: Truck,
+      color: "purple",
+    },
+    {
+      title: "Sundry Debtors",
+      value: sundryDebtors.length,
+      sub: `Receivable ${formatCurrency(totalReceivable)}`,
+      icon: BadgeIndianRupee,
+      color: "blue",
+    },
+    {
+      title: "Other Parties",
+      value: others.length,
+      sub: "Active Parties",
+      icon: Building2,
+      color: "orange",
+    },
+  ];
+
+  return (
     <div className="grid w-full grid-cols-2 gap-3 lg:grid-cols-4">
-    
       {stats.map((item) => {
         const Icon = item.icon;
 
@@ -68,9 +122,6 @@ const LedgerStats = ({ledger = []}) => {
               lg:py-3
             "
           >
-
-            {/* Decorative Circle */}
-
             <div
               className="
                 absolute
@@ -91,14 +142,8 @@ const LedgerStats = ({ledger = []}) => {
               "
             />
 
-            {/* Content */}
-
             <div className="relative flex items-start justify-between gap-2">
-
-              {/* Text */}
-
               <div className="min-w-0">
-
                 <p className="truncate text-xs font-medium text-slate-500 sm:text-sm">
                   {item.title}
                 </p>
@@ -121,10 +166,7 @@ const LedgerStats = ({ledger = []}) => {
                 >
                   {item.sub}
                 </p>
-
               </div>
-
-              {/* Icon */}
 
               <div
                 className={`
@@ -152,13 +194,10 @@ const LedgerStats = ({ledger = []}) => {
                   `}
                 />
               </div>
-
             </div>
-
           </div>
         );
       })}
-
     </div>
   );
 };
