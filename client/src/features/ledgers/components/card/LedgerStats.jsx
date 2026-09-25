@@ -26,7 +26,17 @@ const colors = {
   },
 };
 
-const LedgerStats = () => {
+const LedgerStats = ({ledger = []}) => {
+  const totalLedgers = ledger.length;
+  const sundryDebtors = ledger.filter(party => party.partyType == "Sundry Debtor");
+  const sundryCreditors = ledger.filter(party => party.partyType == "Sundry Creditor");
+  const others = ledger.filter(party => party.partyType !=="Sundry Debtor" && !"Sundry Creditor");
+  console.log("Total ledgers : ", totalLedgers);
+  console.log("Sundry Creditors :",sundryCreditors);
+  console.log("Sundry Debtors :",sundryDebtors);
+  console.log("others : ", others);
+  
+  
   return (
 
     <div className="grid w-full grid-cols-2 gap-3 lg:grid-cols-4">

@@ -71,7 +71,7 @@ const ContactInfo = ({
             <Input
               label="Contact Person"
               name="contactName"
-              value={formData.contactName}
+              value={formData.personName}
               onChange={handleChange}
               placeholder="John Mathew"
               required
@@ -80,7 +80,7 @@ const ContactInfo = ({
             <Input
               label="Phone Number"
               name="phone"
-              value={formData.phone}
+              value={formData.phoneNo}
               onChange={handleChange}
               placeholder="+91 98765 43210"
               required

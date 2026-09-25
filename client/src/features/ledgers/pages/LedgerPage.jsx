@@ -75,7 +75,7 @@ const LedgerPage = () => {
           {/* STATISTICS */}
 
           <div className="shrink-0">
-            <LedgerStats />
+            <LedgerStats ledger={ledger} />
           </div>
 
           {/* TABLE */}

@@ -10,10 +10,10 @@ import SupplyInfo from "./SupplyInfo";
 const initialFormData = {
   company: "",
   alias: "",
-  supplierType: "",
+  partyType: "",
   category: "",
   gstin: "",
-  supplierCode: "",
+  pincode: "",
 
   contactName: "",
   phone: "",
@@ -73,7 +73,7 @@ const LedgerModal = ({ onClose, onSubmit }) => {
 
       // Fields expected by the table
       company: formData.company || "Unnamed Company",
-      partyType: formData.supplierType || "Sundry Creditor",
+      partyType: formData.partyType || "Sundry Creditor",
       supplyCategory: Array.isArray(formData.supplies)
         ? formData.supplies
         : [],
