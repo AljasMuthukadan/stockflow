@@ -3,7 +3,7 @@ import { useState } from "react";
 import LedgerHeader from "../components/LedgerHeader";
 import LedgerStats from "../components/card/LedgerStats";
 import LedgerTable from "../components/table/LedgerTable";
-import LedgerProfile from "../components/supplier-profile/LedgerProfile";
+import LedgerProfile from "../components/profile/LedgerProfile";
 import LedgerModal from "../components/modal/LedgerModal";
 
 import { sampleData } from "../components/supplierData";
