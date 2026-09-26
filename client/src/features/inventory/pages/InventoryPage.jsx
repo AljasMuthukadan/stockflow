@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 
-import InventoryStats from "../components/stat-card/InventoryStats";
-import InventoryFilters from "../components/search-filter/InventoryFilters";
-import InventoryTable from "../components/inventory-table/InventoryTable";
+import InventoryStats from "../components/card/InventoryStats";
+import InventoryFilters from "../components/filter/InventoryFilters";
+import InventoryTable from "../components/table/InventoryTable";
 import InventoryHeader from "../components/InventoryHeader";
 import InventoryModal from "../components/modal/InventoryModal";
 
