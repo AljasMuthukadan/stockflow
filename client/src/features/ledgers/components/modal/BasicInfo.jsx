@@ -128,15 +128,7 @@ const BasicInfo = ({ toggleSection, handleChange, formData, openSection }) => {
               placeholder="32ABCDE1234F1Z5"
             />
 
-            {/* Supplier Code */}
-
-            <Input
-              label="Supplier Code"
-              name="supplierCode"
-              value={formData.supplierCode}
-              onChange={handleChange}
-              placeholder="SUP-1001"
-            />
+           
           </div>
         </div>
       )}

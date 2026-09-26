@@ -13,11 +13,10 @@ const initialFormData = {
   partyType: "",
   category: "",
   gstin: "",
-  pincode: "",
 
   contactName: "",
   phone: "",
-  alternatePhone: "",
+  designation: "",
   email: "",
 
   addressLine1: "",
@@ -77,11 +76,16 @@ const LedgerModal = ({ onClose, onSubmit }) => {
       supplyCategory: Array.isArray(formData.supplies)
         ? formData.supplies
         : [],
-
-      contact: formData.contactName || "",
-      phone: formData.phone || "",
-      email: formData.email || "",
-
+      contactInfo : {
+        personName : formData.contactName,
+        phoneNo : formData.phone,
+        designation : formData?.designation || "Not specified"
+      },
+      email: formData?.email || "Not specified",
+      address : {
+        company : formData?.company,
+        address : `${formData.addressLine1}, \n${formData.addressLine2}, ${formData.city},${formData.state}-${formData.pinCode} \n Ph:${formData.phone} `
+      },
       avatar: formData.company
         ? formData.company
             .split(" ")
@@ -90,6 +94,7 @@ const LedgerModal = ({ onClose, onSubmit }) => {
             .slice(0, 2)
             .toUpperCase()
         : "NA",
+      
 
       avatarColor: "bg-emerald-500",
 

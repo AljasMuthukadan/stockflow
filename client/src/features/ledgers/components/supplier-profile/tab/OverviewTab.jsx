@@ -65,7 +65,7 @@ const OverviewTab = ({ supplier }) => {
                     </h5>
 
                     <p className="text-xs text-slate-500">
-                      {supplier.contactInfo.designation || ""}
+                      {supplier?.contactInfo?.designation || ""}
                     </p>
                   </div>
                 </div>

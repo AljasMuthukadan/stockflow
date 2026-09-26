@@ -58,6 +58,10 @@ const ledgerSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
+    profile : {
+      type : String,
+      default:""
+    },
 
     // =========================================
     // CONTACT INFORMATION

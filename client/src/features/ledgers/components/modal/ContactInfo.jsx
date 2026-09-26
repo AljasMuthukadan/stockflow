@@ -96,11 +96,11 @@ const ContactInfo = ({
             />
 
             <Input
-              label="Alternate Phone"
-              name="alternatePhone"
-              value={formData.alternatePhone}
+              label="Designation"
+              name="designation"
+              value={formData.designation}
               onChange={handleChange}
-              placeholder="+91 98765 43210"
+              placeholder="Manager"
             />
           </div>
         </div>
