@@ -6,14 +6,14 @@ const ledgerSchema = new mongoose.Schema(
     // BASIC INFORMATION
     // =========================================
 
-    name: {
+    company: {
       type: String,
       required: true,
       unique: true,
       trim: true,
     },
 
-    type: {
+    partyType: {
       type: String,
       enum: ["Sundry Debtor", "Sundry Creditor"],
       required: true,
@@ -24,11 +24,6 @@ const ledgerSchema = new mongoose.Schema(
       default: "",
       trim: true,
       uppercase: true,
-    },
-
-    supplyCategory: {
-      type: [String],
-      default: [],
     },
 
     // =========================================
@@ -47,7 +42,7 @@ const ledgerSchema = new mongoose.Schema(
       default: "Settled",
     },
 
-    totalOrders: {
+    orders: {
       type: Number,
       default: 0,
       min: 0,
@@ -105,25 +100,25 @@ const ledgerSchema = new mongoose.Schema(
         trim: true,
       },
 
-      buildingStreet: {
+      line1: {
         type: String,
         default: "",
         trim: true,
       },
 
-      landmark: {
+      line2: {
+        type : String,
+        default : "",
+        trim: true
+      },
+
+      city: {
         type: String,
         default: "",
         trim: true,
       },
 
-      place: {
-        type: String,
-        default: "",
-        trim: true,
-      },
-
-      pincode: {
+      pinCode: {
         type: String,
         default: "",
         trim: true,
@@ -140,6 +135,10 @@ const ledgerSchema = new mongoose.Schema(
         default: "India",
         trim: true,
       },
+      address : {
+        type : String,
+        default : "",
+      }
     },
   },
   {
@@ -150,3 +149,4 @@ const ledgerSchema = new mongoose.Schema(
 const Ledger = mongoose.model("Ledger", ledgerSchema);
 
 export default Ledger;
+
