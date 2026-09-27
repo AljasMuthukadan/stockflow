@@ -1,5 +1,4 @@
 import {
-  SupplyCategories,
   PartyType,
   SupplierInfo,
   ContactInfo,
@@ -44,9 +43,7 @@ const SupplierMobileCard = ({ supplier }) => {
           Supplies
         </p>
 
-        <SupplyCategories
-          categories={supplier.supplyCategory || ""}
-        />
+       
       </div>
 
       <div
@@ -152,9 +149,7 @@ const SupplierDesktopTable = ({ ledger, setProfile }) => {
               </td>
 
               <td className="w-52 px-3 py-2.5">
-                <SupplyCategories
-                  categories={supplier?.supplyCategory || ""}
-                />
+                {/** Empty space */}
               </td>
 
               <td className="px-3 py-2.5">

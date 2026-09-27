@@ -5,7 +5,7 @@ import ModalHeader from "./ModalHeader";
 import BasicInfo from "./BasicInfo";
 import ContactInfo from "./ContactInfo";
 import AddressInfo from "./AddressInfo";
-import SupplyInfo from "./SupplyInfo";
+import ProfileImage from "./ProfileImage";
 
 const initialFormData = {
   company: "",
@@ -13,6 +13,8 @@ const initialFormData = {
   partyType: "",
   category: "",
   gstin: "",
+
+  image: null,
 
   contactName: "",
   phone: "",
@@ -24,21 +26,11 @@ const initialFormData = {
   city: "",
   state: "",
   pinCode: "",
-
-  supplies: [],
 };
 
 const LedgerModal = ({ onClose, onSubmit }) => {
   const [formData, setFormData] = useState(initialFormData);
   const [openSection, setOpenSection] = useState("basic");
-
-  const supplyOptions = [
-    "Raw Materials",
-    "Packaging",
-    "Finished Goods",
-    "Equipment",
-    "Services",
-  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,43 +41,47 @@ const LedgerModal = ({ onClose, onSubmit }) => {
     }));
   };
 
-  const toggleSection = (section) => {
-    setOpenSection((prev) => (prev === section ? "" : section));
-  };
-
-  const toggleSupply = (supply) => {
+  const handleImageChange = (file) => {
     setFormData((prev) => ({
       ...prev,
-      supplies: prev.supplies.includes(supply)
-        ? prev.supplies.filter((item) => item !== supply)
-        : [...prev.supplies, supply],
+      image: file,
     }));
+  };
+
+  const toggleSection = (section) => {
+    setOpenSection((prev) => (prev === section ? "" : section));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const newLedger = {
-      ...formData,
-
       id: crypto.randomUUID(),
 
-      // Fields expected by the table
       company: formData.company || "Unnamed Company",
-      partyType: formData.partyType || "Sundry Creditor",
-      supplyCategory: Array.isArray(formData.supplies)
-        ? formData.supplies
-        : [],
-      contactInfo : {
-        personName : formData.contactName,
-        phoneNo : formData.phone,
-        designation : formData?.designation || "Not specified"
+      alias: formData.alias || "",
+      partyType: formData.partyType || "Other",
+      category: formData.category || "",
+      gstin: formData.gstin || "",
+
+      image: formData.image ? URL.createObjectURL(formData.image) : null,
+
+      contactInfo: {
+        personName: formData.contactName || "",
+        phoneNo: formData.phone || "",
+        designation: formData.designation || "",
+        email: formData.email || "",
       },
-      email: formData?.email || "Not specified",
-      address : {
-        company : formData?.company,
-        address : `${formData.addressLine1}, \n${formData.addressLine2}, ${formData.city},${formData.state}-${formData.pinCode} \n Ph:${formData.phone} `
+
+      address: {
+        line1: formData.addressLine1 || "",
+        line2: formData.addressLine2 || "",
+        city: formData.city || "",
+        state: formData.state || "",
+        postalCode: formData.pinCode || "",
+        country: "India",
       },
+
       avatar: formData.company
         ? formData.company
             .split(" ")
@@ -94,7 +90,6 @@ const LedgerModal = ({ onClose, onSubmit }) => {
             .slice(0, 2)
             .toUpperCase()
         : "NA",
-      
 
       avatarColor: "bg-emerald-500",
 
@@ -143,12 +138,11 @@ const LedgerModal = ({ onClose, onSubmit }) => {
               toggleSection={toggleSection}
             />
 
-            <SupplyInfo
+            <ProfileImage
               formData={formData}
+              handleImageChange={handleImageChange}
               openSection={openSection}
-              supplyOptions={supplyOptions}
               toggleSection={toggleSection}
-              toggleSupply={toggleSupply}
             />
           </div>
         </div>

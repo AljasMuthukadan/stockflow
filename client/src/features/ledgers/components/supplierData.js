@@ -3,6 +3,7 @@ export const sampleData = [
     id: 1,
     avatar: "RT",
     avatarColor: "bg-emerald-600",
+    image:null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -27,6 +28,7 @@ export const sampleData = [
     id: 2,
     avatar: "GF",
     avatarColor: "bg-blue-600",
+    image: null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -51,6 +53,7 @@ export const sampleData = [
     id: 3,
     avatar: "KS",
     avatarColor: "bg-purple-600",
+    image: null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -75,6 +78,7 @@ export const sampleData = [
     id: 4,
     avatar: "FM",
     avatarColor: "bg-orange-600",
+    image: null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -99,6 +103,7 @@ export const sampleData = [
     id: 5,
     avatar: "RS",
     avatarColor: "bg-red-600",
+    image : null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -123,6 +128,7 @@ export const sampleData = [
     id: 6,
     avatar: "DM",
     avatarColor: "bg-cyan-600",
+    image : null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -147,6 +153,7 @@ export const sampleData = [
     id: 7,
     avatar: "SM",
     avatarColor: "bg-pink-600",
+    image : null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -171,6 +178,7 @@ export const sampleData = [
     id: 8,
     avatar: "KF",
     avatarColor: "bg-yellow-600",
+    image : null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -195,6 +203,7 @@ export const sampleData = [
     id: 9,
     avatar: "SP",
     avatarColor: "bg-indigo-600",
+    image : null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
@@ -219,6 +228,7 @@ export const sampleData = [
     id: 10,
     avatar: "MF",
     avatarColor: "bg-teal-600",
+    image : null,
     address: {
       company: "ABC Foods Pvt Ltd",
       address:
