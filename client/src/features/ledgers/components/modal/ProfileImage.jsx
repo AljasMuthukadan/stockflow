@@ -1,142 +1,186 @@
-import { useRef } from "react";
-import { Camera, ChevronDown, ImagePlus, X } from "lucide-react";
+import { useState } from "react";
 
-const ProfileImage = ({
-  formData,
-  handleImageChange,
-  toggleSection,
-  openSection,
-}) => {
-  const fileInputRef = useRef(null);
+import Modal from "../../../../components/common/Modal";
+import ModalHeader from "./ModalHeader";
+import BasicInfo from "./BasicInfo";
+import ContactInfo from "./ContactInfo";
+import AddressInfo from "./AddressInfo";
+import ProfileImage from "./ProfileImage";
 
-  const handleSelectImage = () => {
-    fileInputRef.current?.click();
+const initialFormData = {
+  company: "",
+  alias: "",
+  partyType: "",
+  category: "",
+  gstin: "",
+
+  image: null,
+
+  contactName: "",
+  phone: "",
+  designation: "",
+  email: "",
+
+  addressLine1: "",
+  addressLine2: "",
+  city: "",
+  state: "",
+  pinCode: "",
+};
+
+const LedgerModal = ({ onClose, onSubmit }) => {
+  const [formData, setFormData] = useState(initialFormData);
+  const [openSection, setOpenSection] = useState("basic");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleRemoveImage = () => {
-    handleImageChange(null);
+  const handleImageChange = (file) => {
+    setFormData((prev) => ({
+      ...prev,
+      image: file,
+    }));
+  };
+
+  const toggleSection = (section) => {
+    setOpenSection((prev) => (prev === section ? "" : section));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newLedger = {
+      id: crypto.randomUUID(),
+
+      company: formData.company || "Unnamed Company",
+      alias: formData.alias || "",
+      partyType: formData.partyType || "Other",
+      category: formData.category || "",
+      gstin: formData.gstin || "",
+
+      image: formData.image,
+
+      contactInfo: {
+        personName: formData.contactName || "",
+        phoneNo: formData.phone || "",
+        designation: formData.designation || "",
+        email: formData.email || "",
+      },
+
+      address: {
+        line1: formData.addressLine1 || "",
+        line2: formData.addressLine2 || "",
+        city: formData.city || "",
+        state: formData.state || "",
+        postalCode: formData.pinCode || "",
+        country: "India",
+      },
+
+      avatar: formData.company
+        ? formData.company
+            .split(" ")
+            .map((word) => word[0])
+            .join("")
+            .slice(0, 2)
+            .toUpperCase()
+        : "NA",
+
+      avatarColor: "bg-emerald-500",
+
+      orders: 0,
+      outstanding: 0,
+      outstandingType: "Settled",
+    };
+
+    console.log("New Ledger:", newLedger);
+
+    onSubmit(newLedger);
+
+    setFormData(initialFormData);
+    setOpenSection("basic");
+    onClose();
   };
 
   return (
-    <section className="overflow-hidden rounded-xl border border-slate-200">
-      {/* Header */}
-      <button
-        type="button"
-        onClick={() => toggleSection("profileImage")}
-        className="
-          flex w-full items-center justify-between
-          px-4 py-3 text-left
-          transition hover:bg-slate-50
-        "
+    <Modal>
+      <ModalHeader onClose={onClose} />
+
+      <form
+        onSubmit={handleSubmit}
+        className="flex min-h-0 flex-1 flex-col overflow-hidden"
       >
-        <div className="flex items-center gap-3">
-          <div
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          <div className="space-y-2 p-3 sm:p-4">
+            <BasicInfo
+              formData={formData}
+              handleChange={handleChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
+
+            <ContactInfo
+              formData={formData}
+              handleChange={handleChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
+
+            <AddressInfo
+              formData={formData}
+              handleChange={handleChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
+
+            <ProfileImage
+              formData={formData}
+              handleImageChange={handleImageChange}
+              openSection={openSection}
+              toggleSection={toggleSection}
+            />
+          </div>
+        </div>
+
+        <div
+          className="
+            flex shrink-0 flex-col-reverse gap-2 border-t
+            border-slate-100 bg-white px-4 py-3
+            sm:flex-row sm:items-center sm:justify-end sm:px-5
+          "
+        >
+          <button
+            type="button"
+            onClick={onClose}
             className="
-              flex h-8 w-8 items-center justify-center
-              rounded-lg bg-emerald-50
+              w-full rounded-xl border border-slate-200
+              px-5 py-2.5 text-sm font-medium text-slate-600
+              transition hover:bg-slate-50 sm:w-auto
             "
           >
-            <Camera size={16} className="text-emerald-600" />
-          </div>
+            Cancel
+          </button>
 
-          <div>
-            <h3 className="text-sm font-semibold text-slate-800">
-              Profile Image
-            </h3>
-
-            <p className="text-xs text-slate-400">
-              Add a logo or profile image
-            </p>
-          </div>
+          <button
+            type="submit"
+            className="
+              w-full rounded-xl bg-emerald-600 px-5 py-2.5
+              text-sm font-semibold text-white shadow-sm
+              transition hover:bg-emerald-700
+              active:scale-[0.98] sm:w-auto
+            "
+          >
+            Add Ledger
+          </button>
         </div>
-
-        <ChevronDown
-          size={17}
-          className={`
-            text-slate-400 transition-transform
-            ${openSection === "profileImage" ? "rotate-180" : ""}
-          `}
-        />
-      </button>
-
-      {/* Content */}
-      {openSection === "profileImage" && (
-        <div className="border-t border-slate-100 p-4">
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
-            onChange={(e) =>
-              handleImageChange(e.target.files?.[0] || null)
-            }
-            className="hidden"
-          />
-
-          <div className="flex flex-col items-center gap-4 sm:flex-row">
-            {/* Image Preview */}
-            <div
-              className="
-                relative flex h-24 w-24 shrink-0
-                items-center justify-center
-                overflow-hidden rounded-2xl
-                border border-dashed border-slate-300
-                bg-slate-50
-              "
-            >
-              {formData.image ? (
-                <>
-                  <img
-                    src={URL.createObjectURL(formData.image)}
-                    alt="Ledger preview"
-                    className="h-full w-full object-cover"
-                  />
-
-                  <button
-                    type="button"
-                    onClick={handleRemoveImage}
-                    className="
-                      absolute right-1.5 top-1.5
-                      flex h-6 w-6 items-center justify-center
-                      rounded-full bg-black/60
-                      text-white transition
-                      hover:bg-black/80
-                    "
-                  >
-                    <X size={13} />
-                  </button>
-                </>
-              ) : (
-                <ImagePlus size={28} className="text-slate-400" />
-              )}
-            </div>
-
-            {/* Upload Controls */}
-            <div className="min-w-0">
-              <button
-                type="button"
-                onClick={handleSelectImage}
-                className="
-                  inline-flex items-center gap-2
-                  rounded-lg border border-slate-200
-                  bg-white px-3 py-2
-                  text-sm font-medium text-slate-700
-                  transition hover:bg-slate-50
-                "
-              >
-                <ImagePlus size={16} />
-
-                {formData.image ? "Change Image" : "Upload Image"}
-              </button>
-
-              <p className="mt-2 text-xs text-slate-400">
-                PNG, JPG or WebP. Recommended size: 256 × 256px.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-    </section>
+      </form>
+    </Modal>
   );
 };
 
-export default ProfileImage;
+export default LedgerModal;
