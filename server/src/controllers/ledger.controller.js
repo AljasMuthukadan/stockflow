@@ -1,17 +1,27 @@
-import mongoose from 'mongoose'
+import Ledger from '../models/ledger.data';
 
+export const addLedger = async(req, res) => {
+  const {company, partyType} = req.body;
+  console.log("Req Body :", req.body);
 
-export const addLedger = async (req, res)=> {
-    console.log(req.body)
-    const {name,type}  = req.body;
-    if(!name || !type){
-        res.status(400).json({
-            message:"Please Fill all data",
-            succes:false
+  if(!company || !partyType) return res.status(400).json({
+    message : "Please provide all values",
+    succes : false,
+  });
+  try{
+    const newLedger = await Ledger.create(req.body);
+    return res.status(201).json({
+        message : "Ledger Succesfully Created",
+        Ledger : newLedger,
+        success : false
+    })
 
-        });
-    }
-    console.log("Success")
-
-
+  }catch(err){
+    console.error("Error ", err);
+   return res.status(500).json({
+        message: "Invernal server error",
+        succes : false
+    });
+  }
+    
 }
