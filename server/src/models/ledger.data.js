@@ -58,7 +58,7 @@ const ledgerSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
-    profile : {
+    image : {
       type : String,
       default:""
     },
@@ -67,7 +67,7 @@ const ledgerSchema = new mongoose.Schema(
     // CONTACT INFORMATION
     // =========================================
 
-    contact: {
+    contactInfo: {
       personName: {
         type: String,
         default: "",

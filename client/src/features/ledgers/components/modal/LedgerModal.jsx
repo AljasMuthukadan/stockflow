@@ -20,7 +20,7 @@ const initialFormData = {
   phone: "",
   designation: "",
   email: "",
-
+  country :"India",
   addressLine1: "",
   addressLine2: "",
   city: "",
@@ -78,8 +78,10 @@ const LedgerModal = ({ onClose, onSubmit }) => {
         line2: formData.addressLine2 || "",
         city: formData.city || "",
         state: formData.state || "",
-        postalCode: formData.pinCode || "",
+        pinCode: formData.pinCode || "",
         country: "India",
+        company : formData.company,
+        address : `${formData.line1},\n ${formData.addressLine2}\n ${formData.city}, ${formData.state}-${formData.pinCode}, ${formData.country}`
       },
 
       avatar: formData.company
