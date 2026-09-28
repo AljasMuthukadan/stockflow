@@ -1,4 +1,4 @@
-import Ledger from '../models/ledger.data';
+import Ledger from '../models/ledger.data.js';
 
 export const addLedger = async(req, res) => {
   const {company, partyType} = req.body;
