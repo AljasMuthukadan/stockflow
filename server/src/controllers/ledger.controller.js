@@ -20,8 +20,24 @@ export const addLedger = async(req, res) => {
     console.error("Error ", err);
    return res.status(500).json({
         message: "Invernal server error",
-        succes : false
+        succes : false,
+        error : err
     });
   }
     
+}
+
+export const getAllLedgers = async (req, res) => {
+  try{
+   const ledgers = await Ledger.find();
+  }catch(error){
+    console.log(error);
+    
+    return res.status(500).json({
+        message: "Invernal server error",
+        succes : false,
+        error : error
+    });
+
+  }
 }
