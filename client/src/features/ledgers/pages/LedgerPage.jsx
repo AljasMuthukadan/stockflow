@@ -7,8 +7,9 @@ import LedgerProfile from "../components/profile/LedgerProfile";
 import LedgerModal from "../components/modal/LedgerModal";
 
 import { sampleData } from "../components/supplierData";
-
+import useLedger from "../hooks/useLedger";
 const LedgerPage = () => {
+  const { addLedger } = useLedger();
   const [ledger, setLedger] = useState(sampleData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectProfile, setSelectProfile] = useState(ledger[0]);
@@ -97,7 +98,7 @@ const LedgerPage = () => {
       {isModalOpen && (
         <LedgerModal
           onClose={handleModalClose}
-          onSubmit={handleSubmit}
+          onSubmit={addLedger}
         />
       )}
     </div>
