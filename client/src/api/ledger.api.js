@@ -18,7 +18,7 @@ export const getLedgers = async() => {
     const response = await api.get("/api/ledger");
     console.log("response : ", response)
     console.log("RESPONSE DATA", response.data)
-    return response.data()
+    return response.data;
   }catch(error){
     console.error("Failed to get ledger data", error);
     throw error;

@@ -30,13 +30,22 @@ export const addLedger = async(req, res) => {
 export const getAllLedgers = async (req, res) => {
   try{
    const ledgers = await Ledger.find();
+   if(ledgers.length == 0) return res.status(404).json({
+    message : "No ledgers",
+    success : false
+   })
+   return res.status(200).json({
+    message:"ledgers fetched successfully",
+    Ledgers : ledgers
+   });
+   
   }catch(error){
     console.log(error);
     
     return res.status(500).json({
         message: "Invernal server error",
         succes : false,
-        error : error
+        error : error,
     });
 
   }
