@@ -19,7 +19,7 @@ const ContactTab = ({ supplier }) => {
 
                   <div>
                     <p className="text-sm font-semibold text-slate-800">
-                      {supplier.contactInfo.personName}
+                      {supplier?.contactInfo?.personName}
                     </p>
 
                     <p className="text-xs text-slate-500">
@@ -46,7 +46,7 @@ const ContactTab = ({ supplier }) => {
                   />
 
                   <span className="break-all text-sm text-slate-700">
-                    {supplier?.email}
+                    {supplier?.contactInfo?.email}
                   </span>
                 </div>
 
