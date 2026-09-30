@@ -91,8 +91,8 @@ const BasicInfo = ({ toggleSection, handleChange, formData, openSection }) => {
             {/* Supplier Type */}
 
             <SelectField
-              label="Supplier Type"
-              name="supplierType"
+              label="Party Type"
+              name="partyType"
               value={formData.partyType}
               onChange={handleChange}
               required

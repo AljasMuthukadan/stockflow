@@ -81,7 +81,7 @@ const LedgerModal = ({ onClose, onSubmit }) => {
         pinCode: formData.pinCode || "",
         country: "India",
         company : formData.company,
-        address : `${formData.line1},\n ${formData.addressLine2}\n ${formData.city}, ${formData.state}-${formData.pinCode}, ${formData.country}`
+        address : `${formData.addressLine1},\n ${formData.addressLine2}\n ${formData.city}, ${formData.state}-${formData.pinCode}, ${formData.country}`
       },
 
       avatar: formData.company
