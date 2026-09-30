@@ -18,7 +18,7 @@ const OverviewTab = ({ supplier }) => {
                   </span>
 
                   <span className="text-sm font-semibold text-red-500">
-                    {supplier.outstanding || 0} {supplier.outstandingType || ""}
+                    {supplier?.outstanding || 0} {supplier?.outstandingType || ""}
                   </span>
                 </div>
 
@@ -28,7 +28,7 @@ const OverviewTab = ({ supplier }) => {
                   </span>
 
                   <span className="text-sm font-semibold text-slate-700">
-                    {supplier.totalOrders || 0}
+                    {supplier?.totalOrders || 0}
                   </span>
                 </div>
 
@@ -38,7 +38,7 @@ const OverviewTab = ({ supplier }) => {
                   </span>
 
                   <span className="text-base font-bold text-slate-800">
-                    {supplier.totalPurchase || 0}
+                    {supplier?.totalPurchase || 0}
                   </span>
                 </div>
 
@@ -61,7 +61,7 @@ const OverviewTab = ({ supplier }) => {
 
                   <div>
                     <h5 className="text-sm font-semibold text-slate-800">
-                      {supplier.contactInfo.personName || "None"}
+                      {supplier?.contactInfo?.personName || "None"}
                     </h5>
 
                     <p className="text-xs text-slate-500">
@@ -77,7 +77,7 @@ const OverviewTab = ({ supplier }) => {
                   />
 
                   <span className="text-sm font-medium text-slate-700">
-                    {supplier.contactInfo.phoneNo || ""}
+                    {supplier?.contactInfo?.phoneNo || ""}
                   </span>
                 </div>
 
@@ -88,7 +88,7 @@ const OverviewTab = ({ supplier }) => {
                   />
 
                   <span className="break-all text-sm font-medium text-slate-700">
-                    {supplier.email || "not defined"}
+                    {supplier?.contactInfo?.email || "not defined"}
                   </span>
                 </div>
 

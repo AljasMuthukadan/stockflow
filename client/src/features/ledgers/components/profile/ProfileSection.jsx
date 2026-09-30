@@ -4,20 +4,20 @@ const ProfileSection = ({supplier}) => {
         <div className="flex items-start gap-3.5">
 
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-green-600 text-sm font-bold text-white">
-            {supplier.avatar}
+            { supplier?.image ||supplier?.avatar || "NO"}
           </div>
 
           <div className="min-w-0">
             <h3 className="text-lg font-bold leading-tight text-slate-800">
-              {supplier.company}
+              {supplier?.company || "Error"}
             </h3>
 
             <span className="mt-1 inline-flex rounded-md px-2.5 py-0.5 text-xs font-medium text-red-600">
-              {supplier.partyType}
+              {supplier?.partyType || "Error"}
             </span>
 
             <p className="mt-1.5 text-xs text-slate-500">
-              GSTIN: {supplier.gstin}
+              GSTIN: {supplier?.gstin || "Error"}
             </p>
           </div>
 

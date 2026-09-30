@@ -36,7 +36,7 @@ export const getAllLedgers = async (req, res) => {
    })
    return res.status(200).json({
     message:"ledgers fetched successfully",
-    Ledgers : ledgers
+    data : ledgers
    });
    
   }catch(error){
