@@ -1,16 +1,24 @@
 import {
-    useMutation,
+  useMutation,
   useQuery,
-  useQueryClient
+  useQueryClient,
 } from "@tanstack/react-query";
 
-import { getLedgers, createLedger, updateLedgerById } from "../../../api/ledger.api.js";
+import {
+  getLedgers,
+  createLedger,
+  updateLedgerById,
+} from "../../../api/ledger.api.js";
 
 const LEDGER_QUERY_KEY = ["ledger"];
 
 const useLedger = () => {
-    const queryClient = useQueryClient();
-    {/** Get all ledgers */}
+  const queryClient = useQueryClient();
+
+  // =========================================================
+  // GET ALL LEDGERS
+  // =========================================================
+
   const {
     data: ledger = [],
     isLoading: loading,
@@ -18,41 +26,64 @@ const useLedger = () => {
     refetch: fetchLedgers,
   } = useQuery({
     queryKey: LEDGER_QUERY_KEY,
-
-    queryFn: async () => {
-      const response = await getLedgers();
-
-      return response.data;
-    },
+    queryFn: getLedgers,
   });
-  {/** Add Ledger */}
+
+  // =========================================================
+  // CREATE LEDGER
+  // =========================================================
+
   const createMutation = useMutation({
     mutationFn: createLedger,
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: LEDGER_QUERY_KEY,
       });
     },
   });
-   const addLedger = async (ledgerData) => {
-    const response = await createMutation.mutateAsync(ledgerData);
-    return response.data;
+
+  const addLedger = async (ledgerData) => {
+    return await createMutation.mutateAsync(
+      ledgerData
+    );
   };
 
-  {/** Update Ledger */}
+  // =========================================================
+  // UPDATE LEDGER
+  // =========================================================
+
   const updateMutation = useMutation({
-    mutationFn: updateLedgerById,
+    mutationFn: ({
+      ledgerId,
+      updateData,
+    }) =>
+      updateLedgerById(
+        ledgerId,
+        updateData
+      ),
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: LEDGER_QUERY_KEY,
       });
     },
   });
-  const updateLedger = async (ledgerId, updateData) => {
-    const response = await updateMutation.mutateAsync({ ledgerId, updateData });
-    return response.data;
+
+  const updateLedger = async (
+    ledgerId,
+    updateData
+  ) => {
+    return await updateMutation.mutateAsync({
+      ledgerId,
+      updateData,
+    });
   };
-   
+
+  // =========================================================
+  // RETURN
+  // =========================================================
+
   return {
     ledger,
     loading,

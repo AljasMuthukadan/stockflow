@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Modal from "../../../../components/common/Modal";
 import ModalHeader from "./ModalHeader";
@@ -20,7 +20,9 @@ const initialFormData = {
   phone: "",
   designation: "",
   email: "",
-  country :"India",
+
+  country: "India",
+
   addressLine1: "",
   addressLine2: "",
   city: "",
@@ -28,9 +30,81 @@ const initialFormData = {
   pinCode: "",
 };
 
-const LedgerModal = ({ onClose, onSubmit }) => {
-  const [formData, setFormData] = useState(initialFormData);
-  const [openSection, setOpenSection] = useState("basic");
+const LedgerModal = ({
+  onClose,
+  onSubmit,
+  updateLedger,
+  ledger,
+}) => {
+  const [formData, setFormData] = useState(
+    initialFormData
+  );
+
+  const [openSection, setOpenSection] =
+    useState("basic");
+
+  const isEditMode = Boolean(ledger);
+
+  // =========================================================
+  // LOAD EDIT DATA
+  // =========================================================
+
+  useEffect(() => {
+    if (!ledger) {
+      setFormData(initialFormData);
+      setOpenSection("basic");
+      return;
+    }
+
+    setFormData({
+      company: ledger.company || "",
+      alias: ledger.alias || "",
+      partyType: ledger.partyType || "",
+      category: ledger.category || "",
+      gstin: ledger.gstin || "",
+
+      // Existing backend image URL
+      image: ledger.image || null,
+
+      contactName:
+        ledger.contactInfo?.personName || "",
+
+      phone:
+        ledger.contactInfo?.phoneNo || "",
+
+      designation:
+        ledger.contactInfo?.designation || "",
+
+      email:
+        ledger.contactInfo?.email || "",
+
+      country:
+        ledger.address?.country || "India",
+
+      addressLine1:
+        ledger.address?.line1 || "",
+
+      addressLine2:
+        ledger.address?.line2 || "",
+
+      city:
+        ledger.address?.city || "",
+
+      state:
+        ledger.address?.state || "",
+
+      pinCode:
+        ledger.address?.postalCode ||
+        ledger.address?.pinCode ||
+        "",
+    });
+
+    setOpenSection("basic");
+  }, [ledger]);
+
+  // =========================================================
+  // INPUT CHANGE
+  // =========================================================
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,6 +115,10 @@ const LedgerModal = ({ onClose, onSubmit }) => {
     }));
   };
 
+  // =========================================================
+  // IMAGE CHANGE
+  // =========================================================
+
   const handleImageChange = (file) => {
     setFormData((prev) => ({
       ...prev,
@@ -48,45 +126,79 @@ const LedgerModal = ({ onClose, onSubmit }) => {
     }));
   };
 
+  // =========================================================
+  // TOGGLE SECTION
+  // =========================================================
+
   const toggleSection = (section) => {
-    setOpenSection((prev) => (prev === section ? "" : section));
+    setOpenSection((prev) =>
+      prev === section ? "" : section
+    );
   };
 
-  const handleSubmit = (e) => {
+  // =========================================================
+  // SUBMIT
+  // =========================================================
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newLedger = {
-      id: crypto.randomUUID(),
+    const ledgerData = {
+      company:
+        formData.company || "Unnamed Company",
 
-      company: formData.company || "Unnamed Company",
       alias: formData.alias || "",
-      partyType: formData.partyType || "Other",
-      category: formData.category || "",
-      gstin: formData.gstin || "",
 
-      image: formData.image ? URL.createObjectURL(formData.image) : null,
+      partyType:
+        formData.partyType || "Other",
+
+      category:
+        formData.category || "",
+
+      gstin:
+        formData.gstin || "",
+
+      image:
+        formData.image || null,
 
       contactInfo: {
-        personName: formData.contactName || "",
-        phoneNo: formData.phone || "",
-        designation: formData.designation || "",
-        email: formData.email || "",
+        personName:
+          formData.contactName || "",
+
+        phoneNo:
+          formData.phone || "",
+
+        designation:
+          formData.designation || "",
+
+        email:
+          formData.email || "",
       },
 
       address: {
-        line1: formData.addressLine1 || "",
-        line2: formData.addressLine2 || "",
-        city: formData.city || "",
-        state: formData.state || "",
-        pinCode: formData.pinCode || "",
-        country: "India",
-        company : formData.company,
-        address : `${formData.addressLine1},\n ${formData.addressLine2}\n ${formData.city}, ${formData.state}-${formData.pinCode}, ${formData.country}`
+        line1:
+          formData.addressLine1 || "",
+
+        line2:
+          formData.addressLine2 || "",
+
+        city:
+          formData.city || "",
+
+        state:
+          formData.state || "",
+
+        postalCode:
+          formData.pinCode || "",
+
+        country:
+          formData.country || "India",
       },
 
       avatar: formData.company
         ? formData.company
             .split(" ")
+            .filter(Boolean)
             .map((word) => word[0])
             .join("")
             .slice(0, 2)
@@ -95,28 +207,68 @@ const LedgerModal = ({ onClose, onSubmit }) => {
 
       avatarColor: "bg-emerald-500",
 
-      orders: 0,
-      outstanding: 0,
-      outstandingType: "Settled",
+      orders: ledger?.orders ?? 0,
+
+      outstanding:
+        ledger?.outstanding ?? 0,
+
+      outstandingType:
+        ledger?.outstandingType || "Settled",
     };
 
-    console.log("New Ledger:", newLedger);
+    try {
+      if (isEditMode) {
+        // MongoDB ID
+        await updateLedger(
+          ledger._id,
+          ledgerData
+        );
 
-    onSubmit(newLedger);
+        console.log(
+          "Updating ledger:",
+          ledgerData
+        );
+      } else {
+        await onSubmit(ledgerData);
 
-    setFormData(initialFormData);
-    setOpenSection("basic");
-    onClose();
+        console.log(
+          "Creating new ledger:",
+          ledgerData
+        );
+      }
+
+      // Reset only after successful request
+      setFormData(initialFormData);
+      setOpenSection("basic");
+
+      onClose();
+    } catch (error) {
+      console.error(
+        "Failed to save ledger:",
+        error
+      );
+    }
   };
 
   return (
     <Modal>
-      <ModalHeader onClose={onClose} />
+      <ModalHeader
+        onClose={onClose}
+        isEditMode={isEditMode}
+      />
 
       <form
         onSubmit={handleSubmit}
-        className="flex min-h-0 flex-1 flex-col overflow-hidden"
+        className="
+          flex
+          min-h-0
+          flex-1
+          flex-col
+          overflow-hidden
+        "
       >
+        {/* FORM CONTENT */}
+
         <div className="min-h-0 flex-1 overflow-y-auto">
           <div className="space-y-2 p-3 sm:p-4">
             <BasicInfo
@@ -142,27 +294,50 @@ const LedgerModal = ({ onClose, onSubmit }) => {
 
             <ProfileImage
               formData={formData}
-              handleImageChange={handleImageChange}
+              handleImageChange={
+                handleImageChange
+              }
               openSection={openSection}
               toggleSection={toggleSection}
             />
           </div>
         </div>
 
+        {/* FOOTER */}
+
         <div
           className="
-            flex shrink-0 flex-col-reverse gap-2 border-t
-            border-slate-100 bg-white px-4 py-3
-            sm:flex-row sm:items-center sm:justify-end sm:px-5
+            flex
+            shrink-0
+            flex-col-reverse
+            gap-2
+            border-t
+            border-slate-100
+            bg-white
+            px-4
+            py-3
+            sm:flex-row
+            sm:items-center
+            sm:justify-end
+            sm:px-5
           "
         >
           <button
             type="button"
             onClick={onClose}
             className="
-              w-full rounded-xl border border-slate-200
-              px-5 py-2.5 text-sm font-medium text-slate-600
-              transition hover:bg-slate-50 sm:w-auto
+              w-full
+              rounded-xl
+              border
+              border-slate-200
+              px-5
+              py-2.5
+              text-sm
+              font-medium
+              text-slate-600
+              transition
+              hover:bg-slate-50
+              sm:w-auto
             "
           >
             Cancel
@@ -171,13 +346,24 @@ const LedgerModal = ({ onClose, onSubmit }) => {
           <button
             type="submit"
             className="
-              w-full rounded-xl bg-emerald-600 px-5 py-2.5
-              text-sm font-semibold text-white shadow-sm
-              transition hover:bg-emerald-700
-              active:scale-[0.98] sm:w-auto
+              w-full
+              rounded-xl
+              bg-emerald-600
+              px-5
+              py-2.5
+              text-sm
+              font-semibold
+              text-white
+              shadow-sm
+              transition
+              hover:bg-emerald-700
+              active:scale-[0.98]
+              sm:w-auto
             "
           >
-            Add Ledger
+            {isEditMode
+              ? "Update Ledger"
+              : "Add Ledger"}
           </button>
         </div>
       </form>

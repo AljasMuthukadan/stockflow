@@ -60,17 +60,44 @@ const LedgerPage = () => {
     loading,
     error,
     fetchLedgers,
+    updateLedger,
   } = useLedger();
 
+  // null = Add mode
+  // object = Edit mode
+  const [selectLedger, setSelectLedger] = useState(null);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectProfile, setSelectProfile] = useState(null);
 
-  const handleModal = () => {
+  // =========================================================
+  // OPEN ADD MODAL
+  // =========================================================
+
+  const handleOpenAddModal = () => {
+    setSelectLedger(null);
     setIsModalOpen(true);
   };
 
+  // =========================================================
+  // OPEN EDIT MODAL
+  // =========================================================
+
+  const handleEditLedger = (ledger) => {
+    console.log("Editing ledger:", ledger);
+
+    setSelectLedger(ledger);
+    setIsModalOpen(true);
+  };
+
+  // =========================================================
+  // CLOSE MODAL
+  // =========================================================
+
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setSelectLedger(null);
   };
 
   return (
@@ -92,7 +119,9 @@ const LedgerPage = () => {
       {/* PAGE HEADER */}
 
       <div className="shrink-0">
-        <LedgerHeader onAddItem={handleModal} />
+        <LedgerHeader
+          onAddItem={handleOpenAddModal}
+        />
       </div>
 
       {/* MAIN CONTENT */}
@@ -120,11 +149,15 @@ const LedgerPage = () => {
             gap-3
           "
         >
+          {/* LOADING */}
+
           {loading ? (
             <div className="min-h-0 flex-1">
               <LedgerLoading />
             </div>
           ) : error ? (
+            /* ERROR */
+
             <div className="min-h-0 flex-1">
               <LedgerError
                 error={error}
@@ -132,6 +165,8 @@ const LedgerPage = () => {
               />
             </div>
           ) : (
+            /* SUCCESS */
+
             <>
               {/* STATISTICS */}
 
@@ -145,25 +180,29 @@ const LedgerPage = () => {
                 <LedgerTable
                   ledger={ledger}
                   setProfile={setSelectProfile}
+                  onEditLedger={handleEditLedger}
                 />
               </div>
             </>
           )}
         </div>
 
-        {/* RIGHT SECTION */}
+        {/* RIGHT PROFILE */}
 
         <div className="hidden min-h-0 min-w-0 xl:block">
           <LedgerProfile ledger={selectProfile} />
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* ADD / EDIT MODAL */}
 
       {isModalOpen && (
         <LedgerModal
+          key={selectLedger?._id ?? "new-ledger"}
+          ledger={selectLedger}
           onClose={handleModalClose}
           onSubmit={addLedger}
+          updateLedger={updateLedger}
         />
       )}
     </div>

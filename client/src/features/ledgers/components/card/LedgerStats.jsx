@@ -29,6 +29,7 @@ const colors = {
 };
 
 const LedgerStats = ({ ledger = [] }) => {
+  console.log("LedgerStats ledger:", ledger);
   const totalLedgers = ledger.length;
 
   const sundryDebtors = ledger.filter(

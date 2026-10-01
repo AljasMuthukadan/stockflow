@@ -1,5 +1,8 @@
 import Input from "../../../../components/ui/Input";
-import { ChevronDown, User } from "lucide-react";
+import {
+  ChevronDown,
+  User,
+} from "lucide-react";
 
 const ContactInfo = ({
   toggleSection,
@@ -10,40 +13,47 @@ const ContactInfo = ({
   return (
     <div
       className="
-                overflow-hidden
-                rounded-xl
-                border
-                border-slate-200
-              "
+        overflow-hidden
+        rounded-xl
+        border
+        border-slate-200
+      "
     >
+      {/* HEADER */}
+
       <button
         type="button"
-        onClick={() => toggleSection("contact")}
+        onClick={() =>
+          toggleSection("contact")
+        }
         className="
-                  flex
-                  w-full
-                  items-center
-                  justify-between
-                  px-4
-                  py-3
-                  text-left
-                  transition
-                  hover:bg-slate-50
-                "
+          flex
+          w-full
+          items-center
+          justify-between
+          px-4
+          py-3
+          text-left
+          transition
+          hover:bg-slate-50
+        "
       >
         <div className="flex items-center gap-3">
           <div
             className="
-                      flex
-                      h-8
-                      w-8
-                      items-center
-                      justify-center
-                      rounded-lg
-                      bg-blue-50
-                    "
+              flex
+              h-8
+              w-8
+              items-center
+              justify-center
+              rounded-lg
+              bg-blue-50
+            "
           >
-            <User size={16} className="text-blue-600" />
+            <User
+              size={16}
+              className="text-blue-600"
+            />
           </div>
 
           <div>
@@ -51,19 +61,27 @@ const ContactInfo = ({
               Contact Information
             </h3>
 
-            <p className="text-xs text-slate-400">Primary supplier contact</p>
+            <p className="text-xs text-slate-400">
+              Primary party contact
+            </p>
           </div>
         </div>
 
         <ChevronDown
           size={17}
           className={`
-                    text-slate-400
-                    transition-transform
-                    ${openSection === "contact" ? "rotate-180" : ""}
-                  `}
+            text-slate-400
+            transition-transform
+            ${
+              openSection === "contact"
+                ? "rotate-180"
+                : ""
+            }
+          `}
         />
       </button>
+
+      {/* CONTENT */}
 
       {openSection === "contact" && (
         <div className="border-t border-slate-100 p-4">
@@ -71,7 +89,7 @@ const ContactInfo = ({
             <Input
               label="Contact Person"
               name="contactName"
-              value={formData.personName}
+              value={formData.contactName}
               onChange={handleChange}
               placeholder="John Mathew"
               required
@@ -80,7 +98,7 @@ const ContactInfo = ({
             <Input
               label="Phone Number"
               name="phone"
-              value={formData.phoneNo}
+              value={formData.phone}
               onChange={handleChange}
               placeholder="+91 98765 43210"
               required
@@ -91,7 +109,7 @@ const ContactInfo = ({
               name="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="supplier@email.com"
+              placeholder="party@email.com"
               type="email"
             />
 

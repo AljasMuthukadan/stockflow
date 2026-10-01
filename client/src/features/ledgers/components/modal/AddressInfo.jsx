@@ -1,6 +1,9 @@
 import Input from "../../../../components/ui/Input";
 import SelectField from "../../../../components/ui/SelectField";
-import { ChevronDown, MapPin } from "lucide-react";
+import {
+  ChevronDown,
+  MapPin,
+} from "lucide-react";
 
 const AddressInfo = ({
   toggleSection,
@@ -10,10 +13,13 @@ const AddressInfo = ({
 }) => {
   return (
     <section className="overflow-hidden rounded-xl border border-slate-200">
-      {/* Section Header */}
+      {/* HEADER */}
+
       <button
         type="button"
-        onClick={() => toggleSection("address")}
+        onClick={() =>
+          toggleSection("address")
+        }
         className="
           flex
           w-full
@@ -38,7 +44,10 @@ const AddressInfo = ({
               bg-orange-50
             "
           >
-            <MapPin size={16} className="text-orange-600" />
+            <MapPin
+              size={16}
+              className="text-orange-600"
+            />
           </div>
 
           <div>
@@ -47,7 +56,7 @@ const AddressInfo = ({
             </h3>
 
             <p className="text-xs text-slate-400">
-              Supplier business address
+              Party business address
             </p>
           </div>
         </div>
@@ -57,16 +66,20 @@ const AddressInfo = ({
           className={`
             text-slate-400
             transition-transform
-            ${openSection === "address" ? "rotate-180" : ""}
+            ${
+              openSection === "address"
+                ? "rotate-180"
+                : ""
+            }
           `}
         />
       </button>
 
-      {/* Section Content */}
+      {/* CONTENT */}
+
       {openSection === "address" && (
         <div className="border-t border-slate-100 p-4">
           <div className="space-y-4">
-            {/* Address Line 1 */}
             <Input
               label="Address Line 1"
               name="addressLine1"
@@ -75,7 +88,6 @@ const AddressInfo = ({
               placeholder="Building / Street"
             />
 
-            {/* Address Line 2 */}
             <Input
               label="Address Line 2"
               name="addressLine2"
@@ -84,7 +96,6 @@ const AddressInfo = ({
               placeholder="Area / Landmark"
             />
 
-            {/* City / State / PIN */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 sm:items-end">
               <Input
                 label="City"
@@ -100,12 +111,29 @@ const AddressInfo = ({
                 value={formData.state}
                 onChange={handleChange}
               >
-                <option value="">Select state</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Delhi">Delhi</option>
+                <option value="">
+                  Select state
+                </option>
+
+                <option value="Kerala">
+                  Kerala
+                </option>
+
+                <option value="Tamil Nadu">
+                  Tamil Nadu
+                </option>
+
+                <option value="Karnataka">
+                  Karnataka
+                </option>
+
+                <option value="Maharashtra">
+                  Maharashtra
+                </option>
+
+                <option value="Delhi">
+                  Delhi
+                </option>
               </SelectField>
 
               <Input

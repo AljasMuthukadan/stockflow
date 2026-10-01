@@ -50,3 +50,36 @@ export const getAllLedgers = async (req, res) => {
 
   }
 }
+
+export const updateLedgerById = async (req, res) => {
+  const { ledgerId } = req.params;
+  const updatedLedgerData = req.body;
+
+  try {
+    const updatedLedger = await Ledger.findByIdAndUpdate(
+      ledgerId,
+      updatedLedgerData,
+      { new: true }
+    );
+
+    if (!updatedLedger) {
+      return res.status(404).json({
+        message: "Ledger not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Ledger updated successfully",
+      data: updatedLedger,
+      success: true,
+    });
+  } catch (error) {
+    console.error("Error updating ledger:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+      error: error.message,
+    });
+  }
+};
