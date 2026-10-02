@@ -59,7 +59,7 @@ export const updateLedgerById = async (req, res) => {
     const updatedLedger = await Ledger.findByIdAndUpdate(
       ledgerId,
       updatedLedgerData,
-      { new: true }
+      { returnDocument:'after', runValidators : true}
     );
 
     if (!updatedLedger) {
