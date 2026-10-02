@@ -107,7 +107,7 @@ const SupplierMobileCard = ({
 /* ================================================= */
 
 const SupplierDesktopTable = ({
-  ledger,
+  filteredLedger = [],
   setProfile,
   onEditLedger,
 }) => {
@@ -147,7 +147,7 @@ const SupplierDesktopTable = ({
         </thead>
 
         <tbody>
-          {ledger.map((ledgerItem) => (
+          {filteredLedger.map((ledgerItem) => (
             <tr
               key={ledgerItem._id}
               onClick={() =>
@@ -239,9 +239,13 @@ const SupplierDesktopTable = ({
 /* ================================================= */
 
 const LedgerTable = ({
-  ledger = [],
   setProfile,
   onEditLedger,
+  setSearch,
+  setPartyType,
+  search,
+  partyType,
+  filteredLedger,
 }) => {
   return (
     <div
@@ -261,7 +265,12 @@ const LedgerTable = ({
       {/* FILTERS */}
 
       <div className="shrink-0">
-        <SupplierFilters />
+        <SupplierFilters 
+          setSearch={setSearch}
+          setPartyType={setPartyType}
+          search={search}
+          partyType={partyType}
+        />
       </div>
 
       {/* MOBILE VIEW */}
@@ -276,8 +285,8 @@ const LedgerTable = ({
             scrollbar-none
           "
         >
-          {ledger.length > 0 ? (
-            ledger.map((ledgerItem) => (
+          {filteredLedger.length > 0 ? (
+            filteredLedger.map((ledgerItem) => (
               <SupplierMobileCard
                 key={ledgerItem._id}
                 supplier={ledgerItem}
@@ -295,9 +304,9 @@ const LedgerTable = ({
       {/* DESKTOP VIEW */}
 
       <div className="hidden min-h-0 flex-1 md:block">
-        {ledger.length > 0 ? (
+        {filteredLedger.length > 0 ? (
           <SupplierDesktopTable
-            ledger={ledger}
+            filteredLedger={filteredLedger}
             setProfile={setProfile}
             onEditLedger={onEditLedger}
           />

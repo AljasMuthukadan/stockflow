@@ -72,6 +72,27 @@ const LedgerPage = () => {
   const [selectProfile, setSelectProfile] = useState(null);
 
   // =========================================================
+  // FILTER 
+  // =========================================================
+  const [ search, setSearch] = useState("");
+  const [ partyType, setPartyType] = useState("All");
+
+
+  const filteredLedger = ledger.filter((ledger) => {
+    const matchesPartyType =
+      partyType === "All" || ledger.partyType === partyType;
+    const matchesSearch =
+      search === "" ||
+      ledger?.company?.toLowerCase().includes(search.toLowerCase()) ||
+      ledger?.contactInfo?.personName?.toLowerCase().includes(search.toLowerCase()) ||
+      ledger?.contactInfo?.phoneNo?.includes(search) ||
+      ledger?.contactInfo?.email?.toLowerCase().includes(search.toLowerCase());
+      console.log("Filtering ledger:", ledger, "Matches Party Type:", matchesPartyType, "Matches Search:", matchesSearch);
+    return matchesPartyType && matchesSearch;
+  });
+
+
+  // =========================================================
   // OPEN ADD MODAL
   // =========================================================
 
@@ -178,6 +199,11 @@ const LedgerPage = () => {
 
               <div className="min-h-0 min-w-0 flex-1">
                 <LedgerTable
+                  filteredLedger={filteredLedger}
+                  setSearch={setSearch}
+                  setPartyType={setPartyType}
+                  search={search}
+                  partyType={partyType}
                   ledger={ledger}
                   setProfile={setSelectProfile}
                   onEditLedger={handleEditLedger}
