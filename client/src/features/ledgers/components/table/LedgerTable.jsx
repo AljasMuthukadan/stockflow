@@ -9,6 +9,7 @@ import {
 import ActionButton from "../../../../components/common/ActionButton";
 import SupplierFilters from "../SupplierFilters";
 
+
 /* ================================================= */
 /* MOBILE CARD */
 /* ================================================= */
@@ -16,6 +17,7 @@ import SupplierFilters from "../SupplierFilters";
 const SupplierMobileCard = ({
   supplier,
   onEditLedger,
+  onDeleteLedger,
 }) => {
   return (
     <article
@@ -36,12 +38,7 @@ const SupplierMobileCard = ({
         <ActionButton
           item={supplier}
           onEdit={() => onEditLedger(supplier)}
-          onDelete={() => {
-            console.log(
-              "Delete ledger with ID:",
-              supplier._id
-            );
-          }}
+          onDelete={() => onDeleteLedger(supplier._id)}
         />
       </div>
 
@@ -110,6 +107,7 @@ const SupplierDesktopTable = ({
   filteredLedger = [],
   setProfile,
   onEditLedger,
+  onDeleteLedger,
 }) => {
   const handleProfile = (ledger) => {
     setProfile(ledger);
@@ -218,10 +216,7 @@ const SupplierDesktopTable = ({
                       onEditLedger(ledgerItem)
                     }
                     onDelete={() => {
-                      console.log(
-                        "Delete ledger with ID:",
-                        ledgerItem._id
-                      );
+                      onDeleteLedger(ledgerItem._id);
                     }}
                   />
                 </div>
@@ -246,6 +241,7 @@ const LedgerTable = ({
   search,
   partyType,
   filteredLedger,
+  onDeleteLedger,
 }) => {
   return (
     <div
@@ -291,6 +287,7 @@ const LedgerTable = ({
                 key={ledgerItem._id}
                 supplier={ledgerItem}
                 onEditLedger={onEditLedger}
+                onDeleteLedger={onDeleteLedger}
               />
             ))
           ) : (
@@ -309,6 +306,7 @@ const LedgerTable = ({
             filteredLedger={filteredLedger}
             setProfile={setProfile}
             onEditLedger={onEditLedger}
+            onDeleteLedger={onDeleteLedger}
           />
         ) : (
           <div className="flex h-full items-center justify-center text-sm text-slate-400">

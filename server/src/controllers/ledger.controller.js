@@ -83,3 +83,31 @@ export const updateLedgerById = async (req, res) => {
     });
   }
 };
+
+export const deleteLedgerById = async (req, res) => {
+  const { ledgerId } = req.params;
+
+  try {
+    const deletedLedger = await Ledger.findByIdAndDelete(ledgerId);
+
+    if (!deletedLedger) {
+      return res.status(404).json({
+        message: "Ledger not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Ledger deleted successfully",
+      data: deletedLedger,
+      success: true,
+    });
+  } catch (error) {
+    console.error("Error deleting ledger:", error);
+    return res.status(500).json({
+      message: "Internal server error",
+      success: false,
+      error: error.message,
+    });
+  }
+};

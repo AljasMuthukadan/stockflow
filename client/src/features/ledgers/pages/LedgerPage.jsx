@@ -61,6 +61,7 @@ const LedgerPage = () => {
     error,
     fetchLedgers,
     updateLedger,
+    deleteLedger,
   } = useLedger();
 
   // null = Add mode
@@ -87,7 +88,7 @@ const LedgerPage = () => {
       ledger?.contactInfo?.personName?.toLowerCase().includes(search.toLowerCase()) ||
       ledger?.contactInfo?.phoneNo?.includes(search) ||
       ledger?.contactInfo?.email?.toLowerCase().includes(search.toLowerCase());
-      console.log("Filtering ledger:", ledger, "Matches Party Type:", matchesPartyType, "Matches Search:", matchesSearch);
+
     return matchesPartyType && matchesSearch;
   });
 
@@ -207,6 +208,7 @@ const LedgerPage = () => {
                   ledger={ledger}
                   setProfile={setSelectProfile}
                   onEditLedger={handleEditLedger}
+                  onDeleteLedger={deleteLedger}
                 />
               </div>
             </>

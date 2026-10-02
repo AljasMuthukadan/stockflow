@@ -72,3 +72,18 @@ export const updateLedgerById = async (
     throw error;
   }
 };
+
+export const deleteLedgerById = async (ledgerId) => {
+  try {
+    const response = await api.delete(
+      `/api/ledger/${ledgerId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(
+      "Error deleting ledger:",
+      error
+    );
+    throw error;
+  }
+};

@@ -8,6 +8,7 @@ import {
   getLedgers,
   createLedger,
   updateLedgerById,
+  deleteLedgerById,
 } from "../../../api/ledger.api.js";
 
 const LEDGER_QUERY_KEY = ["ledger"];
@@ -79,6 +80,22 @@ const useLedger = () => {
       updateData,
     });
   };
+  // =========================================================
+  // DELETE LEDGER
+  // =========================================================
+  const deleteMutation = useMutation({
+    mutationFn:(ledgerId) => deleteLedgerById(ledgerId),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: LEDGER_QUERY_KEY,
+      });
+    },
+  });
+
+  const deleteLedger = async (ledgerId) => {
+    return await deleteMutation.mutateAsync(ledgerId);
+  };
 
   // =========================================================
   // RETURN
@@ -91,6 +108,7 @@ const useLedger = () => {
     fetchLedgers,
     addLedger,
     updateLedger,
+    deleteLedger,
   };
 };
 
