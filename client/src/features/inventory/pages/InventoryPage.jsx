@@ -25,6 +25,7 @@ const InventoryPage = () => {
     error,
     addInventoryItem,
     updateInventoryItemById,
+    deleteInventoryItem,
   } = useInventory();
 
   // =========================================================
@@ -152,6 +153,7 @@ const InventoryPage = () => {
         inventory={filteredInventory}
         loading={loading}
         onEditItem={handleEditItem}
+        onDeleteItem={deleteInventoryItem}
       />
 
       {/* Add / Edit Modal */}

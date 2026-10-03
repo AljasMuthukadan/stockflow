@@ -8,6 +8,7 @@ import {
   getInventoryItems,
   createInventoryItem,
   updateInventoryItem,
+  deleteInventoryItemById,
 } from "../../../api/inventory.api.js";
 
 const INVENTORY_QUERY_KEY = ["inventory"];
@@ -84,6 +85,27 @@ const useInventory = () => {
       updatedData,
     });
   };
+  // =========================================================
+  // DELETE INVENTORY ITEM
+  // =========================================================
+
+  const deleteMutation = useMutation({
+    mutationFn: async (itemId) => {
+      const response = await deleteInventoryItemById(itemId);
+
+      return response.data;
+    },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: INVENTORY_QUERY_KEY,
+      });
+    },
+  });
+
+  const deleteInventoryItem = (itemId) => {
+    return deleteMutation.mutateAsync(itemId);
+  };
 
   // =========================================================
   // ERROR
@@ -108,7 +130,7 @@ const useInventory = () => {
 
     addInventoryItem,
     updateInventoryItemById,
-
+    deleteInventoryItem,
     isAdding: createMutation.isPending,
     isUpdating: updateMutation.isPending,
   };

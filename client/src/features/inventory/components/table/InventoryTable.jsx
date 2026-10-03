@@ -33,6 +33,7 @@ export default function InventoryTable({
   inventory = [],
   loading = false,
   onEditItem,
+  onDeleteItem,
 }) {
   return (
     <div className="mb-5 mt-5">
@@ -268,7 +269,7 @@ export default function InventoryTable({
                             <ActionButton
                               item={item}
                               onEdit={onEditItem}
-                              onDelete={() => console.log("Delete", item)}
+                              onDelete={() => onDeleteItem(item._id)}
                             />
                           </div>
                         </td>

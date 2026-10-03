@@ -58,3 +58,13 @@ export const updateInventoryItem = async (itemId, updatedData) => {
     throw error;
   }
 };
+
+export const deleteInventoryItemById = async (itemId) => {
+  try {
+    const response = await api.delete(`/api/inventory/${itemId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting inventory item:", error);
+    throw error;
+  }
+};
