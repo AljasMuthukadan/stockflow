@@ -7,14 +7,22 @@ import TopProducts from "../components/TopProducts";
 import ProductionHeader from "../components/ProductionHeader";
 import { productionOrders } from "../components/production-table/data";
 import { useState } from "react";
+import ProductionModal from "../components/modal/ProductionModal";
 
 const ProductionPage = () => {
   const [ productionData, setProductionData ] = useState(productionOrders);
+  const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
   return (
     <div className="space-y-6 px-3 md:px-4 lg:px-8">
       {/* Header */}
 
-      <ProductionHeader />
+      <ProductionHeader handleOpenModal={handleOpenModal} />
 
       {/* Stats */}
 
@@ -38,6 +46,9 @@ const ProductionPage = () => {
           <RecentActivities />
         </div>
       </div>
+      {isModalOpen && (
+        <ProductionModal onClose={handleCloseModal} />
+      )}
     </div>
   );
 };
