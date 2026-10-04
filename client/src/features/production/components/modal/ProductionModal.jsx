@@ -8,12 +8,12 @@ import ScheduleSection from "./ScheduleSection";
 import AdditionalSection from "./AdditionalSection";
 import FormFooter from "./FormFooter";
 
-const ProductionModal = ({ onClose }) => {
+const ProductionModal = ({ onClose, setProductionData }) => {
   const [openSection, setOpenSection] = useState("production");
 
   const [formData, setFormData] = useState({
     productionNumber: "",
-    finishedProduct: "",
+    product: "",
     quantity: "",
     unit: "",
     bom: "",
@@ -32,6 +32,7 @@ const ProductionModal = ({ onClose }) => {
       [name]: value,
     }));
   };
+ 
 
   const toggleSection = (section) => {
     setOpenSection((prev) =>
@@ -41,7 +42,7 @@ const ProductionModal = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    setProductionData((prev) => [...prev, formData]);
     console.log("Production Order:", formData);
 
     // Later:

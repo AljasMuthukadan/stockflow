@@ -47,7 +47,7 @@ const ProductionPage = () => {
         </div>
       </div>
       {isModalOpen && (
-        <ProductionModal onClose={handleCloseModal} />
+        <ProductionModal onClose={handleCloseModal} setProductionData={setProductionData} />
       )}
     </div>
   );

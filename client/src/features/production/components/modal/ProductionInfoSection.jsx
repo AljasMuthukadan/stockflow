@@ -106,8 +106,8 @@ const ProductionInfoSection = ({
 
             <SelectField
               label="Finished Product"
-              name="finishedProduct"
-              value={formData.finishedProduct}
+              name="product"
+              value={formData.product}
               onChange={handleChange}
               required
             >

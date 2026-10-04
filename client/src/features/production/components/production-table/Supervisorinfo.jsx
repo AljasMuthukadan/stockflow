@@ -16,12 +16,12 @@ const SupervisorInfo = ({ supervisor }) => {
           text-blue-700
         "
       >
-        {supervisor.charAt(0)}
+        {supervisor?.charAt(0)}
       </div>
 
       <div className="min-w-0">
         <p className="truncate font-medium text-slate-800">
-          {supervisor}
+          {supervisor? supervisor : "N/A"}
         </p>
 
         <p className="mt-0.5 text-xs text-slate-400">
