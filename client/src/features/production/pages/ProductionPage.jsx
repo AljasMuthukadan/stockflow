@@ -5,8 +5,11 @@ import ProductionOverview from "../components/ProductionOverview";
 import RecentActivities from "../components/RecentActivities";
 import TopProducts from "../components/TopProducts";
 import ProductionHeader from "../components/ProductionHeader";
+import { productionOrders } from "../components/production-table/data";
+import { useState } from "react";
 
 const ProductionPage = () => {
+  const [ productionData, setProductionData ] = useState(productionOrders);
   return (
     <div className="space-y-6 px-3 md:px-4 lg:px-8">
       {/* Header */}
@@ -23,7 +26,7 @@ const ProductionPage = () => {
 
       {/* Product Table */}
 
-      <ProductionTable />
+      <ProductionTable data={productionData} />
       {/* Overview & Recent Activity Section */}
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 ">
         <div className="xl:col-span-2 space-y-6 mb-8">

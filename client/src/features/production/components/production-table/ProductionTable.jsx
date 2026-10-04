@@ -1,4 +1,4 @@
-import { productionOrders } from "./data";
+
 import ProductionProgress from "./ProductionProgress";
 import ProductionStatus from "./ProductionStatus";
 import SupervisorInfo from "./Supervisorinfo";
@@ -8,7 +8,7 @@ import ProductionTableHeader from "./ProductionTableHeader";
 import Pagination from "../../../../components/common/Pagination";
 import ActionButton from "../../../../components/common/ActionButton";
 
-const ProductionTable = () => {
+const ProductionTable = ({ data }) => {
   return (
     <div
       className="
@@ -51,7 +51,7 @@ const ProductionTable = () => {
           {/* ================================================= */}
 
           <tbody>
-            {productionOrders.map((order) => (
+            {data.map((order) => (
               <tr
                 key={order.id}
                 className="
