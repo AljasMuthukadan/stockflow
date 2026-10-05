@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import Modal from "../../../../components/common/Modal";
 
 import HeaderSection from "./HeaderSection";
@@ -8,8 +9,18 @@ import ScheduleSection from "./ScheduleSection";
 import AdditionalSection from "./AdditionalSection";
 import FormFooter from "./FormFooter";
 
-const ProductionModal = ({ onClose, setProductionData }) => {
-  const [openSection, setOpenSection] = useState("production");
+import useInventory from "../../../inventory/hooks/useInventory";
+
+const ProductionModal = ({
+  onClose,
+  setProductionData,
+}) => {
+  /* ===================================================== */
+  /* STATE */
+  /* ===================================================== */
+
+  const [openSection, setOpenSection] =
+    useState("production");
 
   const [formData, setFormData] = useState({
     productionNumber: "",
@@ -24,15 +35,70 @@ const ProductionModal = ({ onClose, setProductionData }) => {
     notes: "",
   });
 
+  /* ===================================================== */
+  /* INVENTORY */
+  /* ===================================================== */
+
+  const { inventory = [] } = useInventory();
+
+  /* ===================================================== */
+  /* HANDLE INPUT CHANGE */
+  /* ===================================================== */
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    /*
+     * Normal input handling
+     */
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+
+    /*
+     * If the selected field is Finished Product,
+     * automatically find the product and get its unit.
+     */
+    if (name === "product") {
+      const selectedProduct = inventory.find(
+        (item) =>
+          String(item._id ?? item.id) === String(value)
+      );
+
+      console.log(
+        "Selected Product:",
+        selectedProduct
+      );
+
+      if (selectedProduct) {
+        console.log(
+          "Selected Product Unit:",
+          selectedProduct.unit
+        );
+
+        setFormData((prev) => ({
+          ...prev,
+          product: value,
+          unit: selectedProduct.unit || "",
+        }));
+      } else {
+        /*
+         * If no product is selected,
+         * clear the unit.
+         */
+        setFormData((prev) => ({
+          ...prev,
+          product: value,
+          unit: "",
+        }));
+      }
+    }
   };
- 
+
+  /* ===================================================== */
+  /* TOGGLE SECTION */
+  /* ===================================================== */
 
   const toggleSection = (section) => {
     setOpenSection((prev) =>
@@ -40,50 +106,112 @@ const ProductionModal = ({ onClose, setProductionData }) => {
     );
   };
 
+  /* ===================================================== */
+  /* SUBMIT */
+  /* ===================================================== */
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setProductionData((prev) => [...prev, formData]);
-    console.log("Production Order:", formData);
 
-    // Later:
-    // POST /api/production
-    // Backend will:
-    // 1. Validate BOM
-    // 2. Check available raw materials
-    // 3. Create production record
-    // 4. Deduct raw materials
-    // 5. Increase finished goods stock
-    // 6. Create stock movement records
+    /*
+     * Basic validation
+     */
+    if (!formData.product) {
+      alert("Please select a finished product.");
+      return;
+    }
+
+    if (!formData.quantity) {
+      alert("Please enter production quantity.");
+      return;
+    }
+
+    if (!formData.unit) {
+      alert("Selected product does not have a unit.");
+      return;
+    }
+
+    /*
+     * Create production record
+     */
+    const productionOrder = {
+      ...formData,
+      quantity: Number(formData.quantity),
+    };
+
+    console.log(
+      "Production Order:",
+      productionOrder
+    );
+
+    /*
+     * Temporary local state.
+     *
+     * Later this will become:
+     *
+     * POST /api/production
+     */
+    setProductionData((prev) => [
+      ...prev,
+      productionOrder,
+    ]);
+
+    /*
+     * Later backend logic:
+     *
+     * 1. Validate product
+     * 2. Validate BOM
+     * 3. Check raw material stock
+     * 4. Deduct raw materials
+     * 5. Increase finished product stock
+     * 6. Create stock movement
+     * 7. Create production record
+     */
 
     onClose();
   };
 
+  /* ===================================================== */
+  /* RENDER */
+  /* ===================================================== */
+
   return (
     <Modal>
-
-      {/* Header */}
+      {/* ================================================= */}
+      {/* HEADER */}
+      {/* ================================================= */}
 
       <HeaderSection onClose={onClose} />
 
-      {/* Form */}
+      {/* ================================================= */}
+      {/* FORM */}
+      {/* ================================================= */}
 
       <form
         onSubmit={handleSubmit}
-        className="min-h-0 flex-1 overflow-y-auto"
+        className="
+          min-h-0
+          flex-1
+          overflow-y-auto
+        "
       >
-
         <div className="space-y-2 p-4">
 
+          {/* ================================================= */}
           {/* PRODUCTION INFORMATION */}
+          {/* ================================================= */}
 
           <ProductionInfoSection
             openSection={openSection}
             toggleSection={toggleSection}
             formData={formData}
             handleChange={handleChange}
+            inventory={inventory}
           />
 
+          {/* ================================================= */}
           {/* MATERIALS / BOM */}
+          {/* ================================================= */}
 
           <MaterialsSection
             openSection={openSection}
@@ -92,7 +220,9 @@ const ProductionModal = ({ onClose, setProductionData }) => {
             handleChange={handleChange}
           />
 
+          {/* ================================================= */}
           {/* SCHEDULE */}
+          {/* ================================================= */}
 
           <ScheduleSection
             openSection={openSection}
@@ -101,7 +231,9 @@ const ProductionModal = ({ onClose, setProductionData }) => {
             handleChange={handleChange}
           />
 
+          {/* ================================================= */}
           {/* ADDITIONAL */}
+          {/* ================================================= */}
 
           <AdditionalSection
             openSection={openSection}
@@ -109,15 +241,14 @@ const ProductionModal = ({ onClose, setProductionData }) => {
             formData={formData}
             handleChange={handleChange}
           />
-
         </div>
 
-        {/* Footer */}
+        {/* ================================================= */}
+        {/* FOOTER */}
+        {/* ================================================= */}
 
         <FormFooter onClose={onClose} />
-
       </form>
-
     </Modal>
   );
 };

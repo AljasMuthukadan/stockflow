@@ -1,7 +1,4 @@
-import {
-  ChevronDown,
-  Factory,
-} from "lucide-react";
+import { ChevronDown, Factory } from "lucide-react";
 
 import Input from "../../../../components/ui/Input";
 import SelectField from "../../../../components/ui/SelectField";
@@ -11,11 +8,13 @@ const ProductionInfoSection = ({
   toggleSection,
   formData,
   handleChange,
+  inventory = [],
 }) => {
   return (
     <section className="overflow-hidden rounded-xl border border-slate-200">
-
-      {/* Header */}
+      {/* ================================================= */}
+      {/* HEADER */}
+      {/* ================================================= */}
 
       <button
         type="button"
@@ -31,9 +30,7 @@ const ProductionInfoSection = ({
           hover:bg-slate-50
         "
       >
-
         <div className="flex items-center gap-3">
-
           <div
             className="
               flex
@@ -52,7 +49,6 @@ const ProductionInfoSection = ({
           </div>
 
           <div className="text-left">
-
             <p className="text-sm font-semibold text-slate-800">
               Production Information
             </p>
@@ -60,9 +56,7 @@ const ProductionInfoSection = ({
             <p className="text-xs text-slate-500">
               Define the product and production quantity
             </p>
-
           </div>
-
         </div>
 
         <ChevronDown
@@ -73,21 +67,21 @@ const ProductionInfoSection = ({
             ${openSection === "production" ? "rotate-180" : ""}
           `}
         />
-
       </button>
 
-      {/* Content */}
+      {/* ================================================= */}
+      {/* CONTENT */}
+      {/* ================================================= */}
 
       {openSection === "production" && (
-
         <div className="border-t border-slate-100 p-4">
-
           <div className="grid gap-4 sm:grid-cols-2">
 
-            {/* Production Number */}
+            {/* ================================================= */}
+            {/* PRODUCTION NUMBER */}
+            {/* ================================================= */}
 
             <div>
-
               <label className="mb-1.5 block text-xs font-medium text-slate-700">
                 Production Number
               </label>
@@ -99,10 +93,11 @@ const ProductionInfoSection = ({
                 type="text"
                 placeholder="e.g. PROD-0001"
               />
-
             </div>
 
-            {/* Finished Product */}
+            {/* ================================================= */}
+            {/* FINISHED PRODUCT */}
+            {/* ================================================= */}
 
             <SelectField
               label="Finished Product"
@@ -111,36 +106,34 @@ const ProductionInfoSection = ({
               onChange={handleChange}
               required
             >
-
               <option value="">
-                Select product
+                Select finished product
               </option>
 
-              <option value="ice-cream">
-                Ice Cream
-              </option>
+              {inventory.map((item) => {
+                const itemId = item._id ?? item.id;
 
-              <option value="milk-shake">
-                Milk Shake
-              </option>
-
-              <option value="chocolate-bar">
-                Chocolate Bar
-              </option>
-
-              <option value="vanilla-cone">
-                Vanilla Cone
-              </option>
-
+                return (
+                  <option
+                    key={itemId}
+                    value={itemId}
+                  >
+                    {item.name}
+                  </option>
+                );
+              })}
             </SelectField>
 
-            {/* Quantity */}
+            {/* ================================================= */}
+            {/* PRODUCTION QUANTITY */}
+            {/* ================================================= */}
 
             <div>
-
               <label className="mb-1.5 block text-xs font-medium text-slate-700">
                 Production Quantity
-                <span className="ml-1 text-red-500">*</span>
+                <span className="ml-1 text-red-500">
+                  *
+                </span>
               </label>
 
               <Input
@@ -151,47 +144,34 @@ const ProductionInfoSection = ({
                 min="1"
                 placeholder="e.g. 100"
               />
-
             </div>
 
-            {/* Unit */}
+            {/* ================================================= */}
+            {/* UNIT - AUTO SELECTED */}
+            {/* ================================================= */}
 
-            <SelectField
-              label="Unit"
-              name="unit"
-              value={formData.unit}
-              onChange={handleChange}
-              required
-            >
+            <div>
+              <label className="mb-1.5 block text-xs font-medium text-slate-700">
+                Unit
+              </label>
 
-              <option value="">
-                Select unit
-              </option>
+              <Input
+                name="unit"
+                value={formData.unit || ""}
+                readOnly
+                placeholder="Select a finished product"
+              />
 
-              <option value="pcs">
-                Pieces
-              </option>
-
-              <option value="kg">
-                Kilogram
-              </option>
-
-              <option value="litre">
-                Litre
-              </option>
-
-              <option value="box">
-                Box
-              </option>
-
-            </SelectField>
-
+              {formData.product && formData.unit && (
+                <p className="mt-1 text-[11px] text-slate-400">
+                  Unit is automatically taken from the selected
+                  finished product.
+                </p>
+              )}
+            </div>
           </div>
-
         </div>
-
       )}
-
     </section>
   );
 };
