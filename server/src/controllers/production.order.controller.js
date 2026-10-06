@@ -1,6 +1,6 @@
 
 
-export const createProduction = async(req, res) => {
+export const createProductionOrder = async(req, res) => {
     const {name} = req.body;
 
     if(!name) return res.status(400).json({
