@@ -2,7 +2,7 @@ import express from "express";
 import inventoryRoutes from "./routes/inventory.routes.js";
 import cors from "cors";
 import ledgerRoutes from "./routes/ledger.routes.js"
-
+import productionRoutes from './routes/production.routes.js'
 const app = express();
 
 // Global Middlewares
@@ -24,5 +24,7 @@ app.get("/api/health", (req, res) => {
 app.use("/api/inventory", inventoryRoutes);
 // ledger routes
 app.use("/api/ledger", ledgerRoutes);
+// production routes
+app.use('/api/production', productionRoutes);
 
 export default app;
