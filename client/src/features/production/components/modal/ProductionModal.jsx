@@ -27,9 +27,9 @@ const ProductionModal = ({
     product: "",
     quantity: "",
     unit: "",
-    bom: "",
+    bom: [],
     warehouse: "",
-    productionDate: "",
+    productionDate: new Date().toISOString().split("T")[0], // Default to today's date
     expectedDate: "",
     batchNumber: "",
     notes: "",
@@ -63,7 +63,7 @@ const ProductionModal = ({
     if (name === "product") {
       const selectedProduct = inventory.find(
         (item) =>
-          String(item._id ?? item.id) === String(value)
+          String(item.name ?? item.name) === String(value)
       );
 
       console.log(

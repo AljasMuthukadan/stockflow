@@ -116,7 +116,7 @@ const ProductionInfoSection = ({
                 return (
                   <option
                     key={itemId}
-                    value={itemId}
+                    value={item.name}
                   >
                     {item.name}
                   </option>
