@@ -76,7 +76,7 @@ const ProductionTable = ({ data }) => {
                 {/* Quantity */}
 
                 <td className="whitespace-nowrap px-4 py-4 text-slate-700 lg:px-5">
-                  {order.quantity} Units
+                  {order.stock}
                 </td>
 
                 {/* Progress */}

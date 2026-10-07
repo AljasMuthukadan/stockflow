@@ -30,6 +30,7 @@ const ProductionModal = ({
     bom: [],
     warehouse: "",
     productionDate: new Date().toISOString().split("T")[0], // Default to today's date
+    stock: "",
     expectedDate: "",
     batchNumber: "",
     notes: "",
@@ -55,7 +56,6 @@ const ProductionModal = ({
       ...prev,
       [name]: value,
     }));
-
     /*
      * If the selected field is Finished Product,
      * automatically find the product and get its unit.
@@ -81,6 +81,7 @@ const ProductionModal = ({
           ...prev,
           product: value,
           unit: selectedProduct.unit || "",
+          stock : `${selectedProduct.quantity} ${selectedProduct.unit}`,
         }));
       } else {
         /*

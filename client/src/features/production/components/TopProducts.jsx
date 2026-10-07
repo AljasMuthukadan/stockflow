@@ -14,6 +14,7 @@ const products = [
     target: 3000,
     growth: "+12%",
     icon: IceCream,
+    unit: "kg",
     color: "bg-green-100 text-green-600",
   },
   {
@@ -22,6 +23,7 @@ const products = [
     target: 2800,
     growth: "+9%",
     icon: IceCream,
+    unit: "kg",
     color: "bg-blue-100 text-blue-600",
   },
   {
@@ -30,6 +32,7 @@ const products = [
     target: 2500,
     growth: "+6%",
     icon: Candy,
+    unit: "pcs",
     color: "bg-orange-100 text-orange-600",
   },
   {
@@ -38,6 +41,7 @@ const products = [
     target: 2200,
     growth: "+4%",
     icon: CupSoda,
+    unit: "L",
     color: "bg-pink-100 text-pink-600",
   },
   {
@@ -46,6 +50,7 @@ const products = [
     target: 2000,
     growth: "+3%",
     icon: Cookie,
+    unit : "pcs",
     color: "bg-purple-100 text-purple-600",
   },
 ];
@@ -140,7 +145,7 @@ const TopProducts = () => {
                   <div className="mt-2 flex justify-between text-sm">
 
                     <span className="text-slate-500">
-                      {product.produced.toLocaleString()} Units
+                      {product.produced.toLocaleString()} {product.unit}
                     </span>
 
                     <span className="font-medium text-slate-600">

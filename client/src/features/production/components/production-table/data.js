@@ -10,6 +10,7 @@ export const productionOrders = [
     dueDate: "25 Jul 2026",
     progress: 85,
     status: "In Progress",
+    stock: "500 kg",
   },
   {
     id: "PRD-1002",
@@ -22,6 +23,7 @@ export const productionOrders = [
     dueDate: "22 Jul 2026",
     progress: 100,
     status: "Completed",
+    stock: "350 kg",
   },
   {
     id: "PRD-1003",
@@ -34,6 +36,7 @@ export const productionOrders = [
     dueDate: "26 Jul 2026",
     progress: 45,
     status: "In Progress",
+    stock: "200 L",
   },
   {
     id: "PRD-1004",
@@ -46,6 +49,7 @@ export const productionOrders = [
     dueDate: "27 Jul 2026",
     progress: 15,
     status: "Pending",
+    stock: "1200 pcs",
   },
   {
     id: "PRD-1005",
@@ -58,6 +62,7 @@ export const productionOrders = [
     dueDate: "21 Jul 2026",
     progress: 100,
     status: "Completed",
+    stock: "700 pcs",
   },
 ];
 
