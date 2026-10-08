@@ -6,8 +6,9 @@ import {
   RotateCcw,
   Plus,
 } from "lucide-react";
+import SelectField from "../../../components/ui/SelectField";
 
-const ProductionFilters = () => {
+const ProductionFilters = ({  search, setSearch, orderStatus, setOrderStatus }) => {
   return (
     <div className="  rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
 
@@ -96,6 +97,8 @@ const ProductionFilters = () => {
               -translate-y-1/2
               text-slate-400
             "
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
           <input
@@ -126,7 +129,7 @@ const ProductionFilters = () => {
 
         {/* Status */}
 
-        <select
+        <SelectField
           className="
             h-10
             rounded-lg
@@ -142,17 +145,19 @@ const ProductionFilters = () => {
             focus:ring-2
             focus:ring-green-100
           "
+          value={orderStatus}
+          onChange={(e) => setOrderStatus(e.target.value)}
         >
           <option>All Status</option>
           <option>Pending</option>
           <option>In Progress</option>
           <option>Completed</option>
           <option>Cancelled</option>
-        </select>
+        </SelectField>
 
         {/* Product */}
 
-        <select
+        <SelectField
           className="
             h-10
             rounded-lg
@@ -168,13 +173,14 @@ const ProductionFilters = () => {
             focus:ring-2
             focus:ring-green-100
           "
+          
         >
           <option>All Products</option>
           <option>Chocolate Ice Cream</option>
           <option>Vanilla Ice Cream</option>
           <option>Strawberry Milkshake</option>
           <option>Chocolate Bar</option>
-        </select>
+        </SelectField>
 
         {/* Date */}
 

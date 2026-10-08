@@ -18,6 +18,22 @@ const ProductionPage = () => {
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
+  {/** FILTER */}
+  const [ orderStatus, setOrderStatus ] = useState("All Status");
+  const [ search, setSearch ] = useState("");
+  
+  const filteredProductionData = productionData.filter((order) => {
+    const matchesStatus =
+      orderStatus === "All Status" || order.status === orderStatus;
+    const matchesSearch =
+      search === "" ||
+      order?.orderId?.toLowerCase().includes(search.toLowerCase()) ||
+      order?.productName?.toLowerCase().includes(search.toLowerCase()) ||
+      order?.customerName?.toLowerCase().includes(search.toLowerCase());
+
+    return matchesStatus && matchesSearch;
+  });
+
   return (
     <div className="space-y-6 px-3 md:px-4 lg:px-8">
       {/* Header */}
@@ -30,11 +46,12 @@ const ProductionPage = () => {
 
       {/* Filters */}
 
-      <ProductionFilters />
+      <ProductionFilters 
+       search={search} setSearch={setSearch} orderStatus={orderStatus} setOrderStatus={setOrderStatus} />
 
       {/* Product Table */}
 
-      <ProductionTable data={productionData} />
+      <ProductionTable data={filteredProductionData} />
       {/* Overview & Recent Activity Section */}
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 ">
         <div className="xl:col-span-2 space-y-6 mb-8">
