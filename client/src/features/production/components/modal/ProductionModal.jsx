@@ -23,7 +23,7 @@ const ProductionModal = ({
     useState("production");
 
   const [formData, setFormData] = useState({
-    productionNumber: "",
+    id: "",
     product: "",
     quantity: "",
     unit: "",
@@ -32,7 +32,7 @@ const ProductionModal = ({
     productionDate: new Date().toISOString().split("T")[0], // Default to today's date
     stock: "",
     expectedDate: "",
-    batchNumber: "",
+    batch: "",
     notes: "",
   });
 

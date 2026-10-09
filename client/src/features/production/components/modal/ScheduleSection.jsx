@@ -152,8 +152,8 @@ const ScheduleSection = ({
               </label>
 
               <Input
-                name="batchNumber"
-                value={formData.batchNumber}
+                name="batch"
+                value={formData.batch}
                 onChange={handleChange}
                 type="text"
                 placeholder="e.g. BATCH-2026-001"

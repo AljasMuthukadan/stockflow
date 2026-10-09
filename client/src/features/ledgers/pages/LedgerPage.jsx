@@ -66,8 +66,7 @@ const LedgerPage = () => {
 
   // null = Add mode
   // object = Edit mode
-  const [selectLedger, setSelectLedger] = useState(null);
-
+  const [selectLedger, setSelectLedger] = useState( ledger?.[0] || "");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [selectProfile, setSelectProfile] = useState(null);
