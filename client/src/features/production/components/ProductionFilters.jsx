@@ -7,6 +7,7 @@ import {
   Plus,
 } from "lucide-react";
 import SelectField from "../../../components/ui/SelectField";
+import Input from "../../../components/ui/Input";
 
 const ProductionFilters = ({  search, setSearch, orderStatus, setOrderStatus }) => {
   return (
@@ -97,11 +98,9 @@ const ProductionFilters = ({  search, setSearch, orderStatus, setOrderStatus }) 
               -translate-y-1/2
               text-slate-400
             "
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
           />
 
-          <input
+          <Input
             type="text"
             placeholder="Search production order..."
             className="
@@ -123,6 +122,8 @@ const ProductionFilters = ({  search, setSearch, orderStatus, setOrderStatus }) 
               focus:ring-2
               focus:ring-green-100
             "
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
 
         </div>

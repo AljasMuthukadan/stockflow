@@ -27,9 +27,10 @@ const ProductionPage = () => {
       orderStatus === "All Status" || order.status === orderStatus;
     const matchesSearch =
       search === "" ||
-      order?.orderId?.toLowerCase().includes(search.toLowerCase()) ||
-      order?.productName?.toLowerCase().includes(search.toLowerCase()) ||
-      order?.customerName?.toLowerCase().includes(search.toLowerCase());
+      order?.id?.toLowerCase().includes(search.toLowerCase()) ||
+      order?.product?.toLowerCase().includes(search.toLowerCase()) ||
+      order?.supervisor?.toLowerCase().includes(search.toLowerCase()) ||
+      order?.status?.toLowerCase().includes(search.toLowerCase()); 
 
     return matchesStatus && matchesSearch;
   });
