@@ -9,7 +9,7 @@ import {
   createInventoryItem,
   updateInventoryItem,
   deleteInventoryItemById,
-} from "../../../api/inventory.api.js";
+} from "../api/inventory.api.js";
 
 const INVENTORY_QUERY_KEY = ["inventory"];
 

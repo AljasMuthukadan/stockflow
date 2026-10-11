@@ -9,7 +9,7 @@ import {
   createLedger,
   updateLedgerById,
   deleteLedgerById,
-} from "../../../api/ledger.api.js";
+} from "../api/ledger.api.js";
 
 const LEDGER_QUERY_KEY = ["ledger"];
 

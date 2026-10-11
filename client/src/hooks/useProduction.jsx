@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createProductionOrder, getProductionOrders, deleteProductionOrder, updateProductionOrder } from "../../../api/production.api.js";
+import { createProductionOrder, getProductionOrders, deleteProductionOrder, updateProductionOrder } from "../api/production.api.js";
 const PRODUCTION_QUERY_KEY = ["order"];
 
 const useProduction = () => {

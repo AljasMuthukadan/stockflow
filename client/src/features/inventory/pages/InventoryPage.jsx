@@ -5,8 +5,9 @@ import InventoryFilters from "../components/filter/InventoryFilters";
 import InventoryTable from "../components/table/InventoryTable";
 import InventoryHeader from "../components/InventoryHeader";
 import InventoryModal from "../components/modal/InventoryModal";
+import useInventory from "../../../hooks/useInventory";
 
-import useInventory from "../hooks/useInventory";
+
 
 const InventoryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

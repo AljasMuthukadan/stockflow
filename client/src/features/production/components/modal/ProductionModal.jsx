@@ -9,7 +9,7 @@ import ScheduleSection from "./ScheduleSection";
 import AdditionalSection from "./AdditionalSection";
 import FormFooter from "./FormFooter";
 
-import useInventory from "../../../inventory/hooks/useInventory";
+import useInventory from "../../../../hooks/useInventory";
 
 const ProductionModal = ({
   onClose,
