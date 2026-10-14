@@ -54,3 +54,26 @@ export const createProductionOrder = async (req, res) => {
     });
   }
 };
+
+export const getAllProductionOrders = async (req, res) => {
+  try {
+    const productionOrders = await ProductionOrder.find().populate("product");
+    if (productionOrders.length === 0) {
+      return res.status(404).json({
+        message: "No production orders found",
+        success: false,
+      });
+    }
+    return res.status(200).json({
+      message: "Production orders retrieved successfully",
+      data: productionOrders,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to retrieve production orders",
+      error: error.message,
+      success: false,
+    });
+  }
+};

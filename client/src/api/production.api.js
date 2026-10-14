@@ -3,7 +3,7 @@ import axios from './axios.js';
 // Create a new production order
 export const createProductionOrder = async (orderData) => {
     try{
-        const response = await axios.post('/production-orders', orderData);
+        const response = await axios.post('/api/production', orderData);
         return response.data;
     } catch (error) {
         console.error('Error creating production order:', error);
@@ -13,7 +13,7 @@ export const createProductionOrder = async (orderData) => {
 // Get all production orders
 export const getProductionOrders = async () => {
     try{
-        const response = await axios.get('/production-orders');
+        const response = await axios.get('/api/production');
         return response.data;
     } catch (error) {
         console.error('Error fetching production orders:', error);
@@ -24,7 +24,7 @@ export const getProductionOrders = async () => {
 // Get a single production order by ID
 export const getProductionOrderById = async (orderId) => {
     try{
-        const response = await axios.get(`/production-orders/${orderId}`);
+        const response = await axios.get(`/api/production/${orderId}`);
         return response.data;
     } catch (error) {
         console.error(`Error fetching production order with ID ${orderId}:`, error);
@@ -35,7 +35,7 @@ export const getProductionOrderById = async (orderId) => {
 // Update a production order by ID
 export const updateProductionOrder = async (orderId, updatedData) => {
     try{
-        const response = await axios.put(`/production-orders/${orderId}`, updatedData);
+        const response = await axios.put(`/api/production/${orderId}`, updatedData);
         return response.data;
     } catch (error) {
         console.error(`Error updating production order with ID ${orderId}:`, error);
@@ -46,7 +46,7 @@ export const updateProductionOrder = async (orderId, updatedData) => {
 // Delete a production order by ID
 export const deleteProductionOrder = async (orderId) => {
     try{
-        const response = await axios.delete(`/production-orders/${orderId}`);
+        const response = await axios.delete(`/api/production/${orderId}`);
         return response.data;
     } catch (error) {
         console.error(`Error deleting production order with ID ${orderId}:`, error);

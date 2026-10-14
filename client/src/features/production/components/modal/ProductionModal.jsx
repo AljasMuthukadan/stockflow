@@ -13,7 +13,7 @@ import useInventory from "../../../../hooks/useInventory";
 
 const ProductionModal = ({
   onClose,
-  setProductionData,
+  addProductionOrder,
 }) => {
   /* ===================================================== */
   /* STATE */
@@ -152,10 +152,7 @@ const ProductionModal = ({
      *
      * POST /api/production
      */
-    setProductionData((prev) => [
-      ...prev,
-      productionOrder,
-    ]);
+    addProductionOrder(productionOrder);
 
     /*
      * Later backend logic:

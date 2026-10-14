@@ -1,17 +1,16 @@
-
 import ProductionProgress from "./ProductionProgress";
 import ProductionStatus from "./ProductionStatus";
 import SupervisorInfo from "./Supervisorinfo";
 import ProductionOrderInfo from "./ProductionOrderInfo";
 import ProductionTableMobile from "./mobile/ProductionTableMobile";
 import ProductionTableHeader from "./ProductionTableHeader";
-import Pagination from "../../../../components/common/Pagination";
 import ActionButton from "../../../../components/common/ActionButton";
 
-const ProductionTable = ({ data }) => {
+const ProductionTable = ({ data = [] }) => {
   return (
     <div
       className="
+        w-full
         overflow-hidden
         rounded-2xl
         border
@@ -20,131 +19,119 @@ const ProductionTable = ({ data }) => {
         shadow-sm
       "
     >
-      {/* ================================================= */}
-      {/* MOBILE VIEW */}
-      {/* ================================================= */}
+      {/* Mobile View */}
+      <div className="md:hidden">
+        <ProductionTableMobile />
+      </div>
 
-      <ProductionTableMobile />
-
-      {/* ================================================= */}
-      {/* TABLET + DESKTOP */}
-      {/* ================================================= */}
-
+      {/* Tablet + Desktop */}
       <div
         className="
           hidden
-          max-h-[calc(100vh-300px)]
+          h-[448px]
+          min-h-0
+          flex-col
           overflow-auto
           scrollbar-none
-          md:block
+          md:flex
         "
       >
-        <table className="w-full min-w-[900px] text-sm xl:min-w-[1150px]">
-          {/* ================================================= */}
-          {/* HEADER */}
-          {/* ================================================= */}
-
+        <table className="w-full min-w-[900px] shrink-0 text-sm xl:min-w-[1150px]">
           <ProductionTableHeader />
 
-          {/* ================================================= */}
-          {/* BODY */}
-          {/* ================================================= */}
-
           <tbody>
-            {data.map((order) => (
-              <tr
-                key={order.id}
-                className="
-                  border-b
-                  border-slate-100
-                  transition
-                  hover:bg-slate-50
-                "
-              >
-                {/* Production Order */}
+            {data.length > 0 ? (
+              data.map((order) => (
+                <tr
+                  key={order.id}
+                  className="
+                    border-b
+                    border-slate-100
+                    transition-colors
+                    hover:bg-slate-50
+                  "
+                >
+                  {/* Production Order */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <ProductionOrderInfo order={order} />
+                  </td>
 
-                <td className="px-4 py-4 lg:px-5 lg:py-4">
-                  <ProductionOrderInfo order={order} />
-                </td>
+                  {/* Batch */}
+                  <td className="whitespace-nowrap px-4 py-4 font-medium text-slate-700 lg:px-5">
+                    {order.batch}
+                  </td>
 
-                {/* Batch */}
+                  {/* Quantity */}
+                  <td className="whitespace-nowrap px-4 py-4 text-slate-700 lg:px-5">
+                    {order.stock}
+                  </td>
 
-                <td className="whitespace-nowrap px-4 py-4 font-medium text-slate-700 lg:px-5">
-                  {order.batch}
-                </td>
+                  {/* Progress */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <div className="w-32 lg:w-40">
+                      <ProductionProgress
+                        progress={order.progress}
+                      />
+                    </div>
+                  </td>
 
-                {/* Quantity */}
+                  {/* Machine */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <div className="min-w-0">
+                      <p className="truncate font-medium text-slate-800">
+                        {order.machine}
+                      </p>
+                      <p className="mt-0.5 text-xs text-slate-400">
+                        Production Line
+                      </p>
+                    </div>
+                  </td>
 
-                <td className="whitespace-nowrap px-4 py-4 text-slate-700 lg:px-5">
-                  {order.stock}
-                </td>
+                  {/* Supervisor */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <SupervisorInfo
+                      supervisor={order.supervisor}
+                    />
+                  </td>
 
-                {/* Progress */}
+                  {/* Due Date */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <div className="whitespace-nowrap">
+                      <p className="font-medium text-slate-700">
+                        {order.dueDate}
+                      </p>
+                      <p className="mt-0.5 text-xs text-slate-400">
+                        Expected Completion
+                      </p>
+                    </div>
+                  </td>
 
-                <td className="px-4 py-4 lg:px-5">
-                  <div className="w-32 lg:w-40">
-                    <ProductionProgress progress={order.progress} />
-                  </div>
-                </td>
+                  {/* Status */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <ProductionStatus status={order.status} />
+                  </td>
 
-                {/* Machine */}
-
-                <td className="px-4 py-4 lg:px-5">
-                  <div className="min-w-0">
-                    <p className="truncate font-medium text-slate-800">
-                      {order.machine}
-                    </p>
-
-                    <p className="mt-0.5 text-xs text-slate-400">
-                      Production Line
-                    </p>
-                  </div>
-                </td>
-
-                {/* Supervisor */}
-
-                <td className="px-4 py-4 lg:px-5">
-                  <SupervisorInfo supervisor={order.supervisor} />
-                </td>
-
-                {/* Due Date */}
-
-                <td className="px-4 py-4 lg:px-5">
-                  <div className="whitespace-nowrap">
-                    <p className="font-medium text-slate-700">
-                      {order.dueDate}
-                    </p>
-
-                    <p className="mt-0.5 text-xs text-slate-400">
-                      Expected Completion
-                    </p>
-                  </div>
-                </td>
-
-                {/* Status */}
-
-                <td className="px-4 py-4 lg:px-5">
-                  <ProductionStatus status={order.status} />
-                </td>
-
-                {/* Action */}
-
-                <td className="px-4 py-4 lg:px-5">
-                  <div className="flex justify-center">
-                    <ActionButton />
-                  </div>
+                  {/* Actions */}
+                  <td className="px-4 py-4 lg:px-5">
+                    <div className="flex justify-center">
+                      <ActionButton />
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td
+                  colSpan={9}
+                  className="h-48 text-center text-sm text-slate-500"
+                >
+                  No production orders found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
-
-      {/* ================================================= */}
-      {/* FOOTER / PAGINATION */}
-      {/* ================================================= */}
-
-      <Pagination />
     </div>
   );
 };
