@@ -43,7 +43,7 @@ const ProductionPage = () => {
 
       {/* Stats */}
 
-      <ProductionStats />
+      <ProductionStats data={productionData} />
 
       {/* Filters */}
 

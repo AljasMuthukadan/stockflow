@@ -8,53 +8,7 @@ import {
   TrendingDown,
 } from "lucide-react";
 
-const stats = [
-  {
-    title: "Total Production",
-    value: "1,450",
-    unit: "Units",
-    change: "+15.3%",
-    positive: true,
-    icon: Factory,
-    color: "green",
-  },
-  {
-    title: "In Progress",
-    value: "8",
-    unit: "Orders",
-    change: "+2",
-    positive: true,
-    icon: LoaderCircle,
-    color: "blue",
-  },
-  {
-    title: "Completed",
-    value: "28",
-    unit: "Orders",
-    change: "+5",
-    positive: true,
-    icon: CircleCheckBig,
-    color: "emerald",
-  },
-  {
-    title: "Pending",
-    value: "5",
-    unit: "Orders",
-    change: "-1",
-    positive: false,
-    icon: Clock3,
-    color: "orange",
-  },
-  {
-    title: "Scrap / Rejected",
-    value: "2",
-    unit: "Orders",
-    change: "-1",
-    positive: false,
-    icon: OctagonX,
-    color: "red",
-  },
-];
+
 
 const colors = {
   green: {
@@ -88,7 +42,62 @@ const colors = {
   },
 };
 
-const ProductionStats = () => {
+
+const ProductionStats = ({data}) => {
+    {/** Order filter */}
+const completedOrders = data.filter(order => order.status == "Completed");
+const inProgressOrders = data.filter(order => order.status == "In Progress");
+const pendingOrders = data.filter(order => order.status == "Pending");
+const scrapOrders = data.filter(order => order.status == "Scrap / Rejected");
+
+  const stats = [
+  {
+    title: "Total Production",
+    value: data.length,
+    unit: "Units",
+    change: "+15.3%",
+    positive: true,
+    icon: Factory,
+    color: "green",
+  },
+  {
+    title: "In Progress",
+    value: inProgressOrders.length  ,
+    unit: "Orders",
+    change: "+2",
+    positive: true,
+    icon: LoaderCircle,
+    color: "blue",
+  },
+  {
+    title: "Completed",
+    value: completedOrders.length,
+    unit: "Orders",
+    change: "+5",
+    positive: true,
+    icon: CircleCheckBig,
+    color: "emerald",
+  },
+  {
+    title: "Pending",
+    value: pendingOrders.length,
+    unit: "Orders",
+    change: "-1",
+    positive: false,
+    icon: Clock3,
+    color: "orange",
+  },
+  {
+    title: "Scrap / Rejected",
+    value: scrapOrders.length,
+    unit: "Orders",
+    change: "-1",
+    positive: false,
+    icon: OctagonX,
+    color: "red",
+  },
+];
+
   return (
     <div
       className="
