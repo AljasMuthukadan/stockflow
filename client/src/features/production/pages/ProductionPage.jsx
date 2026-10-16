@@ -6,10 +6,12 @@ import RecentActivities from "../components/RecentActivities";
 import TopProducts from "../components/TopProducts";
 import ProductionHeader from "../components/ProductionHeader";
 import { productionOrders } from "../components/production-table/data";
+import  useProduction  from "../../../hooks/useProduction";
 import { useState } from "react";
 import ProductionModal from "../components/modal/ProductionModal";
 
 const ProductionPage = () => {
+  const {order} = useProduction();
   const [ productionData, setProductionData ] = useState(productionOrders);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const handleCloseModal = () => {
@@ -34,6 +36,8 @@ const ProductionPage = () => {
 
     return matchesStatus && matchesSearch;
   });
+  console.log("Production Data:", productionData);
+  console.log("real Production Data:", order);
 
   return (
     <div className="space-y-6 px-3 md:px-4 lg:px-8">

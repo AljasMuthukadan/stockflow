@@ -14,7 +14,8 @@ export const createProductionOrder = async (orderData) => {
 export const getProductionOrders = async () => {
     try{
         const response = await axios.get('/api/production');
-        return response.data;
+        // Assuming the API returns an object with a 'data' property containing the orders
+        return response.data.data;
     } catch (error) {
         console.error('Error fetching production orders:', error);
         throw error;
