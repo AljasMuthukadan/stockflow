@@ -24,13 +24,13 @@ const ProductionPage = () => {
   const [ orderStatus, setOrderStatus ] = useState("All Status");
   const [ search, setSearch ] = useState("");
   
-  const filteredProductionData = productionData.filter((order) => {
+  const filteredProductionData = order.filter((order) => {
     const matchesStatus =
       orderStatus === "All Status" || order.status === orderStatus;
     const matchesSearch =
       search === "" ||
       order?.id?.toLowerCase().includes(search.toLowerCase()) ||
-      order?.product?.toLowerCase().includes(search.toLowerCase()) ||
+      order?.product?.name?.toLowerCase().includes(search.toLowerCase()) ||
       order?.supervisor?.toLowerCase().includes(search.toLowerCase()) ||
       order?.status?.toLowerCase().includes(search.toLowerCase()); 
 

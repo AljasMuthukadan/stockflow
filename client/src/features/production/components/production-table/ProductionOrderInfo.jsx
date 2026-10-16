@@ -23,7 +23,7 @@ const ProductionOrderInfo = ({ order }) => {
 
       <div className="min-w-0">
         <p className="truncate font-semibold text-slate-800">
-          {order?.product? order.product : "N/A"}
+          {order?.product?.name? order.product.name : "N/A"}
         </p>
 
         <p className="mt-0.5 text-xs text-slate-400">

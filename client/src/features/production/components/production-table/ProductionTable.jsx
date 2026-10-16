@@ -43,7 +43,7 @@ const ProductionTable = ({ data = [] }) => {
             {data.length > 0 ? (
               data.map((order) => (
                 <tr
-                  key={order.id}
+                  key={order._id}
                   className="
                     border-b
                     border-slate-100
@@ -70,7 +70,7 @@ const ProductionTable = ({ data = [] }) => {
                   <td className="px-4 py-4 lg:px-5">
                     <div className="w-32 lg:w-40">
                       <ProductionProgress
-                        progress={order.progress}
+                        progress={order?.progress? order.progress : 0}
                       />
                     </div>
                   </td>
@@ -79,7 +79,7 @@ const ProductionTable = ({ data = [] }) => {
                   <td className="px-4 py-4 lg:px-5">
                     <div className="min-w-0">
                       <p className="truncate font-medium text-slate-800">
-                        {order.machine}
+                        {order?.machine || "None"}
                       </p>
                       <p className="mt-0.5 text-xs text-slate-400">
                         Production Line
@@ -90,7 +90,7 @@ const ProductionTable = ({ data = [] }) => {
                   {/* Supervisor */}
                   <td className="px-4 py-4 lg:px-5">
                     <SupervisorInfo
-                      supervisor={order.supervisor}
+                      supervisor={order?.supervisor || "Not assigned"}
                     />
                   </td>
 
@@ -98,7 +98,7 @@ const ProductionTable = ({ data = [] }) => {
                   <td className="px-4 py-4 lg:px-5">
                     <div className="whitespace-nowrap">
                       <p className="font-medium text-slate-700">
-                        {order.dueDate}
+                        {order?.dueDate || ""}
                       </p>
                       <p className="mt-0.5 text-xs text-slate-400">
                         Expected Completion
@@ -108,7 +108,7 @@ const ProductionTable = ({ data = [] }) => {
 
                   {/* Status */}
                   <td className="px-4 py-4 lg:px-5">
-                    <ProductionStatus status={order.status} />
+                    <ProductionStatus status={order?.status} />
                   </td>
 
                   {/* Actions */}
