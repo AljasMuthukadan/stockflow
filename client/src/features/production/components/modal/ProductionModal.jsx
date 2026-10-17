@@ -25,6 +25,7 @@ const ProductionModal = ({
   const [formData, setFormData] = useState({
     id: "",
     product: "",
+    productionId: "",
     quantity: "",
     unit: "",
     bom: [],
@@ -80,6 +81,7 @@ const ProductionModal = ({
         setFormData((prev) => ({
           ...prev,
           product: value,
+          id: selectedProduct._id,
           unit: selectedProduct.unit || "",
           stock : `${selectedProduct.quantity} ${selectedProduct.unit}`,
         }));
@@ -91,6 +93,7 @@ const ProductionModal = ({
         setFormData((prev) => ({
           ...prev,
           product: value,
+          id: "",
           unit: "",
         }));
       }

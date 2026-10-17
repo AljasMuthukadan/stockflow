@@ -87,8 +87,8 @@ const ProductionInfoSection = ({
               </label>
 
               <Input
-                name="id"
-                value={formData.id}
+                name="productionId"
+                value={formData.productionId}
                 onChange={handleChange}
                 type="text"
                 placeholder="e.g. PROD-0001"

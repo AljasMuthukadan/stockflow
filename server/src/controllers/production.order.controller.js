@@ -10,18 +10,19 @@ export const createProductionOrder = async (req, res) => {
       stock,
       quantity,
       batch,
+      id,
     } = req.body;
     
 
     // 1. Validate required fields
-    if (!product || !quantity ||  !stock) {
+    if (!product || !quantity ||  !stock || !id) {
       return res.status(400).json({
-        message: "Product, stock, quantity, and production date are required",
+        message: "Product, stock, quantity, and production ID are required",
       });
     }
 
     // 2. Validate MongoDB ObjectId
-    if (!mongoose.isValidObjectId(product)) {
+    if (!mongoose.isValidObjectId(id)) {
       return res.status(400).json({
         message: "Invalid product ID",
       });
@@ -31,7 +32,7 @@ export const createProductionOrder = async (req, res) => {
 
     // 4. Create production order
     const productionOrder = await ProductionOrder.create({
-      product,
+      product : id,
       stock,
       batch,
       quantity,

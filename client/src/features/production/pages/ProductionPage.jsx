@@ -11,7 +11,7 @@ import { useState } from "react";
 import ProductionModal from "../components/modal/ProductionModal";
 
 const ProductionPage = () => {
-  const {order} = useProduction();
+  const { order, addProductionOrder } = useProduction();
   const [ productionData, setProductionData ] = useState(productionOrders);
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const handleCloseModal = () => {
@@ -69,7 +69,7 @@ const ProductionPage = () => {
         </div>
       </div>
       {isModalOpen && (
-        <ProductionModal onClose={handleCloseModal} setProductionData={setProductionData} />
+        <ProductionModal onClose={handleCloseModal} onAdd={addProductionOrder} />
       )}
     </div>
   );
