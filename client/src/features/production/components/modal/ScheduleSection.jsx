@@ -87,24 +87,30 @@ const ScheduleSection = ({
             {/* Warehouse */}
 
             <SelectField
-              label="Production Warehouse"
-              name="warehouse"
-              value={formData.warehouse}
+              label="Production Completion"
+              name="completion"
+              value={formData.completion}
               onChange={handleChange}
               required
             >
 
-              <option value="">
-                Select warehouse
+              <option value="Pending" disabled>
+                Select Status
               </option>
 
-              <option value="main-warehouse">
-                Main Warehouse
+              <option value="Completed">
+                Completed
+              </option>
+              <option value="Pending">
+                Pending
+              </option>
+              <option value="In Progress">
+                In Progress
+              </option>
+              <option value="Cancelled">
+                Cancelled
               </option>
 
-              <option value="warehouse-b">
-                Warehouse B
-              </option>
 
             </SelectField>
 
