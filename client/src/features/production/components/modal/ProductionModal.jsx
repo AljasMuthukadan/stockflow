@@ -83,7 +83,7 @@ const ProductionModal = ({
           product: value,
           id: selectedProduct._id,
           unit: selectedProduct.unit || "",
-          stock : `${selectedProduct.quantity} ${selectedProduct.unit}`,
+          stock : `${formData.quantity} ${selectedProduct.unit}`,
         }));
       } else {
         /*
