@@ -21,9 +21,12 @@ export const badgeStyle = (status) => {
 
     case "In Progress":
       return "border border-blue-200 bg-blue-50 text-blue-700";
-
     case "Pending":
       return "border border-yellow-200 bg-yellow-50 text-yellow-700";
+    case "Delayed":
+      return "border border-red-200 bg-red-50 text-red-700";
+    case "Cancelled":
+      return "border border-red-200 bg-red-50 text-red-700"
 
     default:
       return "border border-slate-200 bg-slate-50 text-slate-600";
