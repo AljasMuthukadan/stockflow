@@ -81,3 +81,30 @@ export const getAllProductionOrders = async (req, res) => {
     });
   }
 };
+
+export const deleteProductionOrder = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const deletedOrder = await ProductionOrder.findByIdAndDelete(id);
+
+    if (!deletedOrder) {
+      return res.status(404).json({
+        message: "Production order not found",
+        success: false,
+      });
+    }
+
+    return res.status(200).json({
+      message: "Production order deleted successfully",
+      data: deletedOrder,
+      success: true,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to delete production order",
+      error: error.message,
+      success: false,
+    });
+  }
+};

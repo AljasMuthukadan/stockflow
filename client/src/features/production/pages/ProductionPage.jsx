@@ -10,7 +10,7 @@ import { useState } from "react";
 import ProductionModal from "../components/modal/ProductionModal";
 
 const ProductionPage = () => {
-  const { order, addProductionOrder } = useProduction();
+  const { order, addProductionOrder, deleteOrder } = useProduction();
 
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const handleCloseModal = () => {
@@ -55,7 +55,7 @@ const ProductionPage = () => {
 
       {/* Product Table */}
 
-      <ProductionTable data={filteredProductionData} />
+      <ProductionTable data={filteredProductionData} onDelete={deleteOrder} />
       {/* Overview & Recent Activity Section */}
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 ">
         <div className="xl:col-span-2 space-y-6 mb-8">

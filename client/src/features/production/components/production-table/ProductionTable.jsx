@@ -6,7 +6,7 @@ import ProductionTableMobile from "./mobile/ProductionTableMobile";
 import ProductionTableHeader from "./ProductionTableHeader";
 import ActionButton from "../../../../components/common/ActionButton";
 
-const ProductionTable = ({ data = [] }) => {
+const ProductionTable = ({ data = [], onDelete }) => {
   return (
     <div
       className="
@@ -114,7 +114,10 @@ const ProductionTable = ({ data = [] }) => {
                   {/* Actions */}
                   <td className="px-4 py-4 lg:px-5">
                     <div className="flex justify-center">
-                      <ActionButton />
+                      <ActionButton onDelete={() => onDelete(order._id)}
+                      key={order.id}
+                      onEdit={()=> console.log("Edit ")}
+                      />
                     </div>
                   </td>
                 </tr>
