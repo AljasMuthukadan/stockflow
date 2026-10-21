@@ -6,18 +6,7 @@ import LedgerTable from "../components/table/LedgerTable";
 import LedgerProfile from "../components/profile/LedgerProfile";
 import LedgerModal from "../components/modal/LedgerModal";
 import useLedger from "../../../hooks/useLedger";
-
-
-const LedgerLoading = () => {
-  return (
-    <div className="flex h-full items-center justify-center rounded-2xl border border-slate-200 bg-white">
-      <div className="flex items-center gap-3 text-sm text-slate-500">
-        <div className="h-5 w-5 animate-spin rounded-full border-2 border-slate-300 border-t-emerald-500" />
-        Loading ledgers...
-      </div>
-    </div>
-  );
-};
+import Loading from '../../../components/ui/Loading'
 
 const LedgerError = ({ error, onRetry }) => {
   const message =
@@ -174,8 +163,8 @@ const LedgerPage = () => {
           {/* LOADING */}
 
           {loading ? (
-            <div className="min-h-0 flex-1">
-              <LedgerLoading />
+            <div className="h-full w-full flex-1  flex justify-center items-center bg-gray-50 rounded-2xl border border-slate-200">
+              <Loading className="text-foreground bg-amber-700 flex justify-center items-center"/>
             </div>
           ) : error ? (
             /* ERROR */
