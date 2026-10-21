@@ -29,7 +29,7 @@ const ProductionModal = ({
     quantity: "",
     unit: "",
     bom: [],
-    completion: "",
+    status: "",
     productionDate: new Date().toISOString().split("T")[0], // Default to today's date
     stock: "",
     expectedDate: "",

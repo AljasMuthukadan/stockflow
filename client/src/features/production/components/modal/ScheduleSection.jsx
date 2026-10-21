@@ -87,9 +87,9 @@ const ScheduleSection = ({
             {/* Warehouse */}
 
             <SelectField
-              label="Production Completion"
-              name="completion"
-              value={formData.completion}
+              label="Production Status"
+              name="status"
+              value={formData.status}
               onChange={handleChange}
               required
             >

@@ -4,15 +4,14 @@ import ProductionTable from "../components/production-table/ProductionTable";
 import ProductionOverview from "../components/ProductionOverview";
 import RecentActivities from "../components/RecentActivities";
 import TopProducts from "../components/TopProducts";
-import ProductionHeader from "../components/ProductionHeader";
-import { productionOrders } from "../components/production-table/data";
+import ProductionHeader from "../components/ProductionHeader";;
 import  useProduction  from "../../../hooks/useProduction";
 import { useState } from "react";
 import ProductionModal from "../components/modal/ProductionModal";
 
 const ProductionPage = () => {
   const { order, addProductionOrder } = useProduction();
-  const [ productionData, setProductionData ] = useState(productionOrders);
+
   const [ isModalOpen, setIsModalOpen ] = useState(false);
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -36,7 +35,7 @@ const ProductionPage = () => {
 
     return matchesStatus && matchesSearch;
   });
-  console.log("Production Data:", productionData);
+
   console.log("real Production Data:", order);
 
   return (
@@ -47,7 +46,7 @@ const ProductionPage = () => {
 
       {/* Stats */}
 
-      <ProductionStats data={productionData} />
+      <ProductionStats data={order} />
 
       {/* Filters */}
 
