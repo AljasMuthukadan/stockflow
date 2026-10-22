@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Modal from "../../../../components/common/Modal";
 
@@ -11,18 +11,11 @@ import FormFooter from "./FormFooter";
 
 import useInventory from "../../../../hooks/useInventory";
 
-const ProductionModal = ({
-  onClose,
-  onAdd,
-}) => {
+const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
+  const isEditMode = Boolean(selectedOrder);
+  console.log(isEditMode);
   /* ===================================================== */
-  /* STATE */
-  /* ===================================================== */
-
-  const [openSection, setOpenSection] =
-    useState("production");
-
-  const [formData, setFormData] = useState({
+  const initialData = {
     id: "",
     product: "",
     productionId: "",
@@ -35,7 +28,15 @@ const ProductionModal = ({
     expectedDate: "",
     batch: "",
     notes: "",
-  });
+  };
+
+  /* ===================================================== */
+  /* STATE */
+  /* ===================================================== */
+
+  const [openSection, setOpenSection] = useState("production");
+
+  const [formData, setFormData] = useState(initialData);
 
   /* ===================================================== */
   /* INVENTORY */
@@ -63,27 +64,20 @@ const ProductionModal = ({
      */
     if (name === "product") {
       const selectedProduct = inventory.find(
-        (item) =>
-          String(item.name ?? item.name) === String(value)
+        (item) => String(item.name ?? item.name) === String(value),
       );
 
-      console.log(
-        "Selected Product:",
-        selectedProduct
-      );
+      console.log("Selected Product:", selectedProduct);
 
       if (selectedProduct) {
-        console.log(
-          "Selected Product Unit:",
-          selectedProduct.unit
-        );
+        console.log("Selected Product Unit:", selectedProduct.unit);
 
         setFormData((prev) => ({
           ...prev,
           product: value,
           id: selectedProduct._id,
           unit: selectedProduct.unit || "",
-          stock : `${formData.quantity} ${selectedProduct.unit}`,
+          stock: `${formData.quantity} ${selectedProduct.unit}`,
         }));
       } else {
         /*
@@ -105,10 +99,30 @@ const ProductionModal = ({
   /* ===================================================== */
 
   const toggleSection = (section) => {
-    setOpenSection((prev) =>
-      prev === section ? "" : section
-    );
+    setOpenSection((prev) => (prev === section ? "" : section));
   };
+
+  useEffect(() => {
+    if (!selectedOrder) {
+      setFormData(initialData);
+      setOpenSection("basic");
+      return;
+    }
+    setFormData({
+      id: selectedOrder._id,
+      product: selectedOrder?.product?._id,
+      productionId: selectedOrder?.productId || "",
+      quantity: selectedOrder?.quantity || selectedOrder?.stock?.split(" ")[0],
+      unit: selectedOrder.product.unit,
+      bom: [],
+      status: selectedOrder.status,
+      productionDate: selectedOrder?.productionDate || new Date().toISOString().split("T")[0], 
+      stock: selectedOrder?.stock,
+      expectedDate: selectedOrder?.expectedDate ||  new Date().toISOString().split("T")[0] ,
+      batch: selectedOrder.batch,
+      notes: "",
+    });
+  });
 
   /* ===================================================== */
   /* SUBMIT */
@@ -143,10 +157,7 @@ const ProductionModal = ({
       quantity: Number(formData.quantity),
     };
 
-    console.log(
-      "Production Order:",
-      productionOrder
-    );
+    console.log("Production Order:", productionOrder);
 
     /*
      * Temporary local state.
@@ -197,7 +208,6 @@ const ProductionModal = ({
         "
       >
         <div className="space-y-2 p-4">
-
           {/* ================================================= */}
           {/* PRODUCTION INFORMATION */}
           {/* ================================================= */}

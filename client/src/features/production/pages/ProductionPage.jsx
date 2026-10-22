@@ -10,9 +10,10 @@ import { useState } from "react";
 import ProductionModal from "../components/modal/ProductionModal";
 
 const ProductionPage = () => {
-  const { order, addProductionOrder, deleteOrder } = useProduction();
+  const { order, addProductionOrder, deleteOrder, updateOrder } = useProduction();
 
   const [ isModalOpen, setIsModalOpen ] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
@@ -37,7 +38,11 @@ const ProductionPage = () => {
   });
 
   console.log("real Production Data:", order);
-
+  const handleEditOrder = (order) => {
+    console.log("Editing order:", order);
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
   return (
     <div className="space-y-6 px-3 md:px-4 lg:px-8">
       {/* Header */}
@@ -55,7 +60,7 @@ const ProductionPage = () => {
 
       {/* Product Table */}
 
-      <ProductionTable data={filteredProductionData} onDelete={deleteOrder} />
+      <ProductionTable data={filteredProductionData} onDelete={deleteOrder} onEdit={handleEditOrder} />
       {/* Overview & Recent Activity Section */}
       <div className="grid grid-cols-1 xl:grid-cols-5 gap-6 ">
         <div className="xl:col-span-2 space-y-6 mb-8">
@@ -68,7 +73,12 @@ const ProductionPage = () => {
         </div>
       </div>
       {isModalOpen && (
-        <ProductionModal onClose={handleCloseModal} onAdd={addProductionOrder} />
+        <ProductionModal 
+        key={selectedOrder?._id ?? "new-production-order"}
+        onClose={handleCloseModal} onAdd={addProductionOrder}
+        selectedOrder={selectedOrder}
+        onUpdate={updateOrder}
+        />
       )}
     </div>
   );
