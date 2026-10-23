@@ -9,7 +9,9 @@ const ProductionInfoSection = ({
   formData,
   handleChange,
   inventory = [],
+  isEditMode
 }) => {
+  console.log("Editmodess", isEditMode)
   return (
     <section className="overflow-hidden rounded-xl border border-slate-200">
       {/* ================================================= */}
@@ -104,6 +106,7 @@ const ProductionInfoSection = ({
               name="product"
               value={formData.product}
               onChange={handleChange}
+              disabled={isEditMode}
               required
             >
               <option value="">

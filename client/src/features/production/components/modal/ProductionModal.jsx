@@ -29,6 +29,8 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
     batch: "",
     notes: "",
   };
+  
+
 
   /* ===================================================== */
   /* STATE */
@@ -37,12 +39,17 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
   const [openSection, setOpenSection] = useState("production");
 
   const [formData, setFormData] = useState(initialData);
-
+   
   /* ===================================================== */
   /* INVENTORY */
   /* ===================================================== */
 
   const { inventory = [] } = useInventory();
+
+   const i = inventory
+      .filter((item) => item?._id === selectedOrder?.product?._id )
+      .map((item) => item.name)[0]
+      console.log(i)
 
   /* ===================================================== */
   /* HANDLE INPUT CHANGE */
@@ -66,6 +73,7 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
       const selectedProduct = inventory.find(
         (item) => String(item.name ?? item.name) === String(value),
       );
+      
 
       console.log("Selected Product:", selectedProduct);
 
@@ -109,20 +117,24 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
       return;
     }
     setFormData({
-      id: selectedOrder._id,
-      product: selectedOrder?.product?._id,
-      productionId: selectedOrder?.productId || "",
+      id: selectedOrder?.product?._id,
+      product: inventory
+      .filter((item) => item?._id === selectedOrder?.product?._id )
+      .map((item) => item.name)[0]
+      ,
+      productionId: selectedOrder?.productionId || "",
       quantity: selectedOrder?.quantity || selectedOrder?.stock?.split(" ")[0],
-      unit: selectedOrder.product.unit,
+      unit: selectedOrder?.product?.unit,
       bom: [],
-      status: selectedOrder.status,
+      status: selectedOrder?.status,
       productionDate: selectedOrder?.productionDate || new Date().toISOString().split("T")[0], 
       stock: selectedOrder?.stock,
       expectedDate: selectedOrder?.expectedDate ||  new Date().toISOString().split("T")[0] ,
-      batch: selectedOrder.batch,
+      batch: selectedOrder?.batch,
       notes: "",
-    });
-  });
+    })
+    
+  }, [selectedOrder, inventory]);
 
   /* ===================================================== */
   /* SUBMIT */
@@ -183,6 +195,7 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
     onClose();
   };
 
+   
   /* ===================================================== */
   /* RENDER */
   /* ===================================================== */
@@ -218,6 +231,7 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
             formData={formData}
             handleChange={handleChange}
             inventory={inventory}
+            isEditMode={isEditMode}
           />
 
           {/* ================================================= */}

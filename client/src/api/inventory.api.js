@@ -21,7 +21,17 @@ export const getInventoryItems = async () => {
     throw error;
   }
 };
+// Get inventory by id
+export const getInventoryItemById = async (id) => {
+  try{
+    const response = await api.get(`/api/inventory/${id}`)
+    return response.data
 
+  }catch(err){
+    console.error("Error fetching inventory items by category : ", err)
+    throw err
+  }
+}
 // Get inventory items by category
 export const getInventoryItemByCategory = async (category) => {
   try {

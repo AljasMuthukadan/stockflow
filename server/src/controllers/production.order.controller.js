@@ -11,7 +11,12 @@ export const createProductionOrder = async (req, res) => {
       quantity,
       batch,
       id,
-      status
+      status,
+      productionId,
+      productionDate,
+      expectedDate,
+      note,
+
 
     } = req.body;
     
@@ -38,7 +43,11 @@ export const createProductionOrder = async (req, res) => {
       stock,
       batch,
       quantity,
-      status
+      status,
+      productionId,
+      productionDate,
+      expectedDate,
+      note,
 
     });
 

@@ -7,6 +7,9 @@ const ProductionOrderSchema = new mongoose.Schema({
     ref: "InventoryItem",
     required: true,
   },
+  productionId : {
+    type : String,
+  },
 
   stock: {
     type: String,

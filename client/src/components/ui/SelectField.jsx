@@ -7,6 +7,7 @@ const SelectField = ({
   onChange,
   children,
   required = false,
+  disabled
 }) => {
   return (
     <div>
@@ -27,6 +28,8 @@ const SelectField = ({
           value={value}
           onChange={onChange}
           required={required}
+          disabled={disabled}
+          
           className="
             h-10
             w-full
