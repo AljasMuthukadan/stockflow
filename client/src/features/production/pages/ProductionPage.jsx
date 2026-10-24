@@ -18,6 +18,7 @@ const ProductionPage = () => {
     setIsModalOpen(false);
   };
   const handleOpenModal = () => {
+    setSelectedOrder(null);
     setIsModalOpen(true);
   };
   {/** FILTER */}

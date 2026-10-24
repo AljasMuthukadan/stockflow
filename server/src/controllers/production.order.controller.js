@@ -117,3 +117,95 @@ export const deleteProductionOrder = async (req, res) => {
     });
   }
 };
+
+export const updateProduction = async (req, res) => {
+  try {
+    const { id } = req.params;
+    console.log(id)
+
+    const {
+      product,
+      stock,
+      quantity,
+      batch,
+      status,
+      productionId,
+      productionDate,
+      expectedDate,
+      note,
+    } = req.body;
+    console.log("Request : ", req.body)
+    const ProId = ProductionOrder.findById(id);
+    const prdtId = ProId.product._id
+    console.log(prdtId)
+    console.log(ProId)
+
+    // 1. Validate production order ID
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid production order ID",
+      });
+    }
+
+    // 2. Validate product ID if provided
+    if (product && !mongoose.isValidObjectId(product)) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid product ID",
+      });
+    }
+
+    // 3. Validate required fields
+    if (quantity !== undefined && Number(quantity) <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Quantity must be greater than zero",
+      });
+    }
+
+    // 4. Build update object using only supplied fields
+    const updateData = {};
+
+    if (product !== undefined) updateData.product = product;
+    if (stock !== undefined) updateData.stock = stock;
+    if (quantity !== undefined) updateData.quantity = Number(quantity);
+    if (batch !== undefined) updateData.batch = batch;
+    if (status !== undefined) updateData.status = status;
+    if (productionId !== undefined) updateData.productionId = productionId;
+    if (productionDate !== undefined) updateData.productionDate = productionDate;
+    if (expectedDate !== undefined) updateData.expectedDate = expectedDate;
+    if (note !== undefined) updateData.note = note;
+
+    // 5. Update production order
+    const updatedOrder = await ProductionOrder.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).populate("product");
+
+    // 6. Handle missing order
+    if (!updatedOrder) {
+      return res.status(404).json({
+        success: false,
+        message: "Production order not found",
+      });
+    }
+
+    // 7. Return updated order
+    return res.status(200).json({
+      success: true,
+      message: "Production order updated successfully",
+      data: updatedOrder,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update production order",
+      error: error.message,
+    });
+  }
+};

@@ -11,7 +11,7 @@ import FormFooter from "./FormFooter";
 
 import useInventory from "../../../../hooks/useInventory";
 
-const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
+const ProductionModal =  ({ onClose, onAdd, selectedOrder, onUpdate }) => {
   const isEditMode = Boolean(selectedOrder);
   console.log(isEditMode);
   /* ===================================================== */
@@ -140,7 +140,7 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
   /* SUBMIT */
   /* ===================================================== */
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     /*
@@ -178,7 +178,18 @@ const ProductionModal = ({ onClose, onAdd, selectedOrder, onUpdate }) => {
      *
      * POST /api/production
      */
-    onAdd(productionOrder);
+    try{
+      if(isEditMode){
+        await onUpdate(selectedOrder._id , productionOrder);
+        
+      }else{
+      await onAdd(productionOrder);
+      }
+    }catch(err){
+      console.error(`error UPDATING :${isEditMode} OR error creating ${!isEditMode}`, err)
+      throw err;
+    }
+    
 
     /*
      * Later backend logic:
