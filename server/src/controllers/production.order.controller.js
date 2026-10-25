@@ -134,11 +134,8 @@ export const updateProduction = async (req, res) => {
       expectedDate,
       note,
     } = req.body;
-    console.log("Request : ", req.body)
-    const ProId = ProductionOrder.findById(id);
-    const prdtId = ProId.product._id
-    console.log(prdtId)
-    console.log(ProId)
+    console.log("Request : ", req.body);
+    const updatedData = req.body;
 
     // 1. Validate production order ID
     if (!mongoose.isValidObjectId(id)) {
@@ -148,13 +145,7 @@ export const updateProduction = async (req, res) => {
       });
     }
 
-    // 2. Validate product ID if provided
-    if (product && !mongoose.isValidObjectId(product)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid product ID",
-      });
-    }
+
 
     // 3. Validate required fields
     if (quantity !== undefined && Number(quantity) <= 0) {
@@ -163,24 +154,17 @@ export const updateProduction = async (req, res) => {
         message: "Quantity must be greater than zero",
       });
     }
-
-    // 4. Build update object using only supplied fields
-    const updateData = {};
-
-    if (product !== undefined) updateData.product = product;
-    if (stock !== undefined) updateData.stock = stock;
-    if (quantity !== undefined) updateData.quantity = Number(quantity);
-    if (batch !== undefined) updateData.batch = batch;
-    if (status !== undefined) updateData.status = status;
-    if (productionId !== undefined) updateData.productionId = productionId;
-    if (productionDate !== undefined) updateData.productionDate = productionDate;
-    if (expectedDate !== undefined) updateData.expectedDate = expectedDate;
-    if (note !== undefined) updateData.note = note;
-
     // 5. Update production order
     const updatedOrder = await ProductionOrder.findByIdAndUpdate(
       id,
-      { $set: updateData },
+      quantity,
+      batch,
+      status,
+      productionId,
+      productionDate,
+      expectedDate,
+      note,
+      stock,
       {
         new: true,
         runValidators: true,

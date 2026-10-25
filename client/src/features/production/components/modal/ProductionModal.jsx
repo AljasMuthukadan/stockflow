@@ -189,19 +189,7 @@ const ProductionModal =  ({ onClose, onAdd, selectedOrder, onUpdate }) => {
       console.error(`error UPDATING :${isEditMode} OR error creating ${!isEditMode}`, err)
       throw err;
     }
-    
-
-    /*
-     * Later backend logic:
-     *
-     * 1. Validate product
-     * 2. Validate BOM
-     * 3. Check raw material stock
-     * 4. Deduct raw materials
-     * 5. Increase finished product stock
-     * 6. Create stock movement
-     * 7. Create production record
-     */
+  
 
     onClose();
   };
