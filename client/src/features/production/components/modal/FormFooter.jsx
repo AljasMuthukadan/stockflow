@@ -1,4 +1,4 @@
-const FormFooter = ({ onClose }) => {
+const FormFooter = ({ onClose, isEditMode }) => {
   return (
     <div className="flex shrink-0 items-center justify-end gap-3 border-t border-slate-200 bg-white px-4 py-3">
 
@@ -35,7 +35,7 @@ const FormFooter = ({ onClose }) => {
           hover:bg-emerald-700
         "
       >
-        Create Production
+     {!isEditMode ? "Create Production" : "Update Production"}
       </button>
 
     </div>

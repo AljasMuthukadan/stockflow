@@ -205,7 +205,7 @@ const ProductionModal =  ({ onClose, onAdd, selectedOrder, onUpdate }) => {
       {/* HEADER */}
       {/* ================================================= */}
 
-      <HeaderSection onClose={onClose} />
+      <HeaderSection onClose={onClose} isEditMode={isEditMode} />
 
       {/* ================================================= */}
       {/* FORM */}
@@ -271,7 +271,7 @@ const ProductionModal =  ({ onClose, onAdd, selectedOrder, onUpdate }) => {
         {/* FOOTER */}
         {/* ================================================= */}
 
-        <FormFooter onClose={onClose} />
+        <FormFooter onClose={onClose} isEditMode={isEditMode} />
       </form>
     </Modal>
   );

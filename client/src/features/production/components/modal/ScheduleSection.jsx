@@ -94,7 +94,7 @@ const ScheduleSection = ({
               required
             >
 
-              <option value="Pending" disabled>
+              <option value="Pending" >
                 Select Status
               </option>
 
