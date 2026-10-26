@@ -157,6 +157,7 @@ export const updateProduction = async (req, res) => {
     // 5. Update production order
     const updatedOrder = await ProductionOrder.findByIdAndUpdate(
       id,
+      {
       quantity,
       batch,
       status,
@@ -165,6 +166,7 @@ export const updateProduction = async (req, res) => {
       expectedDate,
       note,
       stock,
+      },
       {
         new: true,
         runValidators: true,
