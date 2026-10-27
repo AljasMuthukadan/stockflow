@@ -1,5 +1,6 @@
 import { InventoryMobileView } from "./InventoryMobileView";
 import ActionButton from "../../../../components/common/ActionButton";
+import Loading from "../../../../components/ui/Loading";
 
 const badgeStyle = (status) => {
   switch (status) {
@@ -34,7 +35,9 @@ export default function InventoryTable({
   loading = false,
   onEditItem,
   onDeleteItem,
-}) {
+})
+
+{
   return (
     <div className="mb-5 mt-5">
       <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
@@ -100,22 +103,7 @@ export default function InventoryTable({
                 {/* Loading State */}
 
                 {loading ? (
-                  <tr>
-                    <td
-                      colSpan={8}
-                      className="h-[330px] px-5 text-center"
-                    >
-                      <div className="flex flex-col items-center justify-center">
-
-                        <div className="h-8 w-8 animate-spin rounded-full border-4 border-slate-200 border-t-emerald-500" />
-
-                        <p className="mt-4 text-sm font-medium text-slate-500">
-                          Loading inventory...
-                        </p>
-
-                      </div>
-                    </td>
-                  </tr>
+                  <Loading />
 
                 ) : inventory.length === 0 ? (
 

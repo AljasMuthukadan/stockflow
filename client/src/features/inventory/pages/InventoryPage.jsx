@@ -1,27 +1,76 @@
 import { useMemo, useState } from "react";
+import { AlertCircle, PackageSearch } from "lucide-react";
 
 import InventoryStats from "../components/card/InventoryStats";
 import InventoryFilters from "../components/filter/InventoryFilters";
 import InventoryTable from "../components/table/InventoryTable";
 import InventoryHeader from "../components/InventoryHeader";
 import InventoryModal from "../components/modal/InventoryModal";
+
 import useInventory from "../../../hooks/useInventory";
+import Loading from "../../../components/ui/Loading";
 
+// =========================================================
+// STOCK STATUS HELPER
+// =========================================================
 
+const getStockStatus = (quantity, reorderLevel) => {
+  const stock = Number(quantity ?? 0);
+  const reorder = Number(reorderLevel ?? 0);
+
+  if (stock <= 0) {
+    return "Out of Stock";
+  }
+
+  if (stock <= reorder) {
+    return "Low Stock";
+  }
+
+  return "In Stock";
+};
+
+// =========================================================
+// STATISTICS LOADING SKELETON
+// =========================================================
+
+const InventoryStatsSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <div
+          key={index}
+          className="min-h-[145px] rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+        >
+          <div className="flex items-center justify-between gap-4">
+            <div className="h-3 w-28 animate-pulse rounded bg-slate-200" />
+
+            <div className="h-10 w-10 animate-pulse rounded-xl bg-slate-100" />
+          </div>
+
+          <div className="mt-6 h-8 w-24 animate-pulse rounded bg-slate-200" />
+
+          <div className="mt-3 h-3 w-36 max-w-full animate-pulse rounded bg-slate-100" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// =========================================================
+// INVENTORY PAGE
+// =========================================================
 
 const InventoryPage = () => {
+  // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // null = Add mode
-  // item object = Edit mode
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // =========================================================
+  // =======================================================
   // INVENTORY DATA
-  // =========================================================
+  // =======================================================
 
   const {
-    inventory,
+    inventory = [],
     loading,
     error,
     addInventoryItem,
@@ -29,44 +78,30 @@ const InventoryPage = () => {
     deleteInventoryItem,
   } = useInventory();
 
-  // =========================================================
+  const inventoryItems = Array.isArray(inventory) ? inventory : [];
+
+  // =======================================================
   // FILTER STATE
-  // =========================================================
+  // =======================================================
 
   const [category, setCategory] = useState("All Categories");
   const [stockWise, setStockWise] = useState("All Status");
   const [searchQuery, setSearchQuery] = useState("");
 
-  // =========================================================
-  // STOCK STATUS
-  // =========================================================
-
-  const getStockStatus = (quantity, reorderLevel) => {
-    const stock = Number(quantity || 0);
-    const reorder = Number(reorderLevel || 0);
-
-    if (stock === 0) {
-      return "Out of Stock";
-    }
-
-    if (stock <= reorder) {
-      return "Low Stock";
-    }
-
-    return "In Stock";
-  };
-
-  // =========================================================
+  // =======================================================
   // FILTER INVENTORY
-  // =========================================================
+  // =======================================================
 
   const filteredInventory = useMemo(() => {
-    return inventory.filter((item) => {
-      {/** will get matched category | matched category */}
+    const normalizedSearch = searchQuery.trim().toLowerCase();
+
+    return inventoryItems.filter((item) => {
+      const itemCategory = item.itemType ?? item.category ?? "";
+
       const matchesCategory =
         category === "All Categories" ||
-        item.itemType === category;
-        
+        itemCategory === category;
+
       const status = getStockStatus(
         item.quantity,
         item.reorderLevel
@@ -75,89 +110,217 @@ const InventoryPage = () => {
       const matchesStock =
         stockWise === "All Status" ||
         status === stockWise;
-      {/** search can filter  items by name. sku, item type  */}
+
+      const searchableFields = [
+        item.name,
+        item.sku,
+        itemCategory,
+        item._id,
+      ];
+
       const matchesSearch =
-        searchQuery === "" ||
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.sku.includes(searchQuery) ||
-        item.itemType.includes(searchQuery);
+        normalizedSearch === "" ||
+        searchableFields.some((field) =>
+          String(field ?? "")
+            .toLowerCase()
+            .includes(normalizedSearch)
+        );
 
       return matchesCategory && matchesStock && matchesSearch;
     });
-  }, [inventory, category, stockWise, searchQuery]);
+  }, [inventoryItems, category, stockWise, searchQuery]);
 
-  // =========================================================
-  // ADD ITEM
-  // =========================================================
+  // =======================================================
+  // MODAL HANDLERS
+  // =======================================================
 
   const handleOpenAddModal = () => {
-    // No selected item = Add mode
     setSelectedItem(null);
     setIsModalOpen(true);
   };
-
-  // =========================================================
-  // EDIT ITEM
-  // =========================================================
 
   const handleEditItem = (item) => {
     setSelectedItem(item);
     setIsModalOpen(true);
   };
 
-  // =========================================================
-  // CLOSE MODAL
-  // =========================================================
-
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedItem(null);
   };
 
+  // =======================================================
+  // RESET FILTERS
+  // =======================================================
+
+  const handleResetFilters = () => {
+    setCategory("All Categories");
+    setStockWise("All Status");
+    setSearchQuery("");
+  };
+
+  // =======================================================
+  // UI
+  // =======================================================
+
   return (
-    <div className="space-y-6 px-3 md:px-4 lg:px-8">
+    <main className="mx-auto min-h-full w-full max-w-[1800px] space-y-5 px-3 py-4 sm:space-y-6 sm:px-5 lg:px-6 xl:px-8">
 
-      {/* Header */}
+      {/* ================================================ */}
+      {/* PAGE HEADER */}
+      {/* ================================================ */}
 
-      <InventoryHeader
-        onAddItem={handleOpenAddModal}
-      />
+      <section className="min-w-0">
+        <InventoryHeader onAddItem={handleOpenAddModal} />
+      </section>
 
-      {/* Error */}
+      {/* ================================================ */}
+      {/* ERROR MESSAGE */}
+      {/* ================================================ */}
 
       {error && (
-        <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
-          {error}
+        <div
+          role="alert"
+          className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+        >
+          <AlertCircle
+            size={20}
+            className="mt-0.5 shrink-0"
+          />
+
+          <div className="min-w-0">
+            <p className="font-semibold">
+              Unable to load inventory
+            </p>
+
+            <p className="mt-1 break-words">
+              {typeof error === "string"
+                ? error
+                : error.message ||
+                  "Something went wrong. Please try again."}
+            </p>
+          </div>
         </div>
       )}
 
-      {/* Stats */}
+      {/* ================================================ */}
+      {/* INVENTORY STATISTICS */}
+      {/* ================================================ */}
 
-      <InventoryStats
-        inventory={inventory}
-      />
+      <section className="min-w-0">
+        {loading ? (
+          <InventoryStatsSkeleton />
+        ) : (
+          <InventoryStats inventory={inventoryItems} />
+        )}
+      </section>
 
-      {/* Filters */}
+      {/* ================================================ */}
+      {/* FILTERS */}
+      {/* ================================================ */}
 
-      <InventoryFilters
-        category={category}
-        setCategory={setCategory}
-        stockWise={stockWise}
-        setStockWise={setStockWise}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
+      <section className="min-w-0">
+        <InventoryFilters
+          category={category}
+          setCategory={setCategory}
+          stockWise={stockWise}
+          setStockWise={setStockWise}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+      </section>
 
-      {/* Table */}
+      {/* ================================================ */}
+      {/* INVENTORY TABLE SECTION */}
+      {/* ================================================ */}
 
-      <InventoryTable
-        inventory={filteredInventory}
-        loading={loading}
-        onEditItem={handleEditItem}
-        onDeleteItem={deleteInventoryItem}
-      />
+      <section className="min-w-0 space-y-4">
 
-      {/* Add / Edit Modal */}
+        {/* Table Header */}
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <h2 className="text-base font-semibold tracking-tight text-slate-900 sm:text-lg">
+              Inventory Items
+            </h2>
+
+            <p className="mt-1 text-sm text-slate-500">
+              {loading
+                ? "Fetching inventory records..."
+                : `Showing ${filteredInventory.length} of ${inventoryItems.length} items`}
+            </p>
+          </div>
+
+          {!loading && (
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="self-start rounded-lg px-3 py-2 text-sm font-medium text-emerald-700 transition hover:bg-emerald-50 sm:self-auto"
+            >
+              Reset filters
+            </button>
+          )}
+        </div>
+
+        {/* ============================================== */}
+        {/* TABLE / LOADING / EMPTY SEARCH RESULTS */}
+        {/* ============================================== */}
+
+        {loading ? (
+
+          /* Loading State */
+
+          <div className="flex min-h-[420px] w-full items-center justify-center overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <Loading message="Loading inventory items..." />
+          </div>
+
+        ) : inventoryItems.length > 0 &&
+          filteredInventory.length === 0 ? (
+
+          /* No Matching Results */
+
+          <div className="flex min-h-[420px] flex-col items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white px-5 py-10 text-center">
+
+            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-slate-500">
+              <PackageSearch size={27} strokeWidth={1.7} />
+            </div>
+
+            <h3 className="text-base font-semibold text-slate-800">
+              No matching inventory items
+            </h3>
+
+            <p className="mt-2 max-w-sm text-sm leading-6 text-slate-500">
+              We couldn't find any items matching your search or selected filters.
+              Try changing your search term or clearing the filters.
+            </p>
+
+            <button
+              type="button"
+              onClick={handleResetFilters}
+              className="mt-5 inline-flex h-10 items-center justify-center rounded-xl bg-emerald-600 px-5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+            >
+              Clear filters
+            </button>
+          </div>
+
+        ) : (
+
+          /* Inventory Table */
+
+          <div className="min-w-0">
+            <InventoryTable
+              inventory={filteredInventory}
+              loading={false}
+              onEditItem={handleEditItem}
+              onDeleteItem={deleteInventoryItem}
+            />
+          </div>
+        )}
+      </section>
+
+      {/* ================================================ */}
+      {/* ADD / EDIT MODAL */}
+      {/* ================================================ */}
 
       {isModalOpen && (
         <InventoryModal
@@ -168,8 +331,7 @@ const InventoryPage = () => {
           onUpdateItem={updateInventoryItemById}
         />
       )}
-
-    </div>
+    </main>
   );
 };
 
