@@ -59,7 +59,7 @@ const LedgerPage = () => {
   const [selectLedger, setSelectLedger] = useState( ledger?.[0] || "");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [selectProfile, setSelectProfile] = useState(null);
+  const [selectProfile, setSelectProfile] = useState(ledger ? ledger[0] : null);
 
   // =========================================================
   // FILTER 
