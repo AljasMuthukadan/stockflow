@@ -10,6 +10,7 @@ import ProductionHeader from "../components/ProductionHeader";
 import ProductionModal from "../components/modal/ProductionModal";
 
 import useProduction from "../../../hooks/useProduction";
+import Loading from "../../../components/ui/Loading";
 
 const ProductionPage = () => {
   const {
@@ -17,6 +18,7 @@ const ProductionPage = () => {
     addProductionOrder,
     deleteOrder,
     updateOrder,
+    loading
   } = useProduction();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,11 +98,14 @@ const ProductionPage = () => {
       />
 
       {/* Production Table */}
-      <ProductionTable
+      {loading ? ( <Loading />) : (
+         <ProductionTable
         data={filteredProductionData}
         onDelete={deleteOrder}
         onEdit={handleEditOrder}
       />
+      )}
+     
 
       {/* Production Overview and Activity */}
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-5">
