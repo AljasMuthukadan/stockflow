@@ -1,8 +1,7 @@
 import PurchaseRow from "./PurchaseRow.jsx";
-import { purchaseOrders } from "../purchaseData.js";
 import Pagination from "../../../../components/common/Pagination.jsx";
 
-export default function PurchaseTable() {
+export default function PurchaseTable({data}) {
   return (
     <div
       className="
@@ -30,7 +29,7 @@ export default function PurchaseTable() {
             scrollbar-none
           "
         >
-          {purchaseOrders.map((order) => (
+          {data.map((order) => (
             <article
               key={order.id}
               className="
@@ -398,7 +397,7 @@ export default function PurchaseTable() {
           {/* ================================================= */}
 
           <tbody>
-            {purchaseOrders.map((order) => (
+            {data.map((order) => (
               <PurchaseRow
                 key={order.id}
                 order={order}
@@ -436,7 +435,7 @@ export default function PurchaseTable() {
           </strong>{" "}
           of{" "}
           <strong className="font-semibold text-slate-700">
-            {purchaseOrders.length}
+            {data.length}
           </strong>{" "}
           orders
         </p>
