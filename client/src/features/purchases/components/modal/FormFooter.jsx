@@ -18,7 +18,7 @@ const FormFooter = ({ onClose }) => {
       </button>
 
       <button
-        type="button"
+        type="submit"
         className="
           rounded-lg
           bg-green-600
