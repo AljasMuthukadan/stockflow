@@ -25,7 +25,7 @@ const initialFormData = {
   notes: "",
 };
 
-const PurchaseModal = ({ onClose }) => {
+const PurchaseModal = ({ onClose, setPo }) => {
   const [openSection, setOpenSection] = useState("basic");
   const [formData, setFormData] = useState(initialFormData);
   const [items, setItems] = useState([]);
@@ -67,7 +67,7 @@ const PurchaseModal = ({ onClose }) => {
     };
 
     console.log("Purchase Order:", purchaseOrder);
-
+    setPo((prev) => [...prev, formData]); // Update the purchase orders state in the parent component
     // TODO: Send purchaseOrder to your backend API.
 
 

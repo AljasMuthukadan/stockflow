@@ -50,3 +50,18 @@ export const purchaseOrders = [
     payment: "Unpaid",
   },
 ];
+
+const initialFormData = {
+  purchaseOrderNumber: "PO-0001",
+  orderDate: "",
+  expectedDeliveryDate: "",
+  status: "Draft",
+
+  supplier: "",
+  purchaseLedger: "",
+  supplierReference: "",
+
+  paymentTerms: "",
+  deliveryAddress: "",
+  notes: "",
+};
