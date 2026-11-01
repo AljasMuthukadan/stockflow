@@ -4,14 +4,17 @@ import {
   FileText,
   ChevronDown,
 } from "lucide-react";
-
+import useLedger from "../../../../hooks/useLedger"; // Custom hook to fetch ledgers
+import SelectField from "../../../../components/ui/SelectField";
 const SupplierSection = ({
   open,
   onToggle,
   formData,
   handleChange
 }) => {
-  
+
+  const { ledger } = useLedger(); // Custom hook to fetch ledgers
+  console.log("Ledger Data:", ledger[0]); // Log the fetched ledger data for debugging
   return (
     <section className="overflow-hidden rounded-xl border border-slate-200 bg-white">
 
@@ -70,7 +73,7 @@ const SupplierSection = ({
                 Supplier
               </label>
 
-              <select
+              <SelectField
                 name="supplier"
                 value={formData.supplier}
                 onChange={handleChange}
@@ -84,11 +87,13 @@ const SupplierSection = ({
                 <option value="">
                   Select Supplier
                 </option>
-
-                <option>ABC Raw Materials</option>
-                <option>Kerala Polymers</option>
-                <option>India Industrial Supplies</option>
-              </select>
+              {  ledger.map((ledgerItem) => (
+                  console.log("Ledger Item:", ledgerItem), // Log each ledger item for debugging
+                  <option key={ledgerItem._id} value={ledgerItem._id}>
+                    {ledgerItem.company}
+                  </option>
+                ))}
+              </SelectField>
             </div>
 
             {/* Purchase Ledger */}
