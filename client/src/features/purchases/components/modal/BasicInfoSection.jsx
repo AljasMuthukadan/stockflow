@@ -8,16 +8,10 @@ const BasicInfoSection = ({
   open,
   onToggle,
   formData,
-  setFormData,
+  
+  handleChange
 }) => {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  
 
   return (
     <section className="overflow-hidden rounded-xl border border-slate-200 bg-white">

@@ -69,6 +69,8 @@ const PurchaseModal = ({ onClose }) => {
     console.log("Purchase Order:", purchaseOrder);
 
     // TODO: Send purchaseOrder to your backend API.
+
+
     // Call onClose only after a successful save.
     onClose();
   };
@@ -92,7 +94,7 @@ const PurchaseModal = ({ onClose }) => {
                 open={openSection === "basic"}
                 onToggle={() => toggleSection("basic")}
                 formData={formData}
-                setFormData={setFormData}
+                handleChange={handleChange}
               />
 
               {/* Supplier */}
@@ -100,7 +102,7 @@ const PurchaseModal = ({ onClose }) => {
                 open={openSection === "supplier"}
                 onToggle={() => toggleSection("supplier")}
                 formData={formData}
-                setFormData={setFormData}
+                handleChange={handleChange}
               />
 
               {/* Purchase Items */}
@@ -109,6 +111,7 @@ const PurchaseModal = ({ onClose }) => {
                 onToggle={() => toggleSection("items")}
                 items={items}
                 setItems={setItems}
+                handleChange={handleChange}
               />
 
               {/* Additional Information */}
@@ -116,11 +119,15 @@ const PurchaseModal = ({ onClose }) => {
                 open={openSection === "additional"}
                 onToggle={() => toggleSection("additional")}
                 formData={formData}
-                setFormData={setFormData}
+                handleChange={handleChange}
               />
 
               {/* Purchase Summary */}
-              <PurchaseSummary items={items} />
+              <PurchaseSummary 
+              items={items}
+              formData={formData}
+
+              />
             </div>
           </div>
 
