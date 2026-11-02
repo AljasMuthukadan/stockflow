@@ -4,14 +4,15 @@ import {
   Trash2,
   ChevronDown,
 } from "lucide-react";
-
+import useInventory from "../../../../hooks/useInventory"; // Custom hook to fetch inventory items
 const PurchaseItemsSection = ({
   open,
   onToggle,
   items,
   setItems,
 }) => {
-
+  const { inventory } = useInventory()
+  console.log("Inventory Data:", inventory[0]); // Log the fetched inventory data for debugging
   const addItem = () => {
     setItems((prev) => [
       ...prev,
@@ -180,9 +181,15 @@ const PurchaseItemsSection = ({
                             Select Item
                           </option>
 
-                          <option>Raw Material A</option>
-                          <option>Raw Material B</option>
-                          <option>Packaging Material</option>
+                          {inventory.map((invItem) => (
+                            <option
+                              key={invItem._id}
+                              value={invItem._id}
+                            >
+                              {invItem.name}
+                            </option>
+
+                          ))}
                         </select>
 
                       </td>

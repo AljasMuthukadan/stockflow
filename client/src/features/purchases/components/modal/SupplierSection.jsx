@@ -87,10 +87,10 @@ const SupplierSection = ({
                 <option value="">
                   Select Supplier
                 </option>
-              {  ledger.map((ledgerItem) => (
-                  console.log("Ledger Item:", ledgerItem), // Log each ledger item for debugging
-                  <option key={ledgerItem._id} value={ledgerItem._id}>
-                    {ledgerItem.company}
+              {  
+              ledger.map((ledgerItem) => (
+                 <option key={ledgerItem._id} value={ledgerItem._id}>
+                  {ledgerItem.company}
                   </option>
                 ))}
               </SelectField>
