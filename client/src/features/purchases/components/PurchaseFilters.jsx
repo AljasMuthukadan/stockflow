@@ -1,6 +1,6 @@
 import { Search, Calendar, X } from "lucide-react";
 
-export default function PurchaseFilters() {
+export default function PurchaseFilters({ search, setSearch, setPoStatus, poStatus }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-6">
@@ -14,6 +14,8 @@ export default function PurchaseFilters() {
           <input
             type="text"
             placeholder="Search purchase order..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             className="
               w-full
               rounded-xl
@@ -41,7 +43,7 @@ export default function PurchaseFilters() {
         </select>
 
         {/* Status */}
-        <select className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-emerald-500">
+        <select className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none focus:border-emerald-500" value={poStatus} onChange={(e) => setPoStatus(e.target.value)}>
           <option>All Status</option>
           <option>Pending</option>
           <option>Ordered</option>
