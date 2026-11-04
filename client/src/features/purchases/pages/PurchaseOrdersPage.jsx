@@ -23,13 +23,14 @@ export default function PurchaseOrdersPage() {
         status.toLowerCase() === poStatus.toLowerCase();
 
       const searchableFields = [
-        purchaseOrder.purchaseId,
-        purchaseOrder._id,
         purchaseOrder.id,
-        purchaseOrder.product?.name,
-        purchaseOrder.supervisor,
+        purchaseOrder.supplier,
+        purchaseOrder.warehouse,
+        purchaseOrder.date,
+        purchaseOrder.items,
+        purchaseOrder.amount,
         purchaseOrder.status,
-        purchaseOrder.batch,
+        purchaseOrder.payment,
       ];
 
       const matchesSearch =
