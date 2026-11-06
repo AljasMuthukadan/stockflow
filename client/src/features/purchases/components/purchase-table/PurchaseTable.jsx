@@ -1,5 +1,5 @@
 import PurchaseRow from "./PurchaseRow.jsx";
-import Pagination from "../../../../components/common/Pagination.jsx";
+
 
 export default function PurchaseTable({data}) {
   return (
@@ -426,23 +426,6 @@ export default function PurchaseTable({data}) {
           sm:px-6
         "
       >
-        {/* Information */}
-
-        <p className="text-xs text-slate-500 sm:text-sm">
-          Showing{" "}
-          <strong className="font-semibold text-slate-700">
-            1–5
-          </strong>{" "}
-          of{" "}
-          <strong className="font-semibold text-slate-700">
-            {data.length}
-          </strong>{" "}
-          orders
-        </p>
-
-        {/* Pagination */}
-
-        <Pagination/>
       </div>
     </div>
   );
