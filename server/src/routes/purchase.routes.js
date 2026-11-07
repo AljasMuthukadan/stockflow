@@ -1,13 +1,10 @@
 import express from 'express'
+import { createPurchaseOrder, getAllPurchaseOrders } from '../controllers/purchase.order.controller.js';
 
 const router = express.Router()
 
-router.get('/', (req , res) => {
- return res
-})
+router.post('/', createPurchaseOrder)
 
-router.get('/', (req , res) => {
-    return res 
-})
+router.get('/', getAllPurchaseOrders)
 
 export default router;
