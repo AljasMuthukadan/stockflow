@@ -50,7 +50,7 @@ export default function PurchaseOrdersPage() {
     <div className="space-y-3 px-3 lg:px-8  md:px-6 ">
       <PurchaseHeader setIsModalOpen={setIsModalOpen} />
 
-      <PurchaseStats />
+      <PurchaseStats po={po} />
 
       <PurchaseFilters search={search} setSearch={setSearch} poStatus={poStatus} setPoStatus={setPoStatus} />
 

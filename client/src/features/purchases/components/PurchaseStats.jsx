@@ -6,10 +6,15 @@ import {
   TriangleAlert,
 } from "lucide-react";
 
-const stats = [
-  {
+
+export default function PurchaseStats({po}) {
+  const pendingPo = po.filter((order) => order.status === "Pending");
+  const completedPo = po.filter((order) => order.status === "Completed");
+  const overduePo = po.filter((order) => order.status === "Overdue");
+  const status = [
+    {
     title: "Total Orders",
-    value: "254",
+    value: po.length,
     change: "+12 this month",
     icon: ClipboardList,
     iconBg: "bg-blue-100",
@@ -18,7 +23,7 @@ const stats = [
   },
   {
     title: "Pending Orders",
-    value: "18",
+    value: pendingPo.length,
     change: "Need approval",
     icon: Clock3,
     iconBg: "bg-orange-100",
@@ -27,7 +32,7 @@ const stats = [
   },
   {
     title: "Completed",
-    value: "236",
+    value: completedPo.length ,
     change: "92% completion",
     icon: CircleCheckBig,
     iconBg: "bg-emerald-100",
@@ -45,19 +50,18 @@ const stats = [
   },
   {
     title: "Overdue Orders",
-    value: "5",
+    value: overduePo.length,
     change: "Urgent attention",
     icon: TriangleAlert,
     iconBg: "bg-red-100",
     iconColor: "text-red-600",
     changeColor: "text-red-500",
   },
-];
 
-export default function PurchaseStats() {
+  ]
   return (
     <div className="grid gap-5 grid-cols-2 sm:grid-cols-2 xl:grid-cols-5">
-      {stats.map((stat) => {
+      {status.map((stat) => {
         const Icon = stat.icon;
 
         return (
