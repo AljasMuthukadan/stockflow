@@ -10,16 +10,18 @@ import AdditionalSection from "./AdditionalSection";
 import PurchaseSummary from "./PurchaseSummary";
 import FormFooter from "./FormFooter";
 
+
+
 const initialFormData = {
   purchaseOrderNumber: "PO-0001",
   orderDate: "",
   expectedDeliveryDate: "",
   status: "Draft",
-
+  date: "",
   supplier: "",
   purchaseLedger: "",
   supplierReference: "",
-
+  warehouse: "",
   paymentTerms: "",
   deliveryAddress: "",
   notes: "",
