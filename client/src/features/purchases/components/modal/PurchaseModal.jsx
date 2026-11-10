@@ -10,7 +10,7 @@ import AdditionalSection from "./AdditionalSection";
 import PurchaseSummary from "./PurchaseSummary";
 import FormFooter from "./FormFooter";
 
-
+{/* Initial form data for the purchase order modal */}
 
 const initialFormData = {
   purchaseOrderNumber: "PO-0001",
